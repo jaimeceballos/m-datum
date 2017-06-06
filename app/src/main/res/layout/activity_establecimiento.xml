@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity">
+
+    <EditText
+        android:id="@+id/et_especificar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="340dp"
+        tools:text="@string/et_especificar" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_titulo"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="6dp" />
+
+    <EditText
+        android:id="@+id/et_nombre_establecimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="56dp"
+        tools:text="@string/et_nombre_establecimiento" />
+
+    <EditText
+        android:id="@+id/et_nro_establecimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="115dp"
+        tools:text="@string/et_nro_establecimiento" />
+
+    <Button
+        android:id="@+id/btn_capturar_ubicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_capturar_ubicacion"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="174dp" />
+
+    <TextView
+        android:id="@+id/tv_posicion"
+        android:layout_width="106dp"
+        android:layout_height="23dp"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="186dp" />
+
+    <Spinner
+        android:id="@+id/sp_reg_tenencia"
+        android:layout_width="217dp"
+        android:layout_height="41dp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="291dp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_siguiente"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="408dp" />
+
+    <Button
+        android:id="@+id/btn_foto"
+        android:layout_width="96dp"
+        android:layout_height="52dp"
+        android:text="@string/btn_tomar_foto"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="231dp" />
+</android.support.constraint.ConstraintLayout>
