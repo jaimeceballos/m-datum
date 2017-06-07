@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity"
-    android:padding="16dp"
-
-    >
+    android:padding="16dp" >
 
     <TextView
         android:id="@+id/titulo"
@@ -28,7 +26,6 @@
         android:layout_alignLeft="@+id/et_especificar"
         android:layout_alignStart="@+id/et_especificar"
         android:layout_below="@+id/titulo"
-
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/et_nombre_establecimiento"
@@ -43,7 +40,6 @@
         android:layout_alignLeft="@+id/et_especificar"
         android:layout_alignStart="@+id/et_especificar"
         android:layout_below="@+id/et_nombre_establecimiento"
-
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/et_nro_establecimiento"
@@ -60,7 +56,7 @@
         android:layout_below="@+id/et_nro_establecimiento"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="toggleGPSUpdates" />
+        android:onClick="capturar_ubicacion" />
 
     <TextView
         android:id="@+id/tv_long"
@@ -91,14 +87,14 @@
         android:id="@+id/sp_reg_tenencia"
         android:layout_width="217dp"
         android:layout_height="41dp"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="291dp"
-        android:layout_below="@+id/btn_foto"
         android:layout_alignLeft="@+id/titulo"
-        android:layout_alignStart="@+id/titulo"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignStart="@+id/titulo"
+        android:layout_below="@+id/btn_foto"
+        android:layout_marginTop="14dp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="291dp" />
 
     <Button
         android:id="@+id/btn"
@@ -136,7 +132,7 @@
         tools:layout_editor_absoluteY="344dp" />
 
     <TextView
-        android:id="@+id/tv_coordLat"
+        android:id="@+id/tv_coord_lat"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_alignEnd="@+id/titulo"
@@ -148,15 +144,15 @@
         android:text="@string/tv_coordenadas_cero" />
 
     <TextView
-        android:id="@+id/tv_coord_Long"
+        android:id="@+id/tv_coord_long"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_alignEnd="@+id/tv_coordLat"
-        android:layout_alignLeft="@+id/tv_coordLat"
-        android:layout_alignRight="@+id/tv_coordLat"
-        android:layout_alignStart="@+id/tv_coordLat"
-        android:layout_below="@+id/tv_coordLat"
+        android:layout_alignEnd="@+id/tv_coord_lat"
+        android:layout_alignLeft="@+id/tv_coord_lat"
+        android:layout_alignRight="@+id/tv_coord_lat"
+        android:layout_alignStart="@+id/tv_coord_lat"
+        android:layout_below="@+id/tv_coord_lat"
         android:text="@string/tv_coordenadas_cero" />
 
-    <!--</android.support.constraint.ConstraintLayout>-->
+
 </RelativeLayout>

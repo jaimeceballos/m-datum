@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mdatum.udc.com.m_datum">
 
+
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
