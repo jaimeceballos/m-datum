@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity">
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity"
+    android:padding="16dp"
 
-    <EditText
-        android:id="@+id/et_especificar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="340dp"
-        tools:text="@string/et_especificar" />
+    >
 
     <TextView
         android:id="@+id/titulo"
@@ -22,30 +16,39 @@
         android:layout_height="wrap_content"
         android:text="@string/tv_titulo"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="6dp" />
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="-201dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/et_nombre_establecimiento"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_especificar"
+        android:layout_alignStart="@+id/et_especificar"
+        android:layout_below="@+id/titulo"
+
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/et_nombre_establecimiento"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="56dp"
         tools:text="@string/et_nombre_establecimiento" />
 
     <EditText
         android:id="@+id/et_nro_establecimiento"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_especificar"
+        android:layout_alignStart="@+id/et_especificar"
+        android:layout_below="@+id/et_nombre_establecimiento"
+
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/et_nro_establecimiento"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="115dp"
-        tools:text="@string/et_nro_establecimiento" />
+        tools:layout_editor_absoluteY="115dp" />
 
     <Button
         android:id="@+id/btn_capturar_ubicacion"
@@ -53,12 +56,34 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_capturar_ubicacion"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="174dp" />
+        tools:layout_editor_absoluteY="174dp"
+        android:layout_below="@+id/et_nro_establecimiento"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="toggleGPSUpdates" />
 
     <TextView
-        android:id="@+id/tv_posicion"
-        android:layout_width="106dp"
-        android:layout_height="23dp"
+        android:id="@+id/tv_long"
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/btn_capturar_ubicacion"
+        android:layout_alignEnd="@+id/tv_lat"
+        android:layout_alignLeft="@+id/tv_lat"
+        android:layout_alignRight="@+id/tv_lat"
+        android:layout_alignStart="@+id/tv_lat"
+        android:text="@string/tv_long"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="186dp" />
+
+    <TextView
+        android:id="@+id/tv_lat"
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:layout_above="@+id/tv_long"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_toRightOf="@+id/btn_capturar_ubicacion"
+        android:text="@string/tv_lat"
         tools:layout_editor_absoluteX="191dp"
         tools:layout_editor_absoluteY="186dp" />
 
@@ -67,7 +92,13 @@
         android:layout_width="217dp"
         android:layout_height="41dp"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="291dp" />
+        tools:layout_editor_absoluteY="291dp"
+        android:layout_below="@+id/btn_foto"
+        android:layout_alignLeft="@+id/titulo"
+        android:layout_alignStart="@+id/titulo"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btn"
@@ -75,7 +106,9 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_siguiente"
         tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="408dp" />
+        tools:layout_editor_absoluteY="408dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btn_foto"
@@ -83,5 +116,47 @@
         android:layout_height="52dp"
         android:text="@string/btn_tomar_foto"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="231dp" />
-</android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="231dp"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/titulo"
+        android:layout_alignStart="@+id/titulo" />
+
+    <EditText
+        android:id="@+id/et_especificar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sp_reg_tenencia"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/et_especificar"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="344dp" />
+
+    <TextView
+        android:id="@+id/tv_coordLat"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/titulo"
+        android:layout_alignRight="@+id/titulo"
+        android:layout_alignTop="@+id/tv_lat"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toRightOf="@+id/tv_long"
+        android:text="@string/tv_coordenadas_cero" />
+
+    <TextView
+        android:id="@+id/tv_coord_Long"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/tv_coordLat"
+        android:layout_alignLeft="@+id/tv_coordLat"
+        android:layout_alignRight="@+id/tv_coordLat"
+        android:layout_alignStart="@+id/tv_coordLat"
+        android:layout_below="@+id/tv_coordLat"
+        android:text="@string/tv_coordenadas_cero" />
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+</RelativeLayout>
