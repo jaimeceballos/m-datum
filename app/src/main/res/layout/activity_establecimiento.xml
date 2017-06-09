@@ -123,7 +123,7 @@
         android:layout_alignTop="@+id/sp_reg_tenencia"
         android:layout_toLeftOf="@+id/tv_long"
         android:layout_toStartOf="@+id/tv_long"
-        android:text="Regimen de tenencia"
+        android:text="@string/tv_reg_tenencia"
         android:textSize="18sp" />
 
     <Spinner
