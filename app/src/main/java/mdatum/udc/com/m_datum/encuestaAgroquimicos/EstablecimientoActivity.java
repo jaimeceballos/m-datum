@@ -20,10 +20,13 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,7 +56,24 @@ public class EstablecimientoActivity extends AppCompatActivity {
         regTenenciaArray.add("Otro");
 
 
-        name = Environment.getExternalStorageDirectory()+"/establecimiento.jpg";
+        EditText etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
+
+        etNombreEstablecimiento.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                name = Environment.getExternalStorageDirectory()+"/"+editable.toString().replaceAll("\\s+","")+".jpg";
+            }
+        });
 
         Button btnFoto = (Button) findViewById(R.id.btn_foto);
         btnFoto.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +81,7 @@ public class EstablecimientoActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Log.d("FILE NAME",name);
                 Uri output = Uri.fromFile(new File(name));
                 intent.putExtra(MediaStore.EXTRA_OUTPUT,output);
 
@@ -76,24 +97,22 @@ public class EstablecimientoActivity extends AppCompatActivity {
             if (data.hasExtra("data")){
                 ImageView ivEstablecimiento = (ImageView) findViewById(R.id.iv_establecimiento);
                 ivEstablecimiento.setImageBitmap((Bitmap) data.getParcelableExtra("data"));
-                Log.d("HAS EXTRA","entra en has extra");
-            }else{
-                Log.d("HAS EXTRA","no entra en has extra");
-                ImageView ivEstablecimiento = (ImageView) findViewById(R.id.iv_establecimiento);
-                ivEstablecimiento.setImageBitmap(BitmapFactory.decodeFile(name));
-
-                new MediaScannerConnection.MediaScannerConnectionClient(){
-                  private MediaScannerConnection msc = null;{
-                        msc = new MediaScannerConnection(getApplicationContext(),this);msc.connect();
-                    }
-                    public void onMediaScannerConnected(){
-                        msc.scanFile(name,null);
-                    }
-                    public void onScanCompleted(String path,Uri uri){
-                        msc.disconnect();
-                    }
-                };
             }
+        }else{
+            ImageView ivEstablecimiento = (ImageView) findViewById(R.id.iv_establecimiento);
+            ivEstablecimiento.setImageBitmap(BitmapFactory.decodeFile(name));
+
+            new MediaScannerConnection.MediaScannerConnectionClient(){
+                private MediaScannerConnection msc = null;{
+                    msc = new MediaScannerConnection(getApplicationContext(),this);msc.connect();
+                }
+                public void onMediaScannerConnected(){
+                    msc.scanFile(name,null);
+                }
+                public void onScanCompleted(String path,Uri uri){
+                    msc.disconnect();
+                }
+            };
         }
     }
 
