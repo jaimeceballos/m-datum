@@ -24,6 +24,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,12 +50,12 @@ public class EstablecimientoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_establecimiento);
 
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
-        List<String> regTenenciaArray = new ArrayList<String>();
-        regTenenciaArray.add("Propiedad");
-        regTenenciaArray.add("Sucesión indivisa");
-        regTenenciaArray.add("Arrendatario");
-        regTenenciaArray.add("Otro");
+        Spinner spRegTenencia;
 
+        spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
+        String []opciones={"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
+        spRegTenencia.setAdapter(adapter);
 
         EditText etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
 

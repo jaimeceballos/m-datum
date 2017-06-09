@@ -6,7 +6,7 @@
     <string name="btn_capturar_ubicacion">Ubicación</string>
     <string name="tv_lat">Lat.</string>
     <string name="tv_long">Long.</string>
-    <string name="tv_coordenadas_cero">0.0000</string>
+    <string name="tv_coordenada_desconocida">Desconocido</string>
     <string name="btn_tomar_foto">Tomar foto</string>
     <string name="btn_siguiente">Siguiente</string>
     <string name="et_especificar">Especificar</string>
