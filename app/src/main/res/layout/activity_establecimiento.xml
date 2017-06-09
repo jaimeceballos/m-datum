@@ -117,6 +117,16 @@
         android:layout_alignLeft="@+id/titulo"
         android:layout_alignStart="@+id/titulo" />
 
+    <ImageView
+        android:id="@+id/iv_establecimiento"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/sp_reg_tenencia"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/tv_long"
+        android:layout_alignStart="@+id/tv_long" />
+
     <EditText
         android:id="@+id/et_especificar"
         android:layout_width="match_parent"
