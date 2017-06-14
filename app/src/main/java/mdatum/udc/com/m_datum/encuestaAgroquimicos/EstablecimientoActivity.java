@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,9 +18,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +41,7 @@ import mdatum.udc.com.m_datum.data.EstablecimientoDbHelper;
 
 
 public class EstablecimientoActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks{
+        GoogleApiClient.ConnectionCallbacks {
 
     
     private EstablecimientoDbHelper establecimientoDbHelper;
@@ -46,6 +49,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     
     //variable donde se genera el nombre de archivo de la imagen capturada
     private String name = "";
+
 
     private static final String LOGTAG = "android-localizacion";
 
@@ -55,23 +59,51 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     private GoogleApiClient apiClient;
     //textViews que muestran la posicion geografica
     private TextView tvCoordLat,tvCoordLong;
-    //boton de captura de ubicacion
-    private Button btnCapturarUbicacion;
+
+    private EditText etEspecificar;
+
+    private Spinner spRegTenencia;
+
+    private Button btnCapturarUbicacion;  //Ojo no se esta utilizando-------------------------------
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establecimiento);
 
+//--------------------------------SPINNER-----------------------------------------------------------
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
-        final Spinner spRegTenencia;
 
+        etEspecificar = (EditText) findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
-        final String []opciones={"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
+        final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spRegTenencia.setAdapter(adapter);
+        //Utilizo un listener que captura los eventos realizados sobre el spinner y si elige la opción
+        //"Otro" setea el EditText et_especificar como visible
+        spRegTenencia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).toString() == "Otro") {
+                    etEspecificar.setVisibility(View.VISIBLE);
+                }else{
+                    etEspecificar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
+/*-------------------------UTILIZA EL BOTON PARA ACCEDER A LA CAMARA, GUARDA LA FOTO Y LA MUESTRA
+ SIEMPRE QUE EL CAMPO Nombre de Estableciemiento este completo-----------------------------------*/
         //edit text que obtiene el nombre del establecimiento
         final EditText etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
         //listener que detecta el cambio del contenido del cuadro de texto
@@ -147,6 +179,10 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
     }
 
+
+
+
+    //-----------------------------FOTOGRAFIA-------------------------------------------------------
     //Metodo que se ejecuta cuando la aplicacion de la camara captura la imagen.
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
@@ -175,6 +211,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     }
 
     //metodo que actualiza los text views de posicion
+//-----------------------------------GEOPOSICIONAMIENTO---------------------------------------------
+    //método recibe un objeto Location y actualiza los campos de tvCoordLat y tvCoordLong
     private void updateUI(Location loc){
         //si se obtiene la ubicacion
         if(loc != null){
@@ -213,8 +251,6 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
             updateUI(lastLocation);
         }
 
-
-
     }
 
 
@@ -243,8 +279,6 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         }
     }
 
-
-
     @Override
     public void onConnectionSuspended(int i) {
         //Se ha interrumpido la conexión con Google Play Services
@@ -263,5 +297,4 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     }
 }
 
-
-
+//--------------------------------------------------------------------------------------------------

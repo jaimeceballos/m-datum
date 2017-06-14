@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">M-Datum</string>
-    <string name="tv_titulo">Datos del establecimiento</string>
-    <string name="et_nombre_establecimiento">Nombre</string>
+    <string name="tv_titulo_establecimiento">Datos del establecimiento</string>
+    <string name="et_nombre">Nombre</string>
     <string name="et_nro_establecimiento">Nro.</string>
     <string name="btn_capturar_ubicacion">Ubicación</string>
     <string name="tv_lat">Lat.</string>
@@ -11,4 +11,17 @@
     <string name="btn_siguiente">Siguiente</string>
     <string name="et_especificar">Especificar</string>
     <string name="tv_reg_tenencia">Regimen de tenencia</string>
+
+    <string name="tv_titulo_encuestado">Datos del encuestado</string>
+    <string name="et_apellido">Apellido</string>
+    <string name="et_edad">Edad</string>
+    <string name="et_nacionalidad">Nacionalidad</string>
+    <string name="tv_instruccion">Nivel de instrucción</string>
+    <string name="tv_situación">Situación</string>
+    <string name="rb_completo">Completo</string>
+    <string name="rb_incompleto">Incompleto</string>
+    <string name="tv_habita_establecimiento">"Vive en el establecimiento?"</string>
+    <string name="tv_si">Si</string>
+    <string name="tv_no">No</string>
+
 </resources>
