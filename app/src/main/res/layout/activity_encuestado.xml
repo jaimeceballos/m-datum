@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity"
+    android:padding="16dp" >
+
+    <TextView
+        android:id="@+id/tv_titulo_encuestado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_titulo_encuestado"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="-201dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/et_nombre_encuestado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/et_nombre"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="56dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/tv_titulo_encuestado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/et_apellido_encuestado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/et_apellido"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="115dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/et_nombre_encuestado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/et_edad_encuestado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="@string/et_edad"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="115dp"
+        android:layout_below="@+id/et_apellido_encuestado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tv_nivel_instruccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/tv_instruccion"
+        android:textSize="18sp"
+        android:layout_below="@+id/et_nacionalidad"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/sp_niv_instruccion"
+        android:layout_width="217dp"
+        android:layout_height="41dp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="291dp"
+        android:layout_alignTop="@+id/tv_nivel_instruccion"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/tv_nivel_instruccion"
+        android:layout_toEndOf="@+id/tv_nivel_instruccion" />
+
+    <Button
+        android:id="@+id/btn_siguiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_siguiente"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="408dp" />
+
+
+    <EditText
+        android:id="@+id/et_nacionalidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/et_nacionalidad"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/et_edad_encuestado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tv_situación_estudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_situación"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/sp_niv_instruccion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tv_situación_estudio"
+        android:layout_toRightOf="@+id/tv_situación_estudio"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/rb_completo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_completo" />
+
+        <RadioButton
+            android:id="@+id/rb_incompleto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/rb_incompleto" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_habita_establecimiento"
+        android:textSize="18sp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/sp_niv_instruccion"
+        android:layout_toStartOf="@+id/sp_niv_instruccion" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp">
+
+        <RadioButton
+            android:id="@+id/rb_habita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_si" />
+
+        <RadioButton
+            android:id="@+id/rb_no_habita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_no" />
+    </RadioGroup>
+
+</RelativeLayout>

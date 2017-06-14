@@ -9,10 +9,10 @@
     android:padding="16dp" >
 
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/titulo_establecimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_titulo"
+        android:text="@string/tv_titulo_establecimiento"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="63dp"
         tools:layout_editor_absoluteY="-201dp"
@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/et_especificar"
         android:layout_alignStart="@+id/et_especificar"
-        android:layout_below="@+id/titulo"
+        android:layout_below="@+id/titulo_establecimiento"
         android:ems="10"
-        android:hint="@string/et_nombre_establecimiento"
+        android:hint="@string/et_nombre"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="56dp" />
@@ -85,8 +85,8 @@
         android:id="@+id/tv_coord_lat"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_alignEnd="@+id/titulo"
-        android:layout_alignRight="@+id/titulo"
+        android:layout_alignEnd="@+id/titulo_establecimiento"
+        android:layout_alignRight="@+id/titulo_establecimiento"
         android:layout_alignTop="@+id/tv_lat"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
@@ -108,8 +108,8 @@
         android:id="@+id/btn_foto"
         android:layout_width="96dp"
         android:layout_height="52dp"
-        android:layout_alignLeft="@+id/titulo"
-        android:layout_alignStart="@+id/titulo"
+        android:layout_alignLeft="@+id/titulo_establecimiento"
+        android:layout_alignStart="@+id/titulo_establecimiento"
         android:layout_centerVertical="true"
         android:text="@string/btn_tomar_foto"
         tools:layout_editor_absoluteX="84dp"
@@ -158,7 +158,8 @@
         android:hint="@string/et_especificar"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="344dp" />
+        tools:layout_editor_absoluteY="344dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_siguiente"
@@ -169,6 +170,17 @@
         android:text="@string/btn_siguiente"
         tools:layout_editor_absoluteX="145dp"
         tools:layout_editor_absoluteY="408dp" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_siguiente"
+        android:layout_alignEnd="@+id/titulo_establecimiento"
+        android:layout_alignRight="@+id/titulo_establecimiento"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@+id/btn_capturar_ubicacion"
+        android:layout_toRightOf="@+id/btn_capturar_ubicacion" />
 
 
 </RelativeLayout>
