@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -164,6 +165,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
+                savingToast.show();
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
                 establecimiento.setRegimenTenencia(spRegTenencia.getSelectedItemPosition());
@@ -293,6 +296,11 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
             return establecimientoDbHelper.saveEstablecimiento(establecimiento[0]) > 0;
         }
 
+        @Override
+        protected void onPostExecute(Boolean result){
+            Intent encuestado = new Intent(getApplicationContext(),EncuestadoActivity.class);
+            startActivity(encuestado);
+        }
 
     }
 }
