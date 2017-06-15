@@ -9,6 +9,7 @@
     <string name="tv_coordenada_desconocida">Desconocido</string>
     <string name="btn_tomar_foto">Tomar foto</string>
     <string name="btn_siguiente">Siguiente</string>
+    <string name="btn_atras">Atras</string>
     <string name="et_especificar">Especificar</string>
     <string name="tv_reg_tenencia">Regimen de tenencia</string>
 

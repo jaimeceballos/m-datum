@@ -192,11 +192,11 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
         if (data != null){
             if (data.hasExtra("data")){
-                ImageView ivEstablecimiento = (ImageView) findViewById(R.id.iv_establecimiento);
+                ImageView ivEstablecimiento = (ImageView) findViewById(R.id.tv_establecimiento);
                 ivEstablecimiento.setImageBitmap((Bitmap) data.getParcelableExtra("data"));
             }
         }else{
-            ImageView ivEstablecimiento = (ImageView) findViewById(R.id.iv_establecimiento);
+            ImageView ivEstablecimiento = (ImageView) findViewById(R.id.tv_establecimiento);
             ivEstablecimiento.setImageBitmap(BitmapFactory.decodeFile(name));
 
             new MediaScannerConnection.MediaScannerConnectionClient(){
