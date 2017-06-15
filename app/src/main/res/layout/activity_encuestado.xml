@@ -7,19 +7,6 @@
     android:padding="16dp"
     tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity">
 
-    <Button
-        android:id="@+id/btn_atras"
-        android:layout_width="wrap_content"
-        android:layout_height="50sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:text="@string/btn_atras"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="408dp" />
-
     <TextView
         android:id="@+id/tv_titulo_encuestado"
         android:layout_width="match_parent"
@@ -108,8 +95,7 @@
         tools:layout_editor_absoluteX="145dp"
         tools:layout_editor_absoluteY="408dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/tv_habita_establecimiento"
-        android:layout_toEndOf="@+id/tv_habita_establecimiento" />
+        android:layout_centerHorizontal="true" />
 
 
     <EditText
