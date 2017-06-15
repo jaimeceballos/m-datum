@@ -141,10 +141,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_above="@+id/sp_reg_tenencia"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/tv_long"
-        android:layout_alignStart="@+id/tv_long" />
+        android:layout_alignStart="@+id/tv_long"
+        android:layout_below="@+id/tv_long"
+        android:layout_alignRight="@+id/sp_reg_tenencia"
+        android:layout_alignEnd="@+id/sp_reg_tenencia" />
 
     <EditText
         android:id="@+id/et_especificar"
