@@ -8,8 +8,7 @@ import android.content.ContentValues;
 
 public class Establecimiento {
 
-
-
+    private int id;
     private String nombre;
     private String nro;
     private String posLatitud;
@@ -17,6 +16,14 @@ public class Establecimiento {
     private String foto;
     private int regimenTenencia;
     private String regimenOtros;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;

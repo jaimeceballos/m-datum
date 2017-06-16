@@ -3,6 +3,7 @@ package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -36,8 +37,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
+import java.util.ArrayList;
+
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Establecimiento;
+import mdatum.udc.com.m_datum.data.EstablecimientoContract;
 import mdatum.udc.com.m_datum.data.EstablecimientoDbHelper;
 
 
@@ -292,8 +296,9 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     private class AddEstablecimientoTask extends AsyncTask<Establecimiento,Void,Boolean>{
         @Override
         protected Boolean doInBackground(Establecimiento... establecimiento){
-
-            return establecimientoDbHelper.saveEstablecimiento(establecimiento[0]) > 0;
+            long result = establecimientoDbHelper.saveEstablecimiento(establecimiento[0]);
+            establecimiento[0].setId((int) result);
+            return result > 0;
         }
 
         @Override
