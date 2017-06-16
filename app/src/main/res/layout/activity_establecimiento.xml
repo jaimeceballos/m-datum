@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity"
-    android:padding="16dp" >
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity">
 
     <TextView
         android:id="@+id/titulo_establecimiento"
@@ -14,174 +13,220 @@
         android:layout_height="wrap_content"
         android:text="@string/tv_titulo_establecimiento"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="-201dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/et_nombre_establecimiento"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintRight_toRightOf="@+id/et_nombre_establecimiento"
+        android:layout_marginRight="13dp" />
 
     <EditText
         android:id="@+id/et_nombre_establecimiento"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/et_especificar"
-        android:layout_alignStart="@+id/et_especificar"
-        android:layout_below="@+id/titulo_establecimiento"
         android:ems="10"
         android:hint="@string/et_nombre"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="56dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btn_capturar_ubicacion"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="44dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="42dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
 
     <EditText
         android:id="@+id/et_nro_establecimiento"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/et_especificar"
-        android:layout_alignStart="@+id/et_especificar"
-        android:layout_below="@+id/et_nombre_establecimiento"
         android:ems="10"
         android:hint="@string/et_nro_establecimiento"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="115dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/et_nombre_establecimiento"
+        app:layout_constraintTop_toBottomOf="@+id/et_nombre_establecimiento"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/et_nombre_establecimiento" />
 
     <Button
         android:id="@+id/btn_capturar_ubicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_capturar_ubicacion"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="174dp"
-        android:layout_below="@+id/et_nro_establecimiento"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_establecimiento"
+        android:layout_marginStart="8dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/et_nro_establecimiento"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/tv_long"
-        android:layout_width="35dp"
+        android:layout_width="0dp"
         android:layout_height="20dp"
-        android:layout_alignBottom="@+id/btn_capturar_ubicacion"
-        android:layout_alignEnd="@+id/tv_lat"
-        android:layout_alignLeft="@+id/tv_lat"
-        android:layout_alignRight="@+id/tv_lat"
-        android:layout_alignStart="@+id/tv_lat"
         android:text="@string/tv_long"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="186dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/tv_lat"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lat"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_lat" />
 
     <TextView
         android:id="@+id/tv_lat"
         android:layout_width="35dp"
-        android:layout_height="20dp"
-        android:layout_above="@+id/tv_long"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_toRightOf="@+id/btn_capturar_ubicacion"
+        android:layout_height="0dp"
         android:text="@string/tv_lat"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="186dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="123dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_capturar_ubicacion"
+        android:layout_marginEnd="128dp"
+        app:layout_constraintRight_toRightOf="@+id/tv_coord_lat"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_nro_establecimiento"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/et_nro_establecimiento"
+        android:layout_marginLeft="123dp"
+        android:layout_marginRight="128dp" />
 
     <TextView
         android:id="@+id/tv_coord_lat"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_alignEnd="@+id/titulo_establecimiento"
-        android:layout_alignRight="@+id/titulo_establecimiento"
-        android:layout_alignTop="@+id/tv_lat"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
-        android:layout_toRightOf="@+id/tv_long"
-        android:text="@string/tv_coordenada_desconocida" />
+        android:layout_height="0dp"
+        android:text="@string/tv_coordenada_desconocida"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="49dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lat"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintRight_toRightOf="@+id/et_nro_establecimiento"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_establecimiento"
+        app:layout_constraintTop_toTopOf="@+id/tv_lat"
+        android:layout_marginLeft="49dp"
+        android:layout_marginRight="50dp" />
 
     <TextView
         android:id="@+id/tv_coord_long"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_alignEnd="@+id/tv_coord_lat"
-        android:layout_alignLeft="@+id/tv_coord_lat"
-        android:layout_alignRight="@+id/tv_coord_lat"
-        android:layout_alignStart="@+id/tv_coord_lat"
-        android:layout_below="@+id/tv_coord_lat"
-        android:text="@string/tv_coordenada_desconocida" />
+        android:text="@string/tv_coordenada_desconocida"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/tv_coord_lat"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coord_lat"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_coord_lat" />
 
     <Button
         android:id="@+id/btn_foto"
-        android:layout_width="96dp"
+        android:layout_width="0dp"
         android:layout_height="52dp"
-        android:layout_alignLeft="@+id/titulo_establecimiento"
-        android:layout_alignStart="@+id/titulo_establecimiento"
-        android:layout_centerVertical="true"
         android:text="@string/btn_tomar_foto"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="231dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_reg_tenencia"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintRight_toRightOf="@+id/btn_capturar_ubicacion"
+        android:layout_marginTop="52dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="43dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_reg_tenencia"
+        app:layout_constraintTop_toTopOf="@+id/tv_establecimiento"
+        android:layout_marginRight="1dp" />
 
     <TextView
         android:id="@+id/tv_reg_tenencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/et_especificar"
-        android:layout_alignTop="@+id/sp_reg_tenencia"
-        android:layout_toLeftOf="@+id/tv_long"
-        android:layout_toStartOf="@+id/tv_long"
         android:text="@string/tv_reg_tenencia"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="187dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="-2dp" />
 
     <Spinner
         android:id="@+id/sp_reg_tenencia"
-        android:layout_width="217dp"
-        android:layout_height="41dp"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="291dp"
-        android:layout_below="@+id/btn_foto"
-        android:layout_toEndOf="@+id/tv_reg_tenencia"
-        android:layout_toRightOf="@+id/tv_reg_tenencia" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_reg_tenencia"
+        app:layout_constraintRight_toRightOf="@+id/tv_establecimiento"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_establecimiento"
+        app:layout_constraintTop_toTopOf="@+id/tv_reg_tenencia" />
 
     <ImageView
         android:id="@+id/tv_establecimiento"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_above="@+id/sp_reg_tenencia"
-        android:layout_alignLeft="@+id/tv_long"
-        android:layout_alignStart="@+id/tv_long"
-        android:layout_below="@+id/tv_long"
-        android:layout_alignRight="@+id/sp_reg_tenencia"
-        android:layout_alignEnd="@+id/sp_reg_tenencia" />
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/sp_reg_tenencia"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toRightOf="@+id/tv_reg_tenencia"
+        android:layout_marginRight="4dp" />
 
     <EditText
         android:id="@+id/et_especificar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/sp_reg_tenencia"
-        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="@string/et_especificar"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="344dp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_siguiente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:text="@string/btn_siguiente"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="408dp" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="123dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reg_tenencia"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/tv"
+        android:layout_marginLeft="32dp" />
 
     <TextView
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_siguiente"
-        android:layout_alignEnd="@+id/titulo_establecimiento"
-        android:layout_alignRight="@+id/titulo_establecimiento"
-        android:layout_marginBottom="12dp"
-        android:layout_toEndOf="@+id/btn_capturar_ubicacion"
-        android:layout_toRightOf="@+id/btn_capturar_ubicacion" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btn_siguiente"
+        app:layout_constraintRight_toRightOf="@+id/tv_coord_long"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintLeft_toRightOf="@+id/btn_capturar_ubicacion" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

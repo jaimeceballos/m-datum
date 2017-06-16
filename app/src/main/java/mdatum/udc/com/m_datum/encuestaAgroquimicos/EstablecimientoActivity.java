@@ -60,6 +60,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
     //variable para la peticion de permiso de localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
+    private static final int PETICION_PERMISO_ALMACENAMIENTO = 102;
     //instancia de la api de google
     private GoogleApiClient apiClient;
     //textViews que muestran la posicion geografica
@@ -200,20 +201,29 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 ivEstablecimiento.setImageBitmap((Bitmap) data.getParcelableExtra("data"));
             }
         }else{
-            ImageView ivEstablecimiento = (ImageView) findViewById(R.id.tv_establecimiento);
-            ivEstablecimiento.setImageBitmap(BitmapFactory.decodeFile(name));
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                //si no los tiene se los pide al usuario
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PETICION_PERMISO_ALMACENAMIENTO);
+            }else{
+                ImageView ivEstablecimiento = (ImageView) findViewById(R.id.tv_establecimiento);
+                ivEstablecimiento.setImageBitmap(BitmapFactory.decodeFile(name));
 
-            new MediaScannerConnection.MediaScannerConnectionClient(){
-                private MediaScannerConnection msc = null;{
-                    msc = new MediaScannerConnection(getApplicationContext(),this);msc.connect();
-                }
-                public void onMediaScannerConnected(){
-                    msc.scanFile(name,null);
-                }
-                public void onScanCompleted(String path,Uri uri){
-                    msc.disconnect();
-                }
-            };
+                new MediaScannerConnection.MediaScannerConnectionClient(){
+                    private MediaScannerConnection msc = null;{
+                        msc = new MediaScannerConnection(getApplicationContext(),this);msc.connect();
+                    }
+                    public void onMediaScannerConnected(){
+                        msc.scanFile(name,null);
+                    }
+                    public void onScanCompleted(String path,Uri uri){
+                        msc.disconnect();
+                    }
+                };
+            }
+
         }
     }
 
@@ -283,6 +293,22 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
                 Log.e(LOGTAG, "Permiso denegado");
             }
+        }
+        if (requestCode == PETICION_PERMISO_ALMACENAMIENTO){
+            ImageView ivEstablecimiento = (ImageView) findViewById(R.id.tv_establecimiento);
+            ivEstablecimiento.setImageBitmap(BitmapFactory.decodeFile(name));
+
+            new MediaScannerConnection.MediaScannerConnectionClient(){
+                private MediaScannerConnection msc = null;{
+                    msc = new MediaScannerConnection(getApplicationContext(),this);msc.connect();
+                }
+                public void onMediaScannerConnected(){
+                    msc.scanFile(name,null);
+                }
+                public void onScanCompleted(String path,Uri uri){
+                    msc.disconnect();
+                }
+            };
         }
     }
 
