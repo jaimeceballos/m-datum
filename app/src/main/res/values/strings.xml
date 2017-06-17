@@ -24,5 +24,11 @@
     <string name="tv_habita_establecimiento">"Vive en el establecimiento?"</string>
     <string name="tv_si">Si</string>
     <string name="tv_no">No</string>
+    <string name="tv_titulo_familia">Datos de la familia</string>
+    <string name="tv_esposa">Tiene esposa?</string>
+    <string name="tv_hijos">Tiene hijos?</string>
+    <string name="tv_varones">Varones</string>
+    <string name="tv_mujeres">Mujeres</string>
+    <string name="et_cantidad">Cantidad</string>
 
 </resources>

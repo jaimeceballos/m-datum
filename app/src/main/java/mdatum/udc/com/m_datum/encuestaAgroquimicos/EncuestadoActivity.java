@@ -13,11 +13,11 @@ import mdatum.udc.com.m_datum.R;
 public class EncuestadoActivity extends AppCompatActivity {
 
     private Spinner spNivInstruccion;
-    private Button btnAtras;
+    private Button btnEncuestadoSiguiente;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuestado);
 
@@ -27,7 +27,15 @@ public class EncuestadoActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spNivInstruccion.setAdapter(adapter);
 
+        btnEncuestadoSiguiente = (Button) findViewById(R.id.btn_encuestado_siguiente);
 
+        btnEncuestadoSiguiente.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent irAFamilia = new Intent(view.getContext(), FamiliaActivity.class);
+                startActivityForResult(irAFamilia, 0);
+            }
+        });
 
 
     }
