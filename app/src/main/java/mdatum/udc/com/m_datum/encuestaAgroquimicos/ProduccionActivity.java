@@ -7,9 +7,11 @@ import mdatum.udc.com.m_datum.R;
 
 public class ProduccionActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
+
     }
 }
