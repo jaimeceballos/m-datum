@@ -132,6 +132,7 @@
 
     <Button
         android:id="@+id/btn_encuestado_siguiente"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"

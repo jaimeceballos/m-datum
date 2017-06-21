@@ -5,13 +5,11 @@ import android.os.Bundle;
 
 import mdatum.udc.com.m_datum.R;
 
-public class FamiliaActivity extends AppCompatActivity {
+public class ProduccionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_familia);
-
-
+        setContentView(R.layout.activity_produccion);
     }
 }

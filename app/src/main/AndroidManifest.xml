@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".encuestaAgroquimicos.EncuestadoActivity"></activity>
+        <activity android:name=".encuestaAgroquimicos.EncuestadoActivity" />
+        <activity android:name=".encuestaAgroquimicos.FamiliaActivity" />
+        <activity android:name=".encuestaAgroquimicos.ProduccionActivity"></activity>
+
     </application>
 
 </manifest>

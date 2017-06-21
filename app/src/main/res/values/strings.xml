@@ -31,4 +31,7 @@
     <string name="tv_mujeres">Mujeres</string>
     <string name="et_cantidad">Cantidad</string>
 
+    <string name="tv_titulo_produccion">Producción</string>
+    <string name="tv_produce_invernadero">Produce bajo cubierta?</string>
+
 </resources>

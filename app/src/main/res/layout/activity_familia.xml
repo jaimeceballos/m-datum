@@ -12,15 +12,15 @@
         android:id="@+id/tv_titulo_familia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_titulo_familia"
-        android:textSize="18sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
-        tools:layout_constraintLeft_creator="1"
+        android:text="@string/tv_titulo_familia"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/tv_esposa"
@@ -72,15 +72,15 @@
 
         <RadioButton
             android:id="@+id/rb_esposa_no"
-            android:layout_width="57dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignLeft="@+id/tv_hijos"
             android:layout_alignStart="@+id/tv_hijos"
             android:layout_below="@+id/rg_hijos"
-            android:layout_weight="1"
             android:text="@string/tv_no"
             tools:layout_editor_absoluteX="216dp"
-            tools:layout_editor_absoluteY="56dp" />
+            tools:layout_editor_absoluteY="56dp"
+            android:layout_weight="0.59" />
     </RadioGroup>
 
     <TextView
@@ -198,17 +198,18 @@
         android:layout_marginRight="16dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_flia_siguiente"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="26dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_weight="1"
+        android:text="@string/btn_siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
 </android.support.constraint.ConstraintLayout>
