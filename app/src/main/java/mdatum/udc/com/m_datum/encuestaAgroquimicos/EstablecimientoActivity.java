@@ -166,6 +166,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
             @Override
             public void onClick(View view) {
                 Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
+
                 savingToast.show();
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
