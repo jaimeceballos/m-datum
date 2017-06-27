@@ -33,5 +33,8 @@
 
     <string name="tv_titulo_produccion">Producción</string>
     <string name="tv_produce_invernadero">Produce bajo cubierta?</string>
-
+    <string name="et_cant_modulos">Cantidad de módulos</string>
+    <string name="et_sup_unit">Superficie unitaria</string>
+    <string name="tv_mat_estruct">Material de la estructura</string>
+    <string name="tv_anio_const">Año de construcción</string>
 </resources>
