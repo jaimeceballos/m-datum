@@ -36,6 +36,7 @@ import com.google.android.gms.location.LocationServices;
 import java.io.File;
 
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.data.Establecimiento;
 import mdatum.udc.com.m_datum.data.EstablecimientoDbHelper;
 
@@ -43,7 +44,7 @@ import mdatum.udc.com.m_datum.data.EstablecimientoDbHelper;
 public class EstablecimientoActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
-    
+    private Encuesta encuesta = new Encuesta();
     private EstablecimientoDbHelper establecimientoDbHelper;
     private Establecimiento establecimiento = new Establecimiento();
     
@@ -320,12 +321,14 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         protected Boolean doInBackground(Establecimiento... establecimiento){
             long result = establecimientoDbHelper.saveEstablecimiento(establecimiento[0]);
             establecimiento[0].setId((int) result);
+            encuesta.setEstablecimientoId((int) result);
             return result > 0;
         }
 
         @Override
         protected void onPostExecute(Boolean result){
             Intent encuestado = new Intent(getApplicationContext(),EncuestadoActivity.class);
+            encuestado.putExtra("encuesta",encuesta);
             startActivity(encuestado);
         }
 
