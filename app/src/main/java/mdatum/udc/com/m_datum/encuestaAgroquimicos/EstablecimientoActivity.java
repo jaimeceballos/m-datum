@@ -150,12 +150,15 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         //obtengo el boton de captura de ubicacion
         btnCapturarUbicacion = (Button) findViewById(R.id.btn_capturar_ubicacion);
 
-        //Configuro la apiClient de Google
-        apiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .build();
+        btnCapturarUbicacion.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                capturarUbicacion();
+            }
+        });
+
+
         
         //Obtengo el boton de siguiente
         Button btnSiguiente = (Button)findViewById(R.id.btn_siguiente);
@@ -184,7 +187,17 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
     }
 
+    private void capturarUbicacion(){
+        //Configuro la apiClient de Google
+        if(apiClient != null)
+            apiClient.stopAutoManage(this);
 
+        apiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
 
 
     //-----------------------------FOTOGRAFIA-------------------------------------------------------
@@ -259,8 +272,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         }else{
             //si tiene los permisos para acceder a la localizacion
             //obtiene la ultima ubicacion registrada
-            Location lastLocation =
-                    LocationServices.FusedLocationApi.getLastLocation(apiClient);
+            Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
             //actualiza las etiquetas con la ultima ubicacion conocida
             updateUI(lastLocation);
         }
