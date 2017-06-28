@@ -41,7 +41,7 @@
         android:layout_marginStart="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_mat_estruct"
         android:layout_marginEnd="3dp"
-        app:layout_constraintRight_toRightOf="@+id/button2"
+        app:layout_constraintRight_toRightOf="@+id/btn_produccion_siguiente"
         android:layout_marginTop="120dp"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="120dp"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_sup_unit"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="27dp"
-        app:layout_constraintLeft_toLeftOf="@+id/button2"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_produccion_siguiente"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
 
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toTopOf="@+id/et_anio_const" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_produccion_siguiente"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:text="@string/tv_mat_estruct"
-        app:layout_constraintRight_toLeftOf="@+id/button2"
+        app:layout_constraintRight_toLeftOf="@+id/btn_produccion_siguiente"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
