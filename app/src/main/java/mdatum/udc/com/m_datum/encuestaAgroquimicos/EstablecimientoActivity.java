@@ -39,6 +39,8 @@ import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.data.Establecimiento;
 import mdatum.udc.com.m_datum.data.EstablecimientoDbHelper;
+import mdatum.udc.com.m_datum.data.RegimenTenencia;
+import mdatum.udc.com.m_datum.data.RegimenTenenciaDbHelper;
 
 
 public class EstablecimientoActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener,
@@ -79,6 +81,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 //--------------------------------SPINNER-----------------------------------------------------------
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
 
+        new RegimenTenenciaDbHelper(this);
+        
         etEspecificar = (EditText) findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
         final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
@@ -169,9 +173,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
 
-                savingToast.show();
+
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
                 establecimiento.setRegimenTenencia(spRegTenencia.getSelectedItemPosition());
@@ -181,7 +184,19 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                     establecimiento.setRegimenOtros("");
                 }
                 establecimiento.setFoto(name);
-                new AddEstablecimientoTask().execute(establecimiento);
+
+                if(establecimiento.validar()){
+                    Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
+
+                    savingToast.show();
+                    new AddEstablecimientoTask().execute(establecimiento);
+                } else {
+                    Toast savingToast = Toast.makeText(getApplicationContext(),"Verifique los datos cargados.",Toast.LENGTH_SHORT);
+
+                    savingToast.show();
+                }
+
+
             }
         });
 

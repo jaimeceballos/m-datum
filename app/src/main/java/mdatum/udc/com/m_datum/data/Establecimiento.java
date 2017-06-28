@@ -94,4 +94,11 @@ public class Establecimiento {
         values.put(EstablecimientoContract.EstablecimientoEntry.REGIMEN_OTROS,regimenOtros);
         return values;
     }
+
+    public Boolean validar(){
+        if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && (this.getRegimenTenencia() == 6 && !this.getRegimenOtros().isEmpty())){
+            return true;
+        }
+        return false;
+    }
 }
