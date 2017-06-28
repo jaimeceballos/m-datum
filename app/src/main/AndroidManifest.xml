@@ -21,8 +21,11 @@
         </activity>
         <activity android:name=".encuestaAgroquimicos.EncuestadoActivity" />
         <activity android:name=".encuestaAgroquimicos.FamiliaActivity" />
-        <activity android:name=".encuestaAgroquimicos.ProduccionActivity"></activity>
-
+        <activity android:name=".encuestaAgroquimicos.ProduccionActivity" />
+        <activity
+            android:name=".encuestaAgroquimicos.CultivoActivity"
+            android:label="@string/title_activity_cultivo"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
