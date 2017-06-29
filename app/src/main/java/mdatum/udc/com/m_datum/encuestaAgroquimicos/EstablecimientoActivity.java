@@ -38,18 +38,16 @@ import java.io.File;
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.data.Establecimiento;
-import mdatum.udc.com.m_datum.data.EstablecimientoDbHelper;
-import mdatum.udc.com.m_datum.data.RegimenTenencia;
-import mdatum.udc.com.m_datum.data.RegimenTenenciaDbHelper;
+import mdatum.udc.com.m_datum.data.MDatumDbHelper;
 
 
 public class EstablecimientoActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
     private Encuesta encuesta = new Encuesta();
-    private EstablecimientoDbHelper establecimientoDbHelper;
     private Establecimiento establecimiento = new Establecimiento();
-    
+
+    private MDatumDbHelper mDatumDbHelper;
     //variable donde se genera el nombre de archivo de la imagen capturada
     private String name = "";
 
@@ -71,7 +69,6 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     private Button btnCapturarUbicacion;  //Ojo no se esta utilizando-------------------------------
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -81,7 +78,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 //--------------------------------SPINNER-----------------------------------------------------------
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
 
-        new RegimenTenenciaDbHelper(this);
+        mDatumDbHelper = new MDatumDbHelper(this);
         
         etEspecificar = (EditText) findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
@@ -169,7 +166,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
         final EditText etNroEstablecimiento =  (EditText) findViewById(R.id.et_nro_establecimiento);
         final EditText etEspecificar = (EditText) findViewById(R.id.et_especificar);
-        establecimientoDbHelper = new EstablecimientoDbHelper(this);
+
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -346,7 +343,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     private class AddEstablecimientoTask extends AsyncTask<Establecimiento,Void,Boolean>{
         @Override
         protected Boolean doInBackground(Establecimiento... establecimiento){
-            long result = establecimientoDbHelper.saveEstablecimiento(establecimiento[0]);
+            long result = mDatumDbHelper.saveEstablecimiento(establecimiento[0]);
             establecimiento[0].setId((int) result);
             encuesta.setEstablecimientoId((int) result);
             return result > 0;

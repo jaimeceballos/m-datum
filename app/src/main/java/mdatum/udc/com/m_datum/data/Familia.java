@@ -9,8 +9,8 @@ import android.content.ContentValues;
 public class Familia {
 
     private int id;
-    private Boolean esCasado;
-    private Boolean tieneHijos;
+    private int esCasado;
+    private int tieneHijos;
     private int cantVarones;
     private int cantMujeres;
 
@@ -22,19 +22,19 @@ public class Familia {
         this.id = id;
     }
 
-    public Boolean getEsCasado() {
+    public int getEsCasado() {
         return esCasado;
     }
 
-    public void setEsCasado(Boolean esCasado) {
+    public void setEsCasado(int esCasado) {
         this.esCasado = esCasado;
     }
 
-    public Boolean getTieneHijos() {
+    public int getTieneHijos() {
         return tieneHijos;
     }
 
-    public void setTieneHijos(Boolean tieneHijos) {
+    public void setTieneHijos(int tieneHijos) {
         this.tieneHijos = tieneHijos;
     }
 
@@ -56,7 +56,10 @@ public class Familia {
 
     public ContentValues toContentValues(){
         ContentValues values = new ContentValues();
-
+        values.put(FamiliaContract.FamiliaEntry.ES_CASADO,esCasado);
+        values.put(FamiliaContract.FamiliaEntry.TIENE_HIJOS,tieneHijos);
+        values.put(FamiliaContract.FamiliaEntry.CANTIDAD_VARONES,cantVarones);
+        values.put(FamiliaContract.FamiliaEntry.CANTIDAD_MUJERES,cantMujeres);
         return values;
     }
 }
