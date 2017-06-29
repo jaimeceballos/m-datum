@@ -3,6 +3,8 @@ package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -13,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,6 +37,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Encuesta;
@@ -66,7 +70,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
     private Spinner spRegTenencia;
 
-    private Button btnCapturarUbicacion;  //Ojo no se esta utilizando-------------------------------
+    private Button btnCapturarUbicacion;
 
 
     @Override
@@ -83,9 +87,20 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         etEspecificar = (EditText) findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
         final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spRegTenencia.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
         //Utilizo un listener que captura los eventos realizados sobre el spinner y si elige la opción
         //"Otro" setea el EditText et_especificar como visible
         spRegTenencia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -160,7 +175,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         });
 
 
-        
+
         //Obtengo el boton de siguiente
         Button btnSiguiente = (Button)findViewById(R.id.btn_siguiente);
 
@@ -175,6 +190,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
                 establecimiento.setRegimenTenencia(spRegTenencia.getSelectedItemPosition());
+
                 if(opciones[establecimiento.getRegimenTenencia()]=="Otro"){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
                 }else{
@@ -198,6 +214,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         });
 
     }
+
+
 
     private void capturarUbicacion(){
         //Configuro la apiClient de Google
@@ -357,6 +375,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         }
 
     }
+
 }
 
 //--------------------------------------------------------------------------------------------------

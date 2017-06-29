@@ -38,15 +38,15 @@ public class EncuestadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuestado);
-        encuesta        =  (Encuesta) getIntent().getExtras().getSerializable("encuesta");
-        rbHabita        = (RadioButton) findViewById(R.id.rb_habita);
-        rbNoHabita      = (RadioButton) findViewById(R.id.rb_no_habita);
-        etApellido      = (EditText) findViewById(R.id.et_apellido_encuestado);
-        etNombre        = (EditText) findViewById(R.id.et_nombre_encuestado);
-        etEdad          = (EditText) findViewById(R.id.et_edad_encuestado);
-        etNacionalidad  = (EditText) findViewById(R.id.et_nacionalidad);
-        rbCompleto      = (RadioButton) findViewById(R.id.rb_completo);
-        rbIncompleto    = (RadioButton) findViewById(R.id.rb_incompleto);
+        encuesta         = (Encuesta) getIntent().getExtras().getSerializable("encuesta");
+        rbHabita         = (RadioButton) findViewById(R.id.rb_habita);
+        rbNoHabita       = (RadioButton) findViewById(R.id.rb_no_habita);
+        etApellido       = (EditText) findViewById(R.id.et_apellido_encuestado);
+        etNombre         = (EditText) findViewById(R.id.et_nombre_encuestado);
+        etEdad           = (EditText) findViewById(R.id.et_edad_encuestado);
+        etNacionalidad   = (EditText) findViewById(R.id.et_nacionalidad);
+        rbCompleto       = (RadioButton) findViewById(R.id.rb_completo);
+        rbIncompleto     = (RadioButton) findViewById(R.id.rb_incompleto);
         spNivInstruccion = (Spinner) findViewById(R.id.sp_niv_instruccion);
         final String []opciones = new String[]{"Primario", "Secundario", "Terciario", "Universitario"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opciones );
