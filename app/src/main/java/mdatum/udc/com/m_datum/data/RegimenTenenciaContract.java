@@ -11,7 +11,6 @@ public class RegimenTenenciaContract {
 
         public static final String TABLE_NAME = "regimenTenencia";
 
-        public static final String ID = "id";
         public static final String DESCRIPCION = "descripcion";
 
 

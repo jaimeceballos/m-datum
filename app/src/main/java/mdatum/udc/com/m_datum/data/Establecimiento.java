@@ -96,7 +96,7 @@ public class Establecimiento {
     }
 
     public Boolean validar(){
-        if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && (this.getRegimenTenencia() == 6 && !this.getRegimenOtros().isEmpty())){
+        if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && this.getRegimenTenencia() != 6 || (this.getRegimenTenencia() == 6 && !this.getRegimenOtros().isEmpty())){
             return true;
         }
         return false;

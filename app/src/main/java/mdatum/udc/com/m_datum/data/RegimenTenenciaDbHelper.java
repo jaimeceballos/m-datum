@@ -2,8 +2,11 @@ package mdatum.udc.com.m_datum.data;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by jaime on 28/06/17.
@@ -38,11 +41,11 @@ public class RegimenTenenciaDbHelper extends SQLiteOpenHelper {
 
     private  void cargaDatos(SQLiteDatabase db){
         insertarDatos(db,new RegimenTenencia("Propiedad"));
-        insertarDatos(db,new RegimenTenencia("Sucesion Indivisa"));
+        insertarDatos(db,new RegimenTenencia("Sucesión indivisa"));
         insertarDatos(db,new RegimenTenencia("Arrendatario"));
-        insertarDatos(db,new RegimenTenencia("Med. % Producto"));
-        insertarDatos(db,new RegimenTenencia("Med. % Dinero"));
-        insertarDatos(db,new RegimenTenencia("Ocupacion"));
+        insertarDatos(db,new RegimenTenencia("Med. % producto"));
+        insertarDatos(db,new RegimenTenencia("Med. % dinero"));
+        insertarDatos(db,new RegimenTenencia("Ocupación"));
         insertarDatos(db,new RegimenTenencia("Otro"));
 
     }
@@ -54,4 +57,8 @@ public class RegimenTenenciaDbHelper extends SQLiteOpenHelper {
                 regimen.toContentValues()
         );
     }
+
+
+
+
 }
