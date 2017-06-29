@@ -12,20 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".encuestaAgroquimicos.EstablecimientoActivity">
+        <activity
+            android:name=".encuestaAgroquimicos.EstablecimientoActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".encuestaAgroquimicos.EncuestadoActivity" />
-        <activity android:name=".encuestaAgroquimicos.FamiliaActivity" />
-        <activity android:name=".encuestaAgroquimicos.ProduccionActivity" />
+        <activity
+            android:name=".encuestaAgroquimicos.EncuestadoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".encuestaAgroquimicos.FamiliaActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".encuestaAgroquimicos.ProduccionActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".encuestaAgroquimicos.CultivoActivity"
-            android:label="@string/title_activity_cultivo"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
