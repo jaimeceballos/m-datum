@@ -146,18 +146,29 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
             }
         });
 
+
         //obtengo el boton de capturar foto
         Button btnFoto = (Button) findViewById(R.id.btn_foto);
         //le agrego un listener para detectar el click del boton
         btnFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //cuando se detecta el click se genera un intent que abre la aplicacion de la camara del dispositivo
+                //Cuando detecta un click, valida si se ingresó el nombre del establecimiento
+                if (etNombreEstablecimiento.getText().toString().trim().isEmpty()) {
+                    //si el nombre está vacío, muestra un error y no accede a la cámara
+                    Toast fotoToast = Toast.makeText(getApplicationContext(),"Falta introducir nombre establecimiento",Toast.LENGTH_SHORT);
+                    fotoToast.show();
+                }
+                else
+                     {
+                //si encuentra el nombre genera un intent que abre la aplicacion de la camara del dispositivo
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 Uri output = Uri.fromFile(new File(name));
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,output);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
                 //inicio la aplicacion de la camara con un activity que espera como resultado la imagen capturada.
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
+                }
+
 
             }
         });
@@ -202,6 +213,10 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 }
                 establecimiento.setFoto(name);
 
+                final EditText etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
+
+
+                /*
                 if(establecimiento.validar()){
                     Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
 
@@ -211,7 +226,20 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                     Toast savingToast = Toast.makeText(getApplicationContext(),"Verifique los datos cargados.",Toast.LENGTH_SHORT);
 
                     savingToast.show();
+                }*/
+
+
+
+                if(etNombreEstablecimiento.getText().toString().trim().isEmpty()){
+                    etNombreEstablecimiento.setError(getString(R.string.error_nombre));
                 }
+                else {
+                    etNombreEstablecimiento.setError(null);
+                    Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
+                    savingToast.show();
+                    new AddEstablecimientoTask().execute(establecimiento);
+                }
+
 
 
             }
@@ -232,6 +260,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 .addApi(LocationServices.API)
                 .build();
     }
+
+
 
 
     //-----------------------------FOTOGRAFIA-------------------------------------------------------
@@ -379,6 +409,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         }
 
     }
+
 
 }
 
