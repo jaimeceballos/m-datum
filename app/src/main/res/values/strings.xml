@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">M-Datum</string>
+    <string name="btn_encuesta">Nueva encuesta</string>
+    <string name="btn_sincro">Sincronizar datos</string>
+    <string name="btn_export">Exportar datos</string>
     <string name="tv_titulo_establecimiento">Datos del establecimiento</string>
     <string name="et_nombre">Nombre</string>
     <string name="et_nro_establecimiento">Nro.</string>

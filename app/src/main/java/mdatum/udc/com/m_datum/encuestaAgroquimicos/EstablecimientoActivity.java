@@ -89,6 +89,9 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         
         etEspecificar = (EditText) findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
+
+
+
         final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
@@ -193,6 +196,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
                 establecimiento.setRegimenTenencia(spRegTenencia.getSelectedItemPosition());
+
 
                 if(opciones[establecimiento.getRegimenTenencia()]=="Otro"){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
