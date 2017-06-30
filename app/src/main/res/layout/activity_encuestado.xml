@@ -29,6 +29,21 @@
 
 
     <EditText
+        android:id="@+id/et_apellido_encuestado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="@string/et_apellido"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_titulo_encuestado"
+        app:layout_constraintRight_toRightOf="@+id/tv_titulo_encuestado"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_encuestado"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <EditText
         android:id="@+id/et_nombre_encuestado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,21 +57,6 @@
         app:layout_constraintTop_toBottomOf="@+id/et_apellido_encuestado"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/et_apellido_encuestado" />
-
-    <EditText
-        android:id="@+id/et_apellido_encuestado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/et_apellido"
-        android:inputType="textPersonName"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/tv_titulo_encuestado"
-        android:layout_marginTop="11dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_encuestado"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_titulo_encuestado" />
 
     <EditText
         android:id="@+id/et_edad_encuestado"
