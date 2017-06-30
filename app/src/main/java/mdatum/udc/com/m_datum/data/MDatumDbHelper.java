@@ -48,6 +48,21 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
             + FamiliaContract.FamiliaEntry.CANTIDAD_MUJERES + " INTEGER, "
             + FamiliaContract.FamiliaEntry.CANTIDAD_VARONES + " INTEGER )";
 
+    private String createCultivo = "CREATE TABLE "+ CultivoContract.CultivoEntry.TABLE_NAME+" ("
+            + CultivoContract.CultivoEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + CultivoContract.CultivoEntry.ESPECIE_ID + " INTEGER, "
+            + CultivoContract.CultivoEntry.TIPO_ID + " INTEGER, "
+            + CultivoContract.CultivoEntry.NRO_SIEMBRA + " INTEGER, "
+            + CultivoContract.CultivoEntry.MES_SIEMBRA + " INTEGER, "
+            + CultivoContract.CultivoEntry.SURCOS + " INTEGER, "
+            + CultivoContract.CultivoEntry.DISTANCIAS + " INTEGER, "
+            + CultivoContract.CultivoEntry.LARGO + " INTEGER, "
+            + CultivoContract.CultivoEntry.SUPERFICIE_SEMBRADA + " INTEGER, "
+            + CultivoContract.CultivoEntry.SUPERFICIE_MEDIDA_ID + " INTEGER, "
+            + CultivoContract.CultivoEntry.TIPO_PRODUCCION_ID + " INTEGER, "
+            + CultivoContract.CultivoEntry.ELECCION_CULTIVO_ID + " INTEGER, "
+            + CultivoContract.CultivoEntry.ELECCION_ESPECIFICAR + " TEXT)";
+
     public MDatumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -59,6 +74,7 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createRegimenTenencia);
         sqLiteDatabase.execSQL(createFamilia);
         cargaRegimenTenencia(sqLiteDatabase);
+        sqLiteDatabase.execSQL(createCultivo);
 
     }
 
@@ -142,5 +158,21 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
                 null,
                 regimen.toContentValues()
         );
+    }
+
+    public long saveCultivo(Cultivo cultivo){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        long l = 0;
+        try{
+            l = sqLiteDatabase.insertOrThrow(
+                    CultivoContract.CultivoEntry.TABLE_NAME,
+                    null,
+                    cultivo.toContentValues()
+            );
+        }catch (SQLException e){
+            Log.e("Exception","SQLException "+ String.valueOf(e.getMessage()));
+            e.printStackTrace();
+        }
+        return l;
     }
 }
