@@ -11,6 +11,16 @@ public class Encuesta implements Serializable {
     private int establecimientoId;
     private int encuestadoId;
 
+    public int getFamiliaId() {
+        return familiaId;
+    }
+
+    public void setFamiliaId(int familiaId) {
+        this.familiaId = familiaId;
+    }
+
+    private int familiaId;
+
     public int getId() {
         return id;
     }

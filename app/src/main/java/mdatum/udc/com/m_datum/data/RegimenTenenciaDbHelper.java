@@ -58,28 +58,7 @@ public class RegimenTenenciaDbHelper extends SQLiteOpenHelper {
         );
     }
 
-    public ArrayList<String> getAllRegTenencia(){
-        ArrayList<String> opciones = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        db.beginTransaction();
-        String selectQuery = "SELECT * FROM " + RegimenTenenciaContract.RegimenTenenciaEntry.TABLE_NAME;
-        Cursor c = db.rawQuery(selectQuery, null);
-        try {
-            if (c.getCount() < 0) {
-                while (c.moveToNext()) {
-                    String regDescripcion = c.getString(c.getColumnIndex("descripcion"));
-                    opciones.add(regDescripcion);
-                }
-            }
-            db.setTransactionSuccessful();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();
-            db.close();
-        }
-        return opciones;
-    }
+
 
 
 }

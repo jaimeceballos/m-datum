@@ -2,7 +2,6 @@ package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.data.Encuestado;
-import mdatum.udc.com.m_datum.data.EncuestadoDbHelper;
+import mdatum.udc.com.m_datum.data.MDatumDbHelper;
 
 public class EncuestadoActivity extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class EncuestadoActivity extends AppCompatActivity {
     private EditText etNacionalidad;
     private RadioButton rbCompleto;
     private RadioButton rbIncompleto;
-    private EncuestadoDbHelper encuestadoDbHelper;
+    private MDatumDbHelper mDatumDbHelper;
     private Boolean isHabitaChecked = false;
 
     @Override
@@ -54,7 +53,7 @@ public class EncuestadoActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spNivInstruccion.setAdapter(adapter);
 
-        encuestadoDbHelper = new EncuestadoDbHelper(this);
+        mDatumDbHelper = new MDatumDbHelper(this);
         btnEncuestadoSiguiente = (Button) findViewById(R.id.btn_encuestado_siguiente);
 
         btnEncuestadoSiguiente.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +97,7 @@ public class EncuestadoActivity extends AppCompatActivity {
     private class AddEncuestadoTask extends AsyncTask<Encuestado,Void,Boolean> {
         @Override
         protected Boolean doInBackground(Encuestado... encuestado){
-            long result = encuestadoDbHelper.saveEncuestado(encuestado[0]);
+            long result = mDatumDbHelper.saveEncuestado(encuestado[0]);
             encuestado[0].setId((int) result);
             encuesta.setEncuestadoId((int) result);
             return result > 0;
@@ -106,13 +105,16 @@ public class EncuestadoActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result){
+            Intent intent;
             if(encuestado.getViveEstablecimiento()){
-                Intent familia = new Intent(getApplicationContext(), FamiliaActivity.class);
-                startActivity(familia);
+                intent = new Intent(getApplicationContext(), FamiliaActivity.class);
+
             }else{
-                Intent produccion = new Intent(getApplicationContext(), ProduccionActivity.class);
-                startActivity(produccion);
+                intent = new Intent(getApplicationContext(), ProduccionActivity.class);
+
             }
+            intent.putExtra("encuesta",encuesta);
+            startActivity(intent);
         }
 
     }
