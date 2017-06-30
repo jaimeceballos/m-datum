@@ -48,14 +48,13 @@ import mdatum.udc.com.m_datum.data.MDatumDbHelper;
 public class EstablecimientoActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
-    private Encuesta encuesta = new Encuesta();
     private Establecimiento establecimiento = new Establecimiento();
-
+    private Encuesta encuesta;
     private MDatumDbHelper mDatumDbHelper;
     //variable donde se genera el nombre de archivo de la imagen capturada
     private String name = "";
 
-
+    ArrayList<String> opciones;
     private static final String LOGTAG = "android-localizacion";
 
     //variable para la peticion de permiso de localizacion
@@ -79,6 +78,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establecimiento);
 
+        encuesta = (Encuesta) getIntent().getExtras().getSerializable("encuesta");
+
 //--------------------------------SPINNER-----------------------------------------------------------
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
 
@@ -89,7 +90,9 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
 
 
-        final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
+        //final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
+
+        opciones = mDatumDbHelper.getAllRegimen();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -109,7 +112,9 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         spRegTenencia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(parent.getItemAtPosition(position).toString() == "Otro") {
+
+                if(parent.getItemAtPosition(position).toString().equals("Otro")) {
+
                     etEspecificar.setVisibility(View.VISIBLE);
                 }else{
                     etEspecificar.setVisibility(View.GONE);
@@ -195,7 +200,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 establecimiento.setRegimenTenencia(spRegTenencia.getSelectedItemPosition());
 
 
-                if(opciones[establecimiento.getRegimenTenencia()]=="Otro"){
+                if(opciones.get(establecimiento.getRegimenTenencia()).toString().equals("Otro")){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
                 }else{
                     establecimiento.setRegimenOtros("");
