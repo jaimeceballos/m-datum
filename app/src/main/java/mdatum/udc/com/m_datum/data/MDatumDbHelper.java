@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by jaime on 29/06/17.
  */
@@ -175,4 +177,30 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         }
         return l;
     }
+
+        public ArrayList<String> getAllRegimen(){
+
+                        ArrayList<String> lista = new ArrayList<String>();
+                SQLiteDatabase db = this.getReadableDatabase();
+
+                        db.beginTransaction();
+                try {
+                        String selectQuery = "SELECT * FROM "+ RegimenTenenciaContract.RegimenTenenciaEntry.TABLE_NAME;
+                        Cursor cursor = db.rawQuery(selectQuery,null);
+                        if(cursor.getCount() > 0 ){
+                                while (cursor.moveToNext()){
+                                        String regimen = cursor.getString(cursor.getColumnIndex(RegimenTenenciaContract.RegimenTenenciaEntry.DESCRIPCION));
+                                        lista.add(regimen);
+                                    }
+                            }
+                        db.setTransactionSuccessful();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                finally {
+                        db.endTransaction();
+                        db.close();
+                    }
+                return lista;
+            }
 }
