@@ -6,7 +6,7 @@ import android.content.ContentValues;
  * Created by jaime on 01/07/17.
  */
 
-public class ProduccionBajoCubierta {
+public class Invernaculo {
     private int id;
     private int cantidadModulos;
     private int superficieUnitaria;
@@ -55,10 +55,10 @@ public class ProduccionBajoCubierta {
 
    public ContentValues toContentValues(){
        ContentValues values = new ContentValues();
-       values.put(ProduccionBajoCubiertaContract.ProduccionBajoCubiertaEntry.CANTIDAD_MODULOS,cantidadModulos);
-       values.put(ProduccionBajoCubiertaContract.ProduccionBajoCubiertaEntry.SUPERFICIE_UNITARIA,superficieUnitaria);
-       values.put(ProduccionBajoCubiertaContract.ProduccionBajoCubiertaEntry.MATERIAL_ESTRUCTURA_ID,materialEstructuraId);
-       values.put(ProduccionBajoCubiertaContract.ProduccionBajoCubiertaEntry.ANIO_CONSTRUCCION_ID,anioConstruccionId);
+       values.put(InvernaculoContract.InvernaculoEntry.CANTIDAD_MODULOS,cantidadModulos);
+       values.put(InvernaculoContract.InvernaculoEntry.SUPERFICIE_UNITARIA,superficieUnitaria);
+       values.put(InvernaculoContract.InvernaculoEntry.MATERIAL_ESTRUCTURA_ID,materialEstructuraId);
+       values.put(InvernaculoContract.InvernaculoEntry.ANIO_CONSTRUCCION_ID,anioConstruccionId);
        return values;
    }
 

@@ -1,5 +1,6 @@
 package mdatum.udc.com.m_datum.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -65,6 +66,16 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
             + CultivoContract.CultivoEntry.ELECCION_CULTIVO_ID + " INTEGER, "
             + CultivoContract.CultivoEntry.ELECCION_ESPECIFICAR + " TEXT)";
 
+    private String createInvernaculo = "CREATE TABLE " + InvernaculoContract.InvernaculoEntry.TABLE_NAME + " ( "
+            + InvernaculoContract.InvernaculoEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + InvernaculoContract.InvernaculoEntry.CANTIDAD_MODULOS + " INTEGER, "
+            + InvernaculoContract.InvernaculoEntry.SUPERFICIE_UNITARIA + " INTEGER, "
+            + InvernaculoContract.InvernaculoEntry.MATERIAL_ESTRUCTURA_ID + " INTEGER, "
+            + InvernaculoContract.InvernaculoEntry.ANIO_CONSTRUCCION_ID + " INTEGER)";
+
+    private String createMaterialEstructura = "CREATE TABLE materialEstructura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createAnioEstructura = "CREATE TABLE anioEstrutura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+
     public MDatumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -77,6 +88,10 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createFamilia);
         cargaRegimenTenencia(sqLiteDatabase);
         sqLiteDatabase.execSQL(createCultivo);
+        sqLiteDatabase.execSQL(createInvernaculo);
+        sqLiteDatabase.execSQL(createMaterialEstructura);
+        sqLiteDatabase.execSQL(createAnioEstructura);
+        cargaMaterialEstrutura(sqLiteDatabase);
 
     }
 
@@ -154,6 +169,11 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
 
     }
 
+    private void cargaMaterialEstrutura(SQLiteDatabase db){
+        saveMaterialEstructura(db,"madera");
+        saveMaterialEstructura(db,"hierro");
+    }
+
     public long saveRegimen(SQLiteDatabase db, RegimenTenencia regimen){
         return db.insert(
                 RegimenTenenciaContract.RegimenTenenciaEntry.TABLE_NAME,
@@ -162,7 +182,17 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         );
     }
 
-    public long saveCultivo(Cultivo cultivo){
+    public long saveMaterialEstructura(SQLiteDatabase db, String material){
+        ContentValues values = new ContentValues();
+        values.put("descripcion",material);
+        return db.insert(
+                "materialEstructura",
+                null,
+                values
+        );
+    }
+
+   public long saveCultivo(Cultivo cultivo){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         long l = 0;
         try{
@@ -171,6 +201,23 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
                     null,
                     cultivo.toContentValues()
             );
+        }catch (SQLException e){
+            Log.e("Exception","SQLException "+ String.valueOf(e.getMessage()));
+            e.printStackTrace();
+        }
+        return l;
+    }
+
+    public long saveInvernaculo(Invernaculo invernaculo){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        long l = 0;
+        try{
+            l = sqLiteDatabase.insertOrThrow(
+                    InvernaculoContract.InvernaculoEntry.TABLE_NAME,
+                    null,
+                    invernaculo.toContentValues()
+            );
+
         }catch (SQLException e){
             Log.e("Exception","SQLException "+ String.valueOf(e.getMessage()));
             e.printStackTrace();

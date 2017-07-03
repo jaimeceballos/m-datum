@@ -6,9 +6,9 @@ import android.provider.BaseColumns;
  * Created by jaime on 01/07/17.
  */
 
-public class ProduccionBajoCubiertaContract {
+public class InvernaculoContract {
 
-    public static abstract class ProduccionBajoCubiertaEntry implements BaseColumns{
+    public static abstract class InvernaculoEntry implements BaseColumns{
         public static final String TABLE_NAME = "produccionBajoCubierta";
 
         public static final String CANTIDAD_MODULOS = "cantidadModulos";
