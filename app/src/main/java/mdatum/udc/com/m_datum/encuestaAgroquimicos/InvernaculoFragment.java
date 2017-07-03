@@ -8,9 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Encuesta;
@@ -28,7 +31,8 @@ public class InvernaculoFragment extends Fragment {
     Button btnAgregarOtro;
     Invernaculo invernaculo;
     MDatumDbHelper mDatumDbHelper;
-
+    ArrayList<String> opcionesMaterial;
+    ArrayList<String> opcionesAnio;
     public InvernaculoFragment() {
         // Required empty public constructor
     }
@@ -42,12 +46,36 @@ public class InvernaculoFragment extends Fragment {
         if(bundle != null){
             encuesta = (Encuesta) bundle.getSerializable("encuesta");
         }
-        etCantModulos = (EditText) getView().findViewById(R.id.et_cant_modulos);
-        etSupUnit = (EditText) getView().findViewById(R.id.et_sup_unit);
-        spMatEstruct = (Spinner) getView().findViewById(R.id.sp_mat_estruct);
-        spAnioConstruct = (Spinner) getView().findViewById(R.id.sp_anio_construct);
-        btnAgregarOtro = (Button) getView().findViewById(R.id.btn_agregar_otro);
+        mDatumDbHelper = new MDatumDbHelper(getContext());
 
+        opcionesMaterial = mDatumDbHelper.getAllEstructura();
+        opcionesAnio = mDatumDbHelper.getAllAnioEstructura();
+
+
+
+
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_invernaculo, container, false);
+        etCantModulos = (EditText) rootView.findViewById(R.id.et_cant_modulos);
+        etSupUnit = (EditText) rootView.findViewById(R.id.et_sup_unit);
+        spMatEstruct = (Spinner) rootView.findViewById(R.id.sp_mat_estruct);
+        spAnioConstruct = (Spinner) rootView.findViewById(R.id.sp_anio_construct);
+
+        ArrayAdapter<String> materialAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesMaterial);
+        materialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spMatEstruct.setAdapter(materialAdapter);
+
+        ArrayAdapter<String> anioEstructuraAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesAnio);
+        anioEstructuraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spAnioConstruct.setAdapter(anioEstructuraAdapter);
+
+        btnAgregarOtro = (Button) rootView.findViewById(R.id.btn_agregar_otro);
         btnAgregarOtro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,17 +87,18 @@ public class InvernaculoFragment extends Fragment {
                 invernaculo.setAnioConstruccionId(spAnioConstruct.getSelectedItemPosition());
                 mDatumDbHelper = new MDatumDbHelper(getContext());
 
+                new AddInvernaculoTask().execute(invernaculo);
+
+
+
+
 
             }
         });
 
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_invernaculo, container, false);
+
+        return rootView;
     }
 
 

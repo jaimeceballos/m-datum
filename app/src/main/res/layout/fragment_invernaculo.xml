@@ -11,25 +11,15 @@
     <!-- TODO: Update blank fragment layout -->
     <EditText
         android:id="@+id/et_cant_modulos"
-        android:layout_width="0dp"
-        android:layout_height="43dp"
+        android:layout_width="185dp"
+        android:layout_height="47dp"
         android:ems="10"
         android:hint="@string/et_cant_modulos"
         android:inputType="number"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="53dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_sup_unit"
-        android:layout_marginEnd="53dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="48dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="49dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="53dp"
-        android:layout_marginRight="53dp" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/et_sup_unit"
@@ -38,9 +28,9 @@
         android:ems="10"
         android:hint="@string/et_sup_unit"
         android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_mts2"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_cant_modulos"
+        android:layout_marginLeft="-11dp"
         app:layout_constraintLeft_toLeftOf="@+id/et_cant_modulos" />
 
     <TextView
@@ -48,26 +38,22 @@
         android:layout_width="87dp"
         android:layout_height="32dp"
         android:text="@string/tv_anio_const"
-        app:layout_constraintRight_toLeftOf="@+id/sp_anio_construct"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="106dp"
-        android:layout_marginRight="15dp" />
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_sup_unit"
+        android:layout_marginLeft="-1dp"
+        app:layout_constraintLeft_toLeftOf="@+id/et_cant_modulos" />
 
     <Spinner
         android:id="@+id/sp_anio_construct"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_anio_const"
-        app:layout_constraintLeft_toLeftOf="@+id/sp_mat_estruct"
-        app:layout_constraintRight_toRightOf="@+id/sp_mat_estruct"
-        app:layout_constraintTop_toTopOf="@+id/tv_anio_const"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_width="121dp"
+        android:layout_height="38dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/tv_mts2"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mts2"
+        app:layout_constraintLeft_toRightOf="@+id/tv_anio_const"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/tv_mts2"
@@ -75,55 +61,45 @@
         android:layout_height="23dp"
         android:text="@string/tv_mts2"
         android:textSize="18sp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/sp_mat_estruct"
-        android:layout_marginStart="5dp"
-        app:layout_constraintRight_toRightOf="@+id/et_cant_modulos"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="38dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_cant_modulos"
         app:layout_constraintLeft_toRightOf="@+id/et_sup_unit"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintHorizontal_bias="1.0" />
+        android:layout_marginLeft="27dp" />
 
     <TextView
         android:id="@+id/tv_mat_estruct"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:text="@string/tv_mat_estruct"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/sp_mat_estruct"
-        app:layout_constraintRight_toRightOf="@+id/tv_anio_const"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_anio_const"
-        app:layout_constraintTop_toTopOf="@+id/sp_mat_estruct" />
+        android:layout_marginTop="3dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_anio_const"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_anio_const" />
 
     <Spinner
         android:id="@+id/sp_mat_estruct"
-        android:layout_width="111dp"
-        android:layout_height="36dp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/sp_anio_construct"
-        android:layout_marginEnd="53dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="14dp"
-        android:layout_marginRight="53dp" />
+        android:layout_width="121dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/sp_anio_construct"
+        app:layout_constraintLeft_toRightOf="@+id/tv_mat_estruct"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/tv_mts2"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <Button
         android:id="@+id/btn_agregar_otro"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:text="@string/btn_agregar_otro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/sp_mat_estruct"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.502" />
 
 </android.support.constraint.ConstraintLayout>

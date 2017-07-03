@@ -19,6 +19,8 @@ public class Encuesta implements Serializable {
     }
 
     public void setInvernaderoId(int invernaderoId) {
+        if(this.invernaderoId==null)
+            this.invernaderoId = new ArrayList<Integer>();
         this.invernaderoId.add(invernaderoId);
     }
 

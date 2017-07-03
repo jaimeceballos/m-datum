@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by jaime on 29/06/17.
@@ -74,7 +75,7 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
             + InvernaculoContract.InvernaculoEntry.ANIO_CONSTRUCCION_ID + " INTEGER)";
 
     private String createMaterialEstructura = "CREATE TABLE materialEstructura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
-    private String createAnioEstructura = "CREATE TABLE anioEstrutura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createAnioEstructura = "CREATE TABLE anioEstructura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
 
     public MDatumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -92,6 +93,7 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createMaterialEstructura);
         sqLiteDatabase.execSQL(createAnioEstructura);
         cargaMaterialEstrutura(sqLiteDatabase);
+        cargaAnioEstructura(sqLiteDatabase);
 
     }
 
@@ -173,6 +175,12 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         saveMaterialEstructura(db,"madera");
         saveMaterialEstructura(db,"hierro");
     }
+    private void cargaAnioEstructura(SQLiteDatabase db){
+        saveAnioEstructura(db,"mas de 5 años");
+        saveAnioEstructura(db,"Menos de 5 años, mas de 3 años");
+        saveAnioEstructura(db,"Menos de 3 años, mas de 1 año");
+        saveAnioEstructura(db,"Menos de 1 año");
+    }
 
     public long saveRegimen(SQLiteDatabase db, RegimenTenencia regimen){
         return db.insert(
@@ -187,6 +195,16 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         values.put("descripcion",material);
         return db.insert(
                 "materialEstructura",
+                null,
+                values
+        );
+    }
+
+    public long saveAnioEstructura(SQLiteDatabase db, String anio){
+        ContentValues values = new ContentValues();
+        values.put("descripcion",anio);
+        return db.insert(
+                "anioEstructura",
                 null,
                 values
         );
@@ -224,30 +242,75 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         }
         return l;
     }
+    public ArrayList<String> getAllRegimen(){
 
-        public ArrayList<String> getAllRegimen(){
+                ArrayList<String> lista = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
 
-                        ArrayList<String> lista = new ArrayList<String>();
-                SQLiteDatabase db = this.getReadableDatabase();
-
-                        db.beginTransaction();
-                try {
-                        String selectQuery = "SELECT * FROM "+ RegimenTenenciaContract.RegimenTenenciaEntry.TABLE_NAME;
-                        Cursor cursor = db.rawQuery(selectQuery,null);
-                        if(cursor.getCount() > 0 ){
-                                while (cursor.moveToNext()){
-                                        String regimen = cursor.getString(cursor.getColumnIndex(RegimenTenenciaContract.RegimenTenenciaEntry.DESCRIPCION));
-                                        lista.add(regimen);
-                                    }
+                db.beginTransaction();
+        try {
+                String selectQuery = "SELECT * FROM "+ RegimenTenenciaContract.RegimenTenenciaEntry.TABLE_NAME;
+                Cursor cursor = db.rawQuery(selectQuery,null);
+                if(cursor.getCount() > 0 ){
+                        while (cursor.moveToNext()){
+                                String regimen = cursor.getString(cursor.getColumnIndex(RegimenTenenciaContract.RegimenTenenciaEntry.DESCRIPCION));
+                                lista.add(regimen);
                             }
-                        db.setTransactionSuccessful();
-                    }catch (Exception e){
-                        e.printStackTrace();
                     }
-                finally {
-                        db.endTransaction();
-                        db.close();
-                    }
-                return lista;
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                e.printStackTrace();
             }
+        finally {
+                db.endTransaction();
+                db.close();
+            }
+        return lista;
+    }
+
+    public ArrayList<String> getAllEstructura(){
+        ArrayList<String> lista = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try {
+            String selectQuery = "SELECT * FROM materialEstructura";
+            Cursor cursor = db.rawQuery(selectQuery,null);
+            if(cursor.getCount() > 0){
+                while (cursor.moveToNext()){
+                    String material = cursor.getString(cursor.getColumnIndex("descripcion"));
+                    lista.add(material);
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+        return  lista;
+    }
+
+    public ArrayList<String> getAllAnioEstructura(){
+        ArrayList<String> lista = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try{
+            String selectQuery = "SELECT * FROM anioEstructura";
+            Cursor cursor = db.rawQuery(selectQuery,null);
+            if(cursor.getCount() > 0 ){
+                while (cursor.moveToNext()){
+                    String anio = cursor.getString(cursor.getColumnIndex("descripcion"));
+                    lista.add(anio);
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+        return lista;
+    }
 }
