@@ -65,7 +65,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
     //textViews que muestran la posicion geografica
     private TextView tvCoordLat,tvCoordLong;
 
-    private EditText etEspecificar;
+    private EditText etEspecificar, etNombreEstablecimiento, etNroEstablecimiento;
 
     private Spinner spRegTenencia;
 
@@ -131,7 +131,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 /*-------------------------UTILIZA EL BOTON PARA ACCEDER A LA CAMARA, GUARDA LA FOTO Y LA MUESTRA
  SIEMPRE QUE EL CAMPO Nombre de Estableciemiento este completo-----------------------------------*/
         //edit text que obtiene el nombre del establecimiento
-        final EditText etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
+        etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
         //listener que detecta el cambio del contenido del cuadro de texto
         etNombreEstablecimiento.addTextChangedListener(new TextWatcher() {
             @Override
@@ -198,8 +198,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         //Obtengo el boton de siguiente
         Button btnSiguiente = (Button)findViewById(R.id.btn_siguiente);
 
-        final EditText etNroEstablecimiento =  (EditText) findViewById(R.id.et_nro_establecimiento);
-        final EditText etEspecificar = (EditText) findViewById(R.id.et_especificar);
+        etNroEstablecimiento =  (EditText) findViewById(R.id.et_nro_establecimiento);
+        etEspecificar = (EditText) findViewById(R.id.et_especificar);
 
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,38 +218,75 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
                 }
                 establecimiento.setFoto(name);
 
-                final EditText etNombreEstablecimiento = (EditText) findViewById(R.id.et_nombre_establecimiento);
 
+                validarDatos();
 
-                /*
-                if(establecimiento.validar()){
-                    Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
-
-                    savingToast.show();
-                    new AddEstablecimientoTask().execute(establecimiento);
-                } else {
-                    Toast savingToast = Toast.makeText(getApplicationContext(),"Verifique los datos cargados.",Toast.LENGTH_SHORT);
-
-                    savingToast.show();
-                }*/
-
-
-
-                if(etNombreEstablecimiento.getText().toString().trim().isEmpty()){
-                    etNombreEstablecimiento.setError(getString(R.string.error_nombre));
-                }
-                else {
-                    etNombreEstablecimiento.setError(null);
-                    Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
-                    savingToast.show();
-                    new AddEstablecimientoTask().execute(establecimiento);
-                }
 
 
 
             }
         });
 
+    }
+
+
+    private void validarDatos(){
+        if(!validarNombre()){
+            return;
+        }
+        if(!validarNumero()){
+            return;
+        }
+        if(!validarRegimen()){
+            return;
+        }
+
+        Toast savingToast = Toast.makeText(getApplicationContext(),"Guardando los datos.",Toast.LENGTH_SHORT);
+        savingToast.show();
+        new AddEstablecimientoTask().execute(establecimiento);
+
+
+    }
+    private boolean validarNombre(){
+
+        if(etNombreEstablecimiento.getText().toString().trim().isEmpty()){
+            etNombreEstablecimiento.setError(getString(R.string.error_nombre));
+            return false;
+        }else {
+            etNombreEstablecimiento.setError(null);
+
+
+        }
+
+        return true;
+    }
+
+    private boolean validarNumero(){
+
+        if(etNroEstablecimiento.getText().toString().trim().isEmpty()){
+            etNroEstablecimiento.setError(getString(R.string.error_numero));
+            return false;
+        }else {
+            etNroEstablecimiento.setError(null);
+
+
+        }
+
+        return true;
+    }
+
+    private boolean validarRegimen(){
+
+        if(/*() &&*/ etEspecificar.getText().toString().trim().isEmpty()){
+            etEspecificar.setError(getString(R.string.error_especificar));
+            return false;
+        }else {
+            etEspecificar.setError(null);
+
+
+        }
+
+        return true;
     }
 
 

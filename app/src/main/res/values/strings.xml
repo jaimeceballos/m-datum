@@ -18,6 +18,8 @@
 
     <!-- Strings errores de validación -->
     <string name="error_nombre">Falta indicar nombre del establecimiento</string>
+    <string name="error_numero">Falta indicar numero de establecimiento</string>
+    <string name="error_especificar">Falta especificar régimen</string>
 
     <string name="tv_titulo_encuestado">Datos del encuestado</string>
     <string name="et_apellido">Apellido</string>
