@@ -95,6 +95,7 @@ public class FamiliaActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean result){
             Intent produccion = new Intent(getApplicationContext(), ProduccionActivity.class);
+            produccion.putExtra("encuesta",encuesta);
             startActivity(produccion);
         }
 
