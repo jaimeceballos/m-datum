@@ -3,8 +3,6 @@ package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -15,7 +13,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -208,10 +205,10 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
-                establecimiento.setRegimenTenencia(spRegTenencia.getSelectedItemPosition());
+                establecimiento.setRegimenTenenciaId(spRegTenencia.getSelectedItemPosition());
 
 
-                if(opciones.get(establecimiento.getRegimenTenencia()).toString().equals("Otro")){
+                if(opciones.get(establecimiento.getRegimenTenenciaId()).toString().equals("Otro")){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
                 }else{
                     establecimiento.setRegimenOtros("");

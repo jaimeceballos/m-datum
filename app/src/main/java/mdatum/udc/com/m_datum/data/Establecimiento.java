@@ -14,7 +14,7 @@ public class Establecimiento {
     private String posLatitud;
     private String posLongitud;
     private String foto;
-    private int regimenTenencia;
+    private int regimenTenenciaId;
     private String regimenOtros;
 
     public int getId() {
@@ -45,8 +45,8 @@ public class Establecimiento {
         return foto;
     }
 
-    public int getRegimenTenencia() {
-        return regimenTenencia;
+    public int getRegimenTenenciaId() {
+        return regimenTenenciaId;
     }
 
     public String getRegimenOtros() {
@@ -73,8 +73,8 @@ public class Establecimiento {
         this.foto = foto;
     }
 
-    public void setRegimenTenencia(int regimenTenencia) {
-        this.regimenTenencia = regimenTenencia;
+    public void setRegimenTenenciaId(int regimenTenenciaId) {
+        this.regimenTenenciaId = regimenTenenciaId;
     }
 
     public void setRegimenOtros(String regimenOtros) {
@@ -90,13 +90,13 @@ public class Establecimiento {
         values.put(EstablecimientoContract.EstablecimientoEntry.POS_LATITUD,posLatitud);
         values.put(EstablecimientoContract.EstablecimientoEntry.POS_LONGITUD,posLongitud);
         values.put(EstablecimientoContract.EstablecimientoEntry.FOTO,foto);
-        values.put(EstablecimientoContract.EstablecimientoEntry.REGIMEN_TENENCIA,regimenTenencia);
+        values.put(EstablecimientoContract.EstablecimientoEntry.REGIMEN_TENENCIA, regimenTenenciaId);
         values.put(EstablecimientoContract.EstablecimientoEntry.REGIMEN_OTROS,regimenOtros);
         return values;
     }
 
     public Boolean validar(){
-        if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && this.getRegimenTenencia() != 6 || (this.getRegimenTenencia() == 6 && !this.getRegimenOtros().isEmpty())){
+        if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && this.getRegimenTenenciaId() != 6 || (this.getRegimenTenenciaId() == 6 && !this.getRegimenOtros().isEmpty())){
             return true;
         }
         return false;

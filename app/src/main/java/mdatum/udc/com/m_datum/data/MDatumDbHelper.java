@@ -76,6 +76,8 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
 
     private String createMaterialEstructura = "CREATE TABLE materialEstructura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
     private String createAnioEstructura = "CREATE TABLE anioEstructura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createNivelInstruccion = "CREATE TABLE nivelInstruccion(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createNacionalidad = "CREATE TABLE nacionalidad(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
 
     public MDatumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -94,6 +96,10 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createAnioEstructura);
         cargaMaterialEstrutura(sqLiteDatabase);
         cargaAnioEstructura(sqLiteDatabase);
+        sqLiteDatabase.execSQL(createNivelInstruccion);
+        cargaNivelInstruccion(sqLiteDatabase);
+        sqLiteDatabase.execSQL(createNacionalidad);
+        cargaNacionalidad(sqLiteDatabase);
 
     }
 
@@ -182,6 +188,21 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         saveAnioEstructura(db,"Menos de 1 año");
     }
 
+    private void cargaNivelInstruccion(SQLiteDatabase db){
+        saveNivelInstruccion(db,"Primario");
+        saveNivelInstruccion(db,"Secundario");
+        saveNivelInstruccion(db,"Terciario");
+        saveNivelInstruccion(db,"Universitario");
+    }
+
+    private void cargaNacionalidad(SQLiteDatabase db){
+        saveNacionalidad(db,"Argentina");
+        saveNacionalidad(db,"Chile");
+        saveNacionalidad(db,"Bolivia");
+        saveNacionalidad(db,"Paraguay");
+        saveNacionalidad(db,"Peru");
+    }
+
     public long saveRegimen(SQLiteDatabase db, RegimenTenencia regimen){
         return db.insert(
                 RegimenTenenciaContract.RegimenTenenciaEntry.TABLE_NAME,
@@ -200,11 +221,31 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         );
     }
 
+    public long saveNivelInstruccion(SQLiteDatabase db, String nivel){
+        ContentValues values = new ContentValues();
+        values.put("descripcion",nivel);
+        return db.insert(
+                "nivelInstruccion",
+                null,
+                values
+        );
+    }
+
     public long saveAnioEstructura(SQLiteDatabase db, String anio){
         ContentValues values = new ContentValues();
         values.put("descripcion",anio);
         return db.insert(
                 "anioEstructura",
+                null,
+                values
+        );
+    }
+
+    public long saveNacionalidad(SQLiteDatabase db, String nacionalidad){
+        ContentValues values = new ContentValues();
+        values.put("descripcion",nacionalidad);
+        return db.insert(
+                "nacionalidad",
                 null,
                 values
         );
@@ -302,6 +343,51 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
                 while (cursor.moveToNext()){
                     String anio = cursor.getString(cursor.getColumnIndex("descripcion"));
                     lista.add(anio);
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+        return lista;
+    }
+
+    public ArrayList<String> getAllNivelInstruccion(){
+        ArrayList<String> lista = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try {
+            String selectQuery = "SELECT * FROM nivelInstruccion";
+            Cursor cursor = db.rawQuery(selectQuery,null);
+            if(cursor.getCount() > 0){
+                while (cursor.moveToNext()){
+                    String nivel = cursor.getString(cursor.getColumnIndex("descripcion"));
+                    lista.add(nivel);
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+        return lista;
+    }
+    public ArrayList<String> getAllNacionalidad(){
+        ArrayList<String> lista = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try{
+            String selectQuery = "SELECT * FROM nacionalidad";
+            Cursor cursor = db.rawQuery(selectQuery,null);
+            if(cursor.getCount() > 0){
+                while(cursor.moveToNext()){
+                    String nacionalidad = cursor.getString(cursor.getColumnIndex("descripcion"));
+                    lista.add(nacionalidad);
                 }
             }
             db.setTransactionSuccessful();

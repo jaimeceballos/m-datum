@@ -12,8 +12,8 @@ public class Encuestado {
     private String nombre;
     private String apellido;
     private int edad;
-    private String nacionalidad;
-    private String nivelInstruccion;
+    private int nacionalidad;
+    private int nivelInstruccion;
     private Boolean nivelCompleto;
     private Boolean viveEstablecimiento;
 
@@ -49,19 +49,19 @@ public class Encuestado {
         this.edad = edad;
     }
 
-    public String getNacionalidad() {
+    public int getNacionalidad() {
         return nacionalidad;
     }
 
-    public void setNacionalidad(String nacionalidad) {
+    public void setNacionalidad(int nacionalidad) {
         this.nacionalidad = nacionalidad;
     }
 
-    public String getNivelInstruccion() {
+    public int getNivelInstruccion() {
         return nivelInstruccion;
     }
 
-    public void setNivelInstruccion(String nivelInstruccion) {
+    public void setNivelInstruccion(int nivelInstruccion) {
         this.nivelInstruccion = nivelInstruccion;
     }
 
