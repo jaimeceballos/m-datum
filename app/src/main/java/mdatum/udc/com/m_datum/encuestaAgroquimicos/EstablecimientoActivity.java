@@ -244,6 +244,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
 
     }
+
     private boolean validarNombre(){
 
         if(etNombreEstablecimiento.getText().toString().trim().isEmpty()){
@@ -272,9 +273,10 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         return true;
     }
 
+
     private boolean validarRegimen(){
 
-        if(/*() &&*/ etEspecificar.getText().toString().trim().isEmpty()){
+        if((opciones.get(establecimiento.getRegimenTenenciaId()).toString().equals("Otro")) && (etEspecificar.getText().toString().trim().isEmpty())){
             etEspecificar.setError(getString(R.string.error_especificar));
             return false;
         }else {
