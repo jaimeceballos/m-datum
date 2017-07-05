@@ -95,15 +95,6 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spRegTenencia.setAdapter(adapter);
 
-
-
-
-
-
-
-
-
-
         //Utilizo un listener que captura los eventos realizados sobre el spinner y si elige la opción
         //"Otro" setea el EditText et_especificar como visible
         spRegTenencia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

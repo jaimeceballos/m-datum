@@ -12,8 +12,8 @@ public class Encuestado {
     private String nombre;
     private String apellido;
     private int edad;
-    private int nacionalidad;
-    private int nivelInstruccion;
+    private int nacionalidadId;
+    private int nivelInstruccionId;
     private Boolean nivelCompleto;
     private Boolean viveEstablecimiento;
 
@@ -49,20 +49,20 @@ public class Encuestado {
         this.edad = edad;
     }
 
-    public int getNacionalidad() {
-        return nacionalidad;
+    public int getNacionalidadId() {
+        return nacionalidadId;
     }
 
-    public void setNacionalidad(int nacionalidad) {
-        this.nacionalidad = nacionalidad;
+    public void setNacionalidadId(int nacionalidadId) {
+        this.nacionalidadId = nacionalidadId;
     }
 
-    public int getNivelInstruccion() {
-        return nivelInstruccion;
+    public int getNivelInstruccionId() {
+        return nivelInstruccionId;
     }
 
-    public void setNivelInstruccion(int nivelInstruccion) {
-        this.nivelInstruccion = nivelInstruccion;
+    public void setNivelInstruccionId(int nivelInstruccionId) {
+        this.nivelInstruccionId = nivelInstruccionId;
     }
 
     public Boolean getNivelCompleto() {
@@ -87,8 +87,8 @@ public class Encuestado {
         values.put(EncuestadoEntry.NOMBRE, nombre);
         values.put(EncuestadoEntry.APELLIDO,apellido);
         values.put(EncuestadoEntry.EDAD,edad);
-        values.put(EncuestadoEntry.NACIONALIDAD,nacionalidad);
-        values.put(EncuestadoEntry.NIVEL_INSTRUCCION,nivelInstruccion);
+        values.put(EncuestadoEntry.NACIONALIDAD, nacionalidadId);
+        values.put(EncuestadoEntry.NIVEL_INSTRUCCION, nivelInstruccionId);
         values.put(EncuestadoEntry.NIVEL_COMPLETO,nivelCompleto);
         values.put(EncuestadoEntry.VIVE_ESTABLECIMIENTO,viveEstablecimiento);
         return values;
