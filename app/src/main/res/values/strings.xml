@@ -16,10 +16,15 @@
     <string name="et_especificar">Especificar</string>
     <string name="tv_reg_tenencia">Regimen de tenencia</string>
 
-    <!-- Strings errores de validación -->
+    <!-- Strings errores de validación EstablecimientoActivity -->
     <string name="error_nombre">Falta indicar nombre del establecimiento</string>
     <string name="error_numero">Falta indicar numero de establecimiento</string>
     <string name="error_especificar">Falta especificar régimen</string>
+
+    <!-- Strings errores de validación EncuestadoActivity -->
+    <string name="error_nombre_encuestado">Falta indicar nombre del encuestado</string>
+    <string name="error_apellido_encuestado">Falta indicar apellido del encuestado</string>
+    <string name="error_edad_encuestado">Falta indicar edad del encuestado</string>
 
     <string name="tv_titulo_encuestado">Datos del encuestado</string>
     <string name="et_apellido">Apellido</string>

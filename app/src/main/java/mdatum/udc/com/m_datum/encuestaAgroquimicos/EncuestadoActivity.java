@@ -71,6 +71,7 @@ public class EncuestadoActivity extends AppCompatActivity {
         btnEncuestadoSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              //  validarDatos();
                 encuestado = new Encuestado();
                 encuestado.setNombre(etNombre.getText().toString());
                 encuestado.setApellido(etApellido.getText().toString());
@@ -129,4 +130,59 @@ public class EncuestadoActivity extends AppCompatActivity {
         }
 
     }
+/*
+    private void validarDatos() {
+        if (!validarNombre()) {
+        }
+        if (!validarApellido()) {
+        }
+        if (!validarEdad()) {
+        }
+
+    }
+
+    private boolean validarNombre(){
+
+        if(etNombre.getText().toString().trim().isEmpty()){
+            etNombre.setError(getString(R.string.error_nombre_encuestado));
+            return false;
+        }else {
+            etNombre.setError(null);
+
+
+        }
+
+        return true;
+    }
+
+    private boolean validarApellido(){
+
+        if(etApellido.getText().toString().trim().isEmpty()){
+            etApellido.setError(getString(R.string.error_apellido_encuestado));
+            return false;
+        }else {
+            etApellido.setError(null);
+
+
+        }
+
+        return true;
+    }
+
+    private boolean validarEdad(){
+
+        if(etEdad.getText().toString().trim().isEmpty()){
+            etEdad.setError(getString(R.string.error_edad_encuestado));
+            return false;
+        }else {
+            etEdad.setError(null);
+
+
+        }
+
+        return true;
+    }
+*/
+
 }
+
