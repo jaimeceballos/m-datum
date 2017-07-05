@@ -21,11 +21,10 @@ public class ProduccionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produccion);
-
+        encuesta = (Encuesta) getIntent().getExtras().getSerializable("encuesta");
         rbCubiertoSi = (RadioButton) findViewById(R.id.rb_cubierto_si);
         rbCubiertoNo = (RadioButton) findViewById(R.id.rb_cubierto_no);
         btnProduccionSiguiente = (Button) findViewById(R.id.btn_produccion_siguiente);
-        encuesta = (Encuesta) getIntent().getExtras().getSerializable("encuesta");
         rbCubiertoSi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -46,6 +45,8 @@ public class ProduccionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent cultivo = new Intent(view.getContext(), CultivoActivity.class);
+                encuesta = (Encuesta) getIntent().getExtras().getSerializable("encuesta");
+                cultivo.putExtra("encuesta",encuesta);
                 startActivity(cultivo);
             }
         });

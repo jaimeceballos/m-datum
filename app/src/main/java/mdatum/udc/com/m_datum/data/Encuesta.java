@@ -1,5 +1,7 @@
 package mdatum.udc.com.m_datum.data;
 
+import android.content.ContentValues;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,21 @@ public class Encuesta implements Serializable {
     private int establecimientoId;
     private int encuestadoId;
     private int familiaId;
+    private ArrayList<Integer> invernaderoId;
+    private ArrayList<Integer> cultivoId;
+
+    public ArrayList<Integer> getCultivoId() {
+        return cultivoId;
+    }
+
+    public void setCultivoId(int cultivoId) {
+        if(this.cultivoId == null)
+            this.cultivoId = new ArrayList<Integer>();
+
+        this.cultivoId.add(cultivoId);
+    }
+
+
 
     public ArrayList<Integer> getInvernaderoId() {
         return invernaderoId;
@@ -24,7 +41,7 @@ public class Encuesta implements Serializable {
         this.invernaderoId.add(invernaderoId);
     }
 
-    private ArrayList<Integer> invernaderoId;
+
 
 
 
@@ -58,5 +75,14 @@ public class Encuesta implements Serializable {
 
     public void setEncuestadoId(int encuestadoId) {
         this.encuestadoId = encuestadoId;
+    }
+
+
+    public ContentValues toContentValues(){
+        ContentValues values = new ContentValues();
+        values.put(EncuestaContract.EncuestaEntry.ESTABLECIMIENTO_ID,"establecimientoId");
+        values.put(EncuestaContract.EncuestaEntry.ENCUESTADO_ID,"encuestadoId");
+        values.put(EncuestaContract.EncuestaEntry.FAMILIA_ID,"familiaId");
+        return values;
     }
 }

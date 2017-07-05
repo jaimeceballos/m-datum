@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by jaime on 29/06/17.
@@ -78,6 +77,13 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
     private String createAnioEstructura = "CREATE TABLE anioEstructura(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
     private String createNivelInstruccion = "CREATE TABLE nivelInstruccion(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
     private String createNacionalidad = "CREATE TABLE nacionalidad(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createEspecie = "CREATE TABLE especie(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createTipoCultivo = "CREATE TABLE tipoCultivo(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createSuperficieMedida = "CREATE TABLE createSuperficieMedida(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createTipoProduccion = "CREATE TABLE createTipoProduccion(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createEleccionCultivo = "CREATE TABLE eleccionCultivo(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
+    private String createEncuestaInvernaculo = "CREATE TABLE encuestaInvernaculo(id INTEGER PRIMARY KEY AUTOINCREMENT, encuestaId INTEGER NOT NULL, invernaculoId INTEGER NOT NULL)";
+    private String createEncuestaCultivo = "CREATE TABLE encuestaCultivo(id INTEGER PRIMARY KEY AUTOINCREMENT, encuestaId INTEGER NOT NULL, cultivoId INTEGER NOT NULL)";
 
     public MDatumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -100,7 +106,14 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         cargaNivelInstruccion(sqLiteDatabase);
         sqLiteDatabase.execSQL(createNacionalidad);
         cargaNacionalidad(sqLiteDatabase);
-
+        sqLiteDatabase.execSQL(createEspecie);
+        sqLiteDatabase.execSQL(createTipoCultivo);
+        sqLiteDatabase.execSQL(createSuperficieMedida);
+        sqLiteDatabase.execSQL(createTipoProduccion);
+        sqLiteDatabase.execSQL(createEleccionCultivo);
+        carga(sqLiteDatabase);
+        sqLiteDatabase.execSQL(createEncuestaInvernaculo);
+        sqLiteDatabase.execSQL(createEncuestaCultivo);
     }
 
     @Override
@@ -166,6 +179,22 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         return l;
     }
 
+    public long saveEncuesta(Encuesta encuesta){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        long l = 0;
+        try {
+            l = sqLiteDatabase.insertOrThrow(
+                    EncuestaContract.EncuestaEntry.TABLE_NAME,
+                    null,
+                    encuesta.toContentValues()
+            );
+        }catch (SQLException e){
+            Log.e("Exception","SQLException "+String.valueOf(e.getMessage()));
+            e.printStackTrace();
+        }
+        return l;
+    }
+
     private void cargaRegimenTenencia(SQLiteDatabase db){
         saveRegimen(db,new RegimenTenencia("Propiedad"));
         saveRegimen(db,new RegimenTenencia("Sucesion Indivisa"));
@@ -201,6 +230,34 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         saveNacionalidad(db,"Bolivia");
         saveNacionalidad(db,"Paraguay");
         saveNacionalidad(db,"Peru");
+    }
+    private void carga(SQLiteDatabase db){
+        save(db,"Lechuga","especie");
+        save(db,"Espinaca","especie");
+        save(db,"Acelga","especie");
+        save(db,"Radicheta","especie");
+        save(db,"Albahaca","especie");
+        save(db,"Perejil","especie");
+        save(db,"Cebolla Verdeo","especie");
+        save(db,"Apio","especie");
+        save(db,"Escarola","especie");
+        save(db,"Campo","tipoCultivo");
+        save(db,"Bajo Cubierta","tipoCultivo");
+        save(db,"M2","createSuperficieMedida");
+        save(db,"HA","createSuperficieMedida");
+        save(db,"Atado","createTipoProduccion");
+        save(db,"Bolsa","createTipoProduccion");
+        save(db,"Jaula","createTipoProduccion");
+        save(db,"Otras","createTipoProduccion");
+        save(db,"Rotacion","eleccionCultivo");
+        save(db,"Habitualidad","eleccionCultivo");
+        save(db,"Seguridad de venta","eleccionCultivo");
+        save(db,"Por Contrato","eleccionCultivo");
+        save(db,"Precio Anterior","eleccionCultivo");
+        save(db,"Precio Futuro","eleccionCultivo");
+        save(db,"Otro","eleccionCultivo");
+
+
     }
 
     public long saveRegimen(SQLiteDatabase db, RegimenTenencia regimen){
@@ -250,6 +307,15 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
                 values
         );
     }
+    public long save(SQLiteDatabase db, String dato, String tabla){
+        ContentValues values = new ContentValues();
+        values.put("descripcion",dato);
+        return db.insert(
+                tabla,
+                null,
+                values
+        );
+    }
 
    public long saveCultivo(Cultivo cultivo){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
@@ -268,7 +334,7 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
     }
 
     public long saveInvernaculo(Invernaculo invernaculo){
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         long l = 0;
         try{
             l = sqLiteDatabase.insertOrThrow(
@@ -282,6 +348,30 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return l;
+    }
+    public long saveIntermedio(String tabla, int encuestaId,int idAnexo){
+
+        ContentValues values = new ContentValues();
+        values.put("encuestaId",encuestaId);
+        if(tabla.equals("encuestaInvernaculo")){
+            values.put("invernaculoId",idAnexo);
+        }else{
+            values.put("cultivoId",idAnexo);
+        }
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        long l = 0;
+        try{
+            l = sqLiteDatabase.insertOrThrow(
+                    tabla,
+                    null,
+                    values
+            );
+        }catch (SQLException e){
+            Log.e("Exception","SQLException "+ String.valueOf(e.getMessage()));
+            e.printStackTrace();
+        }
+        return l;
+
     }
     public ArrayList<String> getAllRegimen(){
 
@@ -388,6 +478,28 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
                 while(cursor.moveToNext()){
                     String nacionalidad = cursor.getString(cursor.getColumnIndex("descripcion"));
                     lista.add(nacionalidad);
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+        return lista;
+    }
+    public ArrayList<String> getAllItems(String tabla){
+        ArrayList<String> lista = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try{
+            String selectQuery = "SELECT * from "+tabla;
+            Cursor cursor = db.rawQuery(selectQuery,null);
+            if(cursor.getCount() > 0){
+                while (cursor.moveToNext()){
+                    String elemento = cursor.getString(cursor.getColumnIndex("descripcion"));
+                    lista.add(elemento);
                 }
             }
             db.setTransactionSuccessful();

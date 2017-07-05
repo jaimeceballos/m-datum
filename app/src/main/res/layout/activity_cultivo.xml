@@ -15,7 +15,7 @@
         android:text="@string/tv_especie"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.184"
         app:layout_constraintBottom_toTopOf="@+id/tv_tipo_cultivo"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_cultivo" />
 
@@ -24,8 +24,7 @@
         android:layout_width="182dp"
         android:layout_height="36dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintLeft_toRightOf="@+id/tv_especie"
         app:layout_constraintBottom_toTopOf="@+id/sp_tipo_cultivo"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_cultivo" />
 
@@ -44,10 +43,10 @@
         android:id="@+id/sp_tipo_cultivo"
         android:layout_width="186dp"
         android:layout_height="34dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_mes_siembra"
-        app:layout_constraintTop_toBottomOf="@+id/sp_especie"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo" />
+        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo"
+        app:layout_constraintBottom_toTopOf="@+id/et_nro_siembra"
+        app:layout_constraintTop_toBottomOf="@+id/sp_especie" />
 
     <EditText
         android:id="@+id/et_nro_siembra"
@@ -60,7 +59,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintBottom_toTopOf="@+id/et_surcos"
-        app:layout_constraintTop_toBottomOf="@+id/sp_tipo_cultivo" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_tipo_cultivo" />
 
     <EditText
         android:id="@+id/et_mes_siembra"
@@ -84,7 +83,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintBottom_toTopOf="@+id/et_largo"
+        app:layout_constraintBottom_toTopOf="@+id/et_superficie_sembrada"
         app:layout_constraintTop_toBottomOf="@+id/et_nro_siembra" />
 
     <EditText
@@ -95,8 +94,7 @@
         android:hint="@string/et_distancias"
         android:inputType="number"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintLeft_toRightOf="@+id/et_surcos"
         app:layout_constraintBottom_toTopOf="@+id/et_superficie_sembrada"
         app:layout_constraintTop_toBottomOf="@+id/et_mes_siembra" />
 
@@ -104,13 +102,15 @@
         android:id="@+id/tv_titulo_cultivo"
         android:layout_width="376dp"
         android:layout_height="35dp"
+        android:layout_marginBottom="7dp"
         android:text="@string/tv_titulo_cultivo"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textSize="24sp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/sp_especie"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.303"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/et_largo"
@@ -135,7 +135,7 @@
         app:layout_constraintRight_toLeftOf="@+id/sp_superficie_medida"
         app:layout_constraintLeft_toRightOf="@+id/et_largo"
         app:layout_constraintBottom_toTopOf="@+id/sp_tipo_produccion"
-        app:layout_constraintTop_toBottomOf="@+id/et_surcos" />
+        app:layout_constraintTop_toBottomOf="@+id/et_distancias" />
 
     <EditText
         android:id="@+id/et_eleccion_especificar"
@@ -147,7 +147,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.86"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_guardar"
         app:layout_constraintTop_toBottomOf="@+id/tv_eleccion_cultivo" />
 
     <Spinner
@@ -194,29 +194,36 @@
         android:id="@+id/sp_eleccion_cultivo"
         android:layout_width="177dp"
         android:layout_height="34dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_eleccion_cultivo"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/et_eleccion_especificar"
+        app:layout_constraintLeft_toRightOf="@+id/tv_eleccion_cultivo"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_tipo_produccion" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_guardar"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="94dp"
+        android:layout_width="98dp"
         android:layout_height="48dp"
-        android:text="@string/btn_siguiente"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/btn_guardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_eleccion_especificar" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_eleccion_especificar"
+        app:layout_constraintHorizontal_bias="0.346" />
 
-    <android.support.constraint.Guideline
+    <Button
+        android:id="@+id/btn_finalizar"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="20dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-9dp"
+        android:text="@string/btn_finalizar"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintLeft_toRightOf="@+id/btn_guardar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_guardar" />
 
 </android.support.constraint.ConstraintLayout>

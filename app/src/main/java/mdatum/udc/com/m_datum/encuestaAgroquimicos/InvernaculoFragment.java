@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class InvernaculoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         if(bundle != null){
-            encuesta = (Encuesta) bundle.getSerializable("encuesta");
+            encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         }
         mDatumDbHelper = new MDatumDbHelper(getContext());
 
@@ -62,6 +63,7 @@ public class InvernaculoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_invernaculo, container, false);
+
         etCantModulos = (EditText) rootView.findViewById(R.id.et_cant_modulos);
         etSupUnit = (EditText) rootView.findViewById(R.id.et_sup_unit);
         spMatEstruct = (Spinner) rootView.findViewById(R.id.sp_mat_estruct);
@@ -87,6 +89,9 @@ public class InvernaculoFragment extends Fragment {
                 invernaculo.setAnioConstruccionId(spAnioConstruct.getSelectedItemPosition());
                 mDatumDbHelper = new MDatumDbHelper(getContext());
 
+                Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);
+
+                savingToast.show();
                 new AddInvernaculoTask().execute(invernaculo);
 
 
