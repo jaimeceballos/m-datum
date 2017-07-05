@@ -75,8 +75,8 @@ public class EncuestadoActivity extends AppCompatActivity {
                 encuestado.setNombre(etNombre.getText().toString());
                 encuestado.setApellido(etApellido.getText().toString());
                 encuestado.setEdad(Integer.parseInt(etEdad.getText().toString()));
-                encuestado.setNacionalidadId(Integer.parseInt(opcionesNacionalidad.get((int)spNacionalidad.getSelectedItemId())));
-                encuestado.setNivelInstruccionId(Integer.parseInt(opcionesInstruccion.get((int)spNivInstruccion.getSelectedItemId())));
+                encuestado.setNacionalidadId((int) spNacionalidad.getSelectedItemId());
+                encuestado.setNivelInstruccionId((int)spNivInstruccion.getSelectedItemId());
                 if (rbHabita.isChecked()) {
                     encuestado.setViveEstablecimiento(true);
                     isHabitaChecked = true;

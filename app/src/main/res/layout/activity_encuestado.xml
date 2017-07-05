@@ -15,48 +15,35 @@
         android:text="@string/tv_titulo_encuestado"
         android:textAlignment="center"
         android:textSize="24sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="2dp"
-        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintBottom_toTopOf="@+id/et_apellido_encuestado"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <EditText
         android:id="@+id/et_apellido_encuestado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_width="304dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:hint="@string/et_apellido"
         android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_titulo_encuestado"
-        app:layout_constraintRight_toRightOf="@+id/tv_titulo_encuestado"
+        app:layout_constraintBottom_toTopOf="@+id/et_nombre_encuestado"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_encuestado"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/et_nombre_encuestado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="304dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="@string/et_nombre"
         android:inputType="textPersonName"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/et_apellido_encuestado"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_apellido_encuestado"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/et_apellido_encuestado" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/et_edad_encuestado"
+        app:layout_constraintTop_toBottomOf="@+id/et_apellido_encuestado" />
 
     <EditText
         android:id="@+id/et_edad_encuestado"
@@ -65,60 +52,39 @@
         android:ems="10"
         android:hint="@string/et_edad"
         android:inputType="number"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/et_nombre_encuestado"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="45dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_nivel_instruccion"
+        app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado"
+        app:layout_constraintRight_toLeftOf="@+id/sp_nacionalidad"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Spinner
         android:id="@+id/sp_nacionalidad"
-        android:layout_width="192dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/sp_niv_instruccion"
-        app:layout_constraintLeft_toRightOf="@+id/et_edad_encuestado"
+        android:layout_width="157dp"
+        android:layout_height="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_nivel_instruccion"
         app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteY="178dp" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/et_edad_encuestado" />
 
     <TextView
         android:id="@+id/tv_nivel_instruccion"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
+        android:layout_width="125dp"
+        android:layout_height="47dp"
         android:text="@string/tv_instruccion"
         android:textSize="18sp"
-        app:layout_constraintRight_toLeftOf="@+id/btn_encuestado_siguiente"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"
-        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintRight_toLeftOf="@+id/sp_niv_instruccion"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_situación_estudio"
+        app:layout_constraintTop_toBottomOf="@+id/et_edad_encuestado" />
 
     <Spinner
         android:id="@+id/sp_niv_instruccion"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"
+        android:layout_width="156dp"
+        android:layout_height="46dp"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/rg_situacion"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintLeft_toRightOf="@+id/tv_nivel_instruccion"
+        app:layout_constraintBottom_toTopOf="@+id/rg_situacion"
+        app:layout_constraintTop_toBottomOf="@+id/sp_nacionalidad" />
 
     <Button
         android:id="@+id/btn_encuestado_siguiente"
@@ -126,13 +92,10 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/btn_siguiente"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="11dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_habita_establecimiento" />
 
 
     <TextView
@@ -141,21 +104,10 @@
         android:layout_height="39dp"
         android:text="@string/tv_situación"
         android:textSize="18sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="23dp"
-        app:layout_constraintRight_toRightOf="@+id/tv_nivel_instruccion"
-        android:layout_marginTop="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="14dp"
+        app:layout_constraintRight_toLeftOf="@+id/rg_situacion"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="23dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion" />
 
     <TextView
         android:id="@+id/tv_habita_establecimiento"
@@ -163,26 +115,20 @@
         android:layout_height="42dp"
         android:text="@string/tv_habita_establecimiento"
         android:textSize="18sp"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/rg_situacion"
-        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintRight_toLeftOf="@+id/rg_habita"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_encuestado_siguiente"
+        app:layout_constraintTop_toBottomOf="@+id/tv_situación_estudio" />
 
     <RadioGroup
         android:id="@+id/rg_habita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/rg_situacion"
-        android:layout_marginRight="16dp">
+        app:layout_constraintLeft_toRightOf="@+id/tv_habita_establecimiento"
+        app:layout_constraintBottom_toTopOf="@+id/btn_encuestado_siguiente"
+        app:layout_constraintTop_toBottomOf="@+id/rg_situacion">
 
         <RadioButton
             android:id="@+id/rb_habita"
@@ -206,20 +152,13 @@
 
     <RadioGroup
         android:id="@+id/rg_situacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="206dp"
+        android:layout_height="37dp"
         android:orientation="horizontal"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="17dp"
-        app:layout_constraintTop_toBottomOf="@+id/sp_niv_instruccion"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/tv_nivel_instruccion"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="8dp">
+        app:layout_constraintLeft_toRightOf="@+id/tv_situación_estudio"
+        app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion">
 
         <RadioButton
             android:id="@+id/rb_completo"

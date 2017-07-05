@@ -49,6 +49,19 @@
     <string name="tv_mts2">mts2</string>
     <string name="btn_agregar_otro">Guardar y Agregar otro</string>
 
+    <string name="tv_titulo_cultivo">Cultivos</string>
+    <string name="tv_especie">Especie</string>
+    <string name="tv_tipo_cultivo">Tipo Cultivo</string>
+    <string name="et_nro_siembra">Siembra N°</string>
+    <string name="et_mes_siembra">Mes Siembra</string>
+    <string name="et_surcos">Surcos</string>
+    <string name="et_distancias">Distancias</string>
+    <string name="et_largo">Largo</string>
+    <string name="et_superficie_Sembrada">Sup. sembr.</string>
+    <string name="tv_tipo_produccion">Tipo Produccion</string>
+    <string name="tv_eleccion_cultivo">Eleccion del cultivo</string>
+    <string name="tv_eleccion_especificar">Especificar Eleccion</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
