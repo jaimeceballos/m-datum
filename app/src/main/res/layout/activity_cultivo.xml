@@ -2,30 +2,31 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_cultivos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.CultivoActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/tv_especie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_especie"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
         app:layout_constraintBottom_toTopOf="@+id/tv_tipo_cultivo"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_cultivo" />
 
     <Spinner
         android:id="@+id/sp_especie"
         android:layout_width="182dp"
         android:layout_height="36dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_especie"
         app:layout_constraintBottom_toTopOf="@+id/sp_tipo_cultivo"
+        app:layout_constraintLeft_toRightOf="@+id/tv_especie"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_cultivo" />
 
     <TextView
@@ -33,19 +34,19 @@
         android:layout_width="48dp"
         android:layout_height="33dp"
         android:text="@string/tv_tipo_cultivo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintBottom_toTopOf="@+id/et_nro_siembra"
+        app:layout_constraintHorizontal_bias="0.183"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_especie" />
 
     <Spinner
         android:id="@+id/sp_tipo_cultivo"
         android:layout_width="186dp"
         android:layout_height="34dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo"
         app:layout_constraintBottom_toTopOf="@+id/et_nro_siembra"
+        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_especie" />
 
     <EditText
@@ -55,10 +56,10 @@
         android:ems="10"
         android:hint="@string/et_nro_siembra"
         android:inputType="number"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintBottom_toTopOf="@+id/et_surcos"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_tipo_cultivo" />
 
     <EditText
@@ -68,9 +69,9 @@
         android:ems="10"
         android:hint="@string/et_mes_siembra"
         android:inputType="number"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/et_nro_siembra"
         app:layout_constraintBottom_toTopOf="@+id/et_distancias"
+        app:layout_constraintLeft_toRightOf="@+id/et_nro_siembra"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_tipo_cultivo" />
 
     <EditText
@@ -80,10 +81,10 @@
         android:ems="10"
         android:hint="@string/et_surcos"
         android:inputType="number"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintBottom_toTopOf="@+id/et_superficie_sembrada"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_nro_siembra" />
 
     <EditText
@@ -93,9 +94,9 @@
         android:ems="10"
         android:hint="@string/et_distancias"
         android:inputType="number"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/et_surcos"
         app:layout_constraintBottom_toTopOf="@+id/et_superficie_sembrada"
+        app:layout_constraintLeft_toRightOf="@+id/et_surcos"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_mes_siembra" />
 
     <TextView
@@ -119,10 +120,10 @@
         android:ems="10"
         android:hint="@string/et_largo"
         android:inputType="number"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintBottom_toTopOf="@+id/tv_tipo_produccion"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_surcos" />
 
     <EditText
@@ -132,9 +133,9 @@
         android:ems="10"
         android:hint="@string/et_superficie_Sembrada"
         android:inputType="number"
-        app:layout_constraintRight_toLeftOf="@+id/sp_superficie_medida"
-        app:layout_constraintLeft_toRightOf="@+id/et_largo"
         app:layout_constraintBottom_toTopOf="@+id/sp_tipo_produccion"
+        app:layout_constraintLeft_toRightOf="@+id/et_largo"
+        app:layout_constraintRight_toLeftOf="@+id/sp_superficie_medida"
         app:layout_constraintTop_toBottomOf="@+id/et_distancias" />
 
     <EditText
@@ -154,9 +155,9 @@
         android:id="@+id/sp_superficie_medida"
         android:layout_width="106dp"
         android:layout_height="38dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/et_superficie_sembrada"
         app:layout_constraintBottom_toTopOf="@+id/sp_tipo_produccion"
+        app:layout_constraintLeft_toRightOf="@+id/et_superficie_sembrada"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_distancias" />
 
     <TextView
@@ -164,19 +165,19 @@
         android:layout_width="75dp"
         android:layout_height="32dp"
         android:text="@string/tv_tipo_produccion"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintBottom_toTopOf="@+id/tv_eleccion_cultivo"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_largo" />
 
     <Spinner
         android:id="@+id/sp_tipo_produccion"
         android:layout_width="189dp"
         android:layout_height="37dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_produccion"
         app:layout_constraintBottom_toTopOf="@+id/tv_eleccion_cultivo"
+        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_produccion"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_superficie_sembrada" />
 
     <TextView
@@ -184,10 +185,10 @@
         android:layout_width="91dp"
         android:layout_height="34dp"
         android:text="@string/tv_eleccion_cultivo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintBottom_toTopOf="@+id/et_eleccion_especificar"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_tipo_produccion" />
 
     <Spinner
@@ -207,10 +208,10 @@
         android:layout_height="48dp"
         android:text="@string/btn_guardar"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.346"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_eleccion_especificar"
-        app:layout_constraintHorizontal_bias="0.346" />
+        app:layout_constraintTop_toBottomOf="@+id/et_eleccion_especificar" />
 
     <Button
         android:id="@+id/btn_finalizar"

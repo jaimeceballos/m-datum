@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
     private EditText etEspecificar, etNombreEstablecimiento, etNroEstablecimiento;
 
+    private TextInputLayout tilEspecificar;
     private Spinner spRegTenencia;
 
     private Button btnCapturarUbicacion;
@@ -81,7 +83,8 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
 
         mDatumDbHelper = new MDatumDbHelper(this);
-        
+
+        tilEspecificar = (TextInputLayout) findViewById(R.id.til_especificar);
         etEspecificar = (EditText) findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) findViewById(R.id.sp_reg_tenencia);
 
@@ -103,9 +106,11 @@ public class EstablecimientoActivity extends AppCompatActivity  implements Googl
 
                 if(parent.getItemAtPosition(position).toString().equals("Otro")) {
 
-                    etEspecificar.setVisibility(View.VISIBLE);
+                    tilEspecificar.setVisibility(View.VISIBLE);
+                    //etEspecificar.setVisibility(View.VISIBLE);
                 }else{
-                    etEspecificar.setVisibility(View.GONE);
+                    //etEspecificar.setVisibility(View.GONE);
+                    tilEspecificar.setVisibility(View.GONE);
                 }
             }
 
