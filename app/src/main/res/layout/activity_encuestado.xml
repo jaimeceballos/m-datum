@@ -2,11 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_encuestado"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/tv_titulo_encuestado"
@@ -15,56 +16,88 @@
         android:text="@string/tv_titulo_encuestado"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/et_apellido_encuestado"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
-        android:id="@+id/et_apellido_encuestado"
-        android:layout_width="304dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:hint="@string/et_apellido"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/et_nombre_encuestado"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_encuestado"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <EditText
-        android:id="@+id/et_nombre_encuestado"
-        android:layout_width="304dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/et_nombre"
-        android:inputType="textPersonName"
-        app:layout_constraintRight_toRightOf="parent"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_apellido_encuestado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/et_edad_encuestado"
-        app:layout_constraintTop_toBottomOf="@+id/et_apellido_encuestado" />
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="0dp">
 
-    <EditText
-        android:id="@+id/et_edad_encuestado"
-        android:layout_width="132dp"
-        android:layout_height="44dp"
-        android:ems="10"
-        android:hint="@string/et_edad"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/tv_nivel_instruccion"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado"
-        app:layout_constraintRight_toLeftOf="@+id/sp_nacionalidad"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        <EditText
+            android:id="@+id/et_apellido_encuestado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/et_apellido"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/et_nombre_encuestado"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titulo_encuestado" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_nombre_encuestado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="0dp">
+
+        <EditText
+            android:id="@+id/et_nombre_encuestado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/et_nombre"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/et_edad_encuestado"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_apellido_encuestado" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_edad_encuestado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="0dp">
+
+        <EditText
+            android:id="@+id/et_edad_encuestado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/et_edad"
+            android:inputType="number"
+            app:layout_constraintBottom_toTopOf="@+id/tv_nivel_instruccion"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/sp_nacionalidad"
+            app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado" />
+    </android.support.design.widget.TextInputLayout>
 
     <Spinner
         android:id="@+id/sp_nacionalidad"
         android:layout_width="157dp"
         android:layout_height="42dp"
+        android:spinnerMode="dialog"
         app:layout_constraintBottom_toTopOf="@+id/tv_nivel_instruccion"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado"
+        app:layout_constraintLeft_toRightOf="@+id/et_edad_encuestado"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/et_edad_encuestado" />
+        app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado" />
 
     <TextView
         android:id="@+id/tv_nivel_instruccion"
@@ -72,18 +105,19 @@
         android:layout_height="47dp"
         android:text="@string/tv_instruccion"
         android:textSize="18sp"
-        app:layout_constraintRight_toLeftOf="@+id/sp_niv_instruccion"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_situación_estudio"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sp_niv_instruccion"
         app:layout_constraintTop_toBottomOf="@+id/et_edad_encuestado" />
 
     <Spinner
         android:id="@+id/sp_niv_instruccion"
         android:layout_width="156dp"
         android:layout_height="46dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_nivel_instruccion"
+        android:spinnerMode="dialog"
         app:layout_constraintBottom_toTopOf="@+id/rg_situacion"
+        app:layout_constraintLeft_toRightOf="@+id/tv_nivel_instruccion"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_nacionalidad" />
 
     <Button
@@ -92,9 +126,9 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/btn_siguiente"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_habita_establecimiento" />
 
 
@@ -104,9 +138,9 @@
         android:layout_height="39dp"
         android:text="@string/tv_situación"
         android:textSize="18sp"
-        app:layout_constraintRight_toLeftOf="@+id/rg_situacion"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/rg_situacion"
         app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion" />
 
     <TextView
@@ -115,9 +149,9 @@
         android:layout_height="42dp"
         android:text="@string/tv_habita_establecimiento"
         android:textSize="18sp"
-        app:layout_constraintRight_toLeftOf="@+id/rg_habita"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_encuestado_siguiente"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/rg_habita"
         app:layout_constraintTop_toBottomOf="@+id/tv_situación_estudio" />
 
     <RadioGroup
@@ -125,9 +159,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_habita_establecimiento"
         app:layout_constraintBottom_toTopOf="@+id/btn_encuestado_siguiente"
+        app:layout_constraintLeft_toRightOf="@+id/tv_habita_establecimiento"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rg_situacion">
 
         <RadioButton
@@ -155,9 +189,9 @@
         android:layout_width="206dp"
         android:layout_height="37dp"
         android:orientation="horizontal"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_situación_estudio"
         app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
+        app:layout_constraintLeft_toRightOf="@+id/tv_situación_estudio"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion">
 
         <RadioButton

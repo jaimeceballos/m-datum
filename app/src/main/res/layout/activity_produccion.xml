@@ -13,73 +13,29 @@
         android:id="@+id/tv_titulo_produccion"
         android:layout_width="132dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="19dp"
-        android:layout_marginTop="16dp"
         android:text="@string/tv_titulo_produccion"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/rg_produce_invernadero"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="114dp" />
 
     <TextView
         android:id="@+id/tv_bajo_cubierta"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginStart="16dp"
         android:text="@string/tv_produce_invernadero"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rg_produce_invernadero"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/tv_titulo_produccion"
-        app:layout_constraintTop_toTopOf="@+id/rg_produce_invernadero"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/cl_view_group_invernaculo"
-        android:layout_width="328dp"
-        android:layout_height="280dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="98dp"
-        app:layout_constraintHorizontal_bias="0.777"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteY="265dp">
-
-    </android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="64dp"
+        tools:layout_editor_absoluteX="16dp" />
 
     <RadioGroup
         android:id="@+id/rg_produce_invernadero"
         android:layout_width="0dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="64dp"
         android:orientation="horizontal"
-        app:layout_constraintLeft_toRightOf="@+id/tv_bajo_cubierta"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1">
+        tools:layout_editor_absoluteY="64dp"
+        tools:layout_editor_absoluteX="230dp">
 
         <RadioButton
             android:id="@+id/rb_cubierto_si"
@@ -96,19 +52,23 @@
     </RadioGroup>
 
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_view_group_invernaculo"
+        android:layout_width="346dp"
+        android:layout_height="272dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="121dp">
+
+    </android.support.constraint.ConstraintLayout>
+
     <Button
         android:id="@+id/btn_produccion_siguiente"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
         android:layout_weight="1"
         android:text="@string/btn_siguiente"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_editor_absoluteY="442dp"
+        tools:layout_editor_absoluteX="133dp" />
 
 </android.support.constraint.ConstraintLayout>
