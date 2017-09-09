@@ -1,6 +1,7 @@
 package mdatum.udc.com.m_datum;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +11,7 @@ import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnEncuesta;
-    private Encuesta encuesta = new Encuesta();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        btnEncuesta = (Button) findViewById(R.id.btn_encuesta);
-
-
-        btnEncuesta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent establecimiento = new Intent(view.getContext(), EstablecimientoActivity.class);
-                establecimiento.putExtra("encuesta",encuesta);
-                startActivity(establecimiento);
-            }
-        });
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        SplashScreen fragment = new SplashScreen();
+        fragmentTransaction.replace(R.id.ll_body_content, fragment);
+        fragmentTransaction.commit();
     }
 }
