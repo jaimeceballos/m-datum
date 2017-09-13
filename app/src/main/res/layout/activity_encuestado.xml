@@ -16,19 +16,16 @@
         android:text="@string/tv_titulo_encuestado"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_apellido_encuestado"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_apellido_encuestado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
 
         <EditText
             android:id="@+id/et_apellido_encuestado"
@@ -48,9 +45,8 @@
         android:id="@+id/til_nombre_encuestado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
 
         <EditText
             android:id="@+id/et_nombre_encuestado"
@@ -69,11 +65,10 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_edad_encuestado"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
 
         <EditText
             android:id="@+id/et_edad_encuestado"
@@ -94,10 +89,8 @@
         android:layout_width="157dp"
         android:layout_height="42dp"
         android:spinnerMode="dialog"
-        app:layout_constraintBottom_toTopOf="@+id/tv_nivel_instruccion"
-        app:layout_constraintLeft_toRightOf="@+id/et_edad_encuestado"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre_encuestado" />
+        tools:layout_editor_absoluteY="-41dp"
+        tools:layout_editor_absoluteX="163dp" />
 
     <TextView
         android:id="@+id/tv_nivel_instruccion"
@@ -105,20 +98,16 @@
         android:layout_height="47dp"
         android:text="@string/tv_instruccion"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_situación_estudio"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/sp_niv_instruccion"
-        app:layout_constraintTop_toBottomOf="@+id/et_edad_encuestado" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="13dp" />
 
     <Spinner
         android:id="@+id/sp_niv_instruccion"
         android:layout_width="156dp"
         android:layout_height="46dp"
         android:spinnerMode="dialog"
-        app:layout_constraintBottom_toTopOf="@+id/rg_situacion"
-        app:layout_constraintLeft_toRightOf="@+id/tv_nivel_instruccion"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_nacionalidad" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="151dp" />
 
     <Button
         android:id="@+id/btn_encuestado_siguiente"
@@ -126,10 +115,10 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/btn_siguiente"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_habita_establecimiento" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <TextView
@@ -138,10 +127,8 @@
         android:layout_height="39dp"
         android:text="@string/tv_situación"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/rg_situacion"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion" />
+        tools:layout_editor_absoluteY="46dp"
+        tools:layout_editor_absoluteX="9dp" />
 
     <TextView
         android:id="@+id/tv_habita_establecimiento"
@@ -149,20 +136,17 @@
         android:layout_height="42dp"
         android:text="@string/tv_habita_establecimiento"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_encuestado_siguiente"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/rg_habita"
-        app:layout_constraintTop_toBottomOf="@+id/tv_situación_estudio" />
+        tools:layout_editor_absoluteY="307dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <RadioGroup
         android:id="@+id/rg_habita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/btn_encuestado_siguiente"
-        app:layout_constraintLeft_toRightOf="@+id/tv_habita_establecimiento"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_situacion">
+        tools:layout_editor_absoluteY="90dp"
+        tools:layout_editor_absoluteX="171dp">
 
         <RadioButton
             android:id="@+id/rb_habita"
@@ -189,10 +173,8 @@
         android:layout_width="206dp"
         android:layout_height="37dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/tv_habita_establecimiento"
-        app:layout_constraintLeft_toRightOf="@+id/tv_situación_estudio"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nivel_instruccion">
+        tools:layout_editor_absoluteY="48dp"
+        tools:layout_editor_absoluteX="105dp">
 
         <RadioButton
             android:id="@+id/rb_completo"
