@@ -4,6 +4,7 @@ package mdatum.udc.com.m_datum;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 
 import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity;
+import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoFragment;
 
 
 /**
@@ -37,13 +39,19 @@ public class SplashScreen extends Fragment {
         btnEncuesta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent establecimiento = new Intent(view.getContext(), EstablecimientoActivity.class);
-                establecimiento.putExtra("encuesta",encuesta);
-                startActivity(establecimiento);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("encuesta",encuesta);
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                EstablecimientoFragment fragment = new EstablecimientoFragment();
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                        .commit();
             }
         });
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_splash_screen, container, false);
+        return rootView;
     }
 
 }
