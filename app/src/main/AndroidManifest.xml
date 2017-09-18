@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -24,21 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".encuestaAgroquimicos.EstablecimientoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".encuestaAgroquimicos.EncuestadoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".encuestaAgroquimicos.FamiliaActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".encuestaAgroquimicos.ProduccionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".encuestaAgroquimicos.CultivoActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

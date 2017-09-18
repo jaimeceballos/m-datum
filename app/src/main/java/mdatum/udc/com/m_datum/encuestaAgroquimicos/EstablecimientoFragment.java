@@ -13,12 +13,12 @@ import mdatum.udc.com.m_datum.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Establecimiento.OnFragmentInteractionListener} interface
+ * {@link EstablecimientoFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Establecimiento#newInstance} factory method to
+ * Use the {@link EstablecimientoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Establecimiento extends Fragment {
+public class EstablecimientoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class Establecimiento extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Establecimiento() {
+    public EstablecimientoFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class Establecimiento extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Establecimiento.
+     * @return A new instance of fragment EstablecimientoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Establecimiento newInstance(String param1, String param2) {
-        Establecimiento fragment = new Establecimiento();
+    public static EstablecimientoFragment newInstance(String param1, String param2) {
+        EstablecimientoFragment fragment = new EstablecimientoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

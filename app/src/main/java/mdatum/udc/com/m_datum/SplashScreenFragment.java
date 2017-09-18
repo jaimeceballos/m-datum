@@ -11,18 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import mdatum.udc.com.m_datum.data.Encuesta;
-import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoFragment;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SplashScreen extends Fragment {
+public class SplashScreenFragment extends Fragment {
     Button btnEncuesta;
     Encuesta encuesta = new Encuesta();
 
-    public SplashScreen() {
+    public SplashScreenFragment() {
         // Required empty public constructor
     }
 

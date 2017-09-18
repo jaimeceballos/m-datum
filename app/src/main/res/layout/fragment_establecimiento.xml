@@ -1,49 +1,34 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:gravity="center"
-    android:paddingBottom="16dp"
-android:paddingLeft="16dp"
-android:paddingRight="16dp"
-android:paddingTop="16dp"
-android:weightSum="1"
-    android:orientation="vertical">
+    android:id="@+id/cl_establecimiento"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
 
     <TextView
         android:id="@+id/titulo_establecimiento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:text="@string/tv_titulo_establecimiento"
         android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_nombre_establecimiento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp">
-
-        <EditText
-            android:id="@+id/et_nombre_establecimiento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/et_nombre"
-            android:inputType="textPersonName"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-    </android.support.design.widget.TextInputLayout>
+        android:textSize="24sp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_nro_establecimiento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="0dp">
 
         <EditText
             android:id="@+id/et_nro_establecimiento"
@@ -53,77 +38,94 @@ android:weightSum="1"
             android:ems="10"
             android:hint="@string/et_nro_establecimiento"
             android:inputType="number"
-            android:maxLength="3" />
+            android:maxLength="3"
+            tools:layout_editor_absoluteX="381dp"
+            tools:layout_editor_absoluteY="38dp" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btn_capturar_ubicacion"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_capturar_ubicacion" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_capturar_ubicacion"
+        tools:layout_editor_absoluteY="196dp"
+        tools:layout_editor_absoluteX="2dp" />
 
     <TextView
         android:id="@+id/tv_long"
         android:layout_width="55dp"
         android:layout_height="26dp"
         android:text="@string/tv_long"
-        />
+        tools:layout_editor_absoluteY="183dp"
+        tools:layout_editor_absoluteX="341dp" />
 
     <TextView
         android:id="@+id/tv_coord_long"
-        android:layout_width="147dp"
+        android:layout_width="0dp"
         android:layout_height="29dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:text="@string/tv_coordenada_desconocida" />
+        android:text="@string/tv_coordenada_desconocida"
+        tools:layout_editor_absoluteY="181dp"
+        tools:layout_editor_absoluteX="5dp" />
 
     <TextView
         android:id="@+id/tv_lat"
-        android:layout_width="55dp"
-        android:layout_height="26dp"
-        android:text="@string/tv_lat" />
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:text="@string/tv_lat"
+        tools:layout_editor_absoluteY="170dp"
+        tools:layout_editor_absoluteX="336dp" />
 
     <TextView
         android:id="@+id/tv_coord_lat"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:layout_marginStart="3dp"
-        android:text="@string/tv_coordenada_desconocida" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/tv_coordenada_desconocida"
+        tools:layout_editor_absoluteY="200dp"
+        tools:layout_editor_absoluteX="3dp" />
 
     <Button
         android:id="@+id/btn_foto"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="135dp"
+        android:layout_width="0dp"
         android:layout_height="59dp"
-        android:text="@string/btn_tomar_foto" />
+        android:text="@string/btn_tomar_foto"
+        android:layout_marginStart="2dp"
+        tools:layout_editor_absoluteY="264dp"
+        android:layout_marginLeft="2dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
         android:id="@+id/tv_establecimiento"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="81dp"
-        android:contentDescription="Imagen del establecimiento"
-        tools:ignore="HardcodedText" />
+        tools:layout_editor_absoluteY="242dp"
+        tools:layout_editor_absoluteX="325dp" />
 
     <TextView
         android:id="@+id/tv_reg_tenencia"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="27dp"
         android:text="@string/tv_reg_tenencia"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:layout_editor_absoluteY="354dp"
+        tools:layout_editor_absoluteX="2dp" />
 
     <Spinner
         android:id="@+id/sp_reg_tenencia"
         android:layout_width="139dp"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dialog" />
+        android:layout_height="0dp"
+        android:spinnerMode="dialog"
+        tools:layout_editor_absoluteY="359dp"
+        tools:layout_editor_absoluteX="541dp" />
 
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_especificar"
         android:layout_width="351dp"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteY="399dp"
+        tools:layout_editor_absoluteX="329dp">
 
         <EditText
             android:id="@+id/et_especificar"
@@ -141,10 +143,11 @@ android:weightSum="1"
             app:layout_constraintBottom_toTopOf="@+id/btn_siguiente"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1" />
     </android.support.design.widget.TextInputLayout>
-
-
 
     <Button
         android:id="@+id/btn_siguiente"
@@ -152,8 +155,29 @@ android:weightSum="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_siguiente"
+        tools:layout_editor_absoluteY="524dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_nombre_establecimiento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="63dp">
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/et_nombre_establecimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/et_nombre"
+            android:inputType="textPersonName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="50dp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+</android.support.constraint.ConstraintLayout>

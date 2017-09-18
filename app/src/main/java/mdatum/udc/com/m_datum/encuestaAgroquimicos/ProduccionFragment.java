@@ -1,7 +1,6 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.data.Encuesta;
@@ -33,7 +31,7 @@ public class ProduccionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_produccion,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_produccion,container,false);
 
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         rbCubiertoSi = (RadioButton) rootView.findViewById(R.id.rb_cubierto_si);

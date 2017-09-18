@@ -1,7 +1,6 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,7 +40,7 @@ public class FamiliaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_familia,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_familia,container,false);
 
         encuesta        =  (Encuesta) getArguments().getSerializable("encuesta");
         rbHijosSi = (RadioButton) rootView.findViewById(R.id.rb_hijos_si);
