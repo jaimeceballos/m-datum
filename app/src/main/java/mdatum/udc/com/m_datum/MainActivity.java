@@ -1,14 +1,8 @@
 package mdatum.udc.com.m_datum;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
-import mdatum.udc.com.m_datum.data.Encuesta;
-import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        SplashScreen fragment = new SplashScreen();
+        SplashScreenFragment fragment = new SplashScreenFragment();
         fragmentTransaction.replace(R.id.ll_body_content, fragment);
         fragmentTransaction.commit();
     }

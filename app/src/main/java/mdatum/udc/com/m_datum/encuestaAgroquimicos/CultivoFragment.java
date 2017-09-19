@@ -1,7 +1,5 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
-
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,17 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import mdatum.udc.com.m_datum.MainActivity;
 import mdatum.udc.com.m_datum.R;
-import mdatum.udc.com.m_datum.SplashScreen;
+import mdatum.udc.com.m_datum.SplashScreenFragment;
 import mdatum.udc.com.m_datum.data.Cultivo;
 import mdatum.udc.com.m_datum.data.Encuesta;
 import mdatum.udc.com.m_datum.data.MDatumDbHelper;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,7 +60,7 @@ public class CultivoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_cultivo,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_cultivo,container,false);
 
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         spEspecie = (Spinner) rootView.findViewById(R.id.sp_especie);
@@ -199,7 +196,7 @@ public class CultivoFragment extends Fragment {
                 }
             }*/
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            SplashScreen fragment = new SplashScreen();
+            SplashScreenFragment fragment = new SplashScreenFragment();
             fragmentTransaction.replace(R.id.ll_body_content,fragment)
                     .commit();
         }
