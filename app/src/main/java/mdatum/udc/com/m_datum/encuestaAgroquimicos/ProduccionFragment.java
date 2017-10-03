@@ -35,7 +35,7 @@ public class ProduccionFragment extends Fragment {
 
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         rbCubiertoSi = (RadioButton) rootView.findViewById(R.id.rb_cubierto_si);
-        rbCubiertoNo = (RadioButton) rootView.findViewById(R.id.rb_cubierto_no);
+        rbCubiertoNo = (RadioButton) rootView.findViewById(R.id.rb_agroquimico_no);
         btnProduccionSiguiente = (Button) rootView.findViewById(R.id.btn_produccion_siguiente);
         rbCubiertoSi.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -46,7 +46,7 @@ public class ProduccionFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     InvernaculoFragment fragment = new InvernaculoFragment();
                     fragment.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.cl_view_group_invernaculo, fragment);
+                    fragmentTransaction.replace(R.id.cl_view_group_agroquimico, fragment);
                     fragmentTransaction.commit();
 
                 }

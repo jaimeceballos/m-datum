@@ -124,7 +124,7 @@ public class InvernaculoFragment extends Fragment {
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             InvernaculoFragment fragment = new InvernaculoFragment();
             fragment.setArguments(bundle);
-            fragmentTransaction.replace(R.id.cl_view_group_invernaculo, fragment);
+            fragmentTransaction.replace(R.id.cl_view_group_agroquimico, fragment);
             fragmentTransaction.commit();
         }
     }

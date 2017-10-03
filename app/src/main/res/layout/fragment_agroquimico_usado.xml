@@ -1,0 +1,136 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.AgroquimicoUsadoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/btn_guarda_y_agregar"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="162dp"
+        android:layout_weight="1"
+        android:text="@string/btn_agregar_otro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.424" />
+
+    <Button
+        android:id="@+id/btn_agroquimicos_utilizados_siguiente"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:text="@string/btn_siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_plaga"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="227dp">
+
+        <EditText
+            android:id="@+id/et_plaga"
+            android:layout_width="295dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="hint"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.325"
+            tools:text="@string/tv_plaga" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_producto"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="136dp">
+
+        <EditText
+            android:id="@+id/et_producto"
+            android:layout_width="295dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="hint"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.325"
+            tools:text="@string/tv_producto" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tv_agroquimico_usado"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_metodo"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="319dp">
+
+        <EditText
+            android:id="@+id/et_metodo"
+            android:layout_width="295dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="hint"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.325"
+            tools:text="@string/tv_metodo" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_frecuencia_de_uso"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="422dp">
+
+        <EditText
+            android:id="@+id/et_frecuencia_de_uso"
+            android:layout_width="295dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="hint"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.325"
+            tools:text="@string/tv_frecuencia" />
+    </android.support.design.widget.TextInputLayout>
+</android.support.constraint.ConstraintLayout>

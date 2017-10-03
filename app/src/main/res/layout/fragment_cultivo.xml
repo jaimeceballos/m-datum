@@ -4,176 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_cultivos"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.CultivoActivity"
+    android:layout_height="wrap_content"
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.CultivoFragment"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/tv_especie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="79dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="34dp"
+
+        android:layout_marginStart="34dp"
         android:text="@string/tv_especie"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/tv_tipo_cultivo"
-        android:layout_marginStart="53dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_titulo_cultivo"
-        android:layout_marginLeft="53dp" />
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="84dp" />
 
     <Spinner
         android:id="@+id/sp_especie"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_width="207dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="84dp"
         android:spinnerMode="dialog"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/til_distancias"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintRight_toRightOf="@+id/sp_tipo_cultivo"
-        android:layout_marginTop="42dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintLeft_toLeftOf="@+id/sp_tipo_cultivo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_tipo_cultivo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="175dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="30dp"
         android:text="@string/tv_tipo_cultivo"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/sp_tipo_cultivo"
-        app:layout_constraintRight_toRightOf="@+id/tv_especie"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_especie"
-        app:layout_constraintTop_toTopOf="@+id/sp_tipo_cultivo" />
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/sp_tipo_cultivo"
-        android:layout_width="186dp"
-        android:layout_height="0dp"
+        android:layout_width="208dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginRight="16dp"
         android:spinnerMode="dialog"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/til_distancias"
-        android:layout_marginStart="35dp"
-        app:layout_constraintTop_toBottomOf="@+id/sp_especie"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo"
-        android:layout_marginLeft="35dp" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_nro_siembra"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toLeftOf="@+id/sp_superficie_medida"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        app:layout_constraintTop_toBottomOf="@+id/til_surcos"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="11dp">
-
-        <EditText
-            android:id="@+id/et_nro_siembra"
-            android:layout_width="108dp"
-            android:layout_height="42dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/et_nro_siembra"
-            android:inputType="number"
-            tools:layout_editor_absoluteX="44dp"
-            tools:layout_editor_absoluteY="126dp" />
-    </android.support.design.widget.TextInputLayout>
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="30dp" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_mes_siembra"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toLeftOf="@+id/til_surcos"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/til_nro_siembra"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="29dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="29dp">
+
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="138dp">
 
         <EditText
             android:id="@+id/et_mes_siembra"
-            android:layout_width="153dp"
-            android:layout_height="43dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="38dp"
             android:ems="10"
             android:hint="@string/et_mes_siembra"
             android:inputType="number"
-            tools:layout_editor_absoluteX="180dp"
-            tools:layout_editor_absoluteY="126dp" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_surcos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/sp_superficie_medida"
-        android:layout_marginStart="68dp"
-        android:layout_marginEnd="68dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/sp_tipo_cultivo"
-        android:layout_marginLeft="68dp"
-        android:layout_marginRight="68dp">
-
-        <EditText
-            android:id="@+id/et_surcos"
-            android:layout_width="108dp"
-            android:layout_height="46dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/et_surcos"
-            android:inputType="number"
-            tools:layout_editor_absoluteX="44dp"
-            tools:layout_editor_absoluteY="182dp" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_distancias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/til_mes_siembra"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tipo_cultivo"
-        app:layout_constraintRight_toRightOf="@+id/tv_tipo_cultivo"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1">
-
-        <EditText
-            android:id="@+id/et_distancias"
-            android:layout_width="151dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/et_distancias"
-            android:inputType="number"
-            tools:layout_editor_absoluteX="181dp"
-            tools:layout_editor_absoluteY="183dp" />
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="146dp" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -184,214 +83,222 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="24sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/sp_especie"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="7dp"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <Spinner
+        android:id="@+id/sp_superficie_medida"
+        android:layout_width="226dp"
+        android:layout_height="46dp"
+        android:spinnerMode="dialog"
+
+        tools:layout_editor_absoluteX="235dp"
+        tools:layout_editor_absoluteY="356dp" />
+
+    <TextView
+        android:id="@+id/tv_tipo_produccion"
+        android:layout_width="159dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="26dp"
+
+        android:layout_marginStart="26dp"
+        android:text="@string/tv_tipo_produccion"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp" />
+        tools:layout_editor_absoluteY="440dp" />
+
+    <Spinner
+        android:id="@+id/sp_tipo_produccion"
+        android:layout_width="229dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginRight="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="434dp" />
+
+    <TextView
+        android:id="@+id/tv_eleccion_cultivo"
+        android:layout_width="166dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="26dp"
+
+        android:layout_marginStart="26dp"
+        android:text="@string/tv_eleccion_cultivo"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="490dp" />
+
+    <Spinner
+        android:id="@+id/sp_eleccion_cultivo"
+        android:layout_width="231dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:spinnerMode="dialog"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="488dp" />
+
+    <Button
+        android:id="@+id/btn_agregar_otro"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/btn_agregar_otro"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="600dp" />
+
+    <Button
+        android:id="@+id/btn_cultivo_siguiente"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:text="@string/btn_siguiente"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="660dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_eleccion_especificar"
+        android:layout_width="272dp"
+        android:layout_height="49dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="544dp">
+
+        <EditText
+            android:id="@+id/et_eleccion_especificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/tv_eleccion_especificar"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="42dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_tipo_cultivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_surcos"
+        android:layout_width="212dp"
+        android:layout_height="54dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="200dp">
+
+        <EditText
+            android:id="@+id/et_surcos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/et_surcos"
+            android:inputType="number"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="182dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_nro_siembra"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="138dp"
+        tools:layout_editor_absoluteX="2dp">
+
+        <EditText
+            android:id="@+id/et_nro_siembra"
+            android:layout_width="210dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="@string/et_nro_siembra"
+            android:inputType="number"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteY="146dp" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_largo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintRight_toRightOf="@+id/tv_tipo_produccion"
-        app:layout_constraintTop_toBottomOf="@+id/til_mes_siembra"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_tipo_produccion"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp">
+        android:layout_width="215dp"
+        android:layout_height="44dp"
+        tools:layout_editor_absoluteY="272dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp">
 
         <EditText
             android:id="@+id/et_largo"
-            android:layout_width="71dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
             android:ems="10"
             android:hint="@string/et_largo"
             android:inputType="number"
-            tools:layout_editor_absoluteX="43dp"
-            tools:layout_editor_absoluteY="243dp" />
+            tools:layout_editor_absoluteX="358dp"
+            tools:layout_editor_absoluteY="202dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_distancias"
+        android:layout_width="220dp"
+        android:layout_height="59dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="192dp"
+        android:layout_marginEnd="16dp">
+
+        <EditText
+            android:id="@+id/et_distancias"
+            android:layout_width="188dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:ems="10"
+            android:hint="@string/et_distancias"
+            android:inputType="number"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteY="326dp" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_superficie_sembrada"
-        android:layout_width="0dp"
+        android:layout_width="219dp"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toLeftOf="@+id/btn_guardar"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="8dp">
+        android:layout_weight="1"
+        tools:layout_editor_absoluteX="-10dp"
+        tools:layout_editor_absoluteY="341dp">
 
         <EditText
             android:id="@+id/et_superficie_sembrada"
-            android:layout_width="83dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
             android:ems="10"
             android:hint="@string/et_superficie_Sembrada"
             android:inputType="number"
-            tools:layout_editor_absoluteX="133dp"
-            tools:layout_editor_absoluteY="241dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteY="368dp" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_eleccion_especificar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/btn_guardar"
-        android:layout_marginStart="53dp"
-        android:layout_marginEnd="53dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="53dp"
-        android:layout_marginRight="53dp">
-
-        <EditText
-            android:id="@+id/et_eleccion_especificar"
-            android:layout_width="277dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/tv_eleccion_especificar"
-            android:inputType="text"
-            tools:layout_editor_absoluteX="42dp"
-            tools:layout_editor_absoluteY="393dp" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/sp_superficie_medida"
-        android:layout_width="106dp"
-        android:layout_height="38dp"
-        android:spinnerMode="dialog"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="27dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/til_surcos"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="27dp" />
-
     <TextView
-        android:id="@+id/tv_tipo_produccion"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/tv_tipo_produccion"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="17dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sp_tipo_produccion"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="@+id/tv_eleccion_cultivo"
-        android:layout_marginTop="3dp"
-        app:layout_constraintTop_toBottomOf="@+id/til_nro_siembra"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintLeft_toLeftOf="@+id/til_mes_siembra"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="16dp" />
-
-    <Spinner
-        android:id="@+id/sp_tipo_produccion"
-        android:layout_width="0dp"
-        android:layout_height="37dp"
-        android:spinnerMode="dialog"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/til_superficie_sembrada"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="7dp"
-        app:layout_constraintRight_toRightOf="@+id/sp_superficie_medida"
-        android:layout_marginTop="111dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="111dp"
-        app:layout_constraintTop_toTopOf="@+id/til_surcos"
-        app:layout_constraintLeft_toRightOf="@+id/tv_eleccion_cultivo"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="7dp" />
-
-    <TextView
-        android:id="@+id/tv_eleccion_cultivo"
-        android:layout_width="91dp"
-        android:layout_height="34dp"
-        android:text="@string/tv_eleccion_cultivo"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/til_eleccion_especificar"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tipo_produccion"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="43dp" />
-
-    <Spinner
-        android:id="@+id/sp_eleccion_cultivo"
-        android:layout_width="177dp"
-        android:layout_height="0dp"
-        android:spinnerMode="dialog"
-        android:visibility="visible"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_eleccion_cultivo"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/sp_tipo_produccion"
-        app:layout_constraintTop_toTopOf="@+id/tv_eleccion_cultivo"
-        android:layout_marginLeft="14dp" />
-
-    <Button
-        android:id="@+id/btn_guardar"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="98dp"
-        android:layout_height="48dp"
-        android:text="@string/btn_guardar"
-        app:layout_constraintRight_toLeftOf="@+id/sp_superficie_medida"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="46dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginTop="6dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/til_largo"
-        app:layout_constraintTop_toTopOf="@+id/til_superficie_sembrada"
-        android:layout_marginLeft="46dp"
-        android:layout_marginRight="46dp" />
-
-    <Button
-        android:id="@+id/btn_finalizar"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_finalizar"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintRight_toRightOf="@+id/til_eleccion_especificar"
-        app:layout_constraintTop_toBottomOf="@+id/til_eleccion_especificar"
-        android:layout_marginRight="15dp" />
+        android:id="@+id/tv_mts2"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:text="@string/tv_mts"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="291dp" />
 
 </android.support.constraint.ConstraintLayout>

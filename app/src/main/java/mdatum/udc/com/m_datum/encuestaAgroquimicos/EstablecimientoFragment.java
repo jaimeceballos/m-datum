@@ -1,6 +1,4 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
-
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -206,7 +204,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
 
         //Obtengo el boton de siguiente
-        Button btnSiguiente = (Button)rootView.findViewById(R.id.btn_siguiente);
+        Button btnSiguiente = (Button)rootView.findViewById(R.id.btn__establecimiento_siguiente);
 
         etNroEstablecimiento =  (EditText) rootView.findViewById(R.id.et_nro_establecimiento);
         etEspecificar = (EditText) rootView.findViewById(R.id.et_especificar);

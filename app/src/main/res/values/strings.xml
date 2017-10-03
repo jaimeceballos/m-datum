@@ -15,11 +15,24 @@
     <string name="btn_atras">Atras</string>
     <string name="et_especificar">Especificar</string>
     <string name="tv_reg_tenencia">Regimen de tenencia</string>
+    <string name="tv_agroquimico">Uso de agroquimicos</string>
+    <string name="tv_usa_agroquimicos">Usa agroquimicos?</string>
+    <string name="et_por_que_no">Por que no?</string>
+    <string name="et_cuantos_años">Hace cuantos años?</string>
+    <string name="tv_factor_climatico">Al aplicar. Que factor climatico tiene en cuenta?</string>
+    <string name="tv_triple_lavado">Conoce y realiza el triple lavado?</string>
+    <string name="tv_agroquimico_usado">Agroquimicos utilizados</string>
+    <string name="tv_asesoramiento">Quien lo asesora?</string>
+    <string name="btn_cerrar_app">Cerrar aplicacion</string>
+    <string name="tv_nacionalidad">Nacionalidad</string>
+
+
+
 
     <!-- Strings errores de validación EstablecimientoActivity -->
     <string name="error_nombre">Falta indicar nombre del establecimiento</string>
     <string name="error_numero">Falta indicar numero de establecimiento</string>
-    <string name="error_especificar">Falta especificar régimen</string>
+    <string name="error_especificar">Falta especificar régimen de tenencia</string>
 
     <!-- Strings errores de validación EncuestadoActivity -->
     <string name="error_nombre_encuestado">Falta indicar nombre del encuestado</string>
@@ -53,12 +66,18 @@
     <string name="title_activity_cultivo">CultivoActivity</string>
     <string name="tv_mts2">mts2</string>
     <string name="btn_agregar_otro">Guardar y Agregar otro</string>
+    <string name="tv_producto">Producto</string>
+    <string name="tv_plaga">Plaga</string>
+    <string name="tv_metodo">Metodo de aplicacion</string>
+    <string name="tv_frecuencia">Frecuencia de uso</string>
+    <string name="tv_mts">mts2</string>
+
 
     <string name="tv_titulo_cultivo">Cultivos</string>
     <string name="tv_especie">Especie</string>
-    <string name="tv_tipo_cultivo">Tipo Cultivo</string>
+    <string name="tv_tipo_cultivo">Tipo de Cultivo</string>
     <string name="et_nro_siembra">Siembra N°</string>
-    <string name="et_mes_siembra">Mes Siembra</string>
+    <string name="et_mes_siembra">Mes de Siembra</string>
     <string name="et_surcos">Surcos</string>
     <string name="et_distancias">Distancias</string>
     <string name="et_largo">Largo</string>
