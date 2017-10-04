@@ -204,7 +204,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
 
         //Obtengo el boton de siguiente
-        Button btnSiguiente = (Button)rootView.findViewById(R.id.btn__establecimiento_siguiente);
+        Button btnSiguiente = (Button)rootView.findViewById(R.id.btn_establecimiento_siguiente);
 
         etNroEstablecimiento =  (EditText) rootView.findViewById(R.id.et_nro_establecimiento);
         etEspecificar = (EditText) rootView.findViewById(R.id.et_especificar);
