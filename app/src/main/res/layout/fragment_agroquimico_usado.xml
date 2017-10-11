@@ -4,9 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.AgroquimicoUsadoFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
     <Button
         android:id="@+id/btn_guarda_y_agregar"
         style="@style/Widget.AppCompat.Button.Colored"
@@ -17,8 +14,7 @@
         android:text="@string/btn_agregar_otro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.424" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/btn_agroquimicos_utilizados_siguiente"

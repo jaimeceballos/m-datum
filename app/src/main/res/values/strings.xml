@@ -55,7 +55,8 @@
     <string name="tv_hijos">Tiene hijos?</string>
     <string name="tv_varones">Varones</string>
     <string name="tv_mujeres">Mujeres</string>
-    <string name="et_cantidad">Cantidad</string>
+    <string name="et_cantidad_varones">Cantidad de varones</string>
+    <string name="et_cantidad_mujeres">Cantidad de mujeres</string>
 
     <string name="tv_titulo_produccion">Producción</string>
     <string name="tv_produce_invernadero">Produce bajo cubierta?</string>

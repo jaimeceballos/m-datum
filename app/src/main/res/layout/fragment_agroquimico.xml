@@ -161,7 +161,7 @@
         android:layout_width="171dp"
         android:layout_height="44dp"
         android:layout_marginStart="33dp"
-        tools:layout_editor_absoluteY="242dp"
-        tools:layout_editor_absoluteX="274dp" />
+        tools:layout_editor_absoluteY="233dp"
+        tools:layout_editor_absoluteX="249dp" />
 
 </android.support.constraint.ConstraintLayout>

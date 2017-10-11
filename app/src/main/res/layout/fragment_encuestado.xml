@@ -5,7 +5,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:weightSum="1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp">
 
     <TextView
         android:id="@+id/tv_titulo_encuestado1"
@@ -17,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_width="0dp"/>
 
     <android.support.design.widget.TextInputLayout
@@ -28,8 +31,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_titulo_encuestado1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/til_apellido_encuestado"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="4dp">
+        >
 
         <EditText
             android:id="@+id/et_nombre_encuestado"
@@ -69,8 +71,7 @@
         android:layout_width="0dp"
         app:layout_constraintTop_toBottomOf="@id/til_apellido_encuestado"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp">
+        app:layout_constraintRight_toRightOf="parent">
 
         <EditText
             android:id="@+id/et_edad_encuestado"
@@ -90,8 +91,7 @@
         tools:text="@string/tv_nacionalidad"
         app:layout_constraintTop_toBottomOf="@id/til_edad_encuestado"
         app:layout_constraintRight_toLeftOf="@+id/sp_nacionalidad"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Spinner
         android:id="@+id/sp_nacionalidad"
@@ -100,7 +100,6 @@
         android:spinnerMode="dialog"
         app:layout_constraintTop_toTopOf="@id/tv_nacionalidad"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="5dp"
         app:layout_constraintLeft_toRightOf="@id/tv_nacionalidad"/>
 
     <TextView
@@ -110,7 +109,6 @@
         android:text="@string/tv_instruccion"
         app:layout_constraintTop_toBottomOf="@id/tv_nacionalidad"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
         android:textSize="18sp"/>
 
     <Spinner
@@ -129,8 +127,7 @@
         android:text="@string/tv_situación"
         android:textSize="18dp"
         app:layout_constraintTop_toBottomOf="@id/tv_nivel_instruccion"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <RadioGroup
         android:id="@+id/rg_situacion"
@@ -145,14 +142,12 @@
             android:id="@+id/rb_completo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
             android:text="@string/rb_completo"/>
 
         <RadioButton
             android:id="@+id/rb_incompleto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.35"
             android:text="@string/rb_incompleto"/>
 
     </RadioGroup>
@@ -166,9 +161,7 @@
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/tv_situación_estudio"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/tv_nivel_instruccion"
-        android:layout_marginTop="8dp"
-        />
+        app:layout_constraintRight_toRightOf="@id/tv_nivel_instruccion"/>
 
     <RadioGroup
         android:id="@+id/rg_habita"
@@ -177,21 +170,18 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="@id/tv_habita_establecimiento"
         app:layout_constraintLeft_toRightOf="@+id/tv_habita_establecimiento"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp">
+        app:layout_constraintRight_toRightOf="parent">
 
         <RadioButton
             android:id="@+id/rb_habita"
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/tv_si"/>
 
         <RadioButton
             android:id="@+id/rb_no_habita"
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/tv_no"/>
 
     </RadioGroup>
