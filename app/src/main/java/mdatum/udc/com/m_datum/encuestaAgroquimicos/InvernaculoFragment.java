@@ -65,7 +65,7 @@ public class InvernaculoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_invernaculo, container, false);
 
         etCantModulos = (EditText) rootView.findViewById(R.id.et_cant_modulos);
-        etSupUnit = (EditText) rootView.findViewById(R.id.et_sup_unit);
+        //etSupUnit = (EditText) rootView.findViewById(R.id.et_sup_unit);
         spMatEstruct = (Spinner) rootView.findViewById(R.id.sp_mat_estruct);
         spAnioConstruct = (Spinner) rootView.findViewById(R.id.sp_anio_construct);
 

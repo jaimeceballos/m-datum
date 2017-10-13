@@ -27,16 +27,17 @@
         android:id="@+id/til_nombre_encuestado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_titulo_encuestado1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_encuestado"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/til_apellido_encuestado">
+        app:layout_constraintRight_toLeftOf="@+id/til_apellido_encuestado"
+        android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/et_nombre_encuestado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_nombre"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@id/et_edad_encuestado"
+            app:layout_constraintBottom_toTopOf="@+id/et_edad_encuestado"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
     </android.support.design.widget.TextInputLayout>
@@ -66,7 +67,8 @@
         android:layout_width="0dp"
         app:layout_constraintTop_toBottomOf="@id/til_apellido_encuestado"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/et_edad_encuestado"
@@ -86,7 +88,8 @@
         tools:text="@string/tv_nacionalidad"
         app:layout_constraintTop_toBottomOf="@id/til_edad_encuestado"
         app:layout_constraintRight_toLeftOf="@+id/sp_nacionalidad"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/sp_nacionalidad"
@@ -104,7 +107,8 @@
         android:text="@string/tv_instruccion"
         app:layout_constraintTop_toBottomOf="@id/tv_nacionalidad"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/sp_niv_instruccion"
@@ -122,28 +126,33 @@
         android:text="@string/tv_situación"
         android:textSize="18dp"
         app:layout_constraintTop_toBottomOf="@id/tv_nivel_instruccion"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/rg_situacion"
+        android:layout_marginTop="10dp"/>
 
     <RadioGroup
         android:id="@+id/rg_situacion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@id/tv_situación_estudio"
+        app:layout_constraintTop_toBottomOf="@id/tv_nivel_instruccion"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/tv_situación_estudio">
+        app:layout_constraintLeft_toRightOf="@id/tv_situación_estudio"
+        android:layout_marginTop="10dp">
 
         <RadioButton
             android:id="@+id/rb_completo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rb_completo"/>
+            android:text="@string/rb_completo"
+            android:textSize="11sp"/>
 
         <RadioButton
             android:id="@+id/rb_incompleto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rb_incompleto"/>
+            android:text="@string/rb_incompleto"
+            android:textSize="11sp"/>
 
     </RadioGroup>
 
@@ -156,7 +165,9 @@
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/tv_situación_estudio"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/tv_nivel_instruccion"/>
+        app:layout_constraintRight_toRightOf="@id/tv_nivel_instruccion"
+        app:layout_constraintRight_toLeftOf="@+id/rg_habita"
+        android:layout_marginTop="15dp"/>
 
     <RadioGroup
         android:id="@+id/rg_habita"

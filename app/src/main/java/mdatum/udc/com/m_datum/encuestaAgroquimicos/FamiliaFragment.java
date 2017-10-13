@@ -3,6 +3,7 @@ package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import mdatum.udc.com.m_datum.data.MDatumDbHelper;
 public class FamiliaFragment extends Fragment {
 
     private RadioButton rbHijosSi, rbHijosNo,rbEsposaSi,rbEsposaNo;
-    private TextView tvVarones, tvMujeres;
+    private TextInputLayout tilCantVarones, tilCantMujeres;
     private EditText etCantVarones, etCantMujeres;
     private Button btnFliaSiguiente;
     private Encuesta encuesta;
@@ -45,9 +46,9 @@ public class FamiliaFragment extends Fragment {
         encuesta        =  (Encuesta) getArguments().getSerializable("encuesta");
         rbHijosSi = (RadioButton) rootView.findViewById(R.id.rb_hijos_si);
         rbHijosNo = (RadioButton) rootView.findViewById(R.id.rb_hijos_no);
-        tvVarones = (TextView) rootView.findViewById(R.id.tv_varones);
+        tilCantVarones = (TextInputLayout) rootView.findViewById(R.id.til_cant_varones);
         etCantVarones = (EditText) rootView.findViewById(R.id.et_cant_varones);
-        tvMujeres = (TextView) rootView.findViewById(R.id.tv_mujeres);
+        tilCantMujeres = (TextInputLayout) rootView.findViewById(R.id.til_cant_mujeres);
         etCantMujeres = (EditText) rootView.findViewById(R.id.et_cant_mujeres);
         rbEsposaSi = (RadioButton) rootView.findViewById(R.id.rb_esposa_si);
         rbEsposaNo = (RadioButton) rootView.findViewById(R.id.rb_esposa_no);
@@ -58,9 +59,9 @@ public class FamiliaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(rbHijosSi.isChecked()){
-                    tvVarones.setVisibility(View.VISIBLE);
+                    tilCantVarones.setVisibility(View.VISIBLE);
                     etCantVarones.setVisibility(View.VISIBLE);
-                    tvMujeres.setVisibility(View.VISIBLE);
+                    tilCantMujeres.setVisibility(View.VISIBLE);
                     etCantMujeres.setVisibility(View.VISIBLE);
                 }
             }
@@ -70,9 +71,9 @@ public class FamiliaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(rbHijosNo.isChecked()){
-                    tvVarones.setVisibility(View.GONE);
+                    tilCantVarones.setVisibility(View.GONE);
                     etCantVarones.setVisibility(View.GONE);
-                    tvMujeres.setVisibility(View.GONE);
+                    tilCantMujeres.setVisibility(View.GONE);
                     etCantMujeres.setVisibility(View.GONE);
                 }
             }
