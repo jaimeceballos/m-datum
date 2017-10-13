@@ -27,8 +27,6 @@
     <string name="tv_nacionalidad">Nacionalidad</string>
 
 
-
-
     <!-- Strings errores de validación EstablecimientoActivity -->
     <string name="error_nombre">Falta indicar nombre del establecimiento</string>
     <string name="error_numero">Falta indicar numero de establecimiento</string>
