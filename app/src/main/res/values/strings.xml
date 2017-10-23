@@ -1,30 +1,83 @@
 <resources>
     <string name="app_name">M-Datum</string>
+
     <string name="btn_encuesta">Nueva encuesta</string>
     <string name="btn_sincro">Sincronizar datos</string>
     <string name="btn_export">Exportar datos</string>
-    <string name="tv_titulo_establecimiento">Datos del establecimiento</string>
-    <string name="et_nombre">Nombre</string>
-    <string name="et_nro_establecimiento">Nro.</string>
     <string name="btn_capturar_ubicacion">Ubicación</string>
-    <string name="tv_lat">Lat.</string>
-    <string name="tv_long">Long.</string>
-    <string name="tv_coordenada_desconocida">Desconocido</string>
     <string name="btn_tomar_foto">Tomar foto</string>
     <string name="btn_siguiente">Siguiente</string>
     <string name="btn_atras">Atras</string>
-    <string name="et_especificar">Especificar</string>
+    <string name="btn_cerrar_app">Cerrar aplicacion</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="btn_finalizar">Finalizar</string>
+    <string name="btn_agregar_otro">Guardar y Agregar otro</string>
+
+    <string name="tv_titulo_establecimiento">Datos del establecimiento</string>
+    <string name="tv_lat">Lat.</string>
+    <string name="tv_long">Long.</string>
+    <string name="tv_coordenada_desconocida">Desconocido</string>
     <string name="tv_reg_tenencia">Regimen de tenencia</string>
     <string name="tv_agroquimico">Uso de agroquimicos</string>
     <string name="tv_usa_agroquimicos">Usa agroquimicos?</string>
-    <string name="et_por_que_no">Por que no?</string>
-    <string name="et_cuantos_años">Hace cuantos años?</string>
     <string name="tv_factor_climatico">Al aplicar. Que factor climatico tiene en cuenta?</string>
     <string name="tv_triple_lavado">Conoce y realiza el triple lavado?</string>
     <string name="tv_agroquimico_usado">Agroquimicos utilizados</string>
     <string name="tv_asesoramiento">Quien lo asesora?</string>
-    <string name="btn_cerrar_app">Cerrar aplicacion</string>
     <string name="tv_nacionalidad">Nacionalidad</string>
+    <string name="tv_titulo_encuestado">Datos del encuestado</string>
+    <string name="tv_situación">Situación</string>
+    <string name="tv_instruccion">Nivel de instrucción</string>
+    <string name="tv_habita_establecimiento">"Vive en el establecimiento?"</string>
+    <string name="tv_si">Si</string>
+    <string name="tv_no">No</string>
+    <string name="tv_titulo_familia">Datos de la familia</string>
+    <string name="tv_esposa">Tiene esposa?</string>
+    <string name="tv_hijos">Tiene hijos?</string>
+    <string name="tv_varones">Varones</string>
+    <string name="tv_mujeres">Mujeres</string>
+    <string name="tv_titulo_produccion">Producción</string>
+    <string name="tv_produce_invernadero">Produce bajo cubierta?</string>
+    <string name="tv_mat_estruct">Material de la estructura</string>
+    <string name="tv_anio_const">Año de construcción</string>
+    <string name="tv_mts2">mts2</string>
+    <string name="tv_producto">Producto</string>
+    <string name="tv_plaga">Plaga</string>
+    <string name="tv_metodo">Metodo de aplicacion</string>
+    <string name="tv_frecuencia">Frecuencia de uso</string>
+    <string name="tv_mts">mts</string>
+    <string name="tv_titulo_cultivo">Cultivos</string>
+    <string name="tv_especie">Especie</string>
+    <string name="tv_tipo_cultivo">Tipo de cultivo</string>
+    <string name="tv_tipo_produccion">Tipo de produccion</string>
+    <string name="tv_eleccion_cultivo">Eleccion del cultivo</string>
+    <string name="tv_eleccion_especificar">Especificar eleccion</string>
+    <string name="tv_titulo_agroquimico_usado">Agroquimicos usados</string>
+
+
+    <string name="rb_completo">Completo</string>
+    <string name="rb_incompleto">Incompleto</string>
+
+    <string name="et_nombre">Nombre</string>
+    <string name="et_nro_establecimiento">Nro.</string>
+    <string name="et_cant_modulos">Cantidad de módulos</string>
+    <string name="et_sup_unit">Sup. unitaria</string>
+    <string name="et_especificar">Especificar</string>
+    <string name="et_por_que_no">Por que no?</string>
+    <string name="et_cuantos_años">Hace cuantos años?</string>
+    <string name="et_apellido">Apellido</string>
+    <string name="et_edad">Edad</string>
+    <string name="et_nacionalidad">Nacionalidad</string>
+    <string name="et_cantidad_varones">Cantidad de varones</string>
+    <string name="et_cantidad_mujeres">Cantidad de mujeres</string>
+    <string name="et_nro_siembra">Siembra N°</string>
+    <string name="et_mes_siembra">Mes de siembra</string>
+    <string name="et_surcos">Cantidad de surcos</string>
+    <string name="et_distancias">Distancias</string>
+    <string name="et_largo">Largo</string>
+    <string name="et_superficie_Sembrada">Sup. sembr.</string>
+
+    <string name="title_activity_cultivo">CultivoActivity</string>
 
 
     <!-- Strings errores de validación EstablecimientoActivity -->
@@ -37,58 +90,7 @@
     <string name="error_apellido_encuestado">Falta indicar apellido del encuestado</string>
     <string name="error_edad_encuestado">Falta indicar edad del encuestado</string>
 
-    <string name="tv_titulo_encuestado">Datos del encuestado</string>
-    <string name="et_apellido">Apellido</string>
-    <string name="et_edad">Edad</string>
-    <string name="et_nacionalidad">Nacionalidad</string>
-    <string name="tv_instruccion">Nivel de instrucción</string>
-    <string name="tv_situación">Situación</string>
-    <string name="rb_completo">Completo</string>
-    <string name="rb_incompleto">Incompleto</string>
-    <string name="tv_habita_establecimiento">"Vive en el establecimiento?"</string>
-    <string name="tv_si">Si</string>
-    <string name="tv_no">No</string>
-    <string name="tv_titulo_familia">Datos de la familia</string>
-    <string name="tv_esposa">Tiene esposa?</string>
-    <string name="tv_hijos">Tiene hijos?</string>
-    <string name="tv_varones">Varones</string>
-    <string name="tv_mujeres">Mujeres</string>
-    <string name="et_cantidad_varones">Cantidad de varones</string>
-    <string name="et_cantidad_mujeres">Cantidad de mujeres</string>
 
-    <string name="tv_titulo_produccion">Producción</string>
-    <string name="tv_produce_invernadero">Produce bajo cubierta?</string>
-    <string name="et_cant_modulos">Cantidad de módulos</string>
-    <string name="et_sup_unit">Sup. unitaria</string>
-    <string name="tv_mat_estruct">Material de la estructura</string>
-    <string name="tv_anio_const">Año de construcción</string>
-    <string name="title_activity_cultivo">CultivoActivity</string>
-    <string name="tv_mts2">mts2</string>
-    <string name="btn_agregar_otro">Guardar y Agregar otro</string>
-    <string name="tv_producto">Producto</string>
-    <string name="tv_plaga">Plaga</string>
-    <string name="tv_metodo">Metodo de aplicacion</string>
-    <string name="tv_frecuencia">Frecuencia de uso</string>
-    <string name="tv_mts">mts2</string>
-
-
-    <string name="tv_titulo_cultivo">Cultivos</string>
-    <string name="tv_especie">Especie</string>
-    <string name="tv_tipo_cultivo">Tipo de Cultivo</string>
-    <string name="et_nro_siembra">Siembra N°</string>
-    <string name="et_mes_siembra">Mes de Siembra</string>
-    <string name="et_surcos">Surcos</string>
-    <string name="et_distancias">Distancias</string>
-    <string name="et_largo">Largo</string>
-    <string name="et_superficie_Sembrada">Sup. sembr.</string>
-    <string name="tv_tipo_produccion">Tipo Produccion</string>
-    <string name="tv_eleccion_cultivo">Eleccion del cultivo</string>
-    <string name="tv_eleccion_especificar">Especificar Eleccion</string>
-    <string name="btn_guardar">Guardar</string>
-    <string name="btn_finalizar">Finalizar</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -1,0 +1,38 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Agroquimico_usado_base"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mdatum.udc.com.m_datum.encuestaAgroquimicos.AgroquimicoUsadoBaseFragment"
+    android:layout_marginBottom="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp">
+
+    <TextView
+        android:id="@+id/titulo_agroquimico_usado"
+        android:text="@string/tv_titulo_agroquimico_usado"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content" />
+
+
+
+
+
+    <Button
+        android:id="@+id/btn_establecimiento_siguiente"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:text="@string/btn_siguiente"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
