@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 import mdatum.udc.com.m_datum.R;
-import mdatum.udc.com.m_datum.data.Encuesta;
+import mdatum.udc.com.m_datum.database.Encuesta;
 
 /**
  * A simple {@link Fragment} subclass.

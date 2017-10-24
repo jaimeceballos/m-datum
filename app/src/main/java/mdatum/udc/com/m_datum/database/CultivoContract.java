@@ -1,4 +1,4 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 import android.provider.BaseColumns;
 

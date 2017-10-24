@@ -1,14 +1,21 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
-import static mdatum.udc.com.m_datum.data.EncuestadoContract.EncuestadoEntry;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+
+import static mdatum.udc.com.m_datum.database.EncuestadoContract.EncuestadoEntry;
+import org.greenrobot.greendao.annotation.Generated;
 /**
  * Created by jaime on 21/06/17.
  */
 
+@Entity
 public class Encuestado {
-    private int id;
+
+    @org.greenrobot.greendao.annotation.Id (autoincrement = true)
+    private Long id;
     private String nombre;
     private String apellido;
     private int edad;
@@ -17,11 +24,29 @@ public class Encuestado {
     private Boolean nivelCompleto;
     private Boolean viveEstablecimiento;
 
-    public int getId() {
+    @Generated(hash = 1327549907)
+    public Encuestado(Long id, String nombre, String apellido, int edad,
+            int nacionalidadId, int nivelInstruccionId, Boolean nivelCompleto,
+            Boolean viveEstablecimiento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.nacionalidadId = nacionalidadId;
+        this.nivelInstruccionId = nivelInstruccionId;
+        this.nivelCompleto = nivelCompleto;
+        this.viveEstablecimiento = viveEstablecimiento;
+    }
+
+    @Generated(hash = 401734286)
+    public Encuestado() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,24 +1,40 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by jaime on 28/06/17.
  */
 
+@Entity
 public class RegimenTenencia {
-    private int id;
+
+    @org.greenrobot.greendao.annotation.Id (autoincrement = true)
+    private Long id;
     private String descpripcion;
 
     public RegimenTenencia(String descpripcion) {
         this.descpripcion = descpripcion;
     }
 
-    public int getId() {
+    @Generated(hash = 661241241)
+    public RegimenTenencia(Long id, String descpripcion) {
+        this.id = id;
+        this.descpripcion = descpripcion;
+    }
+
+    @Generated(hash = 421682395)
+    public RegimenTenencia() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

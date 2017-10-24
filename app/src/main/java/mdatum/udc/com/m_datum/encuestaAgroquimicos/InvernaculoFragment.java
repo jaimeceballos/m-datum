@@ -17,9 +17,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import mdatum.udc.com.m_datum.R;
-import mdatum.udc.com.m_datum.data.Encuesta;
-import mdatum.udc.com.m_datum.data.Invernaculo;
-import mdatum.udc.com.m_datum.data.MDatumDbHelper;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.Invernaculo;
+import mdatum.udc.com.m_datum.database.MDatumDbHelper;
 
 
 public class InvernaculoFragment extends Fragment {

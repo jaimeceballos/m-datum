@@ -1,12 +1,9 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.ArrayList;
 
 /**
  * Created by jaime on 28/06/17.

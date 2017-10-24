@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -19,15 +20,10 @@ android {
     }
 }
 
-
-
-
-
-
-
-
-
-
+greendao {
+    schemaVersion 1
+    targetGenDir "src/main/java/"
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,6 +37,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:11.0.0'
     compile 'com.google.android.gms:play-services-plus:11.0.0'
     compile 'com.android.support:design:25.2.0'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:support-v4:25.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'org.greenrobot:greendao:3.2.2'
 }

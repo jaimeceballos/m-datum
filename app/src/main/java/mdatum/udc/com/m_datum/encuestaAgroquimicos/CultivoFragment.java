@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.SplashScreenFragment;
-import mdatum.udc.com.m_datum.data.Cultivo;
-import mdatum.udc.com.m_datum.data.Encuesta;
-import mdatum.udc.com.m_datum.data.MDatumDbHelper;
+import mdatum.udc.com.m_datum.database.Cultivo;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.MDatumDbHelper;
 
 
 /**

@@ -12,12 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
+import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
-import mdatum.udc.com.m_datum.data.Encuesta;
-import mdatum.udc.com.m_datum.data.Familia;
-import mdatum.udc.com.m_datum.data.MDatumDbHelper;
+import mdatum.udc.com.m_datum.database.DaoSession;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.Familia;
+import mdatum.udc.com.m_datum.database.MDatumDbHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +30,7 @@ public class FamiliaFragment extends Fragment {
     private EditText etCantVarones, etCantMujeres;
     private Button btnFliaSiguiente;
     private Encuesta encuesta;
-    private MDatumDbHelper mDatumDbHelper;
+    private DaoSession daoSession;
     private Familia familia;
 
 
@@ -52,6 +53,8 @@ public class FamiliaFragment extends Fragment {
         etCantMujeres = (EditText) rootView.findViewById(R.id.et_cant_mujeres);
         rbEsposaSi = (RadioButton) rootView.findViewById(R.id.rb_esposa_si);
         rbEsposaNo = (RadioButton) rootView.findViewById(R.id.rb_esposa_no);
+
+        daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
 
         btnFliaSiguiente = (Button) rootView.findViewById(R.id.btn_flia_siguiente);
 
@@ -79,8 +82,6 @@ public class FamiliaFragment extends Fragment {
             }
         });
 
-        mDatumDbHelper = new MDatumDbHelper(getContext());
-
         btnFliaSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,8 +104,7 @@ public class FamiliaFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Familia... familia) {
-            long result = mDatumDbHelper.saveFamilia(familia[0]);
-            familia[0].setId((int)result);
+            long result = daoSession.insert(familia[0]);
             encuesta.setFamiliaId((int)result);
             return result > 0;
         }

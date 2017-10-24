@@ -39,11 +39,15 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
-import mdatum.udc.com.m_datum.data.*;
-import mdatum.udc.com.m_datum.data.Establecimiento;
+import mdatum.udc.com.m_datum.database.*;
+import mdatum.udc.com.m_datum.database.Establecimiento;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,13 +55,14 @@ import mdatum.udc.com.m_datum.data.Establecimiento;
 public class EstablecimientoFragment extends Fragment implements OnConnectionFailedListener,
         ConnectionCallbacks {
 
-    private mdatum.udc.com.m_datum.data.Establecimiento establecimiento = new mdatum.udc.com.m_datum.data.Establecimiento();
+    private Establecimiento establecimiento = new Establecimiento();
     private Encuesta encuesta;
-    private MDatumDbHelper mDatumDbHelper;
+
+    private DaoSession daoSession;
     //variable donde se genera el nombre de archivo de la imagen capturada
     private String name = "";
 
-    ArrayList<String> opciones;
+    List opciones;
     private static final String LOGTAG = "android-localizacion";
 
     //variable para la peticion de permiso de localizacion
@@ -91,13 +96,13 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
 
 
-
+        daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
 
 //--------------------------------SPINNER-----------------------------------------------------------
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
 
-        mDatumDbHelper = new MDatumDbHelper(getContext());
+
 
         tilEspecificar = (TextInputLayout) rootView.findViewById(R.id.til_especificar);
         etEspecificar = (EditText) rootView.findViewById(R.id.et_especificar);
@@ -105,11 +110,19 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
 
 
-        //final String []opciones= new String[]{"Propiedad","Sucesión indivisa","Arrendatario","Med. % producto","Med. % dinero","Ocupación","Otro"};
+        RegimenTenenciaDao regimenTenenciaDao = daoSession.getRegimenTenenciaDao();
+        opciones = regimenTenenciaDao.loadAll();
 
-        opciones = mDatumDbHelper.getAllRegimen();
+        final List<String> objects = new ArrayList<>();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, opciones);
+        Iterator<RegimenTenencia> iterator = opciones.iterator();
+
+        while (iterator.hasNext()){
+            objects.add(iterator.next().getDescpripcion());
+        }
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item, objects);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spRegTenencia.setAdapter(adapter);
 
@@ -122,9 +135,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
                 if(parent.getItemAtPosition(position).toString().equals("Otro")) {
 
                     tilEspecificar.setVisibility(View.VISIBLE);
-                    //etEspecificar.setVisibility(View.VISIBLE);
                 }else{
-                    //etEspecificar.setVisibility(View.GONE);
                     tilEspecificar.setVisibility(View.GONE);
                 }
             }
@@ -219,7 +230,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
                 establecimiento.setRegimenTenenciaId(spRegTenencia.getSelectedItemPosition());
 
 
-                if(opciones.get(establecimiento.getRegimenTenenciaId()).toString().equals("Otro")){
+                if(opciones.get(establecimiento.getRegimenTenenciaId()).equals("Otro")){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
                 }else{
                     establecimiento.setRegimenOtros("");
@@ -447,11 +458,10 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
         Log.e(LOGTAG, "Se ha interrumpido la conexión con Google Play Services");
     }
 
-    private class AddEstablecimientoTask extends AsyncTask<mdatum.udc.com.m_datum.data.Establecimiento,Void,Boolean> {
+    private class AddEstablecimientoTask extends AsyncTask<mdatum.udc.com.m_datum.database.Establecimiento,Void,Boolean> {
         @Override
         protected Boolean doInBackground(Establecimiento... establecimiento){
-            long result = mDatumDbHelper.saveEstablecimiento(establecimiento[0]);
-            establecimiento[0].setId((int) result);
+            long result = daoSession.insert(establecimiento[0]);
             encuesta.setEstablecimientoId((int) result);
             return result > 0;
         }
@@ -464,6 +474,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
             EncuestadoFragment fragment = new EncuestadoFragment();
             fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                    .addToBackStack("ESTABLECIMIENTO")
                     .commit();
         }
 

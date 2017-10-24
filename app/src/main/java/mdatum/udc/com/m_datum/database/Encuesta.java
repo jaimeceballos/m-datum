@@ -1,10 +1,9 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by jaime on 27/06/17.

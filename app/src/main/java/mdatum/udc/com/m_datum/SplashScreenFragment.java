@@ -3,12 +3,13 @@ package mdatum.udc.com.m_datum;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import mdatum.udc.com.m_datum.data.Encuesta;
+import mdatum.udc.com.m_datum.database.Encuesta;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoFragment;
 
 
@@ -27,6 +28,7 @@ public class SplashScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         View rootView = inflater.inflate(R.layout.fragment_splash_screen, container, false);
 
@@ -42,6 +44,7 @@ public class SplashScreenFragment extends Fragment {
                 EstablecimientoFragment fragment = new EstablecimientoFragment();
                 fragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                        .addToBackStack("SPLASH_SCREEN")
                         .commit();
             }
         });

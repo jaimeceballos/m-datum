@@ -1,14 +1,19 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by jaime on 12/06/17.
  */
 
+@Entity
 public class Establecimiento {
 
-    private int id;
+    @org.greenrobot.greendao.annotation.Id (autoincrement = true)
+    private Long id;
     private String nombre;
     private String nro;
     private String posLatitud;
@@ -17,11 +22,27 @@ public class Establecimiento {
     private int regimenTenenciaId;
     private String regimenOtros;
 
-    public int getId() {
+    @Generated(hash = 541625268)
+    public Establecimiento(Long id, String nombre, String nro, String posLatitud, String posLongitud, String foto, int regimenTenenciaId, String regimenOtros) {
+        this.id = id;
+        this.nombre = nombre;
+        this.nro = nro;
+        this.posLatitud = posLatitud;
+        this.posLongitud = posLongitud;
+        this.foto = foto;
+        this.regimenTenenciaId = regimenTenenciaId;
+        this.regimenOtros = regimenOtros;
+    }
+
+    @Generated(hash = 1125154551)
+    public Establecimiento() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

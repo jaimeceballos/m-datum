@@ -1,24 +1,43 @@
-package mdatum.udc.com.m_datum.data;
+package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by jaime on 29/06/17.
  */
-
+@Entity
 public class Familia {
 
-    private int id;
+    @Id(autoincrement = true)
+    private Long id;
     private int esCasado;
     private int tieneHijos;
     private int cantVarones;
     private int cantMujeres;
 
-    public int getId() {
+    @Generated(hash = 268209188)
+    public Familia(Long id, int esCasado, int tieneHijos, int cantVarones,
+            int cantMujeres) {
+        this.id = id;
+        this.esCasado = esCasado;
+        this.tieneHijos = tieneHijos;
+        this.cantVarones = cantVarones;
+        this.cantMujeres = cantMujeres;
+    }
+
+    @Generated(hash = 2042212105)
+    public Familia() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

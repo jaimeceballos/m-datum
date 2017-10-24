@@ -2,4 +2,6 @@
 <resources>
     <item name="btn_guardar" type="id" />
     <item name="btn_finalizar" type="id" />
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>

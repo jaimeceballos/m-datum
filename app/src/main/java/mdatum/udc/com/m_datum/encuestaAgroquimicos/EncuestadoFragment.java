@@ -16,11 +16,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
-import mdatum.udc.com.m_datum.data.Encuesta;
-import mdatum.udc.com.m_datum.data.Encuestado;
-import mdatum.udc.com.m_datum.data.MDatumDbHelper;
+import mdatum.udc.com.m_datum.database.DaoSession;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.Encuestado;
+import mdatum.udc.com.m_datum.database.MDatumDbHelper;
+import mdatum.udc.com.m_datum.database.Nacionalidad;
+import mdatum.udc.com.m_datum.database.NacionalidadDao;
+import mdatum.udc.com.m_datum.database.NivelInstruccion;
+import mdatum.udc.com.m_datum.database.NivelInstruccionDao;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,9 +49,10 @@ public class EncuestadoFragment extends Fragment {
     private RadioButton rbIncompleto;
     private MDatumDbHelper mDatumDbHelper;
     private Boolean isHabitaChecked = false;
-    private ArrayList<String> opcionesInstruccion;
-    private ArrayList<String> opcionesNacionalidad;
+    private List opcionesInstruccion;
+    private List opcionesNacionalidad;
 
+    private DaoSession daoSession;
 
     public EncuestadoFragment() {
         // Required empty public constructor
@@ -55,6 +64,8 @@ public class EncuestadoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_encuestado,container,false);
 
+        daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();;
+
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         rbHabita = (RadioButton) rootView.findViewById(R.id.rb_habita);
         rbNoHabita = (RadioButton) rootView.findViewById(R.id.rb_no_habita);
@@ -65,20 +76,32 @@ public class EncuestadoFragment extends Fragment {
         rbCompleto = (RadioButton) rootView.findViewById(R.id.rb_completo);
         rbIncompleto = (RadioButton) rootView.findViewById(R.id.rb_incompleto);
         spNivInstruccion = (Spinner) rootView.findViewById(R.id.sp_niv_instruccion);
-        mDatumDbHelper = new MDatumDbHelper(getContext());
-        opcionesInstruccion = mDatumDbHelper.getAllNivelInstruccion();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, opcionesInstruccion);
+
+        NivelInstruccionDao nivelInstruccionDao = daoSession.getNivelInstruccionDao();
+        opcionesInstruccion = nivelInstruccionDao.loadAll();
+        final List<String> instruccion = new ArrayList<>();
+        Iterator<NivelInstruccion> iteratorInstruccion = opcionesInstruccion.iterator();
+        while(iteratorInstruccion.hasNext())
+        {
+            instruccion.add(iteratorInstruccion.next().getDescripcion());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, instruccion);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spNivInstruccion.setAdapter(adapter);
 
-        opcionesNacionalidad = mDatumDbHelper.getAllNacionalidad();
-        ArrayAdapter<String> adapterNacionalidad = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,opcionesNacionalidad);
+        NacionalidadDao nacionalidadDao = daoSession.getNacionalidadDao();
+        opcionesNacionalidad = nacionalidadDao.loadAll();
+        final List<String> nacionalidades = new ArrayList<>();
+        Iterator<Nacionalidad> nacionalidadIterator = opcionesNacionalidad.iterator();
+        while (nacionalidadIterator.hasNext()){
+            nacionalidades.add(nacionalidadIterator.next().getDescripcion());
+        }
+        ArrayAdapter<String> adapterNacionalidad = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,nacionalidades);
         adapterNacionalidad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spNacionalidad.setAdapter(adapterNacionalidad);
 
 
 
-        mDatumDbHelper = new MDatumDbHelper(getContext());
         btnEncuestadoSiguiente = (Button) rootView.findViewById(R.id.btn_encuestado_siguiente);
 
         btnEncuestadoSiguiente.setOnClickListener(new View.OnClickListener() {
@@ -123,27 +146,25 @@ public class EncuestadoFragment extends Fragment {
     private class AddEncuestadoTask extends AsyncTask<Encuestado, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Encuestado... encuestado) {
-            long result = mDatumDbHelper.saveEncuestado(encuestado[0]);
-            encuestado[0].setId((int) result);
+            long result = daoSession.insert(encuestado[0]);
             encuesta.setEncuestadoId((int) result);
             return result > 0;
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
-            //Intent intent;
+
             Bundle bundle = new Bundle();
             bundle.putSerializable("encuesta",encuesta);
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             if (encuestado.getViveEstablecimiento()) {
-                //intent = new Intent(getContext(), FamiliaActivity.class);
                 FamiliaFragment fragment = new FamiliaFragment();
                 fragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.ll_body_content,fragment)
                         .commit();
 
             } else {
-                //intent = new Intent(getContext(), ProduccionActivity.class);
+
                 ProduccionFragment fragment = new ProduccionFragment();
                 fragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.ll_body_content,fragment)
