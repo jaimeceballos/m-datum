@@ -36,7 +36,7 @@ public class ProduccionFragment extends Fragment {
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         rbCubiertoSi = (RadioButton) rootView.findViewById(R.id.rb_cubierto_si);
         rbCubiertoNo = (RadioButton) rootView.findViewById(R.id.rb_agroquimico_no);
-        btnProduccionSiguiente = (Button) rootView.findViewById(R.id.btn_produccion_siguiente);
+        btnProduccionSiguiente = (Button) rootView.findViewById(R.id.btn_agroquimico_siguiente);
         rbCubiertoSi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
