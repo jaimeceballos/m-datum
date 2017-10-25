@@ -18,6 +18,7 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "mdatum.db";
     public static final int DATABASE_VERSION = 1;
 
+    /*
 
     private String createEstablecimiento = "CREATE TABLE "+ EstablecimientoContract.EstablecimientoEntry.TABLE_NAME + "("
             + EstablecimientoContract.EstablecimientoEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -84,14 +85,14 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
     private String createEleccionCultivo = "CREATE TABLE eleccionCultivo(id INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT NOT NULL)";
     private String createEncuestaInvernaculo = "CREATE TABLE encuestaInvernaculo(id INTEGER PRIMARY KEY AUTOINCREMENT, encuestaId INTEGER NOT NULL, invernaculoId INTEGER NOT NULL)";
     private String createEncuestaCultivo = "CREATE TABLE encuestaCultivo(id INTEGER PRIMARY KEY AUTOINCREMENT, encuestaId INTEGER NOT NULL, cultivoId INTEGER NOT NULL)";
-
+*/
     public MDatumDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(createEstablecimiento);
+       /* sqLiteDatabase.execSQL(createEstablecimiento);
         sqLiteDatabase.execSQL(createEncuestado);
         sqLiteDatabase.execSQL(createRegimenTenencia);
         sqLiteDatabase.execSQL(createFamilia);
@@ -113,14 +114,14 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createEleccionCultivo);
         carga(sqLiteDatabase);
         sqLiteDatabase.execSQL(createEncuestaInvernaculo);
-        sqLiteDatabase.execSQL(createEncuestaCultivo);
+        sqLiteDatabase.execSQL(createEncuestaCultivo);*/
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-
+/*
     public Cursor getAllEstablecimientos(){
         return getReadableDatabase()
                 .query(
@@ -510,5 +511,5 @@ public class MDatumDbHelper extends SQLiteOpenHelper {
             db.close();
         }
         return lista;
-    }
+    }*/
 }

@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
-import static mdatum.udc.com.m_datum.database.EncuestadoContract.EncuestadoEntry;
 import org.greenrobot.greendao.annotation.Generated;
 /**
  * Created by jaime on 21/06/17.
@@ -106,17 +105,5 @@ public class Encuestado {
         this.viveEstablecimiento = viveEstablecimiento;
     }
 
-    public ContentValues toContentValues(){
-        ContentValues values = new ContentValues();
 
-        values.put(EncuestadoEntry.NOMBRE, nombre);
-        values.put(EncuestadoEntry.APELLIDO,apellido);
-        values.put(EncuestadoEntry.EDAD,edad);
-        values.put(EncuestadoEntry.NACIONALIDAD, nacionalidadId);
-        values.put(EncuestadoEntry.NIVEL_INSTRUCCION, nivelInstruccionId);
-        values.put(EncuestadoEntry.NIVEL_COMPLETO,nivelCompleto);
-        values.put(EncuestadoEntry.VIVE_ESTABLECIMIENTO,viveEstablecimiento);
-        return values;
-
-    }
 }

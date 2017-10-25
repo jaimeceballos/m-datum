@@ -103,18 +103,7 @@ public class Establecimiento {
     }
 
 
-    public ContentValues toContentValues() {
-
-        ContentValues values = new ContentValues();
-        values.put(EstablecimientoContract.EstablecimientoEntry.NOMBRE, nombre);
-        values.put(EstablecimientoContract.EstablecimientoEntry.NRO,nro);
-        values.put(EstablecimientoContract.EstablecimientoEntry.POS_LATITUD,posLatitud);
-        values.put(EstablecimientoContract.EstablecimientoEntry.POS_LONGITUD,posLongitud);
-        values.put(EstablecimientoContract.EstablecimientoEntry.FOTO,foto);
-        values.put(EstablecimientoContract.EstablecimientoEntry.REGIMEN_TENENCIA, regimenTenenciaId);
-        values.put(EstablecimientoContract.EstablecimientoEntry.REGIMEN_OTROS,regimenOtros);
-        return values;
-    }
+    
 
     public Boolean validar(){
         if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && this.getRegimenTenenciaId() != 6 || (this.getRegimenTenenciaId() == 6 && !this.getRegimenOtros().isEmpty())){

@@ -77,11 +77,5 @@ public class Encuesta implements Serializable {
     }
 
 
-    public ContentValues toContentValues(){
-        ContentValues values = new ContentValues();
-        values.put(EncuestaContract.EncuestaEntry.ESTABLECIMIENTO_ID,"establecimientoId");
-        values.put(EncuestaContract.EncuestaEntry.ENCUESTADO_ID,"encuestadoId");
-        values.put(EncuestaContract.EncuestaEntry.FAMILIA_ID,"familiaId");
-        return values;
-    }
+
 }

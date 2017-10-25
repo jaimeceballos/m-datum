@@ -35,10 +35,5 @@ public class EncuestaInvernaculo {
         this.invernaculoId = invernaculoId;
     }
 
-    public ContentValues toContentValues(){
-        ContentValues values = new ContentValues();
-        values.put(EncuestaInvernaculoContract.EncuestaProduccionBajoCubiertaEntry.ENCUESTA_ID,"encuestaId");
-        values.put(EncuestaInvernaculoContract.EncuestaProduccionBajoCubiertaEntry.INVERNACULO_ID,"invernaculoId");
-        return values;
-    }
+
 }

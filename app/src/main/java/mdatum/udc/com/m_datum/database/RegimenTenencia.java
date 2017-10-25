@@ -46,11 +46,5 @@ public class RegimenTenencia {
         this.descpripcion = descpripcion;
     }
 
-    public ContentValues toContentValues(){
 
-        ContentValues values = new ContentValues();
-
-        values.put(RegimenTenenciaContract.RegimenTenenciaEntry.DESCRIPCION,descpripcion);
-        return values;
-    }
 }

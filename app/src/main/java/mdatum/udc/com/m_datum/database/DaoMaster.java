@@ -27,6 +27,14 @@ public class DaoMaster extends AbstractDaoMaster {
         NivelInstruccionDao.createTable(db, ifNotExists);
         NacionalidadDao.createTable(db, ifNotExists);
         FamiliaDao.createTable(db, ifNotExists);
+        AnioEstructuraDao.createTable(db, ifNotExists);
+        MaterialEstructuraDao.createTable(db, ifNotExists);
+        InvernaculoDao.createTable(db, ifNotExists);
+        CultivoDao.createTable(db, ifNotExists);
+        EleccionCultivoDao.createTable(db, ifNotExists);
+        EspecieDao.createTable(db, ifNotExists);
+        TipoCultivoDao.createTable(db, ifNotExists);
+        TipoProduccionDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -37,6 +45,14 @@ public class DaoMaster extends AbstractDaoMaster {
         NivelInstruccionDao.dropTable(db, ifExists);
         NacionalidadDao.dropTable(db, ifExists);
         FamiliaDao.dropTable(db, ifExists);
+        AnioEstructuraDao.dropTable(db, ifExists);
+        MaterialEstructuraDao.dropTable(db, ifExists);
+        InvernaculoDao.dropTable(db, ifExists);
+        CultivoDao.dropTable(db, ifExists);
+        EleccionCultivoDao.dropTable(db, ifExists);
+        EspecieDao.dropTable(db, ifExists);
+        TipoCultivoDao.dropTable(db, ifExists);
+        TipoProduccionDao.dropTable(db, ifExists);
     }
 
     /**
@@ -61,6 +77,14 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(NivelInstruccionDao.class);
         registerDaoClass(NacionalidadDao.class);
         registerDaoClass(FamiliaDao.class);
+        registerDaoClass(AnioEstructuraDao.class);
+        registerDaoClass(MaterialEstructuraDao.class);
+        registerDaoClass(InvernaculoDao.class);
+        registerDaoClass(CultivoDao.class);
+        registerDaoClass(EleccionCultivoDao.class);
+        registerDaoClass(EspecieDao.class);
+        registerDaoClass(TipoCultivoDao.class);
+        registerDaoClass(TipoProduccionDao.class);
     }
 
     public DaoSession newSession() {

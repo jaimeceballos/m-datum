@@ -2,22 +2,43 @@ package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by jaime on 01/07/17.
  */
 
+@Entity
 public class Invernaculo {
-    private int id;
+
+    @Id(autoincrement = true)
+    private Long id;
     private int cantidadModulos;
     private int superficieUnitaria;
     private int materialEstructuraId;
     private int anioConstruccionId;
 
-    public int getId() {
+    @Generated(hash = 393118165)
+    public Invernaculo(Long id, int cantidadModulos, int superficieUnitaria, int materialEstructuraId,
+            int anioConstruccionId) {
+        this.id = id;
+        this.cantidadModulos = cantidadModulos;
+        this.superficieUnitaria = superficieUnitaria;
+        this.materialEstructuraId = materialEstructuraId;
+        this.anioConstruccionId = anioConstruccionId;
+    }
+
+    @Generated(hash = 1458552915)
+    public Invernaculo() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,13 +74,6 @@ public class Invernaculo {
         this.anioConstruccionId = anioConstruccionId;
     }
 
-   public ContentValues toContentValues(){
-       ContentValues values = new ContentValues();
-       values.put(InvernaculoContract.InvernaculoEntry.CANTIDAD_MODULOS,cantidadModulos);
-       values.put(InvernaculoContract.InvernaculoEntry.SUPERFICIE_UNITARIA,superficieUnitaria);
-       values.put(InvernaculoContract.InvernaculoEntry.MATERIAL_ESTRUCTURA_ID,materialEstructuraId);
-       values.put(InvernaculoContract.InvernaculoEntry.ANIO_CONSTRUCCION_ID,anioConstruccionId);
-       return values;
-   }
+
 
 }

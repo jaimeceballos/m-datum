@@ -84,5 +84,100 @@ public class MDatumOpenHelper extends DaoMaster.OpenHelper {
                 NivelInstruccionDao.Properties.Descripcion.columnName +
                 ") VALUES('Universitario')");
 
+        //Carga Inicial de referencias material estructura
+        db.execSQL("INSERT INTO "+ MaterialEstructuraDao.TABLENAME + " (" +
+                MaterialEstructuraDao.Properties.Descripcion.columnName +
+                ") VALUES('Madera')");
+        db.execSQL("INSERT INTO "+ MaterialEstructuraDao.TABLENAME + " (" +
+                MaterialEstructuraDao.Properties.Descripcion.columnName +
+                ") VALUES('Hierro')");
+
+        //Carga Inicial de referencias anio de estructura
+        db.execSQL("INSERT INTO "+ AnioEstructuraDao.TABLENAME + " (" +
+                AnioEstructuraDao.Properties.Descripcion.columnName +
+                ") VALUES('mas de 5 años')");
+        db.execSQL("INSERT INTO "+ AnioEstructuraDao.TABLENAME + " (" +
+                AnioEstructuraDao.Properties.Descripcion.columnName +
+                ") VALUES('Menos de 5 años, mas de 3 años')");
+        db.execSQL("INSERT INTO "+ AnioEstructuraDao.TABLENAME + " (" +
+                AnioEstructuraDao.Properties.Descripcion.columnName +
+                ") VALUES('Menos de 3 años, mas de 1 año')");
+        db.execSQL("INSERT INTO "+ AnioEstructuraDao.TABLENAME + " (" +
+                AnioEstructuraDao.Properties.Descripcion.columnName +
+                ") VALUES('Menos de 1 año')");
+
+        //carga inicial tipo cultivo
+        db.execSQL("INSERT INTO "+ TipoCultivoDao.TABLENAME + " (" +
+                TipoCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Campo')");
+        db.execSQL("INSERT INTO "+ TipoCultivoDao.TABLENAME + " (" +
+                TipoCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Bajo Cubierta')");
+
+        //carga inicial Especie
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Lechuga')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Espinaca')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Acelga')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Radicheta')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Albahaca')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Perejil')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Cebolla')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Apio')");
+        db.execSQL("INSERT INTO "+ EspecieDao.TABLENAME + " (" +
+                EspecieDao.Properties.Descripcion.columnName +
+                ") VALUES('Escarola')");
+
+        //carga inicial tipo de produccion
+        db.execSQL("INSERT INTO "+ TipoProduccionDao.TABLENAME + " (" +
+                TipoProduccionDao.Properties.Descripcion.columnName +
+                ") VALUES('Atado')");
+        db.execSQL("INSERT INTO "+ TipoProduccionDao.TABLENAME + " (" +
+                TipoProduccionDao.Properties.Descripcion.columnName +
+                ") VALUES('Bolsa')");
+        db.execSQL("INSERT INTO "+ TipoProduccionDao.TABLENAME + " (" +
+                TipoProduccionDao.Properties.Descripcion.columnName +
+                ") VALUES('Jaula')");
+        db.execSQL("INSERT INTO "+ TipoProduccionDao.TABLENAME + " (" +
+                TipoProduccionDao.Properties.Descripcion.columnName +
+                ") VALUES('Otras')");
+
+        //carga inicial Eleccion Cultivo
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Rotacion')");
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Habitualidad')");
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Seguridad de venta')");
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Por Contrato')");
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Precio Anterior')");
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Precio Futuro')");
+        db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
+                EleccionCultivoDao.Properties.Descripcion.columnName +
+                ") VALUES('Otro')");
     }
 }

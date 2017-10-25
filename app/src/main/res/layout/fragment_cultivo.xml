@@ -25,7 +25,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
+    <FrameLayout
+        android:id="@+id/fl_cultivo_nuevo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_cultivo"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cultivo_siguiente"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
+    </FrameLayout>
 
     <Button
         android:id="@+id/btn_cultivo_siguiente"
@@ -34,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
 

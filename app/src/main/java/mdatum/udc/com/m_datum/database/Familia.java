@@ -73,12 +73,5 @@ public class Familia {
         this.cantMujeres = cantMujeres;
     }
 
-    public ContentValues toContentValues(){
-        ContentValues values = new ContentValues();
-        values.put(FamiliaContract.FamiliaEntry.ES_CASADO,esCasado);
-        values.put(FamiliaContract.FamiliaEntry.TIENE_HIJOS,tieneHijos);
-        values.put(FamiliaContract.FamiliaEntry.CANTIDAD_VARONES,cantVarones);
-        values.put(FamiliaContract.FamiliaEntry.CANTIDAD_MUJERES,cantMujeres);
-        return values;
-    }
+
 }

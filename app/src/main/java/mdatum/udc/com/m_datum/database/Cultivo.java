@@ -2,13 +2,18 @@ package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by jaime on 29/06/17.
  */
-
+@Entity
 public class Cultivo {
 
-    private int id;
+    @Id(autoincrement = true)
+    private Long id;
     private int especieId;
     private int tipoId;
     private int nroSiembra;
@@ -22,11 +27,35 @@ public class Cultivo {
     private int eleccionCultivoId;
     private String eleccionEspecificar;
 
-    public int getId() {
+    @Generated(hash = 1772569774)
+    public Cultivo(Long id, int especieId, int tipoId, int nroSiembra, int mesSiembra,
+            int surcos, int distancias, int largo, int superficieSembrada,
+            int superficieMedidaId, int tipoProduccionId, int eleccionCultivoId,
+            String eleccionEspecificar) {
+        this.id = id;
+        this.especieId = especieId;
+        this.tipoId = tipoId;
+        this.nroSiembra = nroSiembra;
+        this.mesSiembra = mesSiembra;
+        this.surcos = surcos;
+        this.distancias = distancias;
+        this.largo = largo;
+        this.superficieSembrada = superficieSembrada;
+        this.superficieMedidaId = superficieMedidaId;
+        this.tipoProduccionId = tipoProduccionId;
+        this.eleccionCultivoId = eleccionCultivoId;
+        this.eleccionEspecificar = eleccionEspecificar;
+    }
+
+    @Generated(hash = 1860368354)
+    public Cultivo() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -126,21 +155,5 @@ public class Cultivo {
         this.eleccionEspecificar = eleccionEspecificar;
     }
 
-    public ContentValues toContentValues(){
-        ContentValues values = new ContentValues();
 
-        values.put(CultivoContract.CultivoEntry.ESPECIE_ID,especieId);
-        values.put(CultivoContract.CultivoEntry.TIPO_ID,tipoId);
-        values.put(CultivoContract.CultivoEntry.NRO_SIEMBRA,nroSiembra);
-        values.put(CultivoContract.CultivoEntry.MES_SIEMBRA,mesSiembra);
-        values.put(CultivoContract.CultivoEntry.SURCOS,surcos);
-        values.put(CultivoContract.CultivoEntry.DISTANCIAS,distancias);
-        values.put(CultivoContract.CultivoEntry.LARGO,largo);
-        values.put(CultivoContract.CultivoEntry.SUPERFICIE_SEMBRADA,superficieSembrada);
-        values.put(CultivoContract.CultivoEntry.SUPERFICIE_MEDIDA_ID,superficieMedidaId);
-        values.put(CultivoContract.CultivoEntry.TIPO_PRODUCCION_ID,tipoProduccionId);
-        values.put(CultivoContract.CultivoEntry.ELECCION_CULTIVO_ID,eleccionCultivoId);
-        values.put(CultivoContract.CultivoEntry.ELECCION_ESPECIFICAR,eleccionEspecificar);
-        return values;
-    }
 }

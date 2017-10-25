@@ -15,25 +15,38 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.database.AnioEstructura;
+import mdatum.udc.com.m_datum.database.AnioEstructuraDao;
+import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.Encuesta;
 import mdatum.udc.com.m_datum.database.Invernaculo;
 import mdatum.udc.com.m_datum.database.MDatumDbHelper;
+import mdatum.udc.com.m_datum.database.MaterialEstructura;
+import mdatum.udc.com.m_datum.database.MaterialEstructuraDao;
 
 
 public class InvernaculoFragment extends Fragment {
 
-    Encuesta encuesta;
-    EditText etCantModulos;
-    EditText etSupUnit;
-    Spinner spMatEstruct;
-    Spinner spAnioConstruct;
-    Button btnAgregarOtro;
-    Invernaculo invernaculo;
-    MDatumDbHelper mDatumDbHelper;
-    ArrayList<String> opcionesMaterial;
-    ArrayList<String> opcionesAnio;
+    private Encuesta encuesta;
+    private EditText etCantModulos;
+    private EditText etSupUnit;
+    private Spinner spMatEstruct;
+    private Spinner spAnioConstruct;
+    private Button btnAgregarOtro;
+    private Invernaculo invernaculo;
+    private List opcionesMaterial;
+    private List opcionesAnio;
+
+    private DaoSession daoSession;
+    private List<String> materiales;
+    private List<String> anios;
+
+
     public InvernaculoFragment() {
         // Required empty public constructor
     }
@@ -47,11 +60,24 @@ public class InvernaculoFragment extends Fragment {
         if(bundle != null){
             encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         }
-        mDatumDbHelper = new MDatumDbHelper(getContext());
 
-        opcionesMaterial = mDatumDbHelper.getAllEstructura();
-        opcionesAnio = mDatumDbHelper.getAllAnioEstructura();
+        daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
 
+        MaterialEstructuraDao materialEstructuraDao = daoSession.getMaterialEstructuraDao();
+        opcionesMaterial = materialEstructuraDao.loadAll();
+        materiales = new ArrayList<>();
+        Iterator<MaterialEstructura> materialEstructuraIterator = opcionesMaterial.iterator();
+        while (materialEstructuraIterator.hasNext()){
+            materiales.add(materialEstructuraIterator.next().getDescripcion());
+        }
+
+        AnioEstructuraDao anioEstructuraDao = daoSession.getAnioEstructuraDao();
+        opcionesAnio = anioEstructuraDao.loadAll();
+        anios = new ArrayList<>();
+        Iterator<AnioEstructura> anioEstructuraIterator = opcionesAnio.iterator();
+        while (anioEstructuraIterator.hasNext()){
+            anios.add(anioEstructuraIterator.next().getDescripcion());
+        }
 
 
 
@@ -65,15 +91,15 @@ public class InvernaculoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_invernaculo, container, false);
 
         etCantModulos = (EditText) rootView.findViewById(R.id.et_cant_modulos);
-        //etSupUnit = (EditText) rootView.findViewById(R.id.et_sup_unit);
+        etSupUnit = (EditText) rootView.findViewById(R.id.et_superficie);
         spMatEstruct = (Spinner) rootView.findViewById(R.id.sp_mat_estruct);
         spAnioConstruct = (Spinner) rootView.findViewById(R.id.sp_anio_construct);
 
-        ArrayAdapter<String> materialAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesMaterial);
+        ArrayAdapter<String> materialAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,materiales);
         materialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spMatEstruct.setAdapter(materialAdapter);
 
-        ArrayAdapter<String> anioEstructuraAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesAnio);
+        ArrayAdapter<String> anioEstructuraAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,anios);
         anioEstructuraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spAnioConstruct.setAdapter(anioEstructuraAdapter);
 
@@ -87,7 +113,6 @@ public class InvernaculoFragment extends Fragment {
                 invernaculo.setSuperficieUnitaria(Integer.parseInt(etSupUnit.getText().toString()));
                 invernaculo.setMaterialEstructuraId(spMatEstruct.getSelectedItemPosition());
                 invernaculo.setAnioConstruccionId(spAnioConstruct.getSelectedItemPosition());
-                mDatumDbHelper = new MDatumDbHelper(getContext());
 
                 Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);
 
@@ -111,8 +136,7 @@ public class InvernaculoFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Invernaculo... invernaculos) {
-            long result = mDatumDbHelper.saveInvernaculo(invernaculos[0]);
-            invernaculos[0].setId((int)result);
+            long result = daoSession.insert(invernaculos[0]);
             encuesta.setInvernaderoId((int)result);
             return result > 0;
         }

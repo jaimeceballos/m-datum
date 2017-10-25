@@ -39,7 +39,7 @@
     <string name="tv_titulo_produccion">Producción</string>
     <string name="tv_produce_invernadero">Produce bajo cubierta?</string>
     <string name="tv_mat_estruct">Material de la estructura</string>
-    <string name="tv_anio_const">Año de construcción</string>
+    <string name="tv_anio_cons">Año de construcción</string>
     <string name="tv_mts2">mts2</string>
     <string name="tv_producto">Producto</string>
     <string name="tv_plaga">Plaga</string>

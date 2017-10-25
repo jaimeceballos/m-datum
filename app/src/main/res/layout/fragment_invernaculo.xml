@@ -64,12 +64,12 @@
 
     <TextView
         android:id="@+id/tv_anio_const"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/tv_anio_const"
+        android:text="@string/tv_anio_cons"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/til_superficie"
-        tools:layout_editor_absoluteX="0dp" />
+         />
 
     <Spinner
         android:id="@+id/sp_anio_construct"
@@ -84,14 +84,12 @@
 
     <TextView
         android:id="@+id/tv_mat_estruct"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/tv_mat_estruct"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/sp_anio_construct"
-        app:layout_constrainLeft_toLeftOf="tv_anio_const"
-
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintLeft_toLeftOf="@+id/tv_anio_const"/>
 
     <Spinner
         android:id="@+id/sp_mat_estruct"
