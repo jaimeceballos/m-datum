@@ -1,109 +1,216 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
-import android.content.Context;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.database.Agroquimicos;
+import mdatum.udc.com.m_datum.database.Asesoramiento;
+import mdatum.udc.com.m_datum.database.AsesoramientoDao;
+import mdatum.udc.com.m_datum.database.DaoSession;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.FactorClimatico;
+import mdatum.udc.com.m_datum.database.FactorClimaticoDao;
+import mdatum.udc.com.m_datum.database.TripleLavado;
+import mdatum.udc.com.m_datum.database.TripleLavadoDao;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AgroquimicoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AgroquimicoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AgroquimicoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Encuesta encuesta;
+    private DaoSession daoSession;
+    private ConstraintLayout clUsa;
+    private TextInputLayout tilAsesoramientoOtro;
+    private RadioButton rbAgroquimicoSi;
+    private RadioButton rbAgroquimicoNo;
+    private Spinner spFactorClimatico;
+    private Spinner spTripleLavado;
+    private Spinner spAsesoramiento;
+    private List factorClimaticoList;
+    private ArrayList<String> opcionesClima;
+    private List tripleLavadoList;
+    private ArrayList<String> opcionesTripleLavado;
+    private List asesoramientoList;
+    private ArrayList<String> opcionesAsesoramiento;
+    private EditText etAsesoramientoOtro;
+    private Button btnSiguiente;
 
-    private OnFragmentInteractionListener mListener;
 
     public AgroquimicoFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AgroquimicoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AgroquimicoFragment newInstance(String param1, String param2) {
-        AgroquimicoFragment fragment = new AgroquimicoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agroquimico, container, false);
+
+
+        View rootView = inflater.inflate(R.layout.fragment_agroquimico, container, false);
+
+        encuesta                = (Encuesta) getArguments().getSerializable("encuesta");
+        daoSession              = ((MDatumController)getActivity().getApplication()).getDaoSession();
+
+        clUsa                   = (ConstraintLayout) rootView.findViewById(R.id.cl_usa);
+        tilAsesoramientoOtro    = (TextInputLayout) rootView.findViewById(R.id.til_asesoramiento_otro);
+
+        clUsa.setVisibility(View.GONE);
+        tilAsesoramientoOtro.setVisibility(View.GONE);
+
+        rbAgroquimicoSi = (RadioButton) rootView.findViewById(R.id.rb_agroquimico_si);
+        rbAgroquimicoNo = (RadioButton) rootView.findViewById(R.id.rb_agroquimico_no);
+
+        rbAgroquimicoSi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(rbAgroquimicoSi.isChecked()){
+                    clUsa.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        rbAgroquimicoNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(rbAgroquimicoNo.isChecked()){
+                    clUsa.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        spFactorClimatico                                   = (Spinner) rootView.findViewById(R.id.sp_factor_climatico);
+        FactorClimaticoDao factorClimaticoDao               = daoSession.getFactorClimaticoDao();
+        factorClimaticoList                                 = factorClimaticoDao.loadAll();
+        Iterator<FactorClimatico> factorClimaticoIterator   = factorClimaticoList.iterator();
+        opcionesClima                                       = new ArrayList<>();
+        while (factorClimaticoIterator.hasNext()){
+            opcionesClima.add(factorClimaticoIterator.next().getDescripcion());
+        }
+        ArrayAdapter<String> adapterClima = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesClima);
+        adapterClima.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spFactorClimatico.setAdapter(adapterClima);
+
+
+        spTripleLavado                                  = (Spinner) rootView.findViewById(R.id.sp_triple_lavado);
+        TripleLavadoDao tripleLavadoDao                 = daoSession.getTripleLavadoDao();
+        tripleLavadoList                                = tripleLavadoDao.loadAll();
+        Iterator<TripleLavado> tripleLavadoIterator     = tripleLavadoList.iterator();
+        opcionesTripleLavado                            = new ArrayList<>();
+        while (tripleLavadoIterator.hasNext()){
+            opcionesTripleLavado.add(tripleLavadoIterator.next().getDescripcion());
+        }
+        ArrayAdapter<String> adapterTripleLavado = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesTripleLavado);
+        adapterTripleLavado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spTripleLavado.setAdapter(adapterTripleLavado);
+
+
+        spAsesoramiento                                 = (Spinner) rootView.findViewById(R.id.sp_asesoramiento);
+        AsesoramientoDao asesoramientoDao               = daoSession.getAsesoramientoDao();
+        asesoramientoList                               = asesoramientoDao.loadAll();
+        Iterator<Asesoramiento> asesoramientoIterator   = asesoramientoList.iterator();
+        opcionesAsesoramiento                           = new ArrayList<>();
+        while (asesoramientoIterator.hasNext()){
+            opcionesAsesoramiento.add(asesoramientoIterator.next().getDescripcion());
+        }
+        ArrayAdapter<String> adapterAsesoramiento = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,opcionesAsesoramiento);
+        adapterAsesoramiento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spAsesoramiento.setAdapter(adapterAsesoramiento);
+        spAsesoramiento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapterView.getItemAtPosition(i).toString().equals("Otro")){
+                    tilAsesoramientoOtro.setVisibility(View.VISIBLE);
+                }else{
+                    tilAsesoramientoOtro.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        etAsesoramientoOtro = (EditText) rootView.findViewById(R.id.et_asesoramiento_otro);
+
+        btnSiguiente = (Button) rootView.findViewById(R.id.btn_agroquimico_siguiente);
+
+        btnSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle argumentos = new Bundle();
+                argumentos.putSerializable("encuesta",encuesta);
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                if(rbAgroquimicoNo.isChecked()){
+                    FinalEncuestaFragment finalEncuestaFragment = new FinalEncuestaFragment();
+                    finalEncuestaFragment.setArguments(argumentos);
+                    fragmentTransaction.replace(R.id.ll_body_content,finalEncuestaFragment)
+                            .commit();
+                }else{
+                    Agroquimicos agroquimicos = new Agroquimicos();
+                    agroquimicos.setUsa(true);
+                    agroquimicos.setFactor_climatico(spFactorClimatico.getSelectedItemId());
+                    agroquimicos.setTriple_lavado(spTripleLavado.getSelectedItemId());
+                    agroquimicos.setAsesoramiento(spAsesoramiento.getSelectedItemId());
+                    agroquimicos.setAsesoramiento_otro(etAsesoramientoOtro.getText().toString());
+                    new AgroquimicoFragment.AddAgroquimicoTask().execute(agroquimicos);
+                }
+
+            }
+        });
+
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+    private class AddAgroquimicoTask extends  AsyncTask<Agroquimicos,Void,Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Agroquimicos... agroquimicos) {
+            Long result = daoSession.insert(agroquimicos[0]);
+            encuesta.setAgroquimicoId(result);
+            daoSession.update(encuesta);
+            return result > 0;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("encuesta",encuesta);
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            AgroquimicoUsadoBaseFragment fragment = new AgroquimicoUsadoBaseFragment();
+            fragment.setArguments(bundle);
+            fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                    .commit();
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

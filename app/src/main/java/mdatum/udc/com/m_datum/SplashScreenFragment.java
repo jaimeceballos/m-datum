@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import mdatum.udc.com.m_datum.database.Encuesta;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoFragment;
 

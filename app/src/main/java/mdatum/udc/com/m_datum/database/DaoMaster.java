@@ -35,6 +35,15 @@ public class DaoMaster extends AbstractDaoMaster {
         EspecieDao.createTable(db, ifNotExists);
         TipoCultivoDao.createTable(db, ifNotExists);
         TipoProduccionDao.createTable(db, ifNotExists);
+        FactorClimaticoDao.createTable(db, ifNotExists);
+        AsesoramientoDao.createTable(db, ifNotExists);
+        TripleLavadoDao.createTable(db, ifNotExists);
+        AgroquimicosDao.createTable(db, ifNotExists);
+        EncuestaDao.createTable(db, ifNotExists);
+        EncuestaInvernaculoDao.createTable(db, ifNotExists);
+        EncuestaCultivoDao.createTable(db, ifNotExists);
+        AgroquimicoUsadoDao.createTable(db, ifNotExists);
+        EncuestaAgroquimicoUsadoDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -53,6 +62,15 @@ public class DaoMaster extends AbstractDaoMaster {
         EspecieDao.dropTable(db, ifExists);
         TipoCultivoDao.dropTable(db, ifExists);
         TipoProduccionDao.dropTable(db, ifExists);
+        FactorClimaticoDao.dropTable(db, ifExists);
+        AsesoramientoDao.dropTable(db, ifExists);
+        TripleLavadoDao.dropTable(db, ifExists);
+        AgroquimicosDao.dropTable(db, ifExists);
+        EncuestaDao.dropTable(db, ifExists);
+        EncuestaInvernaculoDao.dropTable(db, ifExists);
+        EncuestaCultivoDao.dropTable(db, ifExists);
+        AgroquimicoUsadoDao.dropTable(db, ifExists);
+        EncuestaAgroquimicoUsadoDao.dropTable(db, ifExists);
     }
 
     /**
@@ -85,6 +103,15 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(EspecieDao.class);
         registerDaoClass(TipoCultivoDao.class);
         registerDaoClass(TipoProduccionDao.class);
+        registerDaoClass(FactorClimaticoDao.class);
+        registerDaoClass(AsesoramientoDao.class);
+        registerDaoClass(TripleLavadoDao.class);
+        registerDaoClass(AgroquimicosDao.class);
+        registerDaoClass(EncuestaDao.class);
+        registerDaoClass(EncuestaInvernaculoDao.class);
+        registerDaoClass(EncuestaCultivoDao.class);
+        registerDaoClass(AgroquimicoUsadoDao.class);
+        registerDaoClass(EncuestaAgroquimicoUsadoDao.class);
     }
 
     public DaoSession newSession() {

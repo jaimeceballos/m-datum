@@ -60,6 +60,14 @@ public class CultivoFragment extends Fragment {
         btnFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle argumentos = new Bundle();
+                argumentos.putSerializable("encuesta",encuesta);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                AgroquimicoFragment fragmento = new AgroquimicoFragment();
+                fragmento.setArguments(argumentos);
+                transaction.replace(R.id.ll_body_content,fragmento)
+                        .addToBackStack("AGROQUIMICO")
+                        .commit();
 
             }
         });

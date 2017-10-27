@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import java.util.ArrayList;
+
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.database.Encuesta;
 
@@ -21,7 +23,6 @@ public class ProduccionFragment extends Fragment {
     private RadioButton rbCubiertoSi, rbCubiertoNo;
     private Button btnProduccionSiguiente;
     private Encuesta encuesta;
-
 
     public ProduccionFragment() {
         // Required empty public constructor
@@ -37,6 +38,7 @@ public class ProduccionFragment extends Fragment {
         rbCubiertoSi = (RadioButton) rootView.findViewById(R.id.rb_cubierto_si);
         rbCubiertoNo = (RadioButton) rootView.findViewById(R.id.rb_agroquimico_no);
         btnProduccionSiguiente = (Button) rootView.findViewById(R.id.btn_agroquimico_siguiente);
+
         rbCubiertoSi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -56,10 +58,7 @@ public class ProduccionFragment extends Fragment {
         btnProduccionSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent cultivo = new Intent(view.getContext(), CultivoActivity.class);
-                encuesta = (Encuesta) getIntent().getExtras().getSerializable("encuesta");
-                cultivo.putExtra("encuesta",encuesta);
-                startActivity(cultivo);*/
+
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("encuesta",encuesta);
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

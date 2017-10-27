@@ -12,27 +12,34 @@
 
     <TextView
         android:id="@+id/titulo_agroquimico_usado"
-        android:text="@string/tv_titulo_agroquimico_usado"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="wrap_content" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/tv_titulo_agroquimico_usado"
+        android:textSize="24sp"
+        android:textAlignment="center"/>
 
-
-
-
-
-    <Button
-        android:id="@+id/btn_establecimiento_siguiente"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:text="@string/btn_siguiente"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_usado"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_agroquimico_usado"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_finalizar"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cl_usado"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/btn_finalizar"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
 
 </android.support.constraint.ConstraintLayout>

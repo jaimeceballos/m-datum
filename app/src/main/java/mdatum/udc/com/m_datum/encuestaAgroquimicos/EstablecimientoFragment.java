@@ -57,12 +57,11 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
     private Establecimiento establecimiento = new Establecimiento();
     private Encuesta encuesta;
-
     private DaoSession daoSession;
     //variable donde se genera el nombre de archivo de la imagen capturada
     private String name = "";
 
-    List opciones;
+    private List opciones;
     private static final String LOGTAG = "android-localizacion";
 
     //variable para la peticion de permiso de localizacion
@@ -462,7 +461,8 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
         @Override
         protected Boolean doInBackground(Establecimiento... establecimiento){
             long result = daoSession.insert(establecimiento[0]);
-            encuesta.setEstablecimientoId((int) result);
+            encuesta.setEstablecimientoId(result);
+            long idEncuesta = daoSession.insert(encuesta);
             return result > 0;
         }
 

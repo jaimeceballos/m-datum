@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,8 @@ public class EncuestadoFragment extends Fragment {
     private List opcionesNacionalidad;
 
     private DaoSession daoSession;
+
+
 
     public EncuestadoFragment() {
         // Required empty public constructor
@@ -147,7 +150,8 @@ public class EncuestadoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Encuestado... encuestado) {
             long result = daoSession.insert(encuestado[0]);
-            encuesta.setEncuestadoId((int) result);
+            encuesta.setEncuestadoId(result);
+            daoSession.update(encuesta);
             return result > 0;
         }
 

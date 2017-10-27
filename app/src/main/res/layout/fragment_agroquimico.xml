@@ -68,96 +68,101 @@
             />
     </RadioGroup>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_cuantos_años"
-        android:layout_width="197dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_usa"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_usa_agroquimico"
+        app:layout_constraintTop_toBottomOf="@+id/rg_usa_agroquimico"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-
+        app:layout_constraintVertical_bias="0.0"
         >
 
-        <EditText
-            android:id="@+id/et_cuantos_años"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+
+
+        <TextView
+            android:id="@+id/tv_factor_climatico"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/tv_factor_climatico"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/et_cuantos_años" />
+            app:layout_constraintRight_toLeftOf="@+id/sp_factor_climatico"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
+
+        <Spinner
+            android:id="@+id/sp_factor_climatico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_factor_climatico"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_factor_climatico"
+            android:spinnerMode="dialog"
+            />
+
+        <TextView
+            android:id="@+id/tv_triple_lavado"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/tv_triple_lavado"
+            app:layout_constraintTop_toBottomOf="@+id/tv_factor_climatico"
+            app:layout_constraintRight_toLeftOf="@+id/sp_triple_lavado"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
+
+
+        <Spinner
+            android:id="@+id/sp_triple_lavado"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/sp_factor_climatico"
+            app:layout_constraintLeft_toRightOf="@+id/tv_triple_lavado"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_triple_lavado"
+            android:spinnerMode="dialog"
+            />
+
+        <TextView
+            android:id="@+id/tv_asesoramiento"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/tv_asesoramiento"
+            app:layout_constraintTop_toBottomOf="@+id/tv_triple_lavado"
+            app:layout_constraintRight_toLeftOf="@+id/sp_asesoramiento"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <Spinner
+            android:id="@+id/sp_asesoramiento"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:layout_constraintTop_toBottomOf="@+id/sp_triple_lavado"
+            app:layout_constraintLeft_toRightOf="@+id/tv_asesoramiento"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_asesoramiento"
+            android:spinnerMode="dialog"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_asesoramiento_otro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cl_usa"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:hint="@string/et_especificar">
+        <EditText
+            android:id="@+id/et_asesoramiento_otro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tv_factor_climatico"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="@string/tv_factor_climatico"
-        app:layout_constraintTop_toBottomOf="@+id/til_cuantos_años"
-        app:layout_constraintRight_toLeftOf="@+id/sp_factor_climatico"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        />
-
-    <Spinner
-        android:id="@+id/sp_factor_climatico"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/til_cuantos_años"
-        app:layout_constraintLeft_toRightOf="@+id/tv_factor_climatico"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_factor_climatico"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_factor_climatico"
-     />
-
-    <TextView
-        android:id="@+id/tv_triple_lavado"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="@string/tv_triple_lavado"
-        app:layout_constraintTop_toBottomOf="@+id/tv_factor_climatico"
-        app:layout_constraintRight_toLeftOf="@+id/sp_triple_lavado"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        />
-
-
-    <Spinner
-        android:id="@+id/sp_triple_lavado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/sp_factor_climatico"
-        app:layout_constraintLeft_toRightOf="@+id/tv_triple_lavado"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_triple_lavado"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_triple_lavado"
-
-        />
-
-    <TextView
-        android:id="@+id/tv_asesoramiento"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="@string/tv_asesoramiento"
-        app:layout_constraintTop_toBottomOf="@+id/tv_triple_lavado"
-        app:layout_constraintRight_toLeftOf="@+id/sp_asesoramiento"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <Spinner
-        android:id="@+id/sp_asesoramiento"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        app:layout_constraintTop_toBottomOf="@+id/sp_triple_lavado"
-        app:layout_constraintLeft_toRightOf="@+id/tv_asesoramiento"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_asesoramiento"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_asesoramiento" />
 
     <Button
         android:id="@+id/btn_agroquimico_siguiente"

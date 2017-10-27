@@ -179,5 +179,50 @@ public class MDatumOpenHelper extends DaoMaster.OpenHelper {
         db.execSQL("INSERT INTO "+ EleccionCultivoDao.TABLENAME + " (" +
                 EleccionCultivoDao.Properties.Descripcion.columnName +
                 ") VALUES('Otro')");
+
+        //carga inicial Asesoramiento
+        db.execSQL("INSERT INTO "+ AsesoramientoDao.TABLENAME + " (" +
+                AsesoramientoDao.Properties.Descripcion.columnName +
+                ") VALUES('Agronomo Particular')");
+        db.execSQL("INSERT INTO "+ AsesoramientoDao.TABLENAME + " (" +
+                AsesoramientoDao.Properties.Descripcion.columnName +
+                ") VALUES('CORFO')");
+        db.execSQL("INSERT INTO "+ AsesoramientoDao.TABLENAME + " (" +
+                AsesoramientoDao.Properties.Descripcion.columnName +
+                ") VALUES('INTA')");
+        db.execSQL("INSERT INTO "+ AsesoramientoDao.TABLENAME + " (" +
+                AsesoramientoDao.Properties.Descripcion.columnName +
+                ") VALUES('Un vecino/Conocido')");
+        db.execSQL("INSERT INTO "+ AsesoramientoDao.TABLENAME + " (" +
+                AsesoramientoDao.Properties.Descripcion.columnName +
+                ") VALUES('Nadie')");
+        db.execSQL("INSERT INTO "+ AsesoramientoDao.TABLENAME + " (" +
+                AsesoramientoDao.Properties.Descripcion.columnName +
+                ") VALUES('Otro')");
+
+        //carga Inicial Factor Climatico
+        db.execSQL("INSERT INTO "+ FactorClimaticoDao.TABLENAME + " (" +
+                FactorClimaticoDao.Properties.Descripcion.columnName +
+                ") VALUES('Viento')");
+        db.execSQL("INSERT INTO "+ FactorClimaticoDao.TABLENAME + " (" +
+                FactorClimaticoDao.Properties.Descripcion.columnName +
+                ") VALUES('Luvia')");
+        db.execSQL("INSERT INTO "+ FactorClimaticoDao.TABLENAME + " (" +
+                FactorClimaticoDao.Properties.Descripcion.columnName +
+                ") VALUES('Viento y Lluvia')");
+        db.execSQL("INSERT INTO "+ FactorClimaticoDao.TABLENAME + " (" +
+                FactorClimaticoDao.Properties.Descripcion.columnName +
+                ") VALUES('Ninguno')");
+
+        //Carga Inicial Triple Lavado
+        db.execSQL("INSERT INTO "+ TripleLavadoDao.TABLENAME + " (" +
+                TripleLavadoDao.Properties.Descripcion.columnName +
+                ") VALUES('Lo Conozco y lo uso')");
+        db.execSQL("INSERT INTO "+ TripleLavadoDao.TABLENAME + " (" +
+                TripleLavadoDao.Properties.Descripcion.columnName +
+                ") VALUES('Lo Conozco y no lo uso')");
+        db.execSQL("INSERT INTO "+ TripleLavadoDao.TABLENAME + " (" +
+                TripleLavadoDao.Properties.Descripcion.columnName +
+                ") VALUES('No lo conozco')");
     }
 }

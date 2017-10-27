@@ -8,7 +8,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_cerrar"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_nueva_encuesta"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="171dp"
         android:layout_height="50dp"

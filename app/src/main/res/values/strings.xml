@@ -76,9 +76,8 @@
     <string name="et_distancias">Distancias</string>
     <string name="et_largo">Largo</string>
     <string name="et_superficie_Sembrada">Sup. sembr.</string>
-
+    <string name="razon_no">Razon por la cual no usa</string>
     <string name="title_activity_cultivo">CultivoActivity</string>
-
 
     <!-- Strings errores de validación EstablecimientoActivity -->
     <string name="error_nombre">Falta indicar nombre del establecimiento</string>

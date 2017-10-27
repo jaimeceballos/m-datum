@@ -27,6 +27,7 @@ import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.EleccionCultivo;
 import mdatum.udc.com.m_datum.database.EleccionCultivoDao;
 import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.EncuestaCultivo;
 import mdatum.udc.com.m_datum.database.Especie;
 import mdatum.udc.com.m_datum.database.EspecieDao;
 import mdatum.udc.com.m_datum.database.MDatumDbHelper;
@@ -181,7 +182,10 @@ public class NuevoCultivoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Cultivo... cultivos) {
             long result = daoSession.insert(cultivos[0]);
-            encuesta.setCultivoId((int)result);
+            EncuestaCultivo encuestaCultivo = new EncuestaCultivo();
+            encuestaCultivo.setIdCultivo(result);
+            encuestaCultivo.setIdEncuesta(encuesta.getId());
+            daoSession.insert(encuestaCultivo);
             return result > 0;
         }
 

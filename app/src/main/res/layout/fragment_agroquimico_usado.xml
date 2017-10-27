@@ -15,16 +15,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:hint="@string/tv_producto"
         >
 
         <EditText
             android:id="@+id/et_producto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text="@string/tv_producto"
-
-            />
+            android:inputType="text"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -35,14 +33,14 @@
         app:layout_constraintTop_toBottomOf="@id/til_producto"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:hint="@string/tv_plaga"
         >
 
         <EditText
             android:id="@+id/et_plaga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_plaga"
-            android:inputType="number"
+            android:inputType="text"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -53,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/til_plaga"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-
+        android:hint="@string/tv_metodo"
         >
 
 
@@ -61,11 +59,7 @@
             android:id="@+id/et_metodo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:inputType="number"
-
-
-            tools:text="@string/tv_metodo" />
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -75,14 +69,15 @@
         app:layout_constraintTop_toBottomOf="@id/til_metodo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:hint="@string/tv_frecuencia"
         >
 
         <EditText
             android:id="@+id/et_frecuencia_de_uso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text="@string/tv_frecuencia"
+            android:inputType="text"
+
 
 
              />

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.util.ArrayList;
+
 import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.database.DaoSession;
@@ -32,7 +34,6 @@ public class FamiliaFragment extends Fragment {
     private Encuesta encuesta;
     private DaoSession daoSession;
     private Familia familia;
-
 
     public FamiliaFragment() {
         // Required empty public constructor
@@ -105,7 +106,8 @@ public class FamiliaFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Familia... familia) {
             long result = daoSession.insert(familia[0]);
-            encuesta.setFamiliaId((int)result);
+            encuesta.setFamiliaId(result);
+            daoSession.update(encuesta);
             return result > 0;
         }
 

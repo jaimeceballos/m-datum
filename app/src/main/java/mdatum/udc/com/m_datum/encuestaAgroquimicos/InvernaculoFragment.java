@@ -24,6 +24,7 @@ import mdatum.udc.com.m_datum.database.AnioEstructura;
 import mdatum.udc.com.m_datum.database.AnioEstructuraDao;
 import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.EncuestaInvernaculo;
 import mdatum.udc.com.m_datum.database.Invernaculo;
 import mdatum.udc.com.m_datum.database.MDatumDbHelper;
 import mdatum.udc.com.m_datum.database.MaterialEstructura;
@@ -41,7 +42,6 @@ public class InvernaculoFragment extends Fragment {
     private Invernaculo invernaculo;
     private List opcionesMaterial;
     private List opcionesAnio;
-
     private DaoSession daoSession;
     private List<String> materiales;
     private List<String> anios;
@@ -137,7 +137,10 @@ public class InvernaculoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Invernaculo... invernaculos) {
             long result = daoSession.insert(invernaculos[0]);
-            encuesta.setInvernaderoId((int)result);
+            EncuestaInvernaculo encuestaInvernaculo = new EncuestaInvernaculo();
+            encuestaInvernaculo.setEncuestaId(encuesta.getId());
+            encuestaInvernaculo.setInvernaculoId(result);
+            daoSession.insert(encuestaInvernaculo);
             return result > 0;
         }
 
