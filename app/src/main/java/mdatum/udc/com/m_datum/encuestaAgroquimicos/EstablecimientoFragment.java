@@ -189,6 +189,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
                     Uri output = Uri.fromFile(new File(name));
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
                     //inicio la aplicacion de la camara con un activity que espera como resultado la imagen capturada.
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivityForResult(intent, 1);
                 }
 
