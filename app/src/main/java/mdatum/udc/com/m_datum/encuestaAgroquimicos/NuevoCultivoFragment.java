@@ -48,6 +48,7 @@ public class NuevoCultivoFragment extends Fragment {
     private EditText etLargo;
     private Spinner spTipoProduccion;
     private Spinner spEleccionCultivo;
+    private Spinner spMesSiembra;
     private EditText etEleccionEspecificar;
     private DaoSession daoSession;
     private List opcionesEspecie;
@@ -60,7 +61,7 @@ public class NuevoCultivoFragment extends Fragment {
     private List<String> tiposCultivo;
     private List<String> tiposProduccion;
     private List<String> eleccionCultivo;
-
+    private List<String> meses;
 
     public NuevoCultivoFragment() {
         // Required empty public constructor
@@ -78,13 +79,18 @@ public class NuevoCultivoFragment extends Fragment {
         spEspecie = (Spinner) rootView.findViewById(R.id.sp_especie);
         spTipoCultivo = (Spinner) rootView.findViewById(R.id.sp_tipo_cultivo);
         etNroSiembra = (EditText) rootView.findViewById(R.id.et_nro_siembra);
-        etMesSiembra = (EditText) rootView.findViewById(R.id.et_mes_siembra);
+        //etMesSiembra = (EditText) rootView.findViewById(R.id.et_mes_siembra);
         etSurcos = (EditText) rootView.findViewById(R.id.et_surcos);
         etDistancias = (EditText) rootView.findViewById(R.id.et_distancias);
         etLargo = (EditText) rootView.findViewById(R.id.et_largo);
         spTipoProduccion = (Spinner) rootView.findViewById(R.id.sp_tipo_produccion);
         spEleccionCultivo = (Spinner) rootView.findViewById(R.id.sp_eleccion_cultivo);
         etEleccionEspecificar = (EditText) rootView.findViewById(R.id.et_eleccion_especificar);
+        spMesSiembra = (Spinner) rootView.findViewById(R.id.sp_mes_siembra);
+        meses = generarMeses();
+        ArrayAdapter<String> mesesAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,meses);
+        mesesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spMesSiembra.setAdapter(mesesAdapter);
 
         EspecieDao especieDao = daoSession.getEspecieDao();
         opcionesEspecie = especieDao.loadAll();
@@ -155,7 +161,7 @@ public class NuevoCultivoFragment extends Fragment {
                 cultivo.setEspecieId((int) spEspecie.getSelectedItemId());
                 cultivo.setTipoId((int) spTipoCultivo.getSelectedItemId());
                 cultivo.setNroSiembra(Integer.parseInt(etNroSiembra.getText().toString()));
-                cultivo.setMesSiembra(Integer.parseInt(etMesSiembra.getText().toString()));
+                cultivo.setMesSiembra((int) spMesSiembra.getSelectedItemId() +1);
                 cultivo.setSurcos(Integer.parseInt(etSurcos.getText().toString()));
                 cultivo.setDistancias(Integer.parseInt(etDistancias.getText().toString()));
                 cultivo.setLargo(Integer.parseInt(etLargo.getText().toString()));
@@ -202,5 +208,22 @@ public class NuevoCultivoFragment extends Fragment {
         }
     }
 
+    private ArrayList<String> generarMeses(){
+
+        ArrayList<String> meses = new ArrayList<>();
+        meses.add("Enero");
+        meses.add("Febrero");
+        meses.add("Marzo");
+        meses.add("Abril");
+        meses.add("Mayo");
+        meses.add("Junio");
+        meses.add("Julio");
+        meses.add("Agosto");
+        meses.add("Septiembre");
+        meses.add("Octubre");
+        meses.add("Noviembre");
+        meses.add("Diciembre");
+        return meses;
+    }
 
 }

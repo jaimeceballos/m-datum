@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.MultiAutoCompleteTextView;
 
+import mdatum.udc.com.m_datum.MainActivity;
 import mdatum.udc.com.m_datum.R;
 
 public class FinalEncuestaFragment extends Fragment {
@@ -47,7 +49,14 @@ public class FinalEncuestaFragment extends Fragment {
 
             }
         });
-
+        btnNuevaEncuesta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }

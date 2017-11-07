@@ -8,6 +8,7 @@ import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -186,11 +187,27 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
                 {
                     //si encuentra el nombre genera un intent que abre la aplicacion de la camara del dispositivo
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    Uri output = Uri.fromFile(new File(name));
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
+
+                    Uri output; //= Uri.fromFile(new File(name));
+                    //intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
                     //inicio la aplicacion de la camara con un activity que espera como resultado la imagen capturada.
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    startActivityForResult(intent, 1);
+                    //intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        output = Uri.parse(name);
+                    }else{
+                        output = Uri.fromFile(new File(name));
+                    }
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
+
+                    try{
+                        startActivityForResult(intent, 1);
+                    }catch (Exception e){
+                        Toast.makeText(getContext(),"Error al abrir la camara:"+e.toString(),Toast.LENGTH_LONG).show();
+                        Log.e("camara", e.toString());
+                    }
+
+
                 }
 
 
