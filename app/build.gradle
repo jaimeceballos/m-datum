@@ -41,4 +41,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     testCompile 'junit:junit:4.12'
     compile 'org.greenrobot:greendao:3.2.2'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0' //Libreria para manejo de conexiones HTTP
+    compile 'com.google.code.gson:gson:2.8.2' //Libreria para convertir objetos java en JSON
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
 }
