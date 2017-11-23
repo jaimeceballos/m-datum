@@ -1,7 +1,5 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,10 +25,8 @@ import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.EleccionCultivo;
 import mdatum.udc.com.m_datum.database.EleccionCultivoDao;
 import mdatum.udc.com.m_datum.database.Encuesta;
-import mdatum.udc.com.m_datum.database.EncuestaCultivo;
 import mdatum.udc.com.m_datum.database.Especie;
 import mdatum.udc.com.m_datum.database.EspecieDao;
-import mdatum.udc.com.m_datum.database.MDatumDbHelper;
 import mdatum.udc.com.m_datum.database.TipoCultivo;
 import mdatum.udc.com.m_datum.database.TipoCultivoDao;
 import mdatum.udc.com.m_datum.database.TipoProduccion;
@@ -170,6 +166,7 @@ public class NuevoCultivoFragment extends Fragment {
                 cultivo.setTipoProduccionId((int) spTipoProduccion.getSelectedItemId());
                 cultivo.setEleccionCultivoId((int) spEleccionCultivo.getSelectedItemId());
                 cultivo.setEleccionEspecificar(etEleccionEspecificar.getText().toString());
+                cultivo.setEncuestaId(encuesta.getId());
 
                 Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);
 
@@ -188,10 +185,6 @@ public class NuevoCultivoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Cultivo... cultivos) {
             long result = daoSession.insert(cultivos[0]);
-            EncuestaCultivo encuestaCultivo = new EncuestaCultivo();
-            encuestaCultivo.setIdCultivo(result);
-            encuestaCultivo.setIdEncuesta(encuesta.getId());
-            daoSession.insert(encuestaCultivo);
             return result > 0;
         }
 

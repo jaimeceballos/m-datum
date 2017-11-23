@@ -26,12 +26,13 @@ public class Cultivo {
     private int tipoProduccionId;
     private int eleccionCultivoId;
     private String eleccionEspecificar;
+    private Long encuestaId;
 
-    @Generated(hash = 1772569774)
+    @Generated(hash = 2117204930)
     public Cultivo(Long id, int especieId, int tipoId, int nroSiembra, int mesSiembra,
             int surcos, int distancias, int largo, int superficieSembrada,
             int superficieMedidaId, int tipoProduccionId, int eleccionCultivoId,
-            String eleccionEspecificar) {
+            String eleccionEspecificar, Long encuestaId) {
         this.id = id;
         this.especieId = especieId;
         this.tipoId = tipoId;
@@ -45,6 +46,7 @@ public class Cultivo {
         this.tipoProduccionId = tipoProduccionId;
         this.eleccionCultivoId = eleccionCultivoId;
         this.eleccionEspecificar = eleccionEspecificar;
+        this.encuestaId = encuestaId;
     }
 
     @Generated(hash = 1860368354)
@@ -154,6 +156,16 @@ public class Cultivo {
     public void setEleccionEspecificar(String eleccionEspecificar) {
         this.eleccionEspecificar = eleccionEspecificar;
     }
+    
+    public Long getEncuestaId() {
+        return encuestaId;
+    }
+
+    public void setEncuestaId(Long encuestaId) {
+        this.encuestaId = encuestaId;
+    }
+
+
 
 
 }

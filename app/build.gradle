@@ -32,6 +32,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    //Libreria para manejo de conexiones HTTP
+    //Libreria para convertir objetos java en JSON
+
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.android.gms:play-services-ads:11.0.0'
@@ -39,10 +42,9 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:11.0.0'
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:support-v4:25.2.0'
-    testCompile 'junit:junit:4.12'
     compile 'org.greenrobot:greendao:3.2.2'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0' //Libreria para manejo de conexiones HTTP
-    compile 'com.google.code.gson:gson:2.8.2' //Libreria para convertir objetos java en JSON
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-
+    testCompile 'junit:junit:4.12'
 }

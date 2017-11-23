@@ -27,6 +27,7 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         public final static Property Plaga = new Property(2, String.class, "plaga", false, "PLAGA");
         public final static Property Metodo_aplicacion = new Property(3, String.class, "metodo_aplicacion", false, "METODO_APLICACION");
         public final static Property Frecuencia_uso = new Property(4, String.class, "frecuencia_uso", false, "FRECUENCIA_USO");
+        public final static Property EncuestaId = new Property(5, Long.class, "encuestaId", false, "ENCUESTA_ID");
     }
 
 
@@ -46,7 +47,8 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
                 "\"PRODUCTO\" TEXT," + // 1: producto
                 "\"PLAGA\" TEXT," + // 2: plaga
                 "\"METODO_APLICACION\" TEXT," + // 3: metodo_aplicacion
-                "\"FRECUENCIA_USO\" TEXT);"); // 4: frecuencia_uso
+                "\"FRECUENCIA_USO\" TEXT," + // 4: frecuencia_uso
+                "\"ENCUESTA_ID\" INTEGER);"); // 5: encuestaId
     }
 
     /** Drops the underlying database table. */
@@ -83,6 +85,11 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         if (frecuencia_uso != null) {
             stmt.bindString(5, frecuencia_uso);
         }
+ 
+        Long encuestaId = entity.getEncuestaId();
+        if (encuestaId != null) {
+            stmt.bindLong(6, encuestaId);
+        }
     }
 
     @Override
@@ -113,6 +120,11 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         if (frecuencia_uso != null) {
             stmt.bindString(5, frecuencia_uso);
         }
+ 
+        Long encuestaId = entity.getEncuestaId();
+        if (encuestaId != null) {
+            stmt.bindLong(6, encuestaId);
+        }
     }
 
     @Override
@@ -127,7 +139,8 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // producto
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // plaga
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // metodo_aplicacion
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // frecuencia_uso
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // frecuencia_uso
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // encuestaId
         );
         return entity;
     }
@@ -139,6 +152,7 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         entity.setPlaga(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setMetodo_aplicacion(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setFrecuencia_uso(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setEncuestaId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
      }
     
     @Override

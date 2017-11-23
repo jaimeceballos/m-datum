@@ -24,9 +24,7 @@ import mdatum.udc.com.m_datum.database.AnioEstructura;
 import mdatum.udc.com.m_datum.database.AnioEstructuraDao;
 import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.Encuesta;
-import mdatum.udc.com.m_datum.database.EncuestaInvernaculo;
 import mdatum.udc.com.m_datum.database.Invernaculo;
-import mdatum.udc.com.m_datum.database.MDatumDbHelper;
 import mdatum.udc.com.m_datum.database.MaterialEstructura;
 import mdatum.udc.com.m_datum.database.MaterialEstructuraDao;
 
@@ -113,6 +111,7 @@ public class InvernaculoFragment extends Fragment {
                 invernaculo.setSuperficieUnitaria(Integer.parseInt(etSupUnit.getText().toString()));
                 invernaculo.setMaterialEstructuraId(spMatEstruct.getSelectedItemPosition());
                 invernaculo.setAnioConstruccionId(spAnioConstruct.getSelectedItemPosition());
+                invernaculo.setEncuestaId(encuesta.getId());
 
                 Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);
 
@@ -137,10 +136,6 @@ public class InvernaculoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Invernaculo... invernaculos) {
             long result = daoSession.insert(invernaculos[0]);
-            EncuestaInvernaculo encuestaInvernaculo = new EncuestaInvernaculo();
-            encuestaInvernaculo.setEncuestaId(encuesta.getId());
-            encuestaInvernaculo.setInvernaculoId(result);
-            daoSession.insert(encuestaInvernaculo);
             return result > 0;
         }
 

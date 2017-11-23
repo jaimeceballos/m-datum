@@ -27,6 +27,7 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         public final static Property EncuestadoId = new Property(2, Long.class, "encuestadoId", false, "ENCUESTADO_ID");
         public final static Property FamiliaId = new Property(3, Long.class, "familiaId", false, "FAMILIA_ID");
         public final static Property AgroquimicoId = new Property(4, Long.class, "agroquimicoId", false, "AGROQUIMICO_ID");
+        public final static Property Fecha = new Property(5, java.util.Date.class, "fecha", false, "FECHA");
     }
 
 
@@ -46,7 +47,8 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
                 "\"ESTABLECIMIENTO_ID\" INTEGER," + // 1: establecimientoId
                 "\"ENCUESTADO_ID\" INTEGER," + // 2: encuestadoId
                 "\"FAMILIA_ID\" INTEGER," + // 3: familiaId
-                "\"AGROQUIMICO_ID\" INTEGER);"); // 4: agroquimicoId
+                "\"AGROQUIMICO_ID\" INTEGER," + // 4: agroquimicoId
+                "\"FECHA\" INTEGER);"); // 5: fecha
     }
 
     /** Drops the underlying database table. */
@@ -83,6 +85,11 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         if (agroquimicoId != null) {
             stmt.bindLong(5, agroquimicoId);
         }
+ 
+        java.util.Date fecha = entity.getFecha();
+        if (fecha != null) {
+            stmt.bindLong(6, fecha.getTime());
+        }
     }
 
     @Override
@@ -113,6 +120,11 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         if (agroquimicoId != null) {
             stmt.bindLong(5, agroquimicoId);
         }
+ 
+        java.util.Date fecha = entity.getFecha();
+        if (fecha != null) {
+            stmt.bindLong(6, fecha.getTime());
+        }
     }
 
     @Override
@@ -127,7 +139,8 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // establecimientoId
             cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // encuestadoId
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // familiaId
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // agroquimicoId
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // agroquimicoId
+            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)) // fecha
         );
         return entity;
     }
@@ -139,6 +152,7 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         entity.setEncuestadoId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setFamiliaId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setAgroquimicoId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setFecha(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
      }
     
     @Override

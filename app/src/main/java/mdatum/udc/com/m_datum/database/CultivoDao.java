@@ -35,6 +35,7 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         public final static Property TipoProduccionId = new Property(10, int.class, "tipoProduccionId", false, "TIPO_PRODUCCION_ID");
         public final static Property EleccionCultivoId = new Property(11, int.class, "eleccionCultivoId", false, "ELECCION_CULTIVO_ID");
         public final static Property EleccionEspecificar = new Property(12, String.class, "eleccionEspecificar", false, "ELECCION_ESPECIFICAR");
+        public final static Property EncuestaId = new Property(13, Long.class, "encuestaId", false, "ENCUESTA_ID");
     }
 
 
@@ -62,7 +63,8 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
                 "\"SUPERFICIE_MEDIDA_ID\" INTEGER NOT NULL ," + // 9: superficieMedidaId
                 "\"TIPO_PRODUCCION_ID\" INTEGER NOT NULL ," + // 10: tipoProduccionId
                 "\"ELECCION_CULTIVO_ID\" INTEGER NOT NULL ," + // 11: eleccionCultivoId
-                "\"ELECCION_ESPECIFICAR\" TEXT);"); // 12: eleccionEspecificar
+                "\"ELECCION_ESPECIFICAR\" TEXT," + // 12: eleccionEspecificar
+                "\"ENCUESTA_ID\" INTEGER);"); // 13: encuestaId
     }
 
     /** Drops the underlying database table. */
@@ -95,6 +97,11 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         if (eleccionEspecificar != null) {
             stmt.bindString(13, eleccionEspecificar);
         }
+ 
+        Long encuestaId = entity.getEncuestaId();
+        if (encuestaId != null) {
+            stmt.bindLong(14, encuestaId);
+        }
     }
 
     @Override
@@ -121,6 +128,11 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         if (eleccionEspecificar != null) {
             stmt.bindString(13, eleccionEspecificar);
         }
+ 
+        Long encuestaId = entity.getEncuestaId();
+        if (encuestaId != null) {
+            stmt.bindLong(14, encuestaId);
+        }
     }
 
     @Override
@@ -143,7 +155,8 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
             cursor.getInt(offset + 9), // superficieMedidaId
             cursor.getInt(offset + 10), // tipoProduccionId
             cursor.getInt(offset + 11), // eleccionCultivoId
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // eleccionEspecificar
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // eleccionEspecificar
+            cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13) // encuestaId
         );
         return entity;
     }
@@ -163,6 +176,7 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         entity.setTipoProduccionId(cursor.getInt(offset + 10));
         entity.setEleccionCultivoId(cursor.getInt(offset + 11));
         entity.setEleccionEspecificar(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setEncuestaId(cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13));
      }
     
     @Override

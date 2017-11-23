@@ -40,10 +40,7 @@ public class DaoMaster extends AbstractDaoMaster {
         TripleLavadoDao.createTable(db, ifNotExists);
         AgroquimicosDao.createTable(db, ifNotExists);
         EncuestaDao.createTable(db, ifNotExists);
-        EncuestaInvernaculoDao.createTable(db, ifNotExists);
-        EncuestaCultivoDao.createTable(db, ifNotExists);
         AgroquimicoUsadoDao.createTable(db, ifNotExists);
-        EncuestaAgroquimicoUsadoDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -67,10 +64,7 @@ public class DaoMaster extends AbstractDaoMaster {
         TripleLavadoDao.dropTable(db, ifExists);
         AgroquimicosDao.dropTable(db, ifExists);
         EncuestaDao.dropTable(db, ifExists);
-        EncuestaInvernaculoDao.dropTable(db, ifExists);
-        EncuestaCultivoDao.dropTable(db, ifExists);
         AgroquimicoUsadoDao.dropTable(db, ifExists);
-        EncuestaAgroquimicoUsadoDao.dropTable(db, ifExists);
     }
 
     /**
@@ -108,10 +102,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(TripleLavadoDao.class);
         registerDaoClass(AgroquimicosDao.class);
         registerDaoClass(EncuestaDao.class);
-        registerDaoClass(EncuestaInvernaculoDao.class);
-        registerDaoClass(EncuestaCultivoDao.class);
         registerDaoClass(AgroquimicoUsadoDao.class);
-        registerDaoClass(EncuestaAgroquimicoUsadoDao.class);
     }
 
     public DaoSession newSession() {

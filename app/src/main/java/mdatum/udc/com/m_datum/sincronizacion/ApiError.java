@@ -3,6 +3,7 @@ package mdatum.udc.com.m_datum.sincronizacion;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 
@@ -12,58 +13,26 @@ import okhttp3.ResponseBody;
 
 public class ApiError {
 
-    private int status;
-    private int code;
-    private String message;
-    private String moreInfo;
-    private String developerMessage;
+    private String detail;
 
-    public ApiError(int status, int code, String message, String moreInfo, String developerMessage) {
-        this.status = status;
-        this.code = code;
-        this.message = message;
-        this.moreInfo = moreInfo;
-        this.developerMessage = developerMessage;
+    public List<String> getNon_field_errors() {
+        return non_field_errors;
     }
 
-    public int getStatus() {
-        return status;
+    public void setNon_field_errors(List<String> non_field_errors) {
+        this.non_field_errors = non_field_errors;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    private List<String> non_field_errors;
+
+
+
+    public String getDetail() {
+        return detail;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getMoreInfo() {
-        return moreInfo;
-    }
-
-    public void setMoreInfo(String moreInfo) {
-        this.moreInfo = moreInfo;
-    }
-
-    public String getDeveloperMessage() {
-        return developerMessage;
-    }
-
-    public void setDeveloperMessage(String developerMessage) {
-        this.developerMessage = developerMessage;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public static ApiError fromResponseBody(ResponseBody responseBody) {

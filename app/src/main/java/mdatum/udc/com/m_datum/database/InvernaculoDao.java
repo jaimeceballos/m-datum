@@ -27,6 +27,7 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         public final static Property SuperficieUnitaria = new Property(2, int.class, "superficieUnitaria", false, "SUPERFICIE_UNITARIA");
         public final static Property MaterialEstructuraId = new Property(3, int.class, "materialEstructuraId", false, "MATERIAL_ESTRUCTURA_ID");
         public final static Property AnioConstruccionId = new Property(4, int.class, "anioConstruccionId", false, "ANIO_CONSTRUCCION_ID");
+        public final static Property EncuestaId = new Property(5, Long.class, "encuestaId", false, "ENCUESTA_ID");
     }
 
 
@@ -46,7 +47,8 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
                 "\"CANTIDAD_MODULOS\" INTEGER NOT NULL ," + // 1: cantidadModulos
                 "\"SUPERFICIE_UNITARIA\" INTEGER NOT NULL ," + // 2: superficieUnitaria
                 "\"MATERIAL_ESTRUCTURA_ID\" INTEGER NOT NULL ," + // 3: materialEstructuraId
-                "\"ANIO_CONSTRUCCION_ID\" INTEGER NOT NULL );"); // 4: anioConstruccionId
+                "\"ANIO_CONSTRUCCION_ID\" INTEGER NOT NULL ," + // 4: anioConstruccionId
+                "\"ENCUESTA_ID\" INTEGER);"); // 5: encuestaId
     }
 
     /** Drops the underlying database table. */
@@ -67,6 +69,11 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         stmt.bindLong(3, entity.getSuperficieUnitaria());
         stmt.bindLong(4, entity.getMaterialEstructuraId());
         stmt.bindLong(5, entity.getAnioConstruccionId());
+ 
+        Long encuestaId = entity.getEncuestaId();
+        if (encuestaId != null) {
+            stmt.bindLong(6, encuestaId);
+        }
     }
 
     @Override
@@ -81,6 +88,11 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         stmt.bindLong(3, entity.getSuperficieUnitaria());
         stmt.bindLong(4, entity.getMaterialEstructuraId());
         stmt.bindLong(5, entity.getAnioConstruccionId());
+ 
+        Long encuestaId = entity.getEncuestaId();
+        if (encuestaId != null) {
+            stmt.bindLong(6, encuestaId);
+        }
     }
 
     @Override
@@ -95,7 +107,8 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
             cursor.getInt(offset + 1), // cantidadModulos
             cursor.getInt(offset + 2), // superficieUnitaria
             cursor.getInt(offset + 3), // materialEstructuraId
-            cursor.getInt(offset + 4) // anioConstruccionId
+            cursor.getInt(offset + 4), // anioConstruccionId
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // encuestaId
         );
         return entity;
     }
@@ -107,6 +120,7 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         entity.setSuperficieUnitaria(cursor.getInt(offset + 2));
         entity.setMaterialEstructuraId(cursor.getInt(offset + 3));
         entity.setAnioConstruccionId(cursor.getInt(offset + 4));
+        entity.setEncuestaId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
      }
     
     @Override

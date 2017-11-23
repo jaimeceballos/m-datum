@@ -1,7 +1,5 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +15,6 @@ import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.database.AgroquimicoUsado;
 import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.Encuesta;
-import mdatum.udc.com.m_datum.database.EncuestaAgroquimicoUsado;
 
 
 public class AgroquimicoUsadoFragment extends Fragment {
@@ -62,6 +59,7 @@ public class AgroquimicoUsadoFragment extends Fragment {
                 agroquimicoUsado.setPlaga(etPlaga.getText().toString());
                 agroquimicoUsado.setFrecuencia_uso(etFrecuenciaUso.getText().toString());
                 agroquimicoUsado.setMetodo_aplicacion(etMetodoAplicacion.getText().toString());
+                agroquimicoUsado.setEncuestaId(encuesta.getId());
                 new AgroquimicoUsadoFragment.AddAgroquimicoUsadoTask().execute(agroquimicoUsado);
             }
         });
@@ -75,10 +73,6 @@ public class AgroquimicoUsadoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(AgroquimicoUsado... agroquimicoUsados) {
             long result = daoSession.insert(agroquimicoUsados[0]);
-            EncuestaAgroquimicoUsado encuestaAgroquimicoUsado = new EncuestaAgroquimicoUsado();
-            encuestaAgroquimicoUsado.setIdAgroquimicoUsado(result);
-            encuestaAgroquimicoUsado.setIdEncuesta(encuesta.getId());
-            daoSession.insert(encuestaAgroquimicoUsado);
             return result > 0;
         }
 

@@ -8,17 +8,17 @@ public class UserToken {
 
 
 
-    private String token;
+    private String key;
 
-    public UserToken(String token){
-        this.token = token;
+    public UserToken(String key){
+        this.key = key;
     }
 
-    public String getToken() {
-        return token;
+    public String getKey() {
+        return key;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setKey(String key) {
+        this.key = key;
     }
 }
