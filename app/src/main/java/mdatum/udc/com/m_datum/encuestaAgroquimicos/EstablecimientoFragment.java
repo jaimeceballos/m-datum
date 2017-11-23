@@ -1,10 +1,13 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.location.LocationManager;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,11 +15,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -94,8 +99,10 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
         View rootView = inflater.inflate(R.layout.fragment_establecimiento, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
+        //verifica si el servicio de localizacion esta activado, sino lanza un dialogo
+        verificarLocalizacion();
 
-
+        // obtiene la sesion de acceso a la base de datos.
         daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
 
@@ -496,6 +503,47 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
                     .commit();
         }
 
+    }
+
+    /* Verifica que el servicio de localizacion se encuentre activado,
+     * si no esta activado lanza un dialogo solicitando la activacion.
+     */
+    private void verificarLocalizacion(){
+
+        // Crea unn location manager
+        LocationManager locateManager=(LocationManager)getContext().getSystemService(Context.LOCATION_SERVICE);
+        // obtiene el estado del proveedor del servicio
+        boolean enabled = locateManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        // Verifica si no esta habilitado
+        if (!enabled) {
+
+
+            // Notifica al usuario a traves de un dialogo
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+            // setea el mensaje para el usuario
+            dialog.setMessage(R.string.localizacion);
+            //crea el boton de accion positiva (habilitar Localizacion)
+            dialog.setPositiveButton(R.string.habilitaLocalizacion, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    // abre la pantalla de ajustes de ubicacion
+                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    getContext().startActivity(myIntent);
+                }
+            });
+            // crea el boton de accion por la negativa
+            dialog.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+
+
+                }
+            });
+
+            //muestra el dialogo
+            dialog.show();
+        }
     }
 
 

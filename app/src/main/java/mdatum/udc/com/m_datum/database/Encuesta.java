@@ -5,6 +5,8 @@ import org.greenrobot.greendao.annotation.Id;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -22,14 +24,16 @@ public class Encuesta implements Serializable {
     private Long encuestadoId;
     private Long familiaId;
     private Long agroquimicoId;
-    @Generated(hash = 637315002)
+    private Date fecha;
+    @Generated(hash = 1358737852)
     public Encuesta(Long id, Long establecimientoId, Long encuestadoId,
-            Long familiaId, Long agroquimicoId) {
+            Long familiaId, Long agroquimicoId, Date fecha) {
         this.id = id;
         this.establecimientoId = establecimientoId;
         this.encuestadoId = encuestadoId;
         this.familiaId = familiaId;
         this.agroquimicoId = agroquimicoId;
+        this.fecha = fecha;
     }
     @Generated(hash = 483204667)
     public Encuesta() {
@@ -63,6 +67,11 @@ public class Encuesta implements Serializable {
     }
     public void setAgroquimicoId(Long agroquimicoId) {
         this.agroquimicoId = agroquimicoId;
+    }
+
+    public Date getFecha(){return this.fecha;}
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
 

@@ -89,8 +89,11 @@ public class FamiliaFragment extends Fragment {
                 familia = new Familia();
                 familia.setEsCasado((rbEsposaSi.isChecked())?1:0);
                 familia.setTieneHijos((rbHijosSi.isChecked())?1:0);
-                familia.setCantMujeres(Integer.parseInt(etCantMujeres.getText().toString()));
-                familia.setCantVarones(Integer.parseInt(etCantVarones.getText().toString()));
+                if(familia.getTieneHijos() == 1){
+                    familia.setCantMujeres(etCantMujeres.getText().toString().equals("")?0:Integer.parseInt(etCantMujeres.getText().toString()));
+                    familia.setCantVarones(etCantVarones.getText().toString().equals("")?0:Integer.parseInt(etCantVarones.getText().toString()));
+                }
+
 
                 new FamiliaFragment.AddFamiliaTask().execute(familia);
             }

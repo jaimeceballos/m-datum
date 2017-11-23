@@ -44,6 +44,12 @@ public class DaoMaster extends AbstractDaoMaster {
         TipoCultivoDao.createTable(db, ifNotExists);
         TipoProduccionDao.createTable(db, ifNotExists);
         TripleLavadoDao.createTable(db, ifNotExists);
+<<<<<<< HEAD
+=======
+        AgroquimicosDao.createTable(db, ifNotExists);
+        EncuestaDao.createTable(db, ifNotExists);
+        AgroquimicoUsadoDao.createTable(db, ifNotExists);
+>>>>>>> 9a9694f912ef532573a77e2fd075b20c8e19bde9
     }
 
     /** Drops underlying database table using DAOs. */
@@ -71,6 +77,12 @@ public class DaoMaster extends AbstractDaoMaster {
         TipoCultivoDao.dropTable(db, ifExists);
         TipoProduccionDao.dropTable(db, ifExists);
         TripleLavadoDao.dropTable(db, ifExists);
+<<<<<<< HEAD
+=======
+        AgroquimicosDao.dropTable(db, ifExists);
+        EncuestaDao.dropTable(db, ifExists);
+        AgroquimicoUsadoDao.dropTable(db, ifExists);
+>>>>>>> 9a9694f912ef532573a77e2fd075b20c8e19bde9
     }
 
     /**
@@ -112,6 +124,12 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(TipoCultivoDao.class);
         registerDaoClass(TipoProduccionDao.class);
         registerDaoClass(TripleLavadoDao.class);
+<<<<<<< HEAD
+=======
+        registerDaoClass(AgroquimicosDao.class);
+        registerDaoClass(EncuestaDao.class);
+        registerDaoClass(AgroquimicoUsadoDao.class);
+>>>>>>> 9a9694f912ef532573a77e2fd075b20c8e19bde9
     }
 
     public DaoSession newSession() {

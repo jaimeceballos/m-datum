@@ -103,5 +103,18 @@
         completions."
     </string>
 
+    <!-- ACCESO A LA LOCALIZACION -->
+    <string name="localizacion">M-Datum necesita acceder a la ubicacion de tu dispositivo. Por favor habilita el servicio de localizacion.</string>
+    <string name="habilitaLocalizacion">Habilitar localizacion.</string>
+    <string name="cancelar">Cancelar</string>
+
+    <!-- MENU DE OPCIONES -->
+    <string name="mChangePass">Cambiar Password</string>
+    <string name="mLogOut">Cerrar Sesion</string>
+
+    <!-- Password Change -->
+    <string name="new_password">Nueva Contraseña</string>
+    <string name="repeat_password">Repita la Contraseña</string>
+    <string name="cambiar">Cambiar Contraseña</string>
 
 </resources>

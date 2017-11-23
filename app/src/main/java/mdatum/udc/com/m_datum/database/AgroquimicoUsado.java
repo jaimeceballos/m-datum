@@ -17,14 +17,17 @@ public class AgroquimicoUsado {
     private String plaga;
     private String metodo_aplicacion;
     private String frecuencia_uso;
-    @Generated(hash = 1732310513)
+    private Long encuestaId;
+
+    @Generated(hash = 1726814844)
     public AgroquimicoUsado(Long id, String producto, String plaga,
-            String metodo_aplicacion, String frecuencia_uso) {
+            String metodo_aplicacion, String frecuencia_uso, Long encuestaId) {
         this.id = id;
         this.producto = producto;
         this.plaga = plaga;
         this.metodo_aplicacion = metodo_aplicacion;
         this.frecuencia_uso = frecuencia_uso;
+        this.encuestaId = encuestaId;
     }
     @Generated(hash = 299707638)
     public AgroquimicoUsado() {
@@ -59,5 +62,15 @@ public class AgroquimicoUsado {
     public void setFrecuencia_uso(String frecuencia_uso) {
         this.frecuencia_uso = frecuencia_uso;
     }
-    
+
+    public Long getEncuestaId() {
+        return encuestaId;
+    }
+
+    public void setEncuestaId(Long encuestaId) {
+        this.encuestaId = encuestaId;
+    }
+
+
+
 }

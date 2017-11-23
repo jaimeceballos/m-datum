@@ -10,16 +10,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import mdatum.udc.com.m_datum.database.Encuesta;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoFragment;
+import mdatum.udc.com.m_datum.sincronizacion.Usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SplashScreenFragment extends Fragment {
-    Button btnEncuesta;
+    //Button btnEncuesta;
     Encuesta encuesta = new Encuesta();
 
     public SplashScreenFragment() {
@@ -30,14 +35,18 @@ public class SplashScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
 
         View rootView = inflater.inflate(R.layout.fragment_splash_screen, container, false);
 
-        btnEncuesta = (Button) rootView.findViewById(R.id.btn_encuesta);
+        //btnEncuesta = (Button) rootView.findViewById(R.id.btn_encuesta);
+        encuesta.setFecha(new Date());
 
 
-        btnEncuesta.setOnClickListener(new View.OnClickListener() {
+
+
+
+        /*btnEncuesta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -49,7 +58,7 @@ public class SplashScreenFragment extends Fragment {
                         .addToBackStack("SPLASH_SCREEN")
                         .commit();
             }
-        });
+        });*/
 
 
         // Inflate the layout for this fragment

@@ -19,15 +19,17 @@ public class Invernaculo {
     private int superficieUnitaria;
     private int materialEstructuraId;
     private int anioConstruccionId;
+    private Long encuestaId;
 
-    @Generated(hash = 393118165)
+    @Generated(hash = 1553698320)
     public Invernaculo(Long id, int cantidadModulos, int superficieUnitaria, int materialEstructuraId,
-            int anioConstruccionId) {
+            int anioConstruccionId, Long encuestaId) {
         this.id = id;
         this.cantidadModulos = cantidadModulos;
         this.superficieUnitaria = superficieUnitaria;
         this.materialEstructuraId = materialEstructuraId;
         this.anioConstruccionId = anioConstruccionId;
+        this.encuestaId = encuestaId;
     }
 
     @Generated(hash = 1458552915)
@@ -74,6 +76,12 @@ public class Invernaculo {
         this.anioConstruccionId = anioConstruccionId;
     }
 
+    public Long getEncuestaId() {
+        return encuestaId;
+    }
 
+    public void setEncuestaId(Long encuestaId) {
+        this.encuestaId = encuestaId;
+    }
 
 }

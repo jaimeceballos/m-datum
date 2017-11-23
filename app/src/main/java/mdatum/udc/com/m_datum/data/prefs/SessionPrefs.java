@@ -1,4 +1,4 @@
-package mdatum.udc.com.m_datum.sincronizacion.prefs;
+package mdatum.udc.com.m_datum.data.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -29,8 +29,7 @@ public class SessionPrefs {
     }
 
     private SessionPrefs(Context context){
-        mPrefs = context.getApplicationContext()
-                .getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+        mPrefs = context.getApplicationContext().getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 
         mIsLoggedIn = !TextUtils.isEmpty(mPrefs.getString(PREF_USER_TOKEN,null));
 
@@ -44,12 +43,19 @@ public class SessionPrefs {
         if(token!=null){
             SharedPreferences.Editor editor = mPrefs.edit();
 
-            editor.putString(PREF_USER_TOKEN, token.getToken());
+            editor.putString(PREF_USER_TOKEN, token.getKey());
 
             editor.apply();
 
             mIsLoggedIn = true;
         }
+    }
+
+    public void logOut(){
+        mIsLoggedIn = false;
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putString(PREF_USER_TOKEN, null);
+        editor.apply();
     }
 
 
