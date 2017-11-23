@@ -21,56 +21,56 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        EstablecimientoDao.createTable(db, ifNotExists);
-        RegimenTenenciaDao.createTable(db, ifNotExists);
-        EncuestadoDao.createTable(db, ifNotExists);
-        NivelInstruccionDao.createTable(db, ifNotExists);
-        NacionalidadDao.createTable(db, ifNotExists);
-        FamiliaDao.createTable(db, ifNotExists);
+        AgroquimicosDao.createTable(db, ifNotExists);
+        AgroquimicoUsadoDao.createTable(db, ifNotExists);
         AnioEstructuraDao.createTable(db, ifNotExists);
-        MaterialEstructuraDao.createTable(db, ifNotExists);
-        InvernaculoDao.createTable(db, ifNotExists);
+        AsesoramientoDao.createTable(db, ifNotExists);
         CultivoDao.createTable(db, ifNotExists);
         EleccionCultivoDao.createTable(db, ifNotExists);
+        EncuestaDao.createTable(db, ifNotExists);
+        EncuestaAgroquimicoUsadoDao.createTable(db, ifNotExists);
+        EncuestaCultivoDao.createTable(db, ifNotExists);
+        EncuestadoDao.createTable(db, ifNotExists);
+        EncuestaInvernaculoDao.createTable(db, ifNotExists);
         EspecieDao.createTable(db, ifNotExists);
+        EstablecimientoDao.createTable(db, ifNotExists);
+        FactorClimaticoDao.createTable(db, ifNotExists);
+        FamiliaDao.createTable(db, ifNotExists);
+        InvernaculoDao.createTable(db, ifNotExists);
+        MaterialEstructuraDao.createTable(db, ifNotExists);
+        NacionalidadDao.createTable(db, ifNotExists);
+        NivelInstruccionDao.createTable(db, ifNotExists);
+        RegimenTenenciaDao.createTable(db, ifNotExists);
         TipoCultivoDao.createTable(db, ifNotExists);
         TipoProduccionDao.createTable(db, ifNotExists);
-        FactorClimaticoDao.createTable(db, ifNotExists);
-        AsesoramientoDao.createTable(db, ifNotExists);
         TripleLavadoDao.createTable(db, ifNotExists);
-        AgroquimicosDao.createTable(db, ifNotExists);
-        EncuestaDao.createTable(db, ifNotExists);
-        EncuestaInvernaculoDao.createTable(db, ifNotExists);
-        EncuestaCultivoDao.createTable(db, ifNotExists);
-        AgroquimicoUsadoDao.createTable(db, ifNotExists);
-        EncuestaAgroquimicoUsadoDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        EstablecimientoDao.dropTable(db, ifExists);
-        RegimenTenenciaDao.dropTable(db, ifExists);
-        EncuestadoDao.dropTable(db, ifExists);
-        NivelInstruccionDao.dropTable(db, ifExists);
-        NacionalidadDao.dropTable(db, ifExists);
-        FamiliaDao.dropTable(db, ifExists);
+        AgroquimicosDao.dropTable(db, ifExists);
+        AgroquimicoUsadoDao.dropTable(db, ifExists);
         AnioEstructuraDao.dropTable(db, ifExists);
-        MaterialEstructuraDao.dropTable(db, ifExists);
-        InvernaculoDao.dropTable(db, ifExists);
+        AsesoramientoDao.dropTable(db, ifExists);
         CultivoDao.dropTable(db, ifExists);
         EleccionCultivoDao.dropTable(db, ifExists);
+        EncuestaDao.dropTable(db, ifExists);
+        EncuestaAgroquimicoUsadoDao.dropTable(db, ifExists);
+        EncuestaCultivoDao.dropTable(db, ifExists);
+        EncuestadoDao.dropTable(db, ifExists);
+        EncuestaInvernaculoDao.dropTable(db, ifExists);
         EspecieDao.dropTable(db, ifExists);
+        EstablecimientoDao.dropTable(db, ifExists);
+        FactorClimaticoDao.dropTable(db, ifExists);
+        FamiliaDao.dropTable(db, ifExists);
+        InvernaculoDao.dropTable(db, ifExists);
+        MaterialEstructuraDao.dropTable(db, ifExists);
+        NacionalidadDao.dropTable(db, ifExists);
+        NivelInstruccionDao.dropTable(db, ifExists);
+        RegimenTenenciaDao.dropTable(db, ifExists);
         TipoCultivoDao.dropTable(db, ifExists);
         TipoProduccionDao.dropTable(db, ifExists);
-        FactorClimaticoDao.dropTable(db, ifExists);
-        AsesoramientoDao.dropTable(db, ifExists);
         TripleLavadoDao.dropTable(db, ifExists);
-        AgroquimicosDao.dropTable(db, ifExists);
-        EncuestaDao.dropTable(db, ifExists);
-        EncuestaInvernaculoDao.dropTable(db, ifExists);
-        EncuestaCultivoDao.dropTable(db, ifExists);
-        AgroquimicoUsadoDao.dropTable(db, ifExists);
-        EncuestaAgroquimicoUsadoDao.dropTable(db, ifExists);
     }
 
     /**
@@ -89,29 +89,29 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(EstablecimientoDao.class);
-        registerDaoClass(RegimenTenenciaDao.class);
-        registerDaoClass(EncuestadoDao.class);
-        registerDaoClass(NivelInstruccionDao.class);
-        registerDaoClass(NacionalidadDao.class);
-        registerDaoClass(FamiliaDao.class);
+        registerDaoClass(AgroquimicosDao.class);
+        registerDaoClass(AgroquimicoUsadoDao.class);
         registerDaoClass(AnioEstructuraDao.class);
-        registerDaoClass(MaterialEstructuraDao.class);
-        registerDaoClass(InvernaculoDao.class);
+        registerDaoClass(AsesoramientoDao.class);
         registerDaoClass(CultivoDao.class);
         registerDaoClass(EleccionCultivoDao.class);
+        registerDaoClass(EncuestaDao.class);
+        registerDaoClass(EncuestaAgroquimicoUsadoDao.class);
+        registerDaoClass(EncuestaCultivoDao.class);
+        registerDaoClass(EncuestadoDao.class);
+        registerDaoClass(EncuestaInvernaculoDao.class);
         registerDaoClass(EspecieDao.class);
+        registerDaoClass(EstablecimientoDao.class);
+        registerDaoClass(FactorClimaticoDao.class);
+        registerDaoClass(FamiliaDao.class);
+        registerDaoClass(InvernaculoDao.class);
+        registerDaoClass(MaterialEstructuraDao.class);
+        registerDaoClass(NacionalidadDao.class);
+        registerDaoClass(NivelInstruccionDao.class);
+        registerDaoClass(RegimenTenenciaDao.class);
         registerDaoClass(TipoCultivoDao.class);
         registerDaoClass(TipoProduccionDao.class);
-        registerDaoClass(FactorClimaticoDao.class);
-        registerDaoClass(AsesoramientoDao.class);
         registerDaoClass(TripleLavadoDao.class);
-        registerDaoClass(AgroquimicosDao.class);
-        registerDaoClass(EncuestaDao.class);
-        registerDaoClass(EncuestaInvernaculoDao.class);
-        registerDaoClass(EncuestaCultivoDao.class);
-        registerDaoClass(AgroquimicoUsadoDao.class);
-        registerDaoClass(EncuestaAgroquimicoUsadoDao.class);
     }
 
     public DaoSession newSession() {
