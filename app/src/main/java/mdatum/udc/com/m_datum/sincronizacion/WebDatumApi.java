@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 
 public interface WebDatumApi {
 
-    public static final String BASE_URL = "http://192.168.1.41:8000/";
+    public static final String BASE_URL = "http://192.168.2.194:8000/";
 
     @POST ("api/auth/login/")
     Call<UserToken> login(@Body LoginBody loginBody);
