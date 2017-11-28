@@ -1,5 +1,7 @@
 package mdatum.udc.com.m_datum.sincronizacion;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -12,7 +14,7 @@ import retrofit2.http.POST;
 
 public interface WebDatumApi {
 
-    public static final String BASE_URL = "http://192.168.2.194:8000/";
+    public static final String BASE_URL = "http://192.168.1.37:8000/";
 
     @POST ("api/auth/login/")
     Call<UserToken> login(@Body LoginBody loginBody);
@@ -26,5 +28,7 @@ public interface WebDatumApi {
     @POST ("api/auth/password/change/")
     Call<Void> password_change(@Header("Authorization") String token, @Body PasswordChangeBody passwordChangeBody);
 
+    @GET ("api/updates/")
+    Call<List<Updates>> updates(@Header("Authorization") String token);
 
 }

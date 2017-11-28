@@ -31,7 +31,7 @@ public class MDatumOpenHelper extends DaoMaster.OpenHelper {
     public void onCreate(Database db) {
         super.onCreate(db);
 
-        ///INSERCION DE DATOS INICIALES
+       /* ///INSERCION DE DATOS INICIALES
         ///Regimen de tenencia
         db.execSQL("INSERT INTO "+ RegimenTenenciaDao.TABLENAME + " (" +
                     RegimenTenenciaDao.Properties.Descpripcion.columnName +
@@ -223,6 +223,6 @@ public class MDatumOpenHelper extends DaoMaster.OpenHelper {
                 ") VALUES('Lo Conozco y no lo uso')");
         db.execSQL("INSERT INTO "+ TripleLavadoDao.TABLENAME + " (" +
                 TripleLavadoDao.Properties.Descripcion.columnName +
-                ") VALUES('No lo conozco')");
+                ") VALUES('No lo conozco')");*/
     }
 }

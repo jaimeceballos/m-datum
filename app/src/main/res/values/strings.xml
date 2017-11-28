@@ -116,5 +116,7 @@
     <string name="new_password">Nueva Contraseña</string>
     <string name="repeat_password">Repita la Contraseña</string>
     <string name="cambiar">Cambiar Contraseña</string>
+    <string name="title_activity_cambiar_password">Cambiar Password</string>
+    <string name="btn_cambiar_password">Cambiar Password</string>
 
 </resources>

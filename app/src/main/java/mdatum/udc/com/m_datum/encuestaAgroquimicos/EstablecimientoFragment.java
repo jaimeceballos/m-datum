@@ -139,7 +139,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(parent.getItemAtPosition(position).toString().equals("Otro")) {
+                if(parent.getItemAtPosition(position).toString().equals("OTRO")) {
 
                     tilEspecificar.setVisibility(View.VISIBLE);
                 }else{
@@ -254,7 +254,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
                 establecimiento.setRegimenTenenciaId(spRegTenencia.getSelectedItemPosition());
 
 
-                if(opciones.get(establecimiento.getRegimenTenenciaId()).equals("Otro")){
+                if(opciones.get(establecimiento.getRegimenTenenciaId()).equals("OTRO")){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
                 }else{
                     establecimiento.setRegimenOtros("");
@@ -325,7 +325,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
     private boolean validarRegimen(){
 
-        if((opciones.get(establecimiento.getRegimenTenenciaId()).toString().equals("Otro")) && (etEspecificar.getText().toString().trim().isEmpty())){
+        if((opciones.get(establecimiento.getRegimenTenenciaId()).toString().equals("OTRO")) && (etEspecificar.getText().toString().trim().isEmpty())){
             etEspecificar.setError(getString(R.string.error_especificar));
             return false;
         }else {

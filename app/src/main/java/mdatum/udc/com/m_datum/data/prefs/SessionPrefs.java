@@ -14,10 +14,12 @@ public class SessionPrefs {
 
     public static final String PREFS_NAME = "MDATUM_PREFS";
     public static final String PREF_USER_TOKEN = "PREF_USER_TOKEN";
+    public static final String PREF_LAST_UPDATE = "PREF_LAST_UPDATE";
 
     private final SharedPreferences mPrefs;
 
     private boolean mIsLoggedIn = false;
+    private int lastUpdate = 0;
 
     private static SessionPrefs INSTANCE;
 
@@ -32,6 +34,8 @@ public class SessionPrefs {
         mPrefs = context.getApplicationContext().getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 
         mIsLoggedIn = !TextUtils.isEmpty(mPrefs.getString(PREF_USER_TOKEN,null));
+
+        lastUpdate = mPrefs.getInt(PREF_LAST_UPDATE,0);
 
     }
 
@@ -56,6 +60,17 @@ public class SessionPrefs {
         SharedPreferences.Editor editor = mPrefs.edit();
         editor.putString(PREF_USER_TOKEN, null);
         editor.apply();
+    }
+
+    public int getLastUpdate(){
+        return this.lastUpdate;
+    }
+
+    public void saveLastUpdate(int update){
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putInt(PREF_LAST_UPDATE,update);
+        editor.apply();
+        lastUpdate = update;
     }
 
 

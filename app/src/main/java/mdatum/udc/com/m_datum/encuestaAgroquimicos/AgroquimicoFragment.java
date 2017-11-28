@@ -144,7 +144,7 @@ public class AgroquimicoFragment extends Fragment {
         spAsesoramiento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(adapterView.getItemAtPosition(i).toString().equals("Otro")){
+                if(adapterView.getItemAtPosition(i).toString().equals("OTRO")){
                     tilAsesoramientoOtro.setVisibility(View.VISIBLE);
                 }else{
                     tilAsesoramientoOtro.setVisibility(View.GONE);
