@@ -119,4 +119,10 @@
     <string name="title_activity_cambiar_password">Cambiar Password</string>
     <string name="btn_cambiar_password">Cambiar Password</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nro_encuesta_lbl">Encuesta Nro.:</string>
+    <string name="fecha_lbl">Fecha:</string>
+    <string name="establecimiento_lbl">Establecimiento:</string>
+
 </resources>

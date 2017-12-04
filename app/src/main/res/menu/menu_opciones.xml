@@ -16,13 +16,13 @@
         >
 
     </item>
-    <item
+    <!--item
         android:id="@+id/mNueva"
         android:title="@string/btn_encuesta"
         app:showAsAction="ifRoom"
         android:orderInCategory="98">
 
-    </item>
+    </item-->
     <item
         android:id="@+id/mSincro"
         android:title="@string/btn_sincro"

@@ -184,7 +184,7 @@ public class NuevoCultivoFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Cultivo... cultivos) {
-            long result = daoSession.insert(cultivos[0]);
+            long result = daoSession.insertOrReplace(cultivos[0]);
             return result > 0;
         }
 

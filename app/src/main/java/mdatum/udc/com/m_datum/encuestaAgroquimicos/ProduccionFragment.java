@@ -48,8 +48,7 @@ public class ProduccionFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     InvernaculoFragment fragment = new InvernaculoFragment();
                     fragment.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.cl_view_group_agroquimico, fragment);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.replace(R.id.cl_view_group_agroquimico, fragment).commit();
 
                 }
             }
@@ -65,6 +64,7 @@ public class ProduccionFragment extends Fragment {
                 CultivoFragment fragment = new CultivoFragment();
                 fragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                        .addToBackStack("CULTIVO")
                         .commit();
             }
         });

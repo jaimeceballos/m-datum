@@ -194,7 +194,7 @@ public class AgroquimicoFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Agroquimicos... agroquimicos) {
-            Long result = daoSession.insert(agroquimicos[0]);
+            Long result = daoSession.insertOrReplace(agroquimicos[0]);
             encuesta.setAgroquimicoId(result);
             daoSession.update(encuesta);
             return result > 0;
@@ -208,6 +208,7 @@ public class AgroquimicoFragment extends Fragment {
             AgroquimicoUsadoBaseFragment fragment = new AgroquimicoUsadoBaseFragment();
             fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                    .addToBackStack("AGROQUIMICO_USADO")
                     .commit();
         }
     }

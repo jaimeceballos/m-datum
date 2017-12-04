@@ -1,6 +1,13 @@
 package mdatum.udc.com.m_datum;
 
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
+
+import java.net.URL;
+import java.net.URLConnection;
 
 import mdatum.udc.com.m_datum.database.DaoMaster;
 import mdatum.udc.com.m_datum.database.DaoSession;
@@ -23,7 +30,8 @@ public class MDatumController extends Application {
     public void onCreate() {
         super.onCreate();
 
-        mDaoSession = new DaoMaster(new MDatumOpenHelper(this, "control.db").getWritableDb()).newSession();
+        mDaoSession = new DaoMaster(new MDatumOpenHelper(this, "mdatum.db").getWritableDb()).newSession();
+
         mRestAdapter = new Retrofit.Builder()
                 .baseUrl(WebDatumApi.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,4 +49,14 @@ public class MDatumController extends Application {
     public WebDatumApi getApiSession(){
         return mWebDatumApi;
     }
+
+    public boolean isOnline(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        return activeNetwork != null && activeNetwork.isConnected();
+    }
+
+
 }

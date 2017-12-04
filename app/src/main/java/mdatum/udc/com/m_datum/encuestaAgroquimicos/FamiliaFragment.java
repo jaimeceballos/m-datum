@@ -108,7 +108,7 @@ public class FamiliaFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Familia... familia) {
-            long result = daoSession.insert(familia[0]);
+            long result = daoSession.insertOrReplace(familia[0]);
             encuesta.setFamiliaId(result);
             daoSession.update(encuesta);
             return result > 0;
@@ -122,6 +122,7 @@ public class FamiliaFragment extends Fragment {
             ProduccionFragment fragment = new ProduccionFragment();
             fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.ll_body_content,fragment)
+                    .addToBackStack("PRODUCCION")
                     .commit();
         }
 

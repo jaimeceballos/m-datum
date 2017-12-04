@@ -2,6 +2,8 @@ package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -12,14 +14,22 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Establecimiento {
 
+    @SerializedName("id")
     @org.greenrobot.greendao.annotation.Id (autoincrement = true)
     private Long id;
+    @SerializedName("nombre")
     private String nombre;
+    @SerializedName("numero")
     private String nro;
+    @SerializedName("posLatitud")
     private String posLatitud;
+    @SerializedName("posLongitud")
     private String posLongitud;
+    @SerializedName("foto")
     private String foto;
+    @SerializedName("regimenTenencia")
     private int regimenTenenciaId;
+    @SerializedName("regimenOtros")
     private String regimenOtros;
 
     @Generated(hash = 541625268)

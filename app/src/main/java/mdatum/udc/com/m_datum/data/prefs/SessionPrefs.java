@@ -15,11 +15,13 @@ public class SessionPrefs {
     public static final String PREFS_NAME = "MDATUM_PREFS";
     public static final String PREF_USER_TOKEN = "PREF_USER_TOKEN";
     public static final String PREF_LAST_UPDATE = "PREF_LAST_UPDATE";
+    public static final String PREF_LAST_SERVER_UPDATE = "PREF_LAST_SERVER_UPDATE";
 
     private final SharedPreferences mPrefs;
 
     private boolean mIsLoggedIn = false;
     private int lastUpdate = 0;
+    private int lastServerUpdates;
 
     private static SessionPrefs INSTANCE;
 
@@ -36,6 +38,8 @@ public class SessionPrefs {
         mIsLoggedIn = !TextUtils.isEmpty(mPrefs.getString(PREF_USER_TOKEN,null));
 
         lastUpdate = mPrefs.getInt(PREF_LAST_UPDATE,0);
+
+        lastServerUpdates = mPrefs.getInt(PREF_LAST_SERVER_UPDATE,0);
 
     }
 
@@ -73,5 +77,13 @@ public class SessionPrefs {
         lastUpdate = update;
     }
 
+    public void setPrefLastServerUpdate(int lastServerUpdateUpdate){
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putInt(PREF_LAST_SERVER_UPDATE,lastServerUpdateUpdate);
+        editor.apply();
+        lastServerUpdates = lastServerUpdateUpdate;
+    }
+
+    public int getLastServerUpdates() { return this.lastServerUpdates; }
 
 }

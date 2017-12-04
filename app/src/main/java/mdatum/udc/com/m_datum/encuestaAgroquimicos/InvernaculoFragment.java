@@ -135,7 +135,7 @@ public class InvernaculoFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Invernaculo... invernaculos) {
-            long result = daoSession.insert(invernaculos[0]);
+            long result = daoSession.insertOrReplace(invernaculos[0]);
             return result > 0;
         }
 

@@ -61,30 +61,35 @@ import mdatum.udc.com.m_datum.database.Establecimiento;
 public class EstablecimientoFragment extends Fragment implements OnConnectionFailedListener,
         ConnectionCallbacks {
 
+    //Instancio un nuvo objeto POJO Establecimiento
     private Establecimiento establecimiento = new Establecimiento();
+    //Creo un objeto POJO del tipo Encuesta
     private Encuesta encuesta;
+    //Preparo el objeto que va a manerjar la sesion de la base de datos
     private DaoSession daoSession;
     //variable donde se genera el nombre de archivo de la imagen capturada
     private String name = "";
 
+    //Creo una lista donde guardar las opciones de regimen Tenencia
     private List opciones;
+
     private static final String LOGTAG = "android-localizacion";
 
     //variable para la peticion de permiso de localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
+    //variable para la peticion de permiso de almacenamiento
     private static final int PETICION_PERMISO_ALMACENAMIENTO = 102;
     //instancia de la api de google
     private GoogleApiClient apiClient;
-    //textViews que muestran la posicion geografica
+
+    //Creo los elementos con los que voy a relacionar la interfaz
     private TextView tvCoordLat,tvCoordLong;
-
     private EditText etEspecificar, etNombreEstablecimiento, etNroEstablecimiento;
-
     private TextInputLayout tilEspecificar;
     private Spinner spRegTenencia;
-
     private Button btnCapturarUbicacion;
-
+    //Creo un elemento donde guardar la opcion que se selecciona de regimen tenencia
+    private RegimenTenencia opcionSelected;
 
 
     public EstablecimientoFragment() {
@@ -95,7 +100,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.fragment_establecimiento, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
@@ -104,21 +109,23 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
         // obtiene la sesion de acceso a la base de datos.
         daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
+        //Obtengo el objeto encuesta que va a pasar durante toda la sesion
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
+
+
 
 //--------------------------------SPINNER-----------------------------------------------------------
         //Arreglo que carga el spinner de Régimen de Tenencia de Tierra
-
-
-
         tilEspecificar = (TextInputLayout) rootView.findViewById(R.id.til_especificar);
         etEspecificar = (EditText) rootView.findViewById(R.id.et_especificar);
         spRegTenencia = (Spinner) rootView.findViewById(R.id.sp_reg_tenencia);
 
 
-
+        //Instancio un objeto DAO para acceder a la informacion en la base de datos
         RegimenTenenciaDao regimenTenenciaDao = daoSession.getRegimenTenenciaDao();
+        //cargo la lista de opciones con los valore desde la base de datos
         opciones = regimenTenenciaDao.loadAll();
+
 
         final List<String> objects = new ArrayList<>();
 
@@ -251,10 +258,11 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
-                establecimiento.setRegimenTenenciaId(spRegTenencia.getSelectedItemPosition());
+                establecimiento.setRegimenTenenciaId(spRegTenencia.getSelectedItemPosition()+1);
 
+                opcionSelected = (RegimenTenencia) opciones.get(establecimiento.getRegimenTenenciaId() -1 );
 
-                if(opciones.get(establecimiento.getRegimenTenenciaId()).equals("OTRO")){
+                if(opcionSelected.getDescpripcion().equals("OTRO")){
                     establecimiento.setRegimenOtros(etEspecificar.getText().toString());
                 }else{
                     establecimiento.setRegimenOtros("");
@@ -305,6 +313,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
         }
 
+
         return true;
     }
 
@@ -325,7 +334,9 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
     private boolean validarRegimen(){
 
-        if((opciones.get(establecimiento.getRegimenTenenciaId()).toString().equals("OTRO")) && (etEspecificar.getText().toString().trim().isEmpty())){
+
+
+        if((opcionSelected.getDescpripcion().equals("OTRO")) && (etEspecificar.getText().toString().trim().isEmpty())){
             etEspecificar.setError(getString(R.string.error_especificar));
             return false;
         }else {
@@ -485,9 +496,9 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
     private class AddEstablecimientoTask extends AsyncTask<mdatum.udc.com.m_datum.database.Establecimiento,Void,Boolean> {
         @Override
         protected Boolean doInBackground(Establecimiento... establecimiento){
-            long result = daoSession.insert(establecimiento[0]);
+            long result = daoSession.insertOrReplace(establecimiento[0]);
             encuesta.setEstablecimientoId(result);
-            long idEncuesta = daoSession.insert(encuesta);
+            long idEncuesta = daoSession.insertOrReplace(encuesta);
             return result > 0;
         }
 

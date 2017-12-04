@@ -72,7 +72,7 @@ public class AgroquimicoUsadoFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(AgroquimicoUsado... agroquimicoUsados) {
-            long result = daoSession.insert(agroquimicoUsados[0]);
+            long result = daoSession.insertOrReplace(agroquimicoUsados[0]);
             return result > 0;
         }
 
