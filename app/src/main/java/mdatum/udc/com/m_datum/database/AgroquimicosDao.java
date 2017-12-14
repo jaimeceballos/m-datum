@@ -24,12 +24,11 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Usa = new Property(1, boolean.class, "usa", false, "USA");
-        public final static Property Razon_no = new Property(2, String.class, "razon_no", false, "RAZON_NO");
-        public final static Property Tiempo_usa = new Property(3, int.class, "tiempo_usa", false, "TIEMPO_USA");
-        public final static Property Factor_climatico = new Property(4, Long.class, "factor_climatico", false, "FACTOR_CLIMATICO");
-        public final static Property Triple_lavado = new Property(5, Long.class, "triple_lavado", false, "TRIPLE_LAVADO");
-        public final static Property Asesoramiento = new Property(6, Long.class, "asesoramiento", false, "ASESORAMIENTO");
-        public final static Property Asesoramiento_otro = new Property(7, String.class, "asesoramiento_otro", false, "ASESORAMIENTO_OTRO");
+        public final static Property Factor_climatico = new Property(2, Long.class, "factor_climatico", false, "FACTOR_CLIMATICO");
+        public final static Property Triple_lavado = new Property(3, Long.class, "triple_lavado", false, "TRIPLE_LAVADO");
+        public final static Property Asesoramiento = new Property(4, Long.class, "asesoramiento", false, "ASESORAMIENTO");
+        public final static Property Asesoramiento_otro = new Property(5, String.class, "asesoramiento_otro", false, "ASESORAMIENTO_OTRO");
+        public final static Property Transaccion = new Property(6, String.class, "transaccion", false, "TRANSACCION");
     }
 
 
@@ -47,12 +46,11 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"AGROQUIMICOS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"USA\" INTEGER NOT NULL ," + // 1: usa
-                "\"RAZON_NO\" TEXT," + // 2: razon_no
-                "\"TIEMPO_USA\" INTEGER NOT NULL ," + // 3: tiempo_usa
-                "\"FACTOR_CLIMATICO\" INTEGER," + // 4: factor_climatico
-                "\"TRIPLE_LAVADO\" INTEGER," + // 5: triple_lavado
-                "\"ASESORAMIENTO\" INTEGER," + // 6: asesoramiento
-                "\"ASESORAMIENTO_OTRO\" TEXT);"); // 7: asesoramiento_otro
+                "\"FACTOR_CLIMATICO\" INTEGER," + // 2: factor_climatico
+                "\"TRIPLE_LAVADO\" INTEGER," + // 3: triple_lavado
+                "\"ASESORAMIENTO\" INTEGER," + // 4: asesoramiento
+                "\"ASESORAMIENTO_OTRO\" TEXT," + // 5: asesoramiento_otro
+                "\"TRANSACCION\" TEXT);"); // 6: transaccion
     }
 
     /** Drops the underlying database table. */
@@ -71,30 +69,29 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         }
         stmt.bindLong(2, entity.getUsa() ? 1L: 0L);
  
-        String razon_no = entity.getRazon_no();
-        if (razon_no != null) {
-            stmt.bindString(3, razon_no);
-        }
-        stmt.bindLong(4, entity.getTiempo_usa());
- 
         Long factor_climatico = entity.getFactor_climatico();
         if (factor_climatico != null) {
-            stmt.bindLong(5, factor_climatico);
+            stmt.bindLong(3, factor_climatico);
         }
  
         Long triple_lavado = entity.getTriple_lavado();
         if (triple_lavado != null) {
-            stmt.bindLong(6, triple_lavado);
+            stmt.bindLong(4, triple_lavado);
         }
  
         Long asesoramiento = entity.getAsesoramiento();
         if (asesoramiento != null) {
-            stmt.bindLong(7, asesoramiento);
+            stmt.bindLong(5, asesoramiento);
         }
  
         String asesoramiento_otro = entity.getAsesoramiento_otro();
         if (asesoramiento_otro != null) {
-            stmt.bindString(8, asesoramiento_otro);
+            stmt.bindString(6, asesoramiento_otro);
+        }
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(7, transaccion);
         }
     }
 
@@ -108,30 +105,29 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         }
         stmt.bindLong(2, entity.getUsa() ? 1L: 0L);
  
-        String razon_no = entity.getRazon_no();
-        if (razon_no != null) {
-            stmt.bindString(3, razon_no);
-        }
-        stmt.bindLong(4, entity.getTiempo_usa());
- 
         Long factor_climatico = entity.getFactor_climatico();
         if (factor_climatico != null) {
-            stmt.bindLong(5, factor_climatico);
+            stmt.bindLong(3, factor_climatico);
         }
  
         Long triple_lavado = entity.getTriple_lavado();
         if (triple_lavado != null) {
-            stmt.bindLong(6, triple_lavado);
+            stmt.bindLong(4, triple_lavado);
         }
  
         Long asesoramiento = entity.getAsesoramiento();
         if (asesoramiento != null) {
-            stmt.bindLong(7, asesoramiento);
+            stmt.bindLong(5, asesoramiento);
         }
  
         String asesoramiento_otro = entity.getAsesoramiento_otro();
         if (asesoramiento_otro != null) {
-            stmt.bindString(8, asesoramiento_otro);
+            stmt.bindString(6, asesoramiento_otro);
+        }
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(7, transaccion);
         }
     }
 
@@ -145,12 +141,11 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         Agroquimicos entity = new Agroquimicos( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getShort(offset + 1) != 0, // usa
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // razon_no
-            cursor.getInt(offset + 3), // tiempo_usa
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // factor_climatico
-            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // triple_lavado
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // asesoramiento
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // asesoramiento_otro
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // factor_climatico
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // triple_lavado
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // asesoramiento
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // asesoramiento_otro
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // transaccion
         );
         return entity;
     }
@@ -159,12 +154,11 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
     public void readEntity(Cursor cursor, Agroquimicos entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setUsa(cursor.getShort(offset + 1) != 0);
-        entity.setRazon_no(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setTiempo_usa(cursor.getInt(offset + 3));
-        entity.setFactor_climatico(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
-        entity.setTriple_lavado(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
-        entity.setAsesoramiento(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
-        entity.setAsesoramiento_otro(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setFactor_climatico(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setTriple_lavado(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setAsesoramiento(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setAsesoramiento_otro(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setTransaccion(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

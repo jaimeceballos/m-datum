@@ -11,12 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 
+import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.MainActivity;
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.database.DaoSession;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.EncuestaDao;
 
 public class FinalEncuestaFragment extends Fragment {
 
     private Button btnCerrar,btnNuevaEncuesta;
+
+    private Encuesta encuesta;
+    DaoSession mDaosession;
 
     public FinalEncuestaFragment() {
         // Required empty public constructor
@@ -34,8 +41,15 @@ public class FinalEncuestaFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_final_encuesta, container, false);
 
+        mDaosession = ((MDatumController)getActivity().getApplication()).getDaoSession();
+        EncuestaDao encuestaDao = mDaosession.getEncuestaDao();
+        encuesta = (Encuesta) getArguments().getSerializable("encuesta");
+        encuesta.setIs_finished(true);
+        encuestaDao.update(encuesta);
         btnCerrar = (Button) rootView.findViewById(R.id.btn_cerrar);
         btnNuevaEncuesta = (Button) rootView.findViewById(R.id.btn_nueva_encuesta);
+
+
 
         btnCerrar.setOnClickListener(new View.OnClickListener() {
             @Override

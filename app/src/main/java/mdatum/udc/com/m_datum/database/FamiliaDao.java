@@ -23,10 +23,11 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property EsCasado = new Property(1, int.class, "esCasado", false, "ES_CASADO");
-        public final static Property TieneHijos = new Property(2, int.class, "tieneHijos", false, "TIENE_HIJOS");
+        public final static Property EsCasado = new Property(1, boolean.class, "esCasado", false, "ES_CASADO");
+        public final static Property TieneHijos = new Property(2, boolean.class, "tieneHijos", false, "TIENE_HIJOS");
         public final static Property CantVarones = new Property(3, int.class, "cantVarones", false, "CANT_VARONES");
         public final static Property CantMujeres = new Property(4, int.class, "cantMujeres", false, "CANT_MUJERES");
+        public final static Property Transaccion = new Property(5, String.class, "transaccion", false, "TRANSACCION");
     }
 
 
@@ -46,7 +47,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
                 "\"ES_CASADO\" INTEGER NOT NULL ," + // 1: esCasado
                 "\"TIENE_HIJOS\" INTEGER NOT NULL ," + // 2: tieneHijos
                 "\"CANT_VARONES\" INTEGER NOT NULL ," + // 3: cantVarones
-                "\"CANT_MUJERES\" INTEGER NOT NULL );"); // 4: cantMujeres
+                "\"CANT_MUJERES\" INTEGER NOT NULL ," + // 4: cantMujeres
+                "\"TRANSACCION\" TEXT);"); // 5: transaccion
     }
 
     /** Drops the underlying database table. */
@@ -63,10 +65,15 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getEsCasado());
-        stmt.bindLong(3, entity.getTieneHijos());
+        stmt.bindLong(2, entity.getEsCasado() ? 1L: 0L);
+        stmt.bindLong(3, entity.getTieneHijos() ? 1L: 0L);
         stmt.bindLong(4, entity.getCantVarones());
         stmt.bindLong(5, entity.getCantMujeres());
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(6, transaccion);
+        }
     }
 
     @Override
@@ -77,10 +84,15 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getEsCasado());
-        stmt.bindLong(3, entity.getTieneHijos());
+        stmt.bindLong(2, entity.getEsCasado() ? 1L: 0L);
+        stmt.bindLong(3, entity.getTieneHijos() ? 1L: 0L);
         stmt.bindLong(4, entity.getCantVarones());
         stmt.bindLong(5, entity.getCantMujeres());
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(6, transaccion);
+        }
     }
 
     @Override
@@ -92,10 +104,11 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
     public Familia readEntity(Cursor cursor, int offset) {
         Familia entity = new Familia( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // esCasado
-            cursor.getInt(offset + 2), // tieneHijos
+            cursor.getShort(offset + 1) != 0, // esCasado
+            cursor.getShort(offset + 2) != 0, // tieneHijos
             cursor.getInt(offset + 3), // cantVarones
-            cursor.getInt(offset + 4) // cantMujeres
+            cursor.getInt(offset + 4), // cantMujeres
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // transaccion
         );
         return entity;
     }
@@ -103,10 +116,11 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
     @Override
     public void readEntity(Cursor cursor, Familia entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setEsCasado(cursor.getInt(offset + 1));
-        entity.setTieneHijos(cursor.getInt(offset + 2));
+        entity.setEsCasado(cursor.getShort(offset + 1) != 0);
+        entity.setTieneHijos(cursor.getShort(offset + 2) != 0);
         entity.setCantVarones(cursor.getInt(offset + 3));
         entity.setCantMujeres(cursor.getInt(offset + 4));
+        entity.setTransaccion(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

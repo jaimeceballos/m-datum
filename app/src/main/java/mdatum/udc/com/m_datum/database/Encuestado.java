@@ -2,10 +2,14 @@ package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Index;
+
 /**
  * Created by jaime on 21/06/17.
  */
@@ -13,20 +17,31 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Encuestado {
 
+    @SerializedName("id")
     @org.greenrobot.greendao.annotation.Id (autoincrement = true)
     private Long id;
+    @SerializedName("nombre")
     private String nombre;
+    @SerializedName("apellido")
     private String apellido;
+    @SerializedName("edad")
     private int edad;
+    @SerializedName("nacionalidad")
     private int nacionalidadId;
+    @SerializedName("nivelInstruccion")
     private int nivelInstruccionId;
+    @SerializedName("nivelCOmpleto")
     private Boolean nivelCompleto;
+    @SerializedName("viveEstablecimiento")
     private Boolean viveEstablecimiento;
 
-    @Generated(hash = 1327549907)
+    @SerializedName("transaccion")
+    private String transaccion;
+
+    @Generated(hash = 2121983181)
     public Encuestado(Long id, String nombre, String apellido, int edad,
             int nacionalidadId, int nivelInstruccionId, Boolean nivelCompleto,
-            Boolean viveEstablecimiento) {
+            Boolean viveEstablecimiento, String transaccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,6 +50,7 @@ public class Encuestado {
         this.nivelInstruccionId = nivelInstruccionId;
         this.nivelCompleto = nivelCompleto;
         this.viveEstablecimiento = viveEstablecimiento;
+        this.transaccion = transaccion;
     }
 
     @Generated(hash = 401734286)
@@ -42,7 +58,7 @@ public class Encuestado {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -50,7 +66,7 @@ public class Encuestado {
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -58,7 +74,7 @@ public class Encuestado {
     }
 
     public String getApellido() {
-        return apellido;
+        return this.apellido;
     }
 
     public void setApellido(String apellido) {
@@ -66,7 +82,7 @@ public class Encuestado {
     }
 
     public int getEdad() {
-        return edad;
+        return this.edad;
     }
 
     public void setEdad(int edad) {
@@ -74,7 +90,7 @@ public class Encuestado {
     }
 
     public int getNacionalidadId() {
-        return nacionalidadId;
+        return this.nacionalidadId;
     }
 
     public void setNacionalidadId(int nacionalidadId) {
@@ -82,7 +98,7 @@ public class Encuestado {
     }
 
     public int getNivelInstruccionId() {
-        return nivelInstruccionId;
+        return this.nivelInstruccionId;
     }
 
     public void setNivelInstruccionId(int nivelInstruccionId) {
@@ -90,7 +106,7 @@ public class Encuestado {
     }
 
     public Boolean getNivelCompleto() {
-        return nivelCompleto;
+        return this.nivelCompleto;
     }
 
     public void setNivelCompleto(Boolean nivelCompleto) {
@@ -98,12 +114,23 @@ public class Encuestado {
     }
 
     public Boolean getViveEstablecimiento() {
-        return viveEstablecimiento;
+        return this.viveEstablecimiento;
     }
 
     public void setViveEstablecimiento(Boolean viveEstablecimiento) {
         this.viveEstablecimiento = viveEstablecimiento;
     }
 
+    public String getTransaccion() {
+        return this.transaccion;
+    }
+
+    public void setTransaccion(String transaccion) {
+        this.transaccion = transaccion;
+    }
+
+
+
+    
 
 }

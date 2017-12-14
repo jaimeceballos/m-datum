@@ -2,6 +2,8 @@ package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -12,21 +14,30 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Familia {
 
+    @SerializedName("id")
     @Id(autoincrement = true)
     private Long id;
-    private int esCasado;
-    private int tieneHijos;
+    @SerializedName("esCasado")
+    private boolean esCasado;
+    @SerializedName("tieneHijos")
+    private boolean tieneHijos;
+    @SerializedName("cantVarones")
     private int cantVarones;
+    @SerializedName("cantMujeres")
     private int cantMujeres;
 
-    @Generated(hash = 268209188)
-    public Familia(Long id, int esCasado, int tieneHijos, int cantVarones,
-            int cantMujeres) {
+    @SerializedName("transaccion")
+    private String transaccion;
+
+    @Generated(hash = 2085572707)
+    public Familia(Long id, boolean esCasado, boolean tieneHijos, int cantVarones,
+            int cantMujeres, String transaccion) {
         this.id = id;
         this.esCasado = esCasado;
         this.tieneHijos = tieneHijos;
         this.cantVarones = cantVarones;
         this.cantMujeres = cantMujeres;
+        this.transaccion = transaccion;
     }
 
     @Generated(hash = 2042212105)
@@ -34,31 +45,31 @@ public class Familia {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public int getEsCasado() {
-        return esCasado;
+    public boolean getEsCasado() {
+        return this.esCasado;
     }
 
-    public void setEsCasado(int esCasado) {
+    public void setEsCasado(boolean esCasado) {
         this.esCasado = esCasado;
     }
 
-    public int getTieneHijos() {
-        return tieneHijos;
+    public boolean getTieneHijos() {
+        return this.tieneHijos;
     }
 
-    public void setTieneHijos(int tieneHijos) {
+    public void setTieneHijos(boolean tieneHijos) {
         this.tieneHijos = tieneHijos;
     }
 
     public int getCantVarones() {
-        return cantVarones;
+        return this.cantVarones;
     }
 
     public void setCantVarones(int cantVarones) {
@@ -66,12 +77,22 @@ public class Familia {
     }
 
     public int getCantMujeres() {
-        return cantMujeres;
+        return this.cantMujeres;
     }
 
     public void setCantMujeres(int cantMujeres) {
         this.cantMujeres = cantMujeres;
     }
+
+    public String getTransaccion() {
+        return this.transaccion;
+    }
+
+    public void setTransaccion(String transaccion) {
+        this.transaccion = transaccion;
+    }
+
+
 
 
 }

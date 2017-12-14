@@ -6,12 +6,15 @@ import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Index;
 
 /**
  * Created by jaime on 12/06/17.
  */
 
-@Entity
+@Entity(
+        indexes = {@Index(value = "nombre,nro", unique = true) }
+)
 public class Establecimiento {
 
     @SerializedName("id")
@@ -32,93 +35,99 @@ public class Establecimiento {
     @SerializedName("regimenOtros")
     private String regimenOtros;
 
-    @Generated(hash = 541625268)
-    public Establecimiento(Long id, String nombre, String nro, String posLatitud, String posLongitud, String foto, int regimenTenenciaId, String regimenOtros) {
-        this.id = id;
-        this.nombre = nombre;
-        this.nro = nro;
-        this.posLatitud = posLatitud;
-        this.posLongitud = posLongitud;
-        this.foto = foto;
-        this.regimenTenenciaId = regimenTenenciaId;
-        this.regimenOtros = regimenOtros;
-    }
+    @SerializedName("transaccion")
+    private String transaccion;
 
-    @Generated(hash = 1125154551)
-    public Establecimiento() {
-    }
+@Generated(hash = 1529512107)
+public Establecimiento(Long id, String nombre, String nro, String posLatitud,
+        String posLongitud, String foto, int regimenTenenciaId,
+        String regimenOtros, String transaccion) {
+    this.id = id;
+    this.nombre = nombre;
+    this.nro = nro;
+    this.posLatitud = posLatitud;
+    this.posLongitud = posLongitud;
+    this.foto = foto;
+    this.regimenTenenciaId = regimenTenenciaId;
+    this.regimenOtros = regimenOtros;
+    this.transaccion = transaccion;
+}
 
-    public Long getId() {
-        return id;
-    }
+@Generated(hash = 1125154551)
+public Establecimiento() {
+}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+public Long getId() {
+    return this.id;
+}
 
-    public String getNombre() {
-        return nombre;
-    }
+public void setId(Long id) {
+    this.id = id;
+}
 
-    public String getNro() {
-        return nro;
-    }
+public String getNombre() {
+    return this.nombre;
+}
 
-    public String getPosLatitud() {
-        return posLatitud;
-    }
+public void setNombre(String nombre) {
+    this.nombre = nombre;
+}
 
-    public String getPosLongitud() {
-        return posLongitud;
-    }
+public String getNro() {
+    return this.nro;
+}
 
-    public String getFoto() {
-        return foto;
-    }
+public void setNro(String nro) {
+    this.nro = nro;
+}
 
-    public int getRegimenTenenciaId() {
-        return regimenTenenciaId;
-    }
+public String getPosLatitud() {
+    return this.posLatitud;
+}
 
-    public String getRegimenOtros() {
-        return regimenOtros;
-    }
+public void setPosLatitud(String posLatitud) {
+    this.posLatitud = posLatitud;
+}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+public String getPosLongitud() {
+    return this.posLongitud;
+}
 
-    public void setNro(String nro) {
-        this.nro = nro;
-    }
+public void setPosLongitud(String posLongitud) {
+    this.posLongitud = posLongitud;
+}
 
-    public void setPosLatitud(String posLatitud) {
-        this.posLatitud = posLatitud;
-    }
+public String getFoto() {
+    return this.foto;
+}
 
-    public void setPosLongitud(String posLongitud) {
-        this.posLongitud = posLongitud;
-    }
+public void setFoto(String foto) {
+    this.foto = foto;
+}
 
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
+public int getRegimenTenenciaId() {
+    return this.regimenTenenciaId;
+}
 
-    public void setRegimenTenenciaId(int regimenTenenciaId) {
-        this.regimenTenenciaId = regimenTenenciaId;
-    }
+public void setRegimenTenenciaId(int regimenTenenciaId) {
+    this.regimenTenenciaId = regimenTenenciaId;
+}
 
-    public void setRegimenOtros(String regimenOtros) {
-        this.regimenOtros = regimenOtros;
-    }
+public String getRegimenOtros() {
+    return this.regimenOtros;
+}
+
+public void setRegimenOtros(String regimenOtros) {
+    this.regimenOtros = regimenOtros;
+}
+
+public String getTransaccion() {
+    return this.transaccion;
+}
+
+public void setTransaccion(String transaccion) {
+    this.transaccion = transaccion;
+}
 
 
-    
-
-    public Boolean validar(){
-        if(!this.getNombre().isEmpty() && !this.getNro().isEmpty() && this.getRegimenTenenciaId() != 6 || (this.getRegimenTenenciaId() == 6 && !this.getRegimenOtros().isEmpty())){
-            return true;
-        }
-        return false;
-    }
 }

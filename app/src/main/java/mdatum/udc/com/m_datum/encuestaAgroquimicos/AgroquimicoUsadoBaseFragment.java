@@ -37,20 +37,23 @@ public class AgroquimicoUsadoBaseFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_agroquimico_usado_base, container, false);
         btnFinalizar = (Button) rootView.findViewById(R.id.btn_finalizar);
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
+        final Bundle arguments = new Bundle();
+        arguments.putSerializable("encuesta",encuesta);
 
         btnFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FragmentTransaction finalTransaction = getFragmentManager().beginTransaction();
                 FinalEncuestaFragment finalFragment = new FinalEncuestaFragment();
+                finalFragment.setArguments(arguments);
                 finalTransaction.replace(R.id.ll_body_content,finalFragment)
                         .commit();
             }
         });
 
 
-        Bundle arguments = new Bundle();
-        arguments.putSerializable("encuesta",encuesta);
+
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         AgroquimicoUsadoFragment fragment = new AgroquimicoUsadoFragment();
         fragment.setArguments(arguments);

@@ -124,5 +124,9 @@
     <string name="nro_encuesta_lbl">Encuesta Nro.:</string>
     <string name="fecha_lbl">Fecha:</string>
     <string name="establecimiento_lbl">Establecimiento:</string>
+    <string name="encuestado">Encuestado:</string>
+    <string name="nueva_encuesta">Para crear una nueva encuesta haga click en el botón +</string>
+    <string name="synchro_title">Sincronizacion de encuestas</string>
+    <string name="encuestas_para_sincronizar">Encuestas para sincronizar:</string>
 
 </resources>

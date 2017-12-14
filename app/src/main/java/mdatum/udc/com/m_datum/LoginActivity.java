@@ -3,8 +3,10 @@ package mdatum.udc.com.m_datum;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,7 @@ import java.util.List;
 import mdatum.udc.com.m_datum.sincronizacion.ApiError;
 import mdatum.udc.com.m_datum.sincronizacion.LoginBody;
 import mdatum.udc.com.m_datum.sincronizacion.UserToken;
+import mdatum.udc.com.m_datum.sincronizacion.Usuario;
 import mdatum.udc.com.m_datum.sincronizacion.WebDatumApi;
 import mdatum.udc.com.m_datum.data.prefs.SessionPrefs;
 import retrofit2.Call;
@@ -59,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
+        prefs = getApplicationContext().getSharedPreferences("MDATUM_PREFS", Activity.MODE_PRIVATE);
 
         //Crear conexion a la API de WebDatum
         mWebDatumApi = ((MDatumController)getApplication()).getApiSession();
@@ -249,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showSplashScreen(){
+        obtenerUsuario();
         startActivity(new Intent(this,MainActivity.class));
         finish();
     }
@@ -259,6 +264,25 @@ public class LoginActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
         return activeNetwork != null && activeNetwork.isConnected();
+    }
+
+    private void obtenerUsuario(){
+        Call<Usuario> usuario = mWebDatumApi.usuario("Token "+prefs.getString("PREF_USER_TOKEN",null));
+        usuario.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if(response.isSuccessful()){
+                    Usuario user = response.body();
+                    SessionPrefs.get(LoginActivity.this).setUserLoged(Integer.parseInt(user.getPk()));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+
+            }
+        });
     }
 
 }

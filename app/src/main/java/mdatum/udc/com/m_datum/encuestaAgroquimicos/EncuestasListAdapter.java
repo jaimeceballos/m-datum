@@ -1,19 +1,19 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import mdatum.udc.com.m_datum.R;
 import mdatum.udc.com.m_datum.database.Encuesta;
-import mdatum.udc.com.m_datum.database.EncuestaEstablecimiento;
 
 /**
  * Created by jaime on 30/11/17.
@@ -21,10 +21,12 @@ import mdatum.udc.com.m_datum.database.EncuestaEstablecimiento;
 
 public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdapter.EncuestasListViewHolder> {
 
-    ArrayList<EncuestaEstablecimiento> encuestas;
+    List<Encuesta> encuestas;
+    Activity activity;
 
-    public EncuestasListAdapter(ArrayList<EncuestaEstablecimiento> encuestaEstablecimientos){
-        this.encuestas = encuestaEstablecimientos;
+    public EncuestasListAdapter(List<Encuesta> encuestas, Activity activity){
+        this.encuestas = encuestas;
+        this.activity = activity;
     }
 
     @Override
@@ -38,11 +40,19 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
     public void onBindViewHolder(EncuestasListViewHolder holder, int position) {
         //asocia cada elemento de la lista a cada view
 
-        EncuestaEstablecimiento encuestaEstablecimiento = encuestas.get(position);
+        Encuesta encuesta = encuestas.get(position);
 
-        holder.tv_nro_encuesta_cnt.setText(encuestaEstablecimiento.getId_encuesta().toString());
-        holder.tv_fecha_cnt.setText("25/11/2017");
-        holder.tv_establecimiento_cnt.setText(encuestaEstablecimiento.getEstablecimiento().toString());
+        holder.tv_nro_encuesta_cnt.setText(encuesta.getId().toString());
+        holder.tv_fecha_cnt.setText(encuesta.getFecha());
+        holder.tv_establecimiento_cnt.setText(encuesta.getEstablecimientoRelated().getNombre());
+        
+        holder.imgSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity, "Pulso sync", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
     }
 
     @Override
@@ -64,6 +74,7 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
         private TextView tv_nro_encuesta_cnt;
         private TextView tv_fecha_cnt;
         private TextView tv_establecimiento_cnt;
+        private ImageButton imgSync;
 
         public EncuestasListViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +82,7 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
             tv_nro_encuesta_cnt = (TextView)itemView.findViewById(R.id.tv_nro_encuesta_cnt);
             tv_fecha_cnt = (TextView)itemView.findViewById(R.id.tv_fecha_cnt);
             tv_establecimiento_cnt = (TextView)itemView.findViewById(R.id.tv_establecimiento_cnt);
+            imgSync = (ImageButton) itemView.findViewById(R.id.img_sync);
         }
 
 

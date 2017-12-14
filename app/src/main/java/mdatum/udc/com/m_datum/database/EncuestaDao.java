@@ -1,10 +1,13 @@
 package mdatum.udc.com.m_datum.database;
 
+import java.util.List;
+import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.Property;
+import org.greenrobot.greendao.internal.SqlUtils;
 import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
@@ -27,8 +30,15 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         public final static Property EncuestadoId = new Property(2, Long.class, "encuestadoId", false, "ENCUESTADO_ID");
         public final static Property FamiliaId = new Property(3, Long.class, "familiaId", false, "FAMILIA_ID");
         public final static Property AgroquimicoId = new Property(4, Long.class, "agroquimicoId", false, "AGROQUIMICO_ID");
-        public final static Property Fecha = new Property(5, java.util.Date.class, "fecha", false, "FECHA");
+        public final static Property Fecha = new Property(5, String.class, "fecha", false, "FECHA");
+        public final static Property Usuario = new Property(6, int.class, "usuario", false, "USUARIO");
+        public final static Property IsSincronized = new Property(7, boolean.class, "isSincronized", false, "IS_SINCRONIZED");
+        public final static Property Remote_id = new Property(8, int.class, "remote_id", false, "REMOTE_ID");
+        public final static Property Is_finished = new Property(9, boolean.class, "is_finished", false, "IS_FINISHED");
+        public final static Property Transaccion = new Property(10, String.class, "transaccion", false, "TRANSACCION");
     }
+
+    private DaoSession daoSession;
 
 
     public EncuestaDao(DaoConfig config) {
@@ -37,6 +47,7 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
     
     public EncuestaDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
+        this.daoSession = daoSession;
     }
 
     /** Creates the underlying database table. */
@@ -48,7 +59,12 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
                 "\"ENCUESTADO_ID\" INTEGER," + // 2: encuestadoId
                 "\"FAMILIA_ID\" INTEGER," + // 3: familiaId
                 "\"AGROQUIMICO_ID\" INTEGER," + // 4: agroquimicoId
-                "\"FECHA\" INTEGER);"); // 5: fecha
+                "\"FECHA\" TEXT," + // 5: fecha
+                "\"USUARIO\" INTEGER NOT NULL ," + // 6: usuario
+                "\"IS_SINCRONIZED\" INTEGER NOT NULL ," + // 7: isSincronized
+                "\"REMOTE_ID\" INTEGER NOT NULL ," + // 8: remote_id
+                "\"IS_FINISHED\" INTEGER NOT NULL ," + // 9: is_finished
+                "\"TRANSACCION\" TEXT);"); // 10: transaccion
     }
 
     /** Drops the underlying database table. */
@@ -86,9 +102,18 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
             stmt.bindLong(5, agroquimicoId);
         }
  
-        java.util.Date fecha = entity.getFecha();
+        String fecha = entity.getFecha();
         if (fecha != null) {
-            stmt.bindLong(6, fecha.getTime());
+            stmt.bindString(6, fecha);
+        }
+        stmt.bindLong(7, entity.getUsuario());
+        stmt.bindLong(8, entity.getIsSincronized() ? 1L: 0L);
+        stmt.bindLong(9, entity.getRemote_id());
+        stmt.bindLong(10, entity.getIs_finished() ? 1L: 0L);
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(11, transaccion);
         }
     }
 
@@ -121,10 +146,25 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
             stmt.bindLong(5, agroquimicoId);
         }
  
-        java.util.Date fecha = entity.getFecha();
+        String fecha = entity.getFecha();
         if (fecha != null) {
-            stmt.bindLong(6, fecha.getTime());
+            stmt.bindString(6, fecha);
         }
+        stmt.bindLong(7, entity.getUsuario());
+        stmt.bindLong(8, entity.getIsSincronized() ? 1L: 0L);
+        stmt.bindLong(9, entity.getRemote_id());
+        stmt.bindLong(10, entity.getIs_finished() ? 1L: 0L);
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(11, transaccion);
+        }
+    }
+
+    @Override
+    protected final void attachEntity(Encuesta entity) {
+        super.attachEntity(entity);
+        entity.__setDaoSession(daoSession);
     }
 
     @Override
@@ -140,7 +180,12 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // encuestadoId
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // familiaId
             cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // agroquimicoId
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)) // fecha
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // fecha
+            cursor.getInt(offset + 6), // usuario
+            cursor.getShort(offset + 7) != 0, // isSincronized
+            cursor.getInt(offset + 8), // remote_id
+            cursor.getShort(offset + 9) != 0, // is_finished
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // transaccion
         );
         return entity;
     }
@@ -152,7 +197,12 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         entity.setEncuestadoId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setFamiliaId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setAgroquimicoId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
-        entity.setFecha(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setFecha(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setUsuario(cursor.getInt(offset + 6));
+        entity.setIsSincronized(cursor.getShort(offset + 7) != 0);
+        entity.setRemote_id(cursor.getInt(offset + 8));
+        entity.setIs_finished(cursor.getShort(offset + 9) != 0);
+        entity.setTransaccion(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
      }
     
     @Override
@@ -180,4 +230,116 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         return true;
     }
     
+    private String selectDeep;
+
+    protected String getSelectDeep() {
+        if (selectDeep == null) {
+            StringBuilder builder = new StringBuilder("SELECT ");
+            SqlUtils.appendColumns(builder, "T", getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T0", daoSession.getEstablecimientoDao().getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T1", daoSession.getEncuestadoDao().getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T2", daoSession.getFamiliaDao().getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T3", daoSession.getAgroquimicosDao().getAllColumns());
+            builder.append(" FROM ENCUESTA T");
+            builder.append(" LEFT JOIN ESTABLECIMIENTO T0 ON T.\"ESTABLECIMIENTO_ID\"=T0.\"_id\"");
+            builder.append(" LEFT JOIN ENCUESTADO T1 ON T.\"ENCUESTADO_ID\"=T1.\"_id\"");
+            builder.append(" LEFT JOIN FAMILIA T2 ON T.\"FAMILIA_ID\"=T2.\"_id\"");
+            builder.append(" LEFT JOIN AGROQUIMICOS T3 ON T.\"AGROQUIMICO_ID\"=T3.\"_id\"");
+            builder.append(' ');
+            selectDeep = builder.toString();
+        }
+        return selectDeep;
+    }
+    
+    protected Encuesta loadCurrentDeep(Cursor cursor, boolean lock) {
+        Encuesta entity = loadCurrent(cursor, 0, lock);
+        int offset = getAllColumns().length;
+
+        Establecimiento establecimientoRelated = loadCurrentOther(daoSession.getEstablecimientoDao(), cursor, offset);
+        entity.setEstablecimientoRelated(establecimientoRelated);
+        offset += daoSession.getEstablecimientoDao().getAllColumns().length;
+
+        Encuestado encuestadoRelated = loadCurrentOther(daoSession.getEncuestadoDao(), cursor, offset);
+        entity.setEncuestadoRelated(encuestadoRelated);
+        offset += daoSession.getEncuestadoDao().getAllColumns().length;
+
+        Familia familiaRelated = loadCurrentOther(daoSession.getFamiliaDao(), cursor, offset);
+        entity.setFamiliaRelated(familiaRelated);
+        offset += daoSession.getFamiliaDao().getAllColumns().length;
+
+        Agroquimicos agroquimicoRelated = loadCurrentOther(daoSession.getAgroquimicosDao(), cursor, offset);
+        entity.setAgroquimicoRelated(agroquimicoRelated);
+
+        return entity;    
+    }
+
+    public Encuesta loadDeep(Long key) {
+        assertSinglePk();
+        if (key == null) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder(getSelectDeep());
+        builder.append("WHERE ");
+        SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
+        String sql = builder.toString();
+        
+        String[] keyArray = new String[] { key.toString() };
+        Cursor cursor = db.rawQuery(sql, keyArray);
+        
+        try {
+            boolean available = cursor.moveToFirst();
+            if (!available) {
+                return null;
+            } else if (!cursor.isLast()) {
+                throw new IllegalStateException("Expected unique result, but count was " + cursor.getCount());
+            }
+            return loadCurrentDeep(cursor, true);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
+    public List<Encuesta> loadAllDeepFromCursor(Cursor cursor) {
+        int count = cursor.getCount();
+        List<Encuesta> list = new ArrayList<Encuesta>(count);
+        
+        if (cursor.moveToFirst()) {
+            if (identityScope != null) {
+                identityScope.lock();
+                identityScope.reserveRoom(count);
+            }
+            try {
+                do {
+                    list.add(loadCurrentDeep(cursor, false));
+                } while (cursor.moveToNext());
+            } finally {
+                if (identityScope != null) {
+                    identityScope.unlock();
+                }
+            }
+        }
+        return list;
+    }
+    
+    protected List<Encuesta> loadDeepAllAndCloseCursor(Cursor cursor) {
+        try {
+            return loadAllDeepFromCursor(cursor);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+
+    /** A raw-style query where you can pass any WHERE clause and arguments. */
+    public List<Encuesta> queryDeep(String where, String... selectionArg) {
+        Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
+        return loadDeepAllAndCloseCursor(cursor);
+    }
+ 
 }

@@ -15,7 +15,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_nro_encuesta_cnt"
         app:layout_constraintBottom_toTopOf="@+id/tv_fecha_lbl"
-        />
+        android:paddingTop="6dp"
+        android:paddingLeft="3dp"/>
     <TextView
         android:id="@+id/tv_nro_encuesta_cnt"
         android:layout_width="wrap_content"
@@ -24,7 +25,8 @@
         app:layout_constraintLeft_toRightOf="@+id/tv_nro_encuesta_lbl"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_fecha_cnt"
-        />
+        android:paddingTop="6dp"
+        android:paddingLeft="3dp"/>
     <TextView
         android:id="@+id/tv_fecha_lbl"
         android:layout_width="wrap_content"
@@ -35,7 +37,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_nro_encuesta_lbl"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_fecha_cnt"
-        app:layout_constraintBottom_toTopOf="@+id/tv_establecimiento_lbl"/>
+        app:layout_constraintBottom_toTopOf="@+id/tv_establecimiento_lbl"
+        android:paddingTop="6dp"
+        android:paddingLeft="3dp"/>
     <TextView
         android:id="@+id/tv_fecha_cnt"
         android:layout_width="wrap_content"
@@ -43,7 +47,9 @@
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/tv_nro_encuesta_cnt"
         app:layout_constraintLeft_toRightOf="@+id/tv_fecha_lbl"
-        app:layout_constraintBottom_toTopOf="@+id/tv_establecimiento_cnt"/>
+        app:layout_constraintBottom_toTopOf="@+id/tv_establecimiento_cnt"
+        android:paddingTop="6dp"
+        android:paddingLeft="3dp"/>
     <TextView
         android:id="@+id/tv_establecimiento_lbl"
         android:layout_width="wrap_content"
@@ -54,6 +60,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_fecha_lbl"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_establecimiento_cnt"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="3dp"
         />
     <TextView
         android:id="@+id/tv_establecimiento_cnt"
@@ -61,6 +70,20 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/tv_fecha_cnt"
-        app:layout_constraintLeft_toRightOf="@+id/tv_establecimiento_lbl"/>
+        app:layout_constraintLeft_toRightOf="@+id/tv_establecimiento_lbl"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="3dp"/>
+
+    <ImageButton
+        android:id="@+id/img_sync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_sync"
+        android:background="@null"/>
 
 </android.support.constraint.ConstraintLayout>

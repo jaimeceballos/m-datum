@@ -25,16 +25,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/fl_cultivo_nuevo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_cultivo"
-        app:layout_constraintBottom_toTopOf="@+id/btn_cultivo_siguiente"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-    </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <Button
         android:id="@+id/btn_cultivo_siguiente"

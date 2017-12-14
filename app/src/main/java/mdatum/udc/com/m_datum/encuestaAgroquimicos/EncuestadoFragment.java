@@ -132,6 +132,7 @@ public class EncuestadoFragment extends Fragment {
         protected Boolean doInBackground(Encuestado... encuestado) {
             long result = daoSession.insertOrReplace(encuestado[0]);
             encuesta.setEncuestadoId(result);
+            encuesta.setEncuestadoRelated(encuestado[0]);
             daoSession.update(encuesta);
             return result > 0;
         }
@@ -174,8 +175,8 @@ public class EncuestadoFragment extends Fragment {
             encuestado.setNombre(etNombre.getText().toString());
             encuestado.setApellido(etApellido.getText().toString());
             encuestado.setEdad(Integer.parseInt(etEdad.getText().toString()));
-            encuestado.setNacionalidadId((int) spNacionalidad.getSelectedItemId());
-            encuestado.setNivelInstruccionId((int)spNivInstruccion.getSelectedItemId());
+            encuestado.setNacionalidadId((int) spNacionalidad.getSelectedItemId()+1);
+            encuestado.setNivelInstruccionId((int)spNivInstruccion.getSelectedItemId()+1);
             if (rbHabita.isChecked()) {
                 encuestado.setViveEstablecimiento(true);
                 isHabitaChecked = true;

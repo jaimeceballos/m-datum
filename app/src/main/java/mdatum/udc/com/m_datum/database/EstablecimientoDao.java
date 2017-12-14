@@ -30,6 +30,7 @@ public class EstablecimientoDao extends AbstractDao<Establecimiento, Long> {
         public final static Property Foto = new Property(5, String.class, "foto", false, "FOTO");
         public final static Property RegimenTenenciaId = new Property(6, int.class, "regimenTenenciaId", false, "REGIMEN_TENENCIA_ID");
         public final static Property RegimenOtros = new Property(7, String.class, "regimenOtros", false, "REGIMEN_OTROS");
+        public final static Property Transaccion = new Property(8, String.class, "transaccion", false, "TRANSACCION");
     }
 
 
@@ -52,7 +53,11 @@ public class EstablecimientoDao extends AbstractDao<Establecimiento, Long> {
                 "\"POS_LONGITUD\" TEXT," + // 4: posLongitud
                 "\"FOTO\" TEXT," + // 5: foto
                 "\"REGIMEN_TENENCIA_ID\" INTEGER NOT NULL ," + // 6: regimenTenenciaId
-                "\"REGIMEN_OTROS\" TEXT);"); // 7: regimenOtros
+                "\"REGIMEN_OTROS\" TEXT," + // 7: regimenOtros
+                "\"TRANSACCION\" TEXT);"); // 8: transaccion
+        // Add Indexes
+        db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_ESTABLECIMIENTO_NOMBRE_NRO ON ESTABLECIMIENTO" +
+                " (\"NOMBRE\" ASC,\"NRO\" ASC);");
     }
 
     /** Drops the underlying database table. */
@@ -100,6 +105,11 @@ public class EstablecimientoDao extends AbstractDao<Establecimiento, Long> {
         if (regimenOtros != null) {
             stmt.bindString(8, regimenOtros);
         }
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(9, transaccion);
+        }
     }
 
     @Override
@@ -141,6 +151,11 @@ public class EstablecimientoDao extends AbstractDao<Establecimiento, Long> {
         if (regimenOtros != null) {
             stmt.bindString(8, regimenOtros);
         }
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(9, transaccion);
+        }
     }
 
     @Override
@@ -158,7 +173,8 @@ public class EstablecimientoDao extends AbstractDao<Establecimiento, Long> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // posLongitud
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // foto
             cursor.getInt(offset + 6), // regimenTenenciaId
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // regimenOtros
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // regimenOtros
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // transaccion
         );
         return entity;
     }
@@ -173,6 +189,7 @@ public class EstablecimientoDao extends AbstractDao<Establecimiento, Long> {
         entity.setFoto(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setRegimenTenenciaId(cursor.getInt(offset + 6));
         entity.setRegimenOtros(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setTransaccion(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

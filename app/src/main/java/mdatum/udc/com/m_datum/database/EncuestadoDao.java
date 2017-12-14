@@ -30,6 +30,7 @@ public class EncuestadoDao extends AbstractDao<Encuestado, Long> {
         public final static Property NivelInstruccionId = new Property(5, int.class, "nivelInstruccionId", false, "NIVEL_INSTRUCCION_ID");
         public final static Property NivelCompleto = new Property(6, Boolean.class, "nivelCompleto", false, "NIVEL_COMPLETO");
         public final static Property ViveEstablecimiento = new Property(7, Boolean.class, "viveEstablecimiento", false, "VIVE_ESTABLECIMIENTO");
+        public final static Property Transaccion = new Property(8, String.class, "transaccion", false, "TRANSACCION");
     }
 
 
@@ -52,7 +53,8 @@ public class EncuestadoDao extends AbstractDao<Encuestado, Long> {
                 "\"NACIONALIDAD_ID\" INTEGER NOT NULL ," + // 4: nacionalidadId
                 "\"NIVEL_INSTRUCCION_ID\" INTEGER NOT NULL ," + // 5: nivelInstruccionId
                 "\"NIVEL_COMPLETO\" INTEGER," + // 6: nivelCompleto
-                "\"VIVE_ESTABLECIMIENTO\" INTEGER);"); // 7: viveEstablecimiento
+                "\"VIVE_ESTABLECIMIENTO\" INTEGER," + // 7: viveEstablecimiento
+                "\"TRANSACCION\" TEXT);"); // 8: transaccion
     }
 
     /** Drops the underlying database table. */
@@ -92,6 +94,11 @@ public class EncuestadoDao extends AbstractDao<Encuestado, Long> {
         if (viveEstablecimiento != null) {
             stmt.bindLong(8, viveEstablecimiento ? 1L: 0L);
         }
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(9, transaccion);
+        }
     }
 
     @Override
@@ -125,6 +132,11 @@ public class EncuestadoDao extends AbstractDao<Encuestado, Long> {
         if (viveEstablecimiento != null) {
             stmt.bindLong(8, viveEstablecimiento ? 1L: 0L);
         }
+ 
+        String transaccion = entity.getTransaccion();
+        if (transaccion != null) {
+            stmt.bindString(9, transaccion);
+        }
     }
 
     @Override
@@ -142,7 +154,8 @@ public class EncuestadoDao extends AbstractDao<Encuestado, Long> {
             cursor.getInt(offset + 4), // nacionalidadId
             cursor.getInt(offset + 5), // nivelInstruccionId
             cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0, // nivelCompleto
-            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0 // viveEstablecimiento
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // viveEstablecimiento
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // transaccion
         );
         return entity;
     }
@@ -157,6 +170,7 @@ public class EncuestadoDao extends AbstractDao<Encuestado, Long> {
         entity.setNivelInstruccionId(cursor.getInt(offset + 5));
         entity.setNivelCompleto(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
         entity.setViveEstablecimiento(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
+        entity.setTransaccion(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

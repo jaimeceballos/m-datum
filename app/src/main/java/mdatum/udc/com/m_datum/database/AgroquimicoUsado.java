@@ -1,5 +1,7 @@
 package mdatum.udc.com.m_datum.database;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -11,12 +13,18 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class AgroquimicoUsado {
 
+    @SerializedName("id")
     @Id(autoincrement = true)
     private Long id;
+    @SerializedName("producto")
     private String producto;
+    @SerializedName("plaga")
     private String plaga;
+    @SerializedName("metodo_aplicacion")
     private String metodo_aplicacion;
+    @SerializedName("frecuencia_uso")
     private String frecuencia_uso;
+    @SerializedName("encuesta")
     private Long encuestaId;
 
     @Generated(hash = 1726814844)

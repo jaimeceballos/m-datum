@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -87,11 +88,17 @@ public class FamiliaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 familia = new Familia();
-                familia.setEsCasado((rbEsposaSi.isChecked())?1:0);
-                familia.setTieneHijos((rbHijosSi.isChecked())?1:0);
-                if(familia.getTieneHijos() == 1){
-                    familia.setCantMujeres(etCantMujeres.getText().toString().equals("")?0:Integer.parseInt(etCantMujeres.getText().toString()));
-                    familia.setCantVarones(etCantVarones.getText().toString().equals("")?0:Integer.parseInt(etCantVarones.getText().toString()));
+                familia.setEsCasado((rbEsposaSi.isChecked())?true:false);
+                familia.setTieneHijos((rbHijosSi.isChecked())?true:false);
+                if(familia.getTieneHijos()){
+                    if(etCantVarones.getText().toString().trim().isEmpty() && etCantMujeres.getText().toString().trim().isEmpty()){
+                        Toast.makeText(getContext(),"Debe indicar la cantidad de hijos",Toast.LENGTH_LONG).show();
+                        return;
+                    }else{
+                        familia.setCantMujeres(etCantMujeres.getText().toString().equals("")?0:Integer.parseInt(etCantMujeres.getText().toString()));
+                        familia.setCantVarones(etCantVarones.getText().toString().equals("")?0:Integer.parseInt(etCantVarones.getText().toString()));
+                    }
+
                 }
 
 

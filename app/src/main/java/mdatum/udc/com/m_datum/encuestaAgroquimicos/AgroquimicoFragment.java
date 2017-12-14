@@ -176,9 +176,9 @@ public class AgroquimicoFragment extends Fragment {
                 }else{
                     Agroquimicos agroquimicos = new Agroquimicos();
                     agroquimicos.setUsa(true);
-                    agroquimicos.setFactor_climatico(spFactorClimatico.getSelectedItemId());
-                    agroquimicos.setTriple_lavado(spTripleLavado.getSelectedItemId());
-                    agroquimicos.setAsesoramiento(spAsesoramiento.getSelectedItemId());
+                    agroquimicos.setFactor_climatico(spFactorClimatico.getSelectedItemId()+1);
+                    agroquimicos.setTriple_lavado(spTripleLavado.getSelectedItemId()+1);
+                    agroquimicos.setAsesoramiento(spAsesoramiento.getSelectedItemId()+1);
                     agroquimicos.setAsesoramiento_otro(etAsesoramientoOtro.getText().toString());
                     new AgroquimicoFragment.AddAgroquimicoTask().execute(agroquimicos);
                 }

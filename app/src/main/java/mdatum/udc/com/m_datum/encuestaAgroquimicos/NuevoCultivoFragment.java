@@ -2,6 +2,7 @@ package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.List;
 
 import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.data.prefs.SessionPrefs;
 import mdatum.udc.com.m_datum.database.Cultivo;
 import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.EleccionCultivo;
@@ -31,6 +34,7 @@ import mdatum.udc.com.m_datum.database.TipoCultivo;
 import mdatum.udc.com.m_datum.database.TipoCultivoDao;
 import mdatum.udc.com.m_datum.database.TipoProduccion;
 import mdatum.udc.com.m_datum.database.TipoProduccionDao;
+import mdatum.udc.com.m_datum.database.UpdatesToServer;
 
 public class NuevoCultivoFragment extends Fragment {
 
@@ -54,10 +58,16 @@ public class NuevoCultivoFragment extends Fragment {
     private Button btnGuardar;
     private Cultivo cultivo;
     private List<String> especies;
+    private EditText etEspecieNueva;
+    private TextInputLayout tilEspecieNueva;
     private List<String> tiposCultivo;
     private List<String> tiposProduccion;
     private List<String> eleccionCultivo;
     private List<String> meses;
+
+    private boolean haveUpdate = false;
+
+    private View focusView;
 
     public NuevoCultivoFragment() {
         // Required empty public constructor
@@ -71,8 +81,12 @@ public class NuevoCultivoFragment extends Fragment {
 
         daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
 
+        focusView = null;
+
         encuesta = (Encuesta) getArguments().getSerializable("encuesta");
         spEspecie = (Spinner) rootView.findViewById(R.id.sp_especie);
+        tilEspecieNueva = (TextInputLayout) rootView.findViewById(R.id.til_nueva_especie);
+        etEspecieNueva = (EditText) rootView.findViewById(R.id.et_nueva_especie);
         spTipoCultivo = (Spinner) rootView.findViewById(R.id.sp_tipo_cultivo);
         etNroSiembra = (EditText) rootView.findViewById(R.id.et_nro_siembra);
         //etMesSiembra = (EditText) rootView.findViewById(R.id.et_mes_siembra);
@@ -98,6 +112,22 @@ public class NuevoCultivoFragment extends Fragment {
         ArrayAdapter<String> especieAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,especies);
         especieAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spEspecie.setAdapter(especieAdapter);
+
+        spEspecie.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).toString().equals("OTRO")){
+                    tilEspecieNueva.setVisibility(View.VISIBLE);
+                }else{
+                    tilEspecieNueva.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         TipoCultivoDao tipoCultivoDao = daoSession.getTipoCultivoDao();
         opcionesTipoCultivo = tipoCultivoDao.loadAll();
@@ -135,7 +165,7 @@ public class NuevoCultivoFragment extends Fragment {
         spEleccionCultivo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                if(parent.getItemAtPosition(position).toString().equals("Otro")) {
+                if(parent.getItemAtPosition(position).toString().equals("OTRO")) {
 
                     etEleccionEspecificar.setVisibility(View.VISIBLE);
                 }else{
@@ -153,25 +183,40 @@ public class NuevoCultivoFragment extends Fragment {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cultivo = new Cultivo();
-                cultivo.setEspecieId((int) spEspecie.getSelectedItemId());
-                cultivo.setTipoId((int) spTipoCultivo.getSelectedItemId());
-                cultivo.setNroSiembra(Integer.parseInt(etNroSiembra.getText().toString()));
-                cultivo.setMesSiembra((int) spMesSiembra.getSelectedItemId() +1);
-                cultivo.setSurcos(Integer.parseInt(etSurcos.getText().toString()));
-                cultivo.setDistancias(Integer.parseInt(etDistancias.getText().toString()));
-                cultivo.setLargo(Integer.parseInt(etLargo.getText().toString()));
-                cultivo.setSuperficieSembrada(0);
-                cultivo.setSuperficieMedidaId(1);
-                cultivo.setTipoProduccionId((int) spTipoProduccion.getSelectedItemId());
-                cultivo.setEleccionCultivoId((int) spEleccionCultivo.getSelectedItemId());
-                cultivo.setEleccionEspecificar(etEleccionEspecificar.getText().toString());
-                cultivo.setEncuestaId(encuesta.getId());
+                if(validarDatos()) {
+                    cultivo = new Cultivo();
+                    cultivo.setEspecieId((int) spEspecie.getSelectedItemId() + 1);
+                    cultivo.setTipoId((int) spTipoCultivo.getSelectedItemId() + 1);
+                    cultivo.setNueva_especie(etEspecieNueva.getText().toString());
+                    cultivo.setNroSiembra(Integer.parseInt(etNroSiembra.getText().toString()));
+                    cultivo.setMesSiembra((int) spMesSiembra.getSelectedItemId() + 1);
+                    cultivo.setSurcos(Integer.parseInt(etSurcos.getText().toString()));
+                    cultivo.setDistancias(Integer.parseInt(etDistancias.getText().toString()));
+                    cultivo.setLargo(Integer.parseInt(etLargo.getText().toString()));
+                    cultivo.setTipoProduccionId((int) spTipoProduccion.getSelectedItemId() + 1);
+                    cultivo.setEleccionCultivoId((int) spEleccionCultivo.getSelectedItemId() + 1);
+                    cultivo.setEleccionEspecificar(etEleccionEspecificar.getText().toString());
+                    cultivo.setEncuestaId(encuesta.getId());
+                    if (spEspecie.getItemAtPosition(spEspecie.getSelectedItemPosition()).toString().equals("OTRO") && etEspecieNueva.getText().toString().trim().isEmpty()) {
+                        etEspecieNueva.setError("Campo Requerido");
+                        focusView = etEspecieNueva;
+                        focusView.requestFocus();
+                        return;
 
-                Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);
-
-                savingToast.show();
-                new NuevoCultivoFragment.AddCultivoTask().execute(cultivo);
+                    } else if (spEleccionCultivo.getItemAtPosition(spEleccionCultivo.getSelectedItemPosition()).equals("OTRO") && etEleccionEspecificar.getText().toString().trim().isEmpty()) {
+                        etEleccionEspecificar.setError("Campo requerido.");
+                        focusView = etEleccionEspecificar;
+                        focusView.requestFocus();
+                        return;
+                    } else {
+                        Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);
+                        savingToast.show();
+                        if(!etEspecieNueva.getText().toString().trim().isEmpty()){
+                            haveUpdate = true;
+                        }
+                        new NuevoCultivoFragment.AddCultivoTask().execute(cultivo);
+                    }
+                }
             }
         });
 
@@ -185,6 +230,13 @@ public class NuevoCultivoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Cultivo... cultivos) {
             long result = daoSession.insertOrReplace(cultivos[0]);
+            if(haveUpdate){
+                UpdatesToServer updatesToServer = new UpdatesToServer();
+                updatesToServer.setEntidad("Cultivo");
+                updatesToServer.setValor(cultivos[0].getNueva_especie());
+                updatesToServer.setUsuario(SessionPrefs.get(getContext()).getUserLoged());
+                daoSession.insert(updatesToServer);
+            }
             return result > 0;
         }
 
@@ -217,6 +269,54 @@ public class NuevoCultivoFragment extends Fragment {
         meses.add("Noviembre");
         meses.add("Diciembre");
         return meses;
+    }
+
+
+    private boolean validarDatos(){
+
+        if(!(validarNroSiembra() && validarCantSurcos() && validarLargo() && validarDistancias())){
+            focusView.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validarNroSiembra(){
+
+        if(etNroSiembra.getText().toString().trim().isEmpty()){
+            etNroSiembra.setError("Campo requerido");
+            focusView = etNroSiembra;
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validarCantSurcos(){
+        if(etSurcos.getText().toString().trim().isEmpty()){
+            etSurcos.setError("Campo Requerido.");
+            focusView = etSurcos;
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validarLargo(){
+        if(etLargo.getText().toString().trim().isEmpty()){
+            etLargo.setError("Campo Requerido.");
+            focusView = etLargo;
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validarDistancias(){
+        if(etDistancias.getText().toString().trim().isEmpty()){
+            etDistancias.setError("Campo Requerido.");
+            focusView = etDistancias;
+            return false;
+        }
+        return true;
     }
 
 }

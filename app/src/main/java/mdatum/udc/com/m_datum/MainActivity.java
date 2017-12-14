@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import mdatum.udc.com.m_datum.database.Asesoramiento;
 import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.EleccionCultivo;
 import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.EncuestaDao;
 import mdatum.udc.com.m_datum.database.Especie;
 import mdatum.udc.com.m_datum.database.FactorClimatico;
 import mdatum.udc.com.m_datum.database.MaterialEstructura;
@@ -36,6 +38,7 @@ import mdatum.udc.com.m_datum.database.TipoCultivo;
 import mdatum.udc.com.m_datum.database.TipoProduccion;
 import mdatum.udc.com.m_datum.database.TripleLavado;
 import mdatum.udc.com.m_datum.encuestaAgroquimicos.EncuestasListFragment;
+import mdatum.udc.com.m_datum.encuestaAgroquimicos.EstablecimientoFragment;
 import mdatum.udc.com.m_datum.sincronizacion.PasswordChangeFragment;
 import mdatum.udc.com.m_datum.sincronizacion.SincroFragment;
 import mdatum.udc.com.m_datum.sincronizacion.Updates;
@@ -46,18 +49,16 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Encuesta encuesta = new Encuesta();
-
     private SharedPreferences prefs;
-
+    Encuesta encuesta = new Encuesta();
     private WebDatumApi webDatumApi;
     private DaoSession daoSession;
 
     private ConstraintLayout progressLayout;
     private  ConstraintLayout llBodyContent;
-    int last_server_update = -1;
     private TextView tvProgress;
     private int update;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         progressLayout = (ConstraintLayout) findViewById(R.id.progress_layout);
         llBodyContent = (ConstraintLayout)findViewById(R.id.ll_body_content);
+
+
 
         //redireccion  al login
         if(!SessionPrefs.get(this).isLoggedIn()){
@@ -104,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
         EncuestasListFragment fragment = new EncuestasListFragment();
         fragmentTransaction.replace(R.id.ll_body_content, fragment);
         fragmentTransaction.commit();
+
+
+
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -46,12 +47,15 @@ import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.data.prefs.SessionPrefs;
 import mdatum.udc.com.m_datum.database.*;
 import mdatum.udc.com.m_datum.database.Establecimiento;
 
@@ -61,6 +65,7 @@ import mdatum.udc.com.m_datum.database.Establecimiento;
 public class EstablecimientoFragment extends Fragment implements OnConnectionFailedListener,
         ConnectionCallbacks {
 
+    private String exceptionMsg="";
     //Instancio un nuvo objeto POJO Establecimiento
     private Establecimiento establecimiento = new Establecimiento();
     //Creo un objeto POJO del tipo Encuesta
@@ -127,6 +132,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
         opciones = regimenTenenciaDao.loadAll();
 
 
+
         final List<String> objects = new ArrayList<>();
 
         Iterator<RegimenTenencia> iterator = opciones.iterator();
@@ -135,6 +141,9 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
             objects.add(iterator.next().getDescpripcion());
         }
 
+        for(int i = 0 ; i < objects.size() ; i++){
+            Log.d("{POSITION,ELEMENT}","{"+Integer.toString(i)+","+objects.get(i)+"}");
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item, objects);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -258,8 +267,9 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
 
                 establecimiento.setNombre(etNombreEstablecimiento.getText().toString());
                 establecimiento.setNro(etNroEstablecimiento.getText().toString());
+                Log.d("SELECTEDPOS",Integer.toString(spRegTenencia.getSelectedItemPosition()));
                 establecimiento.setRegimenTenenciaId(spRegTenencia.getSelectedItemPosition()+1);
-
+                Log.d("STOREDPOSITION",Integer.toString(establecimiento.getRegimenTenenciaId()));
                 opcionSelected = (RegimenTenencia) opciones.get(establecimiento.getRegimenTenenciaId() -1 );
 
                 if(opcionSelected.getDescpripcion().equals("OTRO")){
@@ -496,22 +506,48 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
     private class AddEstablecimientoTask extends AsyncTask<mdatum.udc.com.m_datum.database.Establecimiento,Void,Boolean> {
         @Override
         protected Boolean doInBackground(Establecimiento... establecimiento){
-            long result = daoSession.insertOrReplace(establecimiento[0]);
-            encuesta.setEstablecimientoId(result);
-            long idEncuesta = daoSession.insertOrReplace(encuesta);
-            return result > 0;
+            long result;
+            try {
+                if(establecimiento[0].getId()!=null) {
+                    daoSession.update(establecimiento[0]);
+                    result = establecimiento[0].getId();
+                }else{
+                    result = daoSession.insert(establecimiento[0]);
+                    encuesta.setEstablecimientoRelated(establecimiento[0]);
+                    Date fecha = new Date();
+                    encuesta.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(fecha));
+                    encuesta.setUsuario(SessionPrefs.get(getContext()).getUserLoged());
+                    encuesta.setIs_finished(false);
+                    encuesta.setIsSincronized(false);
+                    long idEncuesta = daoSession.insertOrReplace(encuesta);
+
+                }
+
+
+                return result > 0;
+            }catch (SQLiteConstraintException e){
+                exceptionMsg ="Ya existe un establecimiento con este nombre y numero.";
+            }
+
+            return false;
         }
 
         @Override
         protected void onPostExecute(Boolean result){
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("encuesta",encuesta);
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            EncuestadoFragment fragment = new EncuestadoFragment();
-            fragment.setArguments(bundle);
-            fragmentTransaction.replace(R.id.ll_body_content,fragment)
-                    .addToBackStack("ESTABLECIMIENTO")
-                    .commit();
+            if(result) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("encuesta", encuesta);
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                EncuestadoFragment fragment = new EncuestadoFragment();
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.ll_body_content, fragment)
+                        .addToBackStack("ESTABLECIMIENTO")
+                        .commit();
+            }else{
+                etNombreEstablecimiento.setError(exceptionMsg);
+                etNroEstablecimiento.setError(exceptionMsg);
+                Toast.makeText(getContext(), exceptionMsg, Toast.LENGTH_SHORT).show();
+            }
         }
 
     }

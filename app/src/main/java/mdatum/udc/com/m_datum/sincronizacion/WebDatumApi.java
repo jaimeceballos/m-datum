@@ -1,8 +1,13 @@
 package mdatum.udc.com.m_datum.sincronizacion;
 
+import java.util.Date;
 import java.util.List;
 
+import mdatum.udc.com.m_datum.database.Agroquimicos;
+import mdatum.udc.com.m_datum.database.Encuesta;
+import mdatum.udc.com.m_datum.database.Encuestado;
 import mdatum.udc.com.m_datum.database.Establecimiento;
+import mdatum.udc.com.m_datum.database.Familia;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -20,7 +25,7 @@ import retrofit2.http.Path;
 
 public interface WebDatumApi {
 
-    public static final String URL = "http://192.168.2.194";
+    public static final String URL = "http://192.168.1.41";
     public static final String PORT = ":8000/";
     public static final String BASE_URL = URL+PORT;
 
@@ -55,8 +60,24 @@ public interface WebDatumApi {
             @Part("posLatitud") RequestBody posLatitud,
             @Part("posLongitud") RequestBody posLongitud,
             @Part("regimenTenencia") RequestBody regimenTenencia,
-            @Part("regimenOtros") RequestBody regimenOtros
+            @Part("regimenOtros") RequestBody regimenOtros,
+            @Part("transaccion") RequestBody transaccion
 
     );
+
+    @POST("api/sincro_encuestado/")
+    Call<Encuestado> sincroEncuestado(@Header("Authorization") String token,@Body Encuestado encuestado);
+
+    @POST("api/sincro_familia/")
+    Call<Familia> sincroFamilia(@Header("Authorization") String Token, @Body Familia familia);
+
+    @POST("api/sincro_agroquimico/")
+    Call<Agroquimicos> sincroAgroquimico(@Header("Authorization") String Token, @Body Agroquimicos agroquimico);
+
+    @POST("api/sincro_encuesta/")
+    Call<Encuesta> sincroEncuesta(@Header("Authorization") String Token,@Body Encuesta encuesta);
+
+    @GET("api/get_ids_by_transaccion/{transaccion}/")
+    Call<IdsSincro> getIdsByTransaccion(@Header("Authorization") String token, @Path("transaccion") String transaccion);
 
 }
