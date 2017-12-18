@@ -83,9 +83,6 @@ public class Encuesta implements Serializable {
     @Expose(serialize = false,deserialize = false)
     private boolean is_finished;
 
-    @SerializedName("transaccion")
-    private String transaccion;
-
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -94,11 +91,10 @@ public class Encuesta implements Serializable {
     @Generated(hash = 245791029)
     private transient EncuestaDao myDao;
 
-    @Generated(hash = 351400041)
+    @Generated(hash = 1306472466)
     public Encuesta(Long id, Long establecimientoId, Long encuestadoId,
             Long familiaId, Long agroquimicoId, String fecha, int usuario,
-            boolean isSincronized, int remote_id, boolean is_finished,
-            String transaccion) {
+            boolean isSincronized, int remote_id, boolean is_finished) {
         this.id = id;
         this.establecimientoId = establecimientoId;
         this.encuestadoId = encuestadoId;
@@ -109,7 +105,6 @@ public class Encuesta implements Serializable {
         this.isSincronized = isSincronized;
         this.remote_id = remote_id;
         this.is_finished = is_finished;
-        this.transaccion = transaccion;
     }
 
     @Generated(hash = 483204667)
@@ -194,14 +189,6 @@ public class Encuesta implements Serializable {
 
     public void setIs_finished(boolean is_finished) {
         this.is_finished = is_finished;
-    }
-
-    public String getTransaccion() {
-        return this.transaccion;
-    }
-
-    public void setTransaccion(String transaccion) {
-        this.transaccion = transaccion;
     }
 
     @Generated(hash = 1989921088)
@@ -468,6 +455,6 @@ public class Encuesta implements Serializable {
         myDao = daoSession != null ? daoSession.getEncuestaDao() : null;
     }
 
-     
+
     
 }

@@ -31,6 +31,8 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         public final static Property Metodo_aplicacion = new Property(3, String.class, "metodo_aplicacion", false, "METODO_APLICACION");
         public final static Property Frecuencia_uso = new Property(4, String.class, "frecuencia_uso", false, "FRECUENCIA_USO");
         public final static Property EncuestaId = new Property(5, Long.class, "encuestaId", false, "ENCUESTA_ID");
+        public final static Property IdRemote = new Property(6, int.class, "idRemote", false, "ID_REMOTE");
+        public final static Property IsSinchronized = new Property(7, boolean.class, "isSinchronized", false, "IS_SINCHRONIZED");
     }
 
     private Query<AgroquimicoUsado> encuesta_AgroquimicoUsadosQuery;
@@ -52,7 +54,9 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
                 "\"PLAGA\" TEXT," + // 2: plaga
                 "\"METODO_APLICACION\" TEXT," + // 3: metodo_aplicacion
                 "\"FRECUENCIA_USO\" TEXT," + // 4: frecuencia_uso
-                "\"ENCUESTA_ID\" INTEGER);"); // 5: encuestaId
+                "\"ENCUESTA_ID\" INTEGER," + // 5: encuestaId
+                "\"ID_REMOTE\" INTEGER NOT NULL ," + // 6: idRemote
+                "\"IS_SINCHRONIZED\" INTEGER NOT NULL );"); // 7: isSinchronized
     }
 
     /** Drops the underlying database table. */
@@ -94,6 +98,8 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         if (encuestaId != null) {
             stmt.bindLong(6, encuestaId);
         }
+        stmt.bindLong(7, entity.getIdRemote());
+        stmt.bindLong(8, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -129,6 +135,8 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         if (encuestaId != null) {
             stmt.bindLong(6, encuestaId);
         }
+        stmt.bindLong(7, entity.getIdRemote());
+        stmt.bindLong(8, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -144,7 +152,9 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // plaga
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // metodo_aplicacion
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // frecuencia_uso
-            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // encuestaId
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // encuestaId
+            cursor.getInt(offset + 6), // idRemote
+            cursor.getShort(offset + 7) != 0 // isSinchronized
         );
         return entity;
     }
@@ -157,6 +167,8 @@ public class AgroquimicoUsadoDao extends AbstractDao<AgroquimicoUsado, Long> {
         entity.setMetodo_aplicacion(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setFrecuencia_uso(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setEncuestaId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setIdRemote(cursor.getInt(offset + 6));
+        entity.setIsSinchronized(cursor.getShort(offset + 7) != 0);
      }
     
     @Override

@@ -1,5 +1,6 @@
 package mdatum.udc.com.m_datum.database;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -26,16 +27,22 @@ public class AgroquimicoUsado {
     private String frecuencia_uso;
     @SerializedName("encuesta")
     private Long encuestaId;
-
-    @Generated(hash = 1726814844)
+    @Expose(serialize = false,deserialize = false)
+    private int idRemote;
+    @Expose(serialize = false, deserialize = false)
+    private boolean isSinchronized;
+    @Generated(hash = 1814494494)
     public AgroquimicoUsado(Long id, String producto, String plaga,
-            String metodo_aplicacion, String frecuencia_uso, Long encuestaId) {
+            String metodo_aplicacion, String frecuencia_uso, Long encuestaId,
+            int idRemote, boolean isSinchronized) {
         this.id = id;
         this.producto = producto;
         this.plaga = plaga;
         this.metodo_aplicacion = metodo_aplicacion;
         this.frecuencia_uso = frecuencia_uso;
         this.encuestaId = encuestaId;
+        this.idRemote = idRemote;
+        this.isSinchronized = isSinchronized;
     }
     @Generated(hash = 299707638)
     public AgroquimicoUsado() {
@@ -70,15 +77,23 @@ public class AgroquimicoUsado {
     public void setFrecuencia_uso(String frecuencia_uso) {
         this.frecuencia_uso = frecuencia_uso;
     }
-
     public Long getEncuestaId() {
-        return encuestaId;
+        return this.encuestaId;
     }
-
     public void setEncuestaId(Long encuestaId) {
         this.encuestaId = encuestaId;
     }
-
-
+    public int getIdRemote() {
+        return this.idRemote;
+    }
+    public void setIdRemote(int idRemote) {
+        this.idRemote = idRemote;
+    }
+    public boolean getIsSinchronized() {
+        return this.isSinchronized;
+    }
+    public void setIsSinchronized(boolean isSinchronized) {
+        this.isSinchronized = isSinchronized;
+    }
 
 }

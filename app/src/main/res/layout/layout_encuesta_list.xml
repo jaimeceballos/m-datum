@@ -75,15 +75,38 @@
         android:paddingBottom="6dp"
         android:paddingLeft="3dp"/>
 
-    <ImageButton
-        android:id="@+id/img_sync"
+    <!--TextView
+        android:id="@+id/tv_finalizado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/finalizado"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_nro_encuesta_lbl"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nro_encuesta_lbl"
+        android:layout_marginRight="6dp"
+        android:textStyle="italic"
+        android:textColor="@color/colorPrimaryDark"
+        />
+    <TextView
+        android:id="@+id/tv_sincronizada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sincronizada"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_fecha_lbl"
+        android:layout_marginRight="6dp"
+        android:textStyle="italic"
+        android:textColor="@color/colorPrimaryDark"
+        />
+
+    <ImageView
+        android:id="@+id/img_not_finalized"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_error"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_sync"
-        android:background="@null"/>
+        android:layout_marginRight="10dp"/-->
 
 </android.support.constraint.ConstraintLayout>

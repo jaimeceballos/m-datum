@@ -28,7 +28,8 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         public final static Property Triple_lavado = new Property(3, Long.class, "triple_lavado", false, "TRIPLE_LAVADO");
         public final static Property Asesoramiento = new Property(4, Long.class, "asesoramiento", false, "ASESORAMIENTO");
         public final static Property Asesoramiento_otro = new Property(5, String.class, "asesoramiento_otro", false, "ASESORAMIENTO_OTRO");
-        public final static Property Transaccion = new Property(6, String.class, "transaccion", false, "TRANSACCION");
+        public final static Property RemoteId = new Property(6, int.class, "remoteId", false, "REMOTE_ID");
+        public final static Property IsSincronized = new Property(7, boolean.class, "isSincronized", false, "IS_SINCRONIZED");
     }
 
 
@@ -50,7 +51,8 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
                 "\"TRIPLE_LAVADO\" INTEGER," + // 3: triple_lavado
                 "\"ASESORAMIENTO\" INTEGER," + // 4: asesoramiento
                 "\"ASESORAMIENTO_OTRO\" TEXT," + // 5: asesoramiento_otro
-                "\"TRANSACCION\" TEXT);"); // 6: transaccion
+                "\"REMOTE_ID\" INTEGER NOT NULL ," + // 6: remoteId
+                "\"IS_SINCRONIZED\" INTEGER NOT NULL );"); // 7: isSincronized
     }
 
     /** Drops the underlying database table. */
@@ -88,11 +90,8 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         if (asesoramiento_otro != null) {
             stmt.bindString(6, asesoramiento_otro);
         }
- 
-        String transaccion = entity.getTransaccion();
-        if (transaccion != null) {
-            stmt.bindString(7, transaccion);
-        }
+        stmt.bindLong(7, entity.getRemoteId());
+        stmt.bindLong(8, entity.getIsSincronized() ? 1L: 0L);
     }
 
     @Override
@@ -124,11 +123,8 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         if (asesoramiento_otro != null) {
             stmt.bindString(6, asesoramiento_otro);
         }
- 
-        String transaccion = entity.getTransaccion();
-        if (transaccion != null) {
-            stmt.bindString(7, transaccion);
-        }
+        stmt.bindLong(7, entity.getRemoteId());
+        stmt.bindLong(8, entity.getIsSincronized() ? 1L: 0L);
     }
 
     @Override
@@ -145,7 +141,8 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // triple_lavado
             cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // asesoramiento
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // asesoramiento_otro
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // transaccion
+            cursor.getInt(offset + 6), // remoteId
+            cursor.getShort(offset + 7) != 0 // isSincronized
         );
         return entity;
     }
@@ -158,7 +155,8 @@ public class AgroquimicosDao extends AbstractDao<Agroquimicos, Long> {
         entity.setTriple_lavado(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setAsesoramiento(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
         entity.setAsesoramiento_otro(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setTransaccion(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setRemoteId(cursor.getInt(offset + 6));
+        entity.setIsSincronized(cursor.getShort(offset + 7) != 0);
      }
     
     @Override

@@ -5,9 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -45,13 +49,28 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
         holder.tv_nro_encuesta_cnt.setText(encuesta.getId().toString());
         holder.tv_fecha_cnt.setText(encuesta.getFecha());
         holder.tv_establecimiento_cnt.setText(encuesta.getEstablecimientoRelated().getNombre());
+
+        /*if(encuesta.getIsSincronized()){
+            holder.tvSincronizada.setVisibility(View.VISIBLE);
+        }else{
+            holder.tvSincronizada.setVisibility(View.GONE);
+        }
+        if(encuesta.getIs_finished()){
+            holder.tvFinalizado.setVisibility(View.VISIBLE);
+            holder.imgNotFinalized.setVisibility(View.GONE);
+        }else{
+            holder.tvFinalizado.setVisibility(View.GONE);
+            holder.imgNotFinalized.setVisibility(View.VISIBLE);
+        }*/
+
+
         
-        holder.imgSync.setOnClickListener(new View.OnClickListener() {
+/*        holder.imgSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, "Pulso sync", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         
     }
 
@@ -74,7 +93,8 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
         private TextView tv_nro_encuesta_cnt;
         private TextView tv_fecha_cnt;
         private TextView tv_establecimiento_cnt;
-        private ImageButton imgSync;
+        //private ImageView imgNotFinalized;
+        //private TextView tvFinalizado, tvSincronizada;
 
         public EncuestasListViewHolder(View itemView) {
             super(itemView);
@@ -82,7 +102,9 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
             tv_nro_encuesta_cnt = (TextView)itemView.findViewById(R.id.tv_nro_encuesta_cnt);
             tv_fecha_cnt = (TextView)itemView.findViewById(R.id.tv_fecha_cnt);
             tv_establecimiento_cnt = (TextView)itemView.findViewById(R.id.tv_establecimiento_cnt);
-            imgSync = (ImageButton) itemView.findViewById(R.id.img_sync);
+            //imgNotFinalized = (ImageView) itemView.findViewById(R.id.img_not_finalized);
+            //tvSincronizada = (TextView) itemView.findViewById(R.id.tv_sincronizada);
+            //tvFinalizado = (TextView) itemView.findViewById(R.id.tv_finalizado);
         }
 
 

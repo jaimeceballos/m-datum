@@ -31,6 +31,8 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         public final static Property MaterialEstructuraId = new Property(3, int.class, "materialEstructuraId", false, "MATERIAL_ESTRUCTURA_ID");
         public final static Property AnioConstruccionId = new Property(4, int.class, "anioConstruccionId", false, "ANIO_CONSTRUCCION_ID");
         public final static Property EncuestaId = new Property(5, Long.class, "encuestaId", false, "ENCUESTA_ID");
+        public final static Property IdRemote = new Property(6, int.class, "idRemote", false, "ID_REMOTE");
+        public final static Property IsSinchronized = new Property(7, boolean.class, "isSinchronized", false, "IS_SINCHRONIZED");
     }
 
     private Query<Invernaculo> encuesta_InvernaculosQuery;
@@ -52,7 +54,9 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
                 "\"SUPERFICIE_UNITARIA\" INTEGER NOT NULL ," + // 2: superficieUnitaria
                 "\"MATERIAL_ESTRUCTURA_ID\" INTEGER NOT NULL ," + // 3: materialEstructuraId
                 "\"ANIO_CONSTRUCCION_ID\" INTEGER NOT NULL ," + // 4: anioConstruccionId
-                "\"ENCUESTA_ID\" INTEGER);"); // 5: encuestaId
+                "\"ENCUESTA_ID\" INTEGER," + // 5: encuestaId
+                "\"ID_REMOTE\" INTEGER NOT NULL ," + // 6: idRemote
+                "\"IS_SINCHRONIZED\" INTEGER NOT NULL );"); // 7: isSinchronized
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +82,8 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         if (encuestaId != null) {
             stmt.bindLong(6, encuestaId);
         }
+        stmt.bindLong(7, entity.getIdRemote());
+        stmt.bindLong(8, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -97,6 +103,8 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         if (encuestaId != null) {
             stmt.bindLong(6, encuestaId);
         }
+        stmt.bindLong(7, entity.getIdRemote());
+        stmt.bindLong(8, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -112,7 +120,9 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
             cursor.getInt(offset + 2), // superficieUnitaria
             cursor.getInt(offset + 3), // materialEstructuraId
             cursor.getInt(offset + 4), // anioConstruccionId
-            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // encuestaId
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // encuestaId
+            cursor.getInt(offset + 6), // idRemote
+            cursor.getShort(offset + 7) != 0 // isSinchronized
         );
         return entity;
     }
@@ -125,6 +135,8 @@ public class InvernaculoDao extends AbstractDao<Invernaculo, Long> {
         entity.setMaterialEstructuraId(cursor.getInt(offset + 3));
         entity.setAnioConstruccionId(cursor.getInt(offset + 4));
         entity.setEncuestaId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setIdRemote(cursor.getInt(offset + 6));
+        entity.setIsSinchronized(cursor.getShort(offset + 7) != 0);
      }
     
     @Override

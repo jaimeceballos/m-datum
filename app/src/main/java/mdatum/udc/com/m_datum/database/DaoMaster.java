@@ -42,7 +42,6 @@ public class DaoMaster extends AbstractDaoMaster {
         AgroquimicosDao.createTable(db, ifNotExists);
         TipoProduccionDao.createTable(db, ifNotExists);
         NacionalidadDao.createTable(db, ifNotExists);
-        TransaccionDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -68,7 +67,6 @@ public class DaoMaster extends AbstractDaoMaster {
         AgroquimicosDao.dropTable(db, ifExists);
         TipoProduccionDao.dropTable(db, ifExists);
         NacionalidadDao.dropTable(db, ifExists);
-        TransaccionDao.dropTable(db, ifExists);
     }
 
     /**
@@ -108,7 +106,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(AgroquimicosDao.class);
         registerDaoClass(TipoProduccionDao.class);
         registerDaoClass(NacionalidadDao.class);
-        registerDaoClass(TransaccionDao.class);
     }
 
     public DaoSession newSession() {

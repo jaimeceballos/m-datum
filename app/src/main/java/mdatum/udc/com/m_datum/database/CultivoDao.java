@@ -38,6 +38,8 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         public final static Property EleccionEspecificar = new Property(10, String.class, "eleccionEspecificar", false, "ELECCION_ESPECIFICAR");
         public final static Property EncuestaId = new Property(11, Long.class, "encuestaId", false, "ENCUESTA_ID");
         public final static Property Nueva_especie = new Property(12, String.class, "nueva_especie", false, "NUEVA_ESPECIE");
+        public final static Property RemoteId = new Property(13, int.class, "remoteId", false, "REMOTE_ID");
+        public final static Property IsSinchronized = new Property(14, boolean.class, "isSinchronized", false, "IS_SINCHRONIZED");
     }
 
     private Query<Cultivo> encuesta_CultivosQuery;
@@ -66,7 +68,9 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
                 "\"ELECCION_CULTIVO_ID\" INTEGER NOT NULL ," + // 9: eleccionCultivoId
                 "\"ELECCION_ESPECIFICAR\" TEXT," + // 10: eleccionEspecificar
                 "\"ENCUESTA_ID\" INTEGER," + // 11: encuestaId
-                "\"NUEVA_ESPECIE\" TEXT);"); // 12: nueva_especie
+                "\"NUEVA_ESPECIE\" TEXT," + // 12: nueva_especie
+                "\"REMOTE_ID\" INTEGER NOT NULL ," + // 13: remoteId
+                "\"IS_SINCHRONIZED\" INTEGER NOT NULL );"); // 14: isSinchronized
     }
 
     /** Drops the underlying database table. */
@@ -107,6 +111,8 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         if (nueva_especie != null) {
             stmt.bindString(13, nueva_especie);
         }
+        stmt.bindLong(14, entity.getRemoteId());
+        stmt.bindLong(15, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -141,6 +147,8 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         if (nueva_especie != null) {
             stmt.bindString(13, nueva_especie);
         }
+        stmt.bindLong(14, entity.getRemoteId());
+        stmt.bindLong(15, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -163,7 +171,9 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
             cursor.getInt(offset + 9), // eleccionCultivoId
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // eleccionEspecificar
             cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11), // encuestaId
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // nueva_especie
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // nueva_especie
+            cursor.getInt(offset + 13), // remoteId
+            cursor.getShort(offset + 14) != 0 // isSinchronized
         );
         return entity;
     }
@@ -183,6 +193,8 @@ public class CultivoDao extends AbstractDao<Cultivo, Long> {
         entity.setEleccionEspecificar(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setEncuestaId(cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11));
         entity.setNueva_especie(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setRemoteId(cursor.getInt(offset + 13));
+        entity.setIsSinchronized(cursor.getShort(offset + 14) != 0);
      }
     
     @Override

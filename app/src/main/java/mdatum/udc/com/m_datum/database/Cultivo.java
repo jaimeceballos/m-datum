@@ -2,6 +2,7 @@ package mdatum.udc.com.m_datum.database;
 
 import android.content.ContentValues;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -41,11 +42,16 @@ public class Cultivo {
     private Long encuestaId;
     @SerializedName("especieNueva")
     private String nueva_especie;
-    @Generated(hash = 1044248098)
+    @Expose(serialize = false,deserialize = false)
+    private int remoteId;
+    @Expose(serialize = false,deserialize = false)
+    private boolean isSinchronized;
+    @Generated(hash = 1675112497)
     public Cultivo(Long id, int especieId, int tipoId, int nroSiembra,
             int mesSiembra, int surcos, int distancias, int largo,
             int tipoProduccionId, int eleccionCultivoId, String eleccionEspecificar,
-            Long encuestaId, String nueva_especie) {
+            Long encuestaId, String nueva_especie, int remoteId,
+            boolean isSinchronized) {
         this.id = id;
         this.especieId = especieId;
         this.tipoId = tipoId;
@@ -59,6 +65,8 @@ public class Cultivo {
         this.eleccionEspecificar = eleccionEspecificar;
         this.encuestaId = encuestaId;
         this.nueva_especie = nueva_especie;
+        this.remoteId = remoteId;
+        this.isSinchronized = isSinchronized;
     }
     @Generated(hash = 1860368354)
     public Cultivo() {
@@ -140,6 +148,18 @@ public class Cultivo {
     }
     public void setNueva_especie(String nueva_especie) {
         this.nueva_especie = nueva_especie;
+    }
+    public int getRemoteId() {
+        return this.remoteId;
+    }
+    public void setRemoteId(int remoteId) {
+        this.remoteId = remoteId;
+    }
+    public boolean getIsSinchronized() {
+        return this.isSinchronized;
+    }
+    public void setIsSinchronized(boolean isSinchronized) {
+        this.isSinchronized = isSinchronized;
     }
     
 }

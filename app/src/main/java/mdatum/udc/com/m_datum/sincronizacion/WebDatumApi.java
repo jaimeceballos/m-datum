@@ -3,11 +3,14 @@ package mdatum.udc.com.m_datum.sincronizacion;
 import java.util.Date;
 import java.util.List;
 
+import mdatum.udc.com.m_datum.database.AgroquimicoUsado;
 import mdatum.udc.com.m_datum.database.Agroquimicos;
+import mdatum.udc.com.m_datum.database.Cultivo;
 import mdatum.udc.com.m_datum.database.Encuesta;
 import mdatum.udc.com.m_datum.database.Encuestado;
 import mdatum.udc.com.m_datum.database.Establecimiento;
 import mdatum.udc.com.m_datum.database.Familia;
+import mdatum.udc.com.m_datum.database.Invernaculo;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -25,7 +28,7 @@ import retrofit2.http.Path;
 
 public interface WebDatumApi {
 
-    public static final String URL = "http://192.168.43.141";
+    public static final String URL = "http://192.168.1.41";
     public static final String PORT = ":8000/";
     public static final String BASE_URL = URL+PORT;
 
@@ -60,9 +63,7 @@ public interface WebDatumApi {
             @Part("posLatitud") RequestBody posLatitud,
             @Part("posLongitud") RequestBody posLongitud,
             @Part("regimenTenencia") RequestBody regimenTenencia,
-            @Part("regimenOtros") RequestBody regimenOtros,
-            @Part("transaccion") RequestBody transaccion
-
+            @Part("regimenOtros") RequestBody regimenOtros
     );
 
     @POST("api/sincro_encuestado/")
@@ -79,5 +80,14 @@ public interface WebDatumApi {
 
     @GET("api/get_ids_by_transaccion/{transaccion}/")
     Call<IdsSincro> getIdsByTransaccion(@Header("Authorization") String token, @Path("transaccion") String transaccion);
+
+    @POST("api/sincro_invernaculo/")
+    Call<Invernaculo> sincroInvernaculo(@Header("Authorization") String token, @Body Invernaculo invernaculo);
+
+    @POST("api/sincro_cultivo/")
+    Call<Cultivo> sincroCultivo(@Header("Authorization") String token, @Body Cultivo cultivo);
+
+    @POST("api/sincro_agroquimico_usado/")
+    Call<AgroquimicoUsado> sincroAgroquimicoUsado(@Header("Authorization") String token, @Body AgroquimicoUsado agroquimicoUsado);
 
 }

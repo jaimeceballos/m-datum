@@ -35,7 +35,6 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         public final static Property IsSincronized = new Property(7, boolean.class, "isSincronized", false, "IS_SINCRONIZED");
         public final static Property Remote_id = new Property(8, int.class, "remote_id", false, "REMOTE_ID");
         public final static Property Is_finished = new Property(9, boolean.class, "is_finished", false, "IS_FINISHED");
-        public final static Property Transaccion = new Property(10, String.class, "transaccion", false, "TRANSACCION");
     }
 
     private DaoSession daoSession;
@@ -63,8 +62,7 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
                 "\"USUARIO\" INTEGER NOT NULL ," + // 6: usuario
                 "\"IS_SINCRONIZED\" INTEGER NOT NULL ," + // 7: isSincronized
                 "\"REMOTE_ID\" INTEGER NOT NULL ," + // 8: remote_id
-                "\"IS_FINISHED\" INTEGER NOT NULL ," + // 9: is_finished
-                "\"TRANSACCION\" TEXT);"); // 10: transaccion
+                "\"IS_FINISHED\" INTEGER NOT NULL );"); // 9: is_finished
     }
 
     /** Drops the underlying database table. */
@@ -110,11 +108,6 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         stmt.bindLong(8, entity.getIsSincronized() ? 1L: 0L);
         stmt.bindLong(9, entity.getRemote_id());
         stmt.bindLong(10, entity.getIs_finished() ? 1L: 0L);
- 
-        String transaccion = entity.getTransaccion();
-        if (transaccion != null) {
-            stmt.bindString(11, transaccion);
-        }
     }
 
     @Override
@@ -154,11 +147,6 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         stmt.bindLong(8, entity.getIsSincronized() ? 1L: 0L);
         stmt.bindLong(9, entity.getRemote_id());
         stmt.bindLong(10, entity.getIs_finished() ? 1L: 0L);
- 
-        String transaccion = entity.getTransaccion();
-        if (transaccion != null) {
-            stmt.bindString(11, transaccion);
-        }
     }
 
     @Override
@@ -184,8 +172,7 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
             cursor.getInt(offset + 6), // usuario
             cursor.getShort(offset + 7) != 0, // isSincronized
             cursor.getInt(offset + 8), // remote_id
-            cursor.getShort(offset + 9) != 0, // is_finished
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // transaccion
+            cursor.getShort(offset + 9) != 0 // is_finished
         );
         return entity;
     }
@@ -202,7 +189,6 @@ public class EncuestaDao extends AbstractDao<Encuesta, Long> {
         entity.setIsSincronized(cursor.getShort(offset + 7) != 0);
         entity.setRemote_id(cursor.getInt(offset + 8));
         entity.setIs_finished(cursor.getShort(offset + 9) != 0);
-        entity.setTransaccion(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
      }
     
     @Override

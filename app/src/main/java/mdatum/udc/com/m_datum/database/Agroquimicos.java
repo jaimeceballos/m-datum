@@ -1,5 +1,6 @@
 package mdatum.udc.com.m_datum.database;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -27,19 +28,22 @@ public class Agroquimicos {
     private Long asesoramiento;
     @SerializedName("asesoramientoOtro")
     private String asesoramiento_otro;
-    @SerializedName("transaccion")
-    private String transaccion;
-    @Generated(hash = 1822871444)
+    @Expose(deserialize = false,serialize = false)
+    private int remoteId;
+    @Expose(deserialize = false,serialize = false)
+    private boolean isSincronized;
+    @Generated(hash = 2002469106)
     public Agroquimicos(Long id, boolean usa, Long factor_climatico,
             Long triple_lavado, Long asesoramiento, String asesoramiento_otro,
-            String transaccion) {
+            int remoteId, boolean isSincronized) {
         this.id = id;
         this.usa = usa;
         this.factor_climatico = factor_climatico;
         this.triple_lavado = triple_lavado;
         this.asesoramiento = asesoramiento;
         this.asesoramiento_otro = asesoramiento_otro;
-        this.transaccion = transaccion;
+        this.remoteId = remoteId;
+        this.isSincronized = isSincronized;
     }
     @Generated(hash = 1769417060)
     public Agroquimicos() {
@@ -80,14 +84,19 @@ public class Agroquimicos {
     public void setAsesoramiento_otro(String asesoramiento_otro) {
         this.asesoramiento_otro = asesoramiento_otro;
     }
-    public String getTransaccion() {
-        return this.transaccion;
+    public int getRemoteId() {
+        return this.remoteId;
     }
-    public void setTransaccion(String transaccion) {
-        this.transaccion = transaccion;
+    public void setRemoteId(int remoteId) {
+        this.remoteId = remoteId;
+    }
+    public boolean getIsSincronized() {
+        return this.isSincronized;
+    }
+    public void setIsSincronized(boolean isSincronized) {
+        this.isSincronized = isSincronized;
     }
 
 
-   
 
 }

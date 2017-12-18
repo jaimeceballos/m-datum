@@ -27,7 +27,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
         public final static Property TieneHijos = new Property(2, boolean.class, "tieneHijos", false, "TIENE_HIJOS");
         public final static Property CantVarones = new Property(3, int.class, "cantVarones", false, "CANT_VARONES");
         public final static Property CantMujeres = new Property(4, int.class, "cantMujeres", false, "CANT_MUJERES");
-        public final static Property Transaccion = new Property(5, String.class, "transaccion", false, "TRANSACCION");
+        public final static Property IdRemote = new Property(5, int.class, "idRemote", false, "ID_REMOTE");
+        public final static Property IsSinchronized = new Property(6, boolean.class, "isSinchronized", false, "IS_SINCHRONIZED");
     }
 
 
@@ -48,7 +49,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
                 "\"TIENE_HIJOS\" INTEGER NOT NULL ," + // 2: tieneHijos
                 "\"CANT_VARONES\" INTEGER NOT NULL ," + // 3: cantVarones
                 "\"CANT_MUJERES\" INTEGER NOT NULL ," + // 4: cantMujeres
-                "\"TRANSACCION\" TEXT);"); // 5: transaccion
+                "\"ID_REMOTE\" INTEGER NOT NULL ," + // 5: idRemote
+                "\"IS_SINCHRONIZED\" INTEGER NOT NULL );"); // 6: isSinchronized
     }
 
     /** Drops the underlying database table. */
@@ -69,11 +71,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
         stmt.bindLong(3, entity.getTieneHijos() ? 1L: 0L);
         stmt.bindLong(4, entity.getCantVarones());
         stmt.bindLong(5, entity.getCantMujeres());
- 
-        String transaccion = entity.getTransaccion();
-        if (transaccion != null) {
-            stmt.bindString(6, transaccion);
-        }
+        stmt.bindLong(6, entity.getIdRemote());
+        stmt.bindLong(7, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -88,11 +87,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
         stmt.bindLong(3, entity.getTieneHijos() ? 1L: 0L);
         stmt.bindLong(4, entity.getCantVarones());
         stmt.bindLong(5, entity.getCantMujeres());
- 
-        String transaccion = entity.getTransaccion();
-        if (transaccion != null) {
-            stmt.bindString(6, transaccion);
-        }
+        stmt.bindLong(6, entity.getIdRemote());
+        stmt.bindLong(7, entity.getIsSinchronized() ? 1L: 0L);
     }
 
     @Override
@@ -108,7 +104,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
             cursor.getShort(offset + 2) != 0, // tieneHijos
             cursor.getInt(offset + 3), // cantVarones
             cursor.getInt(offset + 4), // cantMujeres
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // transaccion
+            cursor.getInt(offset + 5), // idRemote
+            cursor.getShort(offset + 6) != 0 // isSinchronized
         );
         return entity;
     }
@@ -120,7 +117,8 @@ public class FamiliaDao extends AbstractDao<Familia, Long> {
         entity.setTieneHijos(cursor.getShort(offset + 2) != 0);
         entity.setCantVarones(cursor.getInt(offset + 3));
         entity.setCantMujeres(cursor.getInt(offset + 4));
-        entity.setTransaccion(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setIdRemote(cursor.getInt(offset + 5));
+        entity.setIsSinchronized(cursor.getShort(offset + 6) != 0);
      }
     
     @Override

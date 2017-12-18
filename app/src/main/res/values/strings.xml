@@ -128,5 +128,9 @@
     <string name="nueva_encuesta">Para crear una nueva encuesta haga click en el botón +</string>
     <string name="synchro_title">Sincronizacion de encuestas</string>
     <string name="encuestas_para_sincronizar">Encuestas para sincronizar:</string>
+    <string name="cargando_encuestas">Cargando encuestas a Sincronizar</string>
+    <string name="finalizado">Finalizada</string>
+    <string name="sincronizada">Sincronizada</string>
+    <string name="btn_editar">Editar</string>
 
 </resources>

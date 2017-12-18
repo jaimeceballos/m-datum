@@ -109,8 +109,8 @@ public class InvernaculoFragment extends Fragment {
 
                 invernaculo.setCantidadModulos((Integer.parseInt(etCantModulos.getText().toString())));
                 invernaculo.setSuperficieUnitaria(Integer.parseInt(etSupUnit.getText().toString()));
-                invernaculo.setMaterialEstructuraId(spMatEstruct.getSelectedItemPosition());
-                invernaculo.setAnioConstruccionId(spAnioConstruct.getSelectedItemPosition());
+                invernaculo.setMaterialEstructuraId(spMatEstruct.getSelectedItemPosition()+1);
+                invernaculo.setAnioConstruccionId(spAnioConstruct.getSelectedItemPosition()+1);
                 invernaculo.setEncuestaId(encuesta.getId());
 
                 Toast savingToast = Toast.makeText(getContext(), "Guardando los datos.", Toast.LENGTH_SHORT);

@@ -2,74 +2,75 @@ package mdatum.udc.com.m_datum.sincronizacion;
 
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.StringTokenizer;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import mdatum.udc.com.m_datum.MDatumController;
 import mdatum.udc.com.m_datum.R;
+import mdatum.udc.com.m_datum.database.AgroquimicoUsado;
+import mdatum.udc.com.m_datum.database.AgroquimicoUsadoDao;
 import mdatum.udc.com.m_datum.database.Agroquimicos;
+import mdatum.udc.com.m_datum.database.AgroquimicosDao;
 import mdatum.udc.com.m_datum.database.Cultivo;
+import mdatum.udc.com.m_datum.database.CultivoDao;
 import mdatum.udc.com.m_datum.database.DaoSession;
 import mdatum.udc.com.m_datum.database.Encuesta;
 import mdatum.udc.com.m_datum.database.EncuestaDao;
 import mdatum.udc.com.m_datum.database.Encuestado;
+import mdatum.udc.com.m_datum.database.EncuestadoDao;
 import mdatum.udc.com.m_datum.database.Establecimiento;
 import mdatum.udc.com.m_datum.database.EstablecimientoDao;
 import mdatum.udc.com.m_datum.database.Familia;
-import mdatum.udc.com.m_datum.database.Transaccion;
-import mdatum.udc.com.m_datum.database.TransaccionDao;
-import mdatum.udc.com.m_datum.events.MensajesDeEvento;
+import mdatum.udc.com.m_datum.database.FamiliaDao;
+import mdatum.udc.com.m_datum.database.Invernaculo;
+import mdatum.udc.com.m_datum.database.InvernaculoDao;
+import mdatum.udc.com.m_datum.encuestaAgroquimicos.FinalEncuestaFragment;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Multipart;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SincroFragment extends Fragment {
 
-    private String uid = "";
-
+    // Sesion de acceso a la base de datos
     private DaoSession daoSession;
-
+    // sesion de acceso a los servicios de la API web
     private WebDatumApi webDatumApi;
-
+    // Token de autorizacion para la API web
     private String token;
-
-    private int usuarioId;
-
+    // Preferencias de la aplicacion
     private SharedPreferences prefs;
+    // TextView's de la UI
+    private TextView tvCargando,tvSynchronized,tvToSynchronize;
+    // ProgressBar de la UI
+    private ProgressBar pbCargando,pbSincro;
+    // Variable contador de proceso
+    private int progreso = 0;
 
     public SincroFragment() {
         // Required empty public constructor
@@ -83,47 +84,44 @@ public class SincroFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_sincro, container, false);
 
-        EventBus.getDefault().register(this);
-
+        // Obtengo la sesion de base de datos
         daoSession = ((MDatumController)getActivity().getApplication()).getDaoSession();
-
+        // Obtengo la sesion de acceso a los servicios de la API Web
         webDatumApi = ((MDatumController)getActivity().getApplication()).getApiSession();
-
+        // Obtengo las preferencias de la aplicacion
         prefs =  getActivity().getApplication().getSharedPreferences("MDATUM_PREFS", Activity.MODE_PRIVATE);
-
+        // Obtengo desde las preferencias de la aplicacion el Token de Autorizacion de la API web
         token = prefs.getString("PREF_USER_TOKEN",null);
 
-        usuarioId = prefs.getInt("PREF_USER_LOGED",0);
 
-        EncuestaDao encuestaDao = daoSession.getEncuestaDao();
+        // ---- Obtengo la instancia de los elementos de la UI ---- //
+        tvCargando = (TextView) rootview.findViewById(R.id.tv_cargando);
 
-        List<Encuesta> encuestas = encuestaDao.loadAll();//queryBuilder().where(EncuestaDao.Properties.Is_finished.eq(true),EncuestaDao.Properties.IsSincronized.eq(false)).list();
+        pbCargando = (ProgressBar) rootview.findViewById(R.id.pb_cargando);
 
-        new SincroFragment.SincroTask().execute((ArrayList<Encuesta>) encuestas);
+        pbSincro  = (ProgressBar) rootview.findViewById(R.id.pb_sincro);
 
-        /*for(int i = 0; i < encuestas.size() ; i ++){
-            uid = UUID.randomUUID().toString()+"-"+String.valueOf(encuestas.get(i).getId())+"-"+String.valueOf(encuestas.get(i).getUsuario());
+        tvSynchronized = (TextView) rootview.findViewById(R.id.tv_synchronized);
 
-            Encuesta encuesta = encuestas.get(i);
-            encuesta.setTransaccion(uid);
+        tvToSynchronize = (TextView) rootview.findViewById(R.id.tv_to_synchronize);
 
-            encuestaDao.update(encuesta);
+        // -- Fin de la obtencion de las instancias de los elementos de la UI -- //
 
-            Transaccion transaccion = new Transaccion();
-            transaccion.setEncuestaId(encuesta.getId());
-            transaccion.setTransaccion(uid);
-            try{
-                daoSession.insert(transaccion);
-            }catch (SQLiteConstraintException e){
-                daoSession.update(transaccion);
-            }
 
-            Establecimiento establecimiento = encuestas.get(i).getEstablecimientoRelated();
-            establecimiento.setTransaccion(uid);
-
-            new SincroFragment.EstablecimientoSynchroTask().execute(establecimiento);
-
-        }*/
+        /**
+         * Verifico si es necesario hacer la sincronizacion
+         * */
+        if(isSynchroNeeded()){
+            // Preparo la UI para la sincronizacion
+            setUpUI();
+            // Llamo a la tarea de sincronizacion con la accion inicio
+            synchroTask("Inicio",null);
+        }else{
+            // si no es necesaria la sincronizacion oculto la progressbar
+            pbCargando.setVisibility(View.GONE);
+            // y seteo el mensaje de que la actualizacion no es necesaria
+            tvCargando.setText("No hay encuestas para sincronizar.");
+        }
 
 
 
@@ -131,402 +129,480 @@ public class SincroFragment extends Fragment {
         return rootview;
     }
 
-
-    public class SincroTask extends AsyncTask<ArrayList<Encuesta>,Void,Boolean>{
-
-        @Override
-        protected Boolean doInBackground(ArrayList<Encuesta>... arrayLists) {
-
-            MensajesDeEvento event =  new MensajesDeEvento();
-            event.setEvento("Start");
-            event.setDispatcher("SincroTask");
-            event.setObject(arrayLists[0]);
-            EventBus.getDefault().post(event);
-
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-
-            super.onPostExecute(aBoolean);
-        }
+    private void setUpUI(){
+        /*
+        * Obtiene la cantidad de encuestas a sincronizar
+        * para poder mostrar los elementos de control
+        * del avance.
+        * */
+        List<Encuesta> encuestaList = daoSession.getEncuestaDao().queryBuilder().where(
+                EncuestaDao.Properties.Is_finished.eq(true),
+                EncuestaDao.Properties.IsSincronized.eq(false)
+        ).list();
+        tvCargando.setText("Sincronizando Encuestas...");
+        pbCargando.setVisibility(View.GONE);
+        pbSincro.setVisibility(View.VISIBLE);
+        pbSincro.setMax(encuestaList.size());
+        pbSincro.setProgress(progreso);
+        tvSynchronized.setText("00");
+        tvSynchronized.setVisibility(View.VISIBLE);
+        tvToSynchronize.setText(String.valueOf(encuestaList.size()));
+        tvToSynchronize.setVisibility(View.VISIBLE);
     }
 
+    private boolean isSynchroNeeded(){
+        /*
+        * isSynchroNeeded, verifica si existen encuestas que esten finalizadas
+        * y sin haber sido sincronizadas. En caso de encontrar alguna devuelve verdadero,
+        * en el caso contrario devuelve falso.
+        * */
+
+        List<Encuesta> encuestaList = daoSession.getEncuestaDao().queryBuilder().where(
+                EncuestaDao.Properties.Is_finished.eq(true),
+                EncuestaDao.Properties.IsSincronized.eq(false)
+        ).list();
+
+        return (encuestaList.size()>0)?true:false;
+    }
+
+    private void synchroTask(String accion, Encuesta encuesta){
+        /*
+        * synchroTask se encarga de la sincronizacion de las encuestas,
+        * la accion es desde el dispositivo movil al servidor remoto.
+        * Recibe una accion a realizar y la encuesta a sincronizar.
+        * A traves de un Switch selecciona la accion a realizar
+        * y realiza todas las acciones de preparacion para realizar
+        * una peticion HTTP a un endpoint de la api de sincronizacion.
+        * */
+        final Encuesta finalEncuesta = encuesta;
+        switch (accion){
+            case "Inicio":
+                /*Si la accion es inicio, obtiene las encuestas que estan
+                 * finalizadas y no sincronizadas
+                 * */
+
+                EncuestaDao encuestaDao = daoSession.getEncuestaDao();
+                List<Encuesta> encuestas = encuestaDao.queryBuilder().where(EncuestaDao.Properties.Is_finished.eq(true),EncuestaDao.Properties.IsSincronized.eq(false)).list();
+
+                /*
+                * si hay encuestas para sincronizar
+                * */
+                if(encuestas.size()>0){
+                    /*
+                    * Obtiene la primer encuesta a sincronizar
+                    * */
+                    encuesta = encuestas.get(0);
+                    /*
+                     *  Realiza una llamada recursiva con la accion establecimiento
+                     *  y la encuesta que comienza a sincronizar.
+                     *  */
+                    synchroTask("Establecimiento",encuesta);
+                }else{
+                    /*
+                    * Si finalizo la sincronizacion:
+                    * actualiza la UI.
+                    * */
+                    pbSincro.setVisibility(View.GONE);
+                    tvSynchronized.setVisibility(View.GONE);
+                    tvToSynchronize.setVisibility(View.GONE);
+                    tvCargando.setText("Sincronizacion Finalizada, se sincronizaron: " + progreso + " encuestas.");
+                }
+                break;
+            case "Establecimiento":
+                /*
+                * Si la accion solicitada es establecimiento
+                * obtiene el establecimiento que debe sincronizar.
+                 */
+                final Establecimiento establecimiento = encuesta.getEstablecimientoRelated();
+
+                /*
+                * Como el establecimiento captura una imagen del lugar
+                * el EndPoint recibe una peticion POST con un mensaje multipart
+                * ya que se debe enviar un archivo ademas de los datos del establecimiento.
+                * para esto debo preparar cada parte por separado en un cuerpo de mensaje
+                * del tipo multipart.
+                 */
+
+                //Obtengo el archivo de la foto del establecimiento
+                File foto                   = new File(establecimiento.getFoto());
+                //preparo la parte del cuerpo del mensaje que lleva la imagen
+                RequestBody reqFile         = RequestBody.create(MediaType.parse("image/*"), foto);
+                final MultipartBody.Part body     = MultipartBody.Part.createFormData("foto",foto.getName(),reqFile);
+                //preparo el resto de las partes del mensaje
+                RequestBody nombre          = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getNombre());
+                RequestBody numero          = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getNro());
+                RequestBody posLatitud      = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getPosLatitud());
+                RequestBody posLongitud     = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getPosLongitud());
+                RequestBody regimenTenencia = RequestBody.create(MediaType.parse("text/plain"),Integer.toString(establecimiento.getRegimenTenenciaId()));
+                RequestBody regimenOtros    = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getRegimenOtros());
 
 
-    @Subscribe
-    public void onEvent(MensajesDeEvento evento){
+                //Instancio una llamada con las partes generadas anteriormente
+                Call<Establecimiento> establecimientoCall = webDatumApi.sincroEstablecimiento(
+                        "Token " + token,
+                        body,
+                        nombre,
+                        numero,
+                        posLatitud,
+                        posLongitud,
+                        regimenTenencia,
+                        regimenOtros
+                );
 
-        switch (evento.getDispatcher()){
+                establecimientoCall.enqueue(new Callback<Establecimiento>() {
+                    @Override
+                    public void onResponse(Call<Establecimiento> call, Response<Establecimiento> response) {
+                        if(response.isSuccessful()){
+                            /*
+                            * si la respuesta del servidor es SUCCESSFULL,
+                            * en el establecimiento local guardo el id que
+                            * le fue asignado por la base de datos remota
+                            * y lo marco como sincronizado
+                            *
+                             */
+                            establecimiento.setRemoteId(Integer.parseInt(response.body().getId().toString()));
+                            establecimiento.setIsSinchronized(true);
+                            daoSession.update(establecimiento);
+                            finalEncuesta.setEstablecimientoRelated(establecimiento);
 
-            case "SincroTask":
-                List<Encuesta> encuestas = (List<Encuesta>) evento.getObject();
-                Iterator<Encuesta> iterator = encuestas.iterator();
-                if(evento.getEvento().equals("Start")){
-                    if(iterator.hasNext()){
-                        Encuesta encuesta = iterator.next();
-                        Establecimiento establecimiento = encuesta.getEstablecimientoRelated();
-                        uid = UUID.randomUUID().toString()+"-"+String.valueOf(encuesta.getId())+"-"+String.valueOf(encuesta.getUsuario());
-                        establecimiento.setTransaccion(uid);
-                        encuesta.setTransaccion(uid);
-                        daoSession.update(encuesta);
-                        Transaccion transaccion = new Transaccion();
-                        transaccion.setEncuestaId(encuesta.getId());
-                        transaccion.setTransaccion(uid);
-                        try{
-                            daoSession.insert(transaccion);
-                        }catch (SQLiteConstraintException e){
-                            daoSession.update(transaccion);
+                            /*
+                             * Hago una llamada recursiva a la tarea de sincronizacion con
+                              * la accion encuestado y la encuesta que se esta sincronizando.
+                             */
+                            synchroTask("Encuestado", finalEncuesta);
                         }
-                        new SincroFragment.EstablecimientoSynchroTask().execute(establecimiento);
                     }
-                }else if(evento.getEvento().equals("Continue")){
 
+                    @Override
+                    public void onFailure(Call<Establecimiento> call, Throwable t) {
+                        Toast.makeText(getContext(), "Hubo un problema de comunicacion con el servidor. Vuelva a intentarlo mas tarde. Si el problema persiste comuniquese con el administrador.", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                break;
+            case "Encuestado":
+                final Encuestado encuestado = encuesta.getEncuestadoRelated();
+
+                Call<Encuestado> encuestadoCall = webDatumApi.sincroEncuestado(
+                        "Token " + token,
+                        encuestado
+                );
+
+
+                encuestadoCall.enqueue(new Callback<Encuestado>() {
+                    @Override
+                    public void onResponse(Call<Encuestado> call, Response<Encuestado> response) {
+                        if(response.isSuccessful()){
+                            encuestado.setIsSinchronized(true);
+                            encuestado.setRemoteId(Integer.parseInt(response.body().getId().toString()));
+                            daoSession.update(encuestado);
+                            finalEncuesta.setEncuestadoRelated(encuestado);
+                            if(finalEncuesta.getFamiliaId() != null ){
+                                synchroTask("Familia",finalEncuesta);
+                            }else if(finalEncuesta.getAgroquimicoId() != null){
+                                synchroTask("Agroquimico",finalEncuesta);
+                            }else{
+                                synchroTask("Encuesta",finalEncuesta);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Encuestado> call, Throwable t) {
+                        Log.d("FAILURE_ENCUESTADO",t.getMessage().toString());
+                    }
+                });
+                break;
+            case "Familia":
+                final Familia familia = encuesta.getFamiliaRelated();
+                Call<Familia> familiaCall = webDatumApi.sincroFamilia("Token "+token,familia);
+                familiaCall.enqueue(new Callback<Familia>() {
+                    @Override
+                    public void onResponse(Call<Familia> call, Response<Familia> response) {
+                        if(response.isSuccessful()){
+                            familia.setIsSinchronized(true);
+                            familia.setIdRemote(Integer.parseInt(response.body().getId().toString()));
+                            daoSession.update(familia);
+                            finalEncuesta.setFamiliaRelated(familia);
+                            if(finalEncuesta.getAgroquimicoId() != null ){
+                                synchroTask("Agroquimico",finalEncuesta);
+                            }else{
+                                synchroTask("Encuesta",finalEncuesta);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Familia> call, Throwable t) {
+
+                    }
+                });
+                break;
+            case "Agroquimico":
+                final Agroquimicos agroquimico = encuesta.getAgroquimicoRelated();
+
+                Call<Agroquimicos> agroquimicosCall = webDatumApi.sincroAgroquimico("Token "+token,agroquimico);
+
+                agroquimicosCall.enqueue(new Callback<Agroquimicos>() {
+                    @Override
+                    public void onResponse(Call<Agroquimicos> call, Response<Agroquimicos> response) {
+                        if(response.isSuccessful()){
+                            agroquimico.setIsSincronized(true);
+                            agroquimico.setRemoteId(Integer.parseInt(response.body().getId().toString()));
+                            daoSession.update(agroquimico);
+                            finalEncuesta.setAgroquimicoRelated(agroquimico);
+                            synchroTask("Encuesta",finalEncuesta);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Agroquimicos> call, Throwable t) {
+
+                    }
+                });
+                break;
+            case "Encuesta":
+                final Long id = encuesta.getId();
+                daoSession.update(encuesta);
+                encuesta.setEstablecimientoId((long) encuesta.getEstablecimientoRelated().getRemoteId());
+                encuesta.setEncuestadoId((long) encuesta.getEncuestadoRelated().getRemoteId());
+                if(encuesta.getFamiliaId() != null)
+                    encuesta.setFamiliaId((long) encuesta.getFamiliaRelated().getIdRemote());
+                if(encuesta.getAgroquimicoId() != null)
+                    encuesta.setAgroquimicoId((long) encuesta.getAgroquimicoRelated().getRemoteId());
+
+                Call<Encuesta> encuestaCall = webDatumApi.sincroEncuesta("Token "+token,encuesta);
+
+                encuestaCall.enqueue(new Callback<Encuesta>() {
+                    @Override
+                    public void onResponse(Call<Encuesta> call, Response<Encuesta> response) {
+                        if(response.isSuccessful()){
+                            EncuestaDao encuestaDao1 = daoSession.getEncuestaDao();
+                            Agroquimicos agroquimicos = finalEncuesta.getAgroquimicoRelated();
+                            Encuesta encuesta1 = encuestaDao1.load(id);
+                            encuesta1.setRemote_id(Integer.parseInt(response.body().getId().toString()));
+                            encuesta1.setEstablecimientoId(getEstablecimientoByRemoteId(encuesta1.getEstablecimientoId()));
+                            encuesta1.setEncuestadoId(getEncuestadoByRemoteId(encuesta1.getEncuestadoId()));
+                            encuesta1.setFamiliaId((encuesta1.getFamiliaId() != null)?getFamiliaByRemoteId(encuesta1.getFamiliaId()):null);
+                            encuesta1.setAgroquimicoId((encuesta1.getAgroquimicoId()!= null)?getAgroquimicoByRemoteId(encuesta1.getAgroquimicoId()):null);
+                            daoSession.update(encuesta1);
+                            if(finalEncuesta.getInvernaculos().size()>0){
+                                synchroTask("Invernaculos",finalEncuesta);
+                            }else if(finalEncuesta.getCultivos().size()>0){
+                                synchroTask("Cultivos",finalEncuesta);
+                            }else if(finalEncuesta.getAgroquimicoUsados().size()>0){
+                                synchroTask("AgroquimicosUsados",finalEncuesta);
+                            }else{
+                                synchroTask("Finaliza",finalEncuesta);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Encuesta> call, Throwable t) {
+
+                    }
+                });
+                break;
+            case "Invernaculos":
+
+                List<Invernaculo> invernaculos = daoSession.getInvernaculoDao().queryBuilder().where(
+                        InvernaculoDao.Properties.EncuestaId
+                                .eq(encuesta.getId()),
+                        InvernaculoDao.Properties.IsSinchronized.eq(false)
+                ).list();
+                if(invernaculos.size()>0) {
+                    final Invernaculo invernaculo = invernaculos.get(0);
+
+                    invernaculo.setEncuestaId((long) encuesta.getRemote_id());
+
+                    Call<Invernaculo> invernaculoCall = webDatumApi.sincroInvernaculo("Token " + token, invernaculo);
+
+                    invernaculoCall.enqueue(new Callback<Invernaculo>() {
+                        @Override
+                        public void onResponse(Call<Invernaculo> call, Response<Invernaculo> response) {
+                            if (response.isSuccessful()) {
+                                invernaculo.setEncuestaId(finalEncuesta.getId());
+                                invernaculo.setIsSinchronized(true);
+                                invernaculo.setIdRemote(Integer.parseInt(response.body().getId().toString()));
+                                daoSession.update(invernaculo);
+                                InvernaculoDao invernaculoDao = daoSession.getInvernaculoDao();
+                                List<Invernaculo> invernaculos = invernaculoDao.queryBuilder().where(
+                                        InvernaculoDao.Properties.IsSinchronized.eq(false),
+                                        InvernaculoDao.Properties.EncuestaId
+                                                .eq(finalEncuesta.getId()))
+                                        .list();
+
+                                if (invernaculos.size() > 0) {
+                                    synchroTask("Invernaculos", finalEncuesta);
+                                } else if (finalEncuesta.getCultivos().size() > 0) {
+                                    synchroTask("Cultivos", finalEncuesta);
+                                } else if (finalEncuesta.getAgroquimicoUsados().size() > 0) {
+                                    synchroTask("AgroquimicosUsados", finalEncuesta);
+                                } else {
+                                    synchroTask("Finaliza", finalEncuesta);
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Invernaculo> call, Throwable t) {
+
+                        }
+                    });
+                }else if (finalEncuesta.getCultivos().size() > 0) {
+                    synchroTask("Cultivos", finalEncuesta);
+                } else if (finalEncuesta.getAgroquimicoUsados().size() > 0) {
+                    synchroTask("AgroquimicosUsados", finalEncuesta);
+                } else {
+                    synchroTask("Finaliza", finalEncuesta);
                 }
 
-            case "EstablecimientoTask":
-                if(evento.getEvento().equals("Success")){
-                    Encuesta encuesta = getEncuestaByTransaccion(evento.getTransaccion());
-                    Encuestado  encuestado = encuesta.getEncuestadoRelated();
-                    encuestado.setTransaccion(evento.getTransaccion());
-                    new SincroFragment.EncuestadoSynchroTask().execute(encuestado);
+                break;
+            case "Cultivos":
+                List<Cultivo> cultivos = daoSession.getCultivoDao().queryBuilder()
+                        .where(
+                                CultivoDao.Properties.EncuestaId.eq(encuesta.getId()),
+                                CultivoDao.Properties.IsSinchronized.eq(false)
+                        ).list();
+                if(cultivos.size()>0) {
+                    final Cultivo cultivo = cultivos.get(0);
+
+                    cultivo.setEncuestaId((long) encuesta.getRemote_id());
+
+                    Call<Cultivo> cultivoCall = webDatumApi.sincroCultivo("Token " + token, cultivo);
+                    cultivoCall.enqueue(new Callback<Cultivo>() {
+                        @Override
+                        public void onResponse(Call<Cultivo> call, Response<Cultivo> response) {
+                            if (response.isSuccessful()) {
+                                cultivo.setEncuestaId(finalEncuesta.getId());
+                                cultivo.setIsSinchronized(true);
+                                cultivo.setRemoteId(Integer.parseInt(response.body().getId().toString()));
+                                daoSession.update(cultivo);
+                                CultivoDao cultivoDao = daoSession.getCultivoDao();
+                                List<Cultivo> cultivos = cultivoDao.queryBuilder().where(
+                                        CultivoDao.Properties.EncuestaId
+                                                .eq(finalEncuesta.getId()),
+                                        CultivoDao.Properties.IsSinchronized.eq(false))
+                                        .list();
+
+                                if (cultivos.size() > 0) {
+                                    synchroTask("Cultivos", finalEncuesta);
+                                } else if (finalEncuesta.getAgroquimicoUsados().size() > 0) {
+                                    synchroTask("AgroquimicosUsados", finalEncuesta);
+                                } else {
+                                    synchroTask("Finaliza", finalEncuesta);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Cultivo> call, Throwable t) {
+
+                        }
+                    });
+                }else if (finalEncuesta.getAgroquimicoUsados().size() > 0) {
+                    synchroTask("AgroquimicosUsados", finalEncuesta);
+                } else {
+                    synchroTask("Finaliza", finalEncuesta);
                 }
                 break;
-            case "EncuestadoTask":
-                if(evento.getEvento().equals("Success")){
-                    Encuesta encuesta = getEncuestaByTransaccion(evento.getTransaccion());
-                    Familia familia = encuesta.getFamiliaRelated();
-                    if(familia != null){
-                        familia.setTransaccion(evento.getTransaccion());
-                        new SincroFragment.FamiliaSynchroTask().execute(familia);
-                    }else {
-                        MensajesDeEvento event =  new MensajesDeEvento();
-                        event.setEvento("Success");
-                        event.setDispatcher("FamiliaTask");
-                        event.setTransaccion(evento.getTransaccion());
-                        EventBus.getDefault().post(event);
-                    }
+            case "AgroquimicosUsados":
+                List<AgroquimicoUsado> agroquimicoUsados = daoSession.getAgroquimicoUsadoDao().queryBuilder()
+                        .where(
+                                AgroquimicoUsadoDao.Properties.EncuestaId.eq(encuesta.getId()),
+                                AgroquimicoUsadoDao.Properties.IsSinchronized.eq(false)
+                        ).list();
+                if(agroquimicoUsados.size()>0){
+                    final AgroquimicoUsado agroquimicoUsado = agroquimicoUsados.get(0);
+
+                    agroquimicoUsado.setEncuestaId((long) encuesta.getRemote_id());
+
+                    Call<AgroquimicoUsado> agroquimicoUsadoCall = webDatumApi.sincroAgroquimicoUsado("Token "+token,agroquimicoUsado);
+
+                    agroquimicoUsadoCall.enqueue(new Callback<AgroquimicoUsado>() {
+                        @Override
+                        public void onResponse(Call<AgroquimicoUsado> call, Response<AgroquimicoUsado> response) {
+                            if(response.isSuccessful()){
+                                agroquimicoUsado.setEncuestaId(finalEncuesta.getId());
+                                agroquimicoUsado.setIsSinchronized(true);
+                                agroquimicoUsado.setIdRemote(Integer.parseInt(response.body().getId().toString()));
+                                daoSession.update(agroquimicoUsado);
+                                AgroquimicoUsadoDao agroquimicoUsadoDao = daoSession.getAgroquimicoUsadoDao();
+                                List<AgroquimicoUsado> agroquimicoUsados1 = agroquimicoUsadoDao.queryBuilder().where(
+                                        AgroquimicoUsadoDao.Properties.EncuestaId
+                                                .eq(finalEncuesta.getId()),
+                                        AgroquimicoUsadoDao.Properties.IsSinchronized.eq(false))
+                                        .list();
+
+                                if(agroquimicoUsados1.size()>0){
+                                    synchroTask("AgroquimicosUsados",finalEncuesta);
+                                }else{
+                                    synchroTask("Finaliza",finalEncuesta);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<AgroquimicoUsado> call, Throwable t) {
+
+                        }
+                    });
+                }else{
+                    synchroTask("Finaliza",finalEncuesta);
                 }
                 break;
-            case "FamiliaTask":
-                if(evento.getEvento().equals("Success")){
-                    Encuesta encuesta = getEncuestaByTransaccion(evento.getTransaccion());
-                    Agroquimicos agroquimico = encuesta.getAgroquimicoRelated();
-                    if(agroquimico!= null){
-                        agroquimico.setTransaccion(evento.getTransaccion());
-                        new SincroFragment.AgroquimicoSynchroTask().execute(agroquimico);
-                    }else{
-                        MensajesDeEvento event =  new MensajesDeEvento();
-                        event.setEvento("Success");
-                        event.setDispatcher("AgroquimicoTask");
-                        event.setTransaccion(evento.getTransaccion());
-                        EventBus.getDefault().post(event);
-                    }
-                }
+            case "Finaliza":
+                progreso += 1;
+                pbSincro.setProgress(progreso);
+                tvSynchronized.setText(String.valueOf(progreso));
+                finalEncuesta.setIsSincronized(true);
+                daoSession.update(finalEncuesta);
+                Log.d("FINALIZA ENCUESTA","Nro: "+finalEncuesta.getId().toString());
+                synchroTask("Inicio",null);
                 break;
-            case "AgroquimicoTask":
-                if(evento.getEvento().equals("Success")){
-                    new SincroFragment.ObtenerIdsTask().execute(evento.getTransaccion());
-                }
-                break;
-            case "GetIdsTask":
-                if(evento.getEvento().equals("Success")){
-                    Encuesta temp = (Encuesta) evento.getObject();
-                    if(temp.getFamiliaId()== 0)
-                        temp.setFamiliaId(null);
-                    if(temp.getAgroquimicoId()==0)
-                        temp.setAgroquimicoId(null);
-                    new SincroFragment.EncuestaSynchroTask().execute(temp);
-                }
-                break;
-
         }
+
 
 
     }
 
-    private class EstablecimientoSynchroTask extends AsyncTask<Establecimiento,Void,Long>{
 
-        @Override
-        protected Long doInBackground(Establecimiento... establecimientos) {
+    private long getAgroquimicoByRemoteId(long remoteId){
+        AgroquimicosDao agroquimicosDao = daoSession.getAgroquimicosDao();
 
-            Long id = 0L;
-            final Establecimiento establecimiento = establecimientos[0];
+        Agroquimicos agroquimico = agroquimicosDao.queryBuilder().where(AgroquimicosDao.Properties.RemoteId.eq(remoteId)).list().get(0);
 
-            //Obtengo el archivo de la foto del establecimiento
-            File foto                   = new File(establecimiento.getFoto());
-            //preparo la parte del cuerpo del mensaje que lleva la imagen
-            RequestBody reqFile         = RequestBody.create(MediaType.parse("image/*"), foto);
-            final MultipartBody.Part body     = MultipartBody.Part.createFormData("foto",foto.getName(),reqFile);
-            //preparo el resto de las partes del mensaje
-            RequestBody nombre          = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getNombre());
-            RequestBody numero          = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getNro());
-            RequestBody posLatitud      = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getPosLatitud());
-            RequestBody posLongitud     = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getPosLongitud());
-            RequestBody regimenTenencia = RequestBody.create(MediaType.parse("text/plain"),Integer.toString(establecimiento.getRegimenTenenciaId()));
-            RequestBody regimenOtros    = RequestBody.create(MediaType.parse("text/plain"),establecimiento.getRegimenOtros());
-            RequestBody transaccion     = RequestBody.create(MediaType.parse("text/plain"), establecimiento.getTransaccion());
+        return agroquimico.getId();
 
-            //Instancio una llamada con las partes generadas anteriormente
-            Call<Establecimiento> establecimientoCall = webDatumApi.sincroEstablecimiento(
-                    "Token " + token,
-                    body,
-                    nombre,
-                    numero,
-                    posLatitud,
-                    posLongitud,
-                    regimenTenencia,
-                    regimenOtros,
-                    transaccion
-            );
 
-            establecimientoCall.enqueue(new Callback<Establecimiento>() {
-                @Override
-                public void onResponse(Call<Establecimiento> call, Response<Establecimiento> response) {
-                    if(response.isSuccessful()){
-                        MensajesDeEvento evento =  new MensajesDeEvento();
-                        evento.setEvento("Success");
-                        evento.setDispatcher("EstablecimientoTask");
-                        evento.setTransaccion(response.body().getTransaccion());
-                        EventBus.getDefault().post(evento);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Establecimiento> call, Throwable t) {
-
-                }
-            });
-
-            return id;
-
-        }
-
-        @Override
-        protected void onPostExecute(Long aLong) {
-            super.onPostExecute(aLong);
-        }
     }
 
+    private long getEstablecimientoByRemoteId(long remoteId){
 
-    private class EncuestadoSynchroTask extends AsyncTask<Encuestado,Void,Boolean>{
+        EstablecimientoDao establecimientoDao = daoSession.getEstablecimientoDao();
 
-        @Override
-        protected Boolean doInBackground(Encuestado... encuestados) {
+        Establecimiento establecimiento = establecimientoDao.queryBuilder().where(EstablecimientoDao.Properties.RemoteId.eq(remoteId)).list().get(0);
 
-            Encuestado encuestado = encuestados[0];
-
-
-
-            Call<Encuestado> encuestadoCall = webDatumApi.sincroEncuestado(
-                    "Token " + token,
-                    encuestado
-            );
-
-            encuestadoCall.enqueue(new Callback<Encuestado>() {
-                @Override
-                public void onResponse(Call<Encuestado> call, Response<Encuestado> response) {
-                    if (response.isSuccessful()) {
-                        MensajesDeEvento evento =  new MensajesDeEvento();
-                        evento.setEvento("Success");
-                        evento.setDispatcher("EncuestadoTask");
-                        evento.setTransaccion(response.body().getTransaccion());
-                        EventBus.getDefault().post(evento);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Encuestado> call, Throwable t) {
-
-                }
-            });
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-        }
+        return establecimiento.getId();
     }
 
-    private class AgroquimicoSynchroTask extends AsyncTask<Agroquimicos, Void,Boolean>{
+    private long getEncuestadoByRemoteId(long remoteId){
 
-        @Override
-        protected Boolean doInBackground(Agroquimicos... agroquimicos) {
+        EncuestadoDao encuestadoDao = daoSession.getEncuestadoDao();
 
-            Call<Agroquimicos> agroquimicosCall = webDatumApi.sincroAgroquimico(
-                    "Token " + token,
-                    agroquimicos[0]
-            );
+        Encuestado encuestado = encuestadoDao.queryBuilder().where(EncuestadoDao.Properties.RemoteId.eq(remoteId)).list().get(0);
 
-            agroquimicosCall.enqueue(new Callback<Agroquimicos>() {
-                @Override
-                public void onResponse(Call<Agroquimicos> call, Response<Agroquimicos> response) {
-                    if (response.isSuccessful()) {
-                        MensajesDeEvento evento =  new MensajesDeEvento();
-                        evento.setEvento("Success");
-                        evento.setDispatcher("AgroquimicoTask");
-                        evento.setTransaccion(response.body().getTransaccion());
-                        EventBus.getDefault().post(evento);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Agroquimicos> call, Throwable t) {
-
-                }
-            });
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-        }
+        return encuestado.getId();
     }
 
-    private class FamiliaSynchroTask extends  AsyncTask<Familia,Void,Boolean>{
+    private long getFamiliaByRemoteId(long remoteId){
 
-        @Override
-        protected Boolean doInBackground(Familia... familias) {
+        FamiliaDao familiaDao = daoSession.getFamiliaDao();
 
-            Call<Familia> familiaCall = webDatumApi.sincroFamilia("Token " + token,familias[0]);
-            familiaCall.enqueue(new Callback<Familia>() {
-                @Override
-                public void onResponse(Call<Familia> call, Response<Familia> response) {
-                    if (response.isSuccessful()) {
-                        MensajesDeEvento evento =  new MensajesDeEvento();
-                        evento.setEvento("Success");
-                        evento.setDispatcher("FamiliaTask");
-                        evento.setTransaccion(response.body().getTransaccion());
-                        EventBus.getDefault().post(evento);
-                    }else{
-                        Log.d("ERRORResponse",response.errorBody().toString());
-                    }
-                }
+        Familia familia = familiaDao.queryBuilder().where(FamiliaDao.Properties.IdRemote.eq(remoteId)).list().get(0);
 
-                @Override
-                public void onFailure(Call<Familia> call, Throwable t) {
-                    Log.d("FAMILIAFAILURE",t.getMessage().toString());
-                }
-            });
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-        }
-    }
-
-    private class EncuestaSynchroTask extends AsyncTask<Encuesta,Void,Boolean>{
-
-        @Override
-        protected Boolean doInBackground(Encuesta... encuestas) {
-
-            Call<Encuesta> encuestaCall = webDatumApi.sincroEncuesta(
-                    "Token " + token,
-                    encuestas[0]
-            );
-
-            encuestaCall.enqueue(new Callback<Encuesta>() {
-                @Override
-                public void onResponse(Call<Encuesta> call, Response<Encuesta> response) {
-                    if (response.isSuccessful()) {
-                        Encuesta encuestaResponse = response.body();
-                        Encuesta encuesta = getEncuestaByTransaccion(encuestaResponse.getTransaccion());
-                        encuesta.setIsSincronized(true);
-                        encuesta.setRemote_id(Integer.parseInt(encuestaResponse.getId().toString()));
-                        encuesta.setTransaccion(encuestaResponse.getTransaccion());
-                        daoSession.update(encuesta);
-                        MensajesDeEvento evento =  new MensajesDeEvento();
-                        evento.setEvento("Start");
-                        evento.setDispatcher("SincroTask");
-                        evento.setTransaccion(response.body().getTransaccion());
-                        EventBus.getDefault().post(evento);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Encuesta> call, Throwable t) {
-
-                }
-            });
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-        }
-    }
-
-
-
-    private class ObtenerIdsTask extends AsyncTask<String,Void,Boolean>{
-
-        @Override
-        protected Boolean doInBackground(String... strings) {
-
-            final String transaccion = strings[0];
-            Call<IdsSincro> idsCall = webDatumApi.getIdsByTransaccion("Token "+token,strings[0]);
-            idsCall.enqueue(new Callback<IdsSincro>() {
-                @Override
-                public void onResponse(Call<IdsSincro> call, Response<IdsSincro> response) {
-                    if(response.isSuccessful()){
-                        Encuesta encuesta = new Encuesta();
-                        encuesta.setEstablecimientoId(response.body().getEstablecimiento());
-                        encuesta.setEncuestadoId(response.body().getEncuestado());
-                        encuesta.setFamiliaId(response.body().getFamilia());
-                        encuesta.setAgroquimicoId(response.body().getAgroquimico());
-                        encuesta.setFecha(getEncuestaByTransaccion(transaccion).getFecha());
-                        encuesta.setUsuario(getEncuestaByTransaccion(transaccion).getUsuario());
-                        encuesta.setTransaccion(transaccion);
-                        MensajesDeEvento evento =  new MensajesDeEvento();
-                        evento.setEvento("Success");
-                        evento.setDispatcher("GetIdsTask");
-                        evento.setTransaccion(transaccion);
-                        evento.setObject(encuesta);
-                        EventBus.getDefault().post(evento);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<IdsSincro> call, Throwable t) {
-
-                }
-            });
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-        }
-    }
-
-    private Encuesta getEncuestaByTransaccion(String transaction){
-        TransaccionDao transaccionDao = daoSession.getTransaccionDao();
-        Transaccion transaccion = transaccionDao.queryBuilder().where(TransaccionDao.Properties.Transaccion.eq(transaction)).list().get(0);
-        return transaccion.getEncuesta();
-    }
-
-
-    @Override
-    public void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy(){
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
+        return familia.getId();
     }
 }
