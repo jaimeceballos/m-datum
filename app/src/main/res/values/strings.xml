@@ -132,5 +132,7 @@
     <string name="finalizado">Finalizada</string>
     <string name="sincronizada">Sincronizada</string>
     <string name="btn_editar">Editar</string>
+    <string name="responseNotSuccess">Se produjo el siguiente error:</string>
+    <string name="netError">Hubo un problema de comunicacion con el servidor. Vuelva a intentarlo mas tarde. Si el problema persiste comuniquese con el administrador.</string>
 
 </resources>

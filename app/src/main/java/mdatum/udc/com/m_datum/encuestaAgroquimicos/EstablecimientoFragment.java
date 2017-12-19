@@ -189,7 +189,7 @@ public class EstablecimientoFragment extends Fragment implements OnConnectionFai
             //para generar el nombre de archivo de la imagen que se captura del establecimiento.
             @Override
             public void afterTextChanged(Editable editable) {
-                name = Environment.getExternalStorageDirectory()+"/"+editable.toString().replaceAll("\\s+","")+".jpg";
+                name = Environment.getExternalStorageDirectory()+"/M-datum/fotos/"+editable.toString().replaceAll("\\s+","")+".jpg";
             }
         });
 

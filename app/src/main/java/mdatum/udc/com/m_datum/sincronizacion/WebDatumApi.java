@@ -28,8 +28,8 @@ import retrofit2.http.Path;
 
 public interface WebDatumApi {
 
-    public static final String URL = "http://192.168.1.41";
-    public static final String PORT = ":8000/";
+    public static final String URL = "http://31.220.59.238";
+    public static final String PORT = "/";
     public static final String BASE_URL = URL+PORT;
 
     @POST ("api/auth/login/")

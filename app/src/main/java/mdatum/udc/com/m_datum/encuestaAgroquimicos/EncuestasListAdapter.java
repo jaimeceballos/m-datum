@@ -1,6 +1,8 @@
 package mdatum.udc.com.m_datum.encuestaAgroquimicos;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,53 +27,64 @@ import mdatum.udc.com.m_datum.database.Encuesta;
 
 public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdapter.EncuestasListViewHolder> {
 
-    List<Encuesta> encuestas;
-    Activity activity;
+    private List<Encuesta> encuestas;
+    private Activity activity;
+    private RecyclerView mRecyclerView;
 
     public EncuestasListAdapter(List<Encuesta> encuestas, Activity activity){
         this.encuestas = encuestas;
         this.activity = activity;
     }
 
+
+
+
     @Override
     public EncuestasListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //se encarga de inflar el layout y lo va a pasar al viewholder
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_encuesta_list,parent,false);
+
         return new EncuestasListViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(EncuestasListViewHolder holder, int position) {
+    public void onBindViewHolder(EncuestasListViewHolder holder, final int position) {
         //asocia cada elemento de la lista a cada view
 
-        Encuesta encuesta = encuestas.get(position);
-
-        holder.tv_nro_encuesta_cnt.setText(encuesta.getId().toString());
-        holder.tv_fecha_cnt.setText(encuesta.getFecha());
-        holder.tv_establecimiento_cnt.setText(encuesta.getEstablecimientoRelated().getNombre());
-
-        /*if(encuesta.getIsSincronized()){
-            holder.tvSincronizada.setVisibility(View.VISIBLE);
-        }else{
-            holder.tvSincronizada.setVisibility(View.GONE);
-        }
-        if(encuesta.getIs_finished()){
-            holder.tvFinalizado.setVisibility(View.VISIBLE);
-            holder.imgNotFinalized.setVisibility(View.GONE);
-        }else{
-            holder.tvFinalizado.setVisibility(View.GONE);
-            holder.imgNotFinalized.setVisibility(View.VISIBLE);
-        }*/
-
-
-        
-/*        holder.imgSync.setOnClickListener(new View.OnClickListener() {
+        final Encuesta encuesta = encuestas.get(position);
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "Pulso sync", Toast.LENGTH_SHORT).show();
+
             }
-        });*/
-        
+        };
+
+        holder.tvNroEncuestaCnt.setText(encuesta.getId().toString());
+        holder.tvFechaCnt.setText(encuesta.getFecha());
+        holder.tvEstablecimientoCnt.setText(encuesta.getEstablecimientoRelated().getNombre());
+        if(!encuesta.getIs_finished()){
+            holder.imgNotFinalized.setVisibility(View.VISIBLE);
+            holder.imgFinalized.setVisibility(View.GONE);
+            holder.imgSynchronized.setVisibility(View.GONE);
+            holder.imgNotFinalized.setOnClickListener(listener);
+            holder.tvNroEncuestaCnt.setOnClickListener(listener);
+            holder.tvFechaCnt.setOnClickListener(listener);
+            holder.tvEstablecimientoCnt.setOnClickListener(listener);
+            holder.tvEstablecimientoLbl.setOnClickListener(listener);
+            holder.tvNroEncuestaLbl.setOnClickListener(listener);
+            holder.tvFechaLbl.setOnClickListener(listener);
+        }else if(encuesta.getIs_finished() && !encuesta.getIsSincronized()){
+            holder.imgNotFinalized.setVisibility(View.GONE);
+            holder.imgFinalized.setVisibility(View.VISIBLE);
+            holder.imgSynchronized.setVisibility(View.GONE);
+        }else{
+            holder.imgNotFinalized.setVisibility(View.GONE);
+            holder.imgFinalized.setVisibility(View.GONE);
+            holder.imgSynchronized.setVisibility(View.VISIBLE);
+        }
+
+
+
     }
 
     @Override
@@ -90,24 +103,27 @@ public class EncuestasListAdapter extends RecyclerView.Adapter<EncuestasListAdap
 
     public static class EncuestasListViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tv_nro_encuesta_cnt;
-        private TextView tv_fecha_cnt;
-        private TextView tv_establecimiento_cnt;
-        //private ImageView imgNotFinalized;
-        //private TextView tvFinalizado, tvSincronizada;
+        private TextView tvNroEncuestaCnt,tvNroEncuestaLbl;
+        private TextView tvFechaCnt,tvFechaLbl;
+        private TextView tvEstablecimientoCnt,tvEstablecimientoLbl;
+        private ImageView imgNotFinalized,imgFinalized,imgSynchronized;
 
         public EncuestasListViewHolder(View itemView) {
             super(itemView);
 
-            tv_nro_encuesta_cnt = (TextView)itemView.findViewById(R.id.tv_nro_encuesta_cnt);
-            tv_fecha_cnt = (TextView)itemView.findViewById(R.id.tv_fecha_cnt);
-            tv_establecimiento_cnt = (TextView)itemView.findViewById(R.id.tv_establecimiento_cnt);
-            //imgNotFinalized = (ImageView) itemView.findViewById(R.id.img_not_finalized);
-            //tvSincronizada = (TextView) itemView.findViewById(R.id.tv_sincronizada);
-            //tvFinalizado = (TextView) itemView.findViewById(R.id.tv_finalizado);
+            tvNroEncuestaCnt        = (TextView) itemView.findViewById(R.id.tv_nro_encuesta_cnt);
+            tvNroEncuestaLbl        = (TextView) itemView.findViewById(R.id.tv_nro_encuesta_lbl);
+            tvFechaCnt              = (TextView) itemView.findViewById(R.id.tv_fecha_cnt);
+            tvFechaLbl              = (TextView) itemView.findViewById(R.id.tv_fecha_lbl);
+            tvEstablecimientoCnt    = (TextView) itemView.findViewById(R.id.tv_establecimiento_cnt);
+            tvEstablecimientoLbl    = (TextView) itemView.findViewById(R.id.tv_establecimiento_lbl);
+            imgNotFinalized         = (ImageView) itemView.findViewById(R.id.img_not_finalized);
+            imgFinalized            = (ImageView) itemView.findViewById(R.id.img_finalized);
+            imgSynchronized         = (ImageView) itemView.findViewById(R.id.img_synchronized);
         }
 
 
     }
+
 
 }
