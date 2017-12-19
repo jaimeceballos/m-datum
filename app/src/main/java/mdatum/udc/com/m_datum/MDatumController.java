@@ -55,7 +55,10 @@ public class MDatumController extends Application {
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-        return activeNetwork != null && activeNetwork.isConnected();
+
+        return (activeNetwork != null && activeNetwork.isConnected() && activeNetwork.getType() == ConnectivityManager.TYPE_WIFI);
+
+        //return activeNetwork != null && activeNetwork.isConnected();
     }
 
 

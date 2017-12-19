@@ -134,5 +134,7 @@
     <string name="btn_editar">Editar</string>
     <string name="responseNotSuccess">Se produjo el siguiente error:</string>
     <string name="netError">Hubo un problema de comunicacion con el servidor. Vuelva a intentarlo mas tarde. Si el problema persiste comuniquese con el administrador.</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="not_online">Para realizar esta accion debe tener una conexion Wifi habilitada.</string>
 
 </resources>

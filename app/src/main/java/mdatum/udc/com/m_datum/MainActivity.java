@@ -4,12 +4,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -124,14 +126,14 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.mSincro:
-                showProgress(true);
                 if(((MDatumController)getApplication()).isOnline()){
+                    showProgress(true);
                     FragmentTransaction sincroTransaction = getSupportFragmentManager().beginTransaction();
                     SincroFragment sincroFragment = new SincroFragment();
                     showProgress(false);
                     sincroTransaction.replace(R.id.ll_body_content,sincroFragment).addToBackStack("SINCRO").commit();
                 }else{
-                    Toast.makeText(this, "Para sincronizar debe tener una conexion Wifi habilitada.", Toast.LENGTH_LONG).show();
+                    errorDialog(R.string.not_online,"Sincronizacion");
                 }
                 break;
             case R.id.change_pass_menu:
@@ -140,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     PasswordChangeFragment passwordChangeFragment = new PasswordChangeFragment();
                     fragmentTransaction1.replace(R.id.ll_body_content,passwordChangeFragment).addToBackStack("CHANGE_PASS").commit();
                 }else{
-                    Toast.makeText(this, "Para realizar el cambio de contraseña debe tener una conexion Wifi habilitada.", Toast.LENGTH_LONG).show();
+                    errorDialog(R.string.not_online,"Cambiar Password");
+
                 }
                 break;
             case R.id.log_out_menu:
@@ -148,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
                     showProgress(true);
                     cerrarSesion();
                 }else{
-                    Toast.makeText(this, "Para realizar el cierre de sesion debe tener una conexion Wifi habilitada.", Toast.LENGTH_LONG).show();
+                    errorDialog(R.string.not_online,"Cerrar sesion");
+                    
                 }
 
                 break;
@@ -327,6 +331,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void errorDialog(int mensaje,String accion){
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.logo_agro)
+                .setTitle(accion)
+                .setMessage(mensaje)
+                .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                }).show();
     }
 
 }
